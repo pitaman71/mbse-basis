@@ -31,13 +31,17 @@ each already holds, so that those local texts can be replaced by citations.
   F-002, F-003.
   *Applied in*: meta-schemas and `Reflection` (mbse-schemas); expressions bound with `Bindings` (mbse-expressions);
   kinds (mbse-programs); traces (mbse-patterns).
-- **P-004** · adopted · For kind X: `Visitors.OfX` defines the reverse visitor protocol; `Proxies.OfX` defines `Spec`,
-  `Builder` and `Data`; `Proxies.OfX.Builder` must implement `Visitors.OfX`. In the reverse protocol a value writes
-  itself into a visitor (`accept(visitor)`), and visitors pass child visitors to callbacks rather than return them.
-  Builders are fluent, one setter per property taking a `Spec`; `create`, `clone` and `update` finalize and never
-  validate. *Serves* F-003. *Relates to* P-005.
-  *Applied in*: mbse-schemas' `docs/FRAMEWORK.md` (Proxies; Resolved: builders and serializers implement `Visitors`),
-  which states `Proxies.OfX.Data` and the builder's protocol but not `Proxies.OfX.Spec`.
+- **P-004** · adopted · For kind X: `Visitors.OfX` is the one protocol through which code reads and writes a value of
+  X, whether or not it knows the schema; `Proxies.OfX` defines `Spec`, `Builder` and `Data`, and both data instances
+  and builders implement `Visitors.OfX`. Algorithms receive a visitor and pull through it; a value never writes itself
+  into a visitor. Whether a write takes effect is the visitor's mode: data instances visit read-only, a write in
+  read-only mode raises, and a read-only static view of the protocol types the code that must not write. Visitors pass
+  child visitors to callbacks rather than return them, and an object's or an entry's visitor names its methods `as_*`,
+  a prefix no schema-defined name may take. Builders are fluent, one setter per property taking a `Spec`; `create`, `clone` and `update` finalize
+  and never validate. Anything that has a builder has a `Spec`: either a callable that takes that builder and returns
+  it, or an instance of what the builder builds. *Serves* F-003. *Relates to* P-005.
+  *Applied in*: mbse-schemas' `docs/VISITOR_PATTERN.md`, which supersedes the reverse protocol (`accept(visitor)`, a
+  value writing itself into serializers and recorders that implemented `Visitors`); not yet built.
 - **P-005** · proposed · One entry point per kind, named `OfX`: visitors, comparison, evaluation and validation dispatch
   on a value's kind. *Serves* F-003.
   *Applied in*: `Visitors.OfX`, `Comparison.OfX` (mbse-schemas); `Evaluators.OfAny` (mbse-expressions).
