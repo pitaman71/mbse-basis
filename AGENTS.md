@@ -1,8 +1,10 @@
 # Guide for AI agents
 
 mbse-basis states, once, what every mbse repository shares: features (F-), principles (P-), capabilities (C-) and
-vocabulary (V-), each with a permanent ID. It holds no code. Other repositories are its siblings, checked out beside
-it (`../mbse-schemas`, ...), and cite its items by ID.
+vocabulary (V-), each with a permanent ID. It holds no library code, only the tools every repository runs from here
+(`scripts/polyrepo.py`, `scripts/update_doc_links.py`; tests: `python3 -m unittest discover -s scripts`), standard
+library only and kept small. Other repositories are its siblings, checked out beside it (`../mbse-schemas`, ...),
+and cite its items by ID.
 
 ## Start here
 

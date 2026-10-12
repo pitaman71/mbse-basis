@@ -7,6 +7,9 @@ repository cites them and records only its local differences. The markdown, note
 repositories had grown past what any person or agent can absorb; keeping them consolidated, and not special-casing the
 project into an unmanageable mess, is an ongoing priority.
 
-It holds no code. Start with [the basis](docs/README.md).
+It holds no library code, only the tools every repository runs from here: `scripts/polyrepo.py`, which manages the
+sibling checkouts (`python3 ../mbse-basis/scripts/polyrepo.py help`), and `scripts/update_doc_links.py`, which writes
+each document's navigation links; their tests are `python3 -m unittest discover -s scripts`. Start with
+[the basis](docs/README.md).
 
 Why the mbse repositories exist, and each one's part: [MBSE.md](MBSE.md).
