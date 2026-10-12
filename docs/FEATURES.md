@@ -15,8 +15,6 @@ constraint, and the objective is their conjunction, so features may overlap on p
   opinionated manner.
 - **F-004** · adopted · The MBSE project avoids second-order inventions, things that can be modeled and invented
   elsewhere, such as a neutral expression language or datatypes. *Relates to* P-012.
-  *Applied in*: mbse-expressions' Basic dialect, a neutral expression language, is being removed for this reason, and
-  datatypes are to be ISO/IEC 11404's (V-020, C-002 L5).
 - **F-005** · adopted · All models are open-world by default, assuming entropy and/or nondeterminism for any aspect not
   otherwise specified. *Relates to* P-002, P-007.
 - **F-006** · adopted · All models allow refinements to be added, closing details in a targeted and agile manner.
@@ -38,9 +36,10 @@ constraint, and the objective is their conjunction, so features may overlap on p
 
 ## Open items
 
-- **F-005 is not met in shape on main.** mbse-schemas' decoding there refuses an undeclared key, where P-002 preserves
-  it; the `scalars` branch preserves it (C-002 L2), not yet landed. Name resolution staying closed is consistent with
-  F-005: names resolve or are refused, while data is kept.
+- **F-005 is not met in shape.** mbse-schemas' decoding refuses an undeclared key, where P-002 preserves it; its
+  `docs/OPEN_WORLD.md` proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
+  F-005's "by default" contradicts. Name resolution staying closed (OPEN_WORLD.md, Decided) is consistent with F-005:
+  names resolve or are refused, while data is kept.
 - **No feature covers equivalence across languages.** C-001, equivalent Python and TypeScript implementations, is the
   most enforced capability in the project and implements no feature above. Proposed: a feature that every model and
   every operation on it means the same in every implementation language.

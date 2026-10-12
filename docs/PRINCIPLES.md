@@ -10,12 +10,12 @@ each already holds, so that those local texts can be replaced by citations.
 ## Index
 
 - **P-001** · adopted · Declaration order over sorted order. *Serves* F-002.
-  *Applied in*: a schema's member lists as open relations in declaration order, so that a schema read back equals the
-  one built (mbse-schemas, `scalars` branch; sorting by name proved inconsistent); undeclared properties written in the
-  order read (V-022); reachability in first-reference order (mbse-schemas `Reachable`); a transform session's
+  *Applied in*: a schema's properties, adjacencies, branches, parts and parameters in declared order, in builders and
+  in modules' meta-schemas; a store's `names()` in registration order; a keyed list's items in insertion order;
+  reachability and symbols in first-reference order (mbse-schemas `Reachable`, `Plain`); a transform session's
   candidates in the order it first saw them (mbse-patterns).
-  *Exceptions*: a module's schemas are keyed and sorted by name; a relation's entries with a `unique` key are written
-  sorted by that key.
+  *Exceptions*: `Reflection` lists each kind's schemas, and `Paths` routes from the schemas, in name order; a relation's
+  `unique` clauses are written each sorted (mbse-schemas).
 - **P-002** · adopted · Open world means preserving unstructured data: don't lose, preserve, validate and cleanse on
   request. What is read is kept, undeclared or not, and written back as read; validation reports what does not fit,
   as unknown where the model is silent; cleansing removes or repairs it only when the caller asks. Only where a step
@@ -24,9 +24,8 @@ each already holds, so that those local texts can be replaced by citations.
   *Relates to* P-007.
   *Applied in*: parsers that read semantically incorrect code (C-003); names a language cannot spell kept in the tree and flagged by validation, never renamed; `TranspileError`
   (mbse-programs); drops recorded as steps (mbse-codegen-python).
-  *Applied on the `scalars` branch, not landed*: undeclared properties and plain values preserved by default, reported
-  as unknown by checking, closed reading an option of each call (mbse-schemas; V-022, C-002 L2). On main, decoding
-  still refuses undeclared keys.
+  *Not yet applied* in mbse-schemas: decoding refuses undeclared keys. Its `docs/OPEN_WORLD.md` proposes preserving
+  them as a reading policy (Undeclared properties, policy 3).
 - **P-003** · proposed · Everything is schema data: kinds are registered meta-schemas tagged `kind`, and expressions,
   predicates, syntax trees, modules and traces serialize, reflect and compare like any other data. *Serves* F-001,
   F-002, F-003.
@@ -62,10 +61,9 @@ each already holds, so that those local texts can be replaced by citations.
   *Applied in*: constraints kept in mbse-patterns, not mbse-schemas; parsers and dialect bridges in mbse-programs, not
   mbse-expressions.
 - **P-012** · proposed · Model published standards rather than invent: datatypes, value domains, language versions and
-  formats are the standards' own (ISO/IEC 11404, `Ieee754`, `Ieee1164`, C++ and ECMAScript editions), with only the
-  parameters a standard defines. *Serves* F-004.
-  *Applied in*: datatypes of the 11404 dialect, decided (V-020); value domains (mbse-expressions); standards
-  (mbse-programs).
+  formats are the standards' own (`Ieee754`, `Ieee1164`, C++ and ECMAScript editions), with only the parameters a
+  standard defines. *Serves* F-004.
+  *Applied in*: value domains (mbse-expressions); standards (mbse-programs).
 - **P-013** · proposed · Nondeterminism is passed in, never held: a random source is given to each draw, with its seed,
   and streams depend on the seed and key alone. *Serves* F-005.
   *Applied in*: PCG32 and `Generators` (mbse-schemas, mbse-patterns).
@@ -84,8 +82,9 @@ each already holds, so that those local texts can be replaced by citations.
 - **P-015: what it serves, and declarations.** Which features it serves is still to state. Whether declaring a name
   (`.name('crm.Contact')`, a link's name) counts, or only referring to an element already declared.
 
-- **P-001's exceptions.** A module's schemas sorted by name, and keyed entries sorted by key, are sorted orders.
-  Decide whether they are deliberate exceptions, say for lookup and byte-identity, or debts against P-001.
+- **P-001's exceptions.** Schemas listed in name order by `Reflection` and `Paths`, and `unique` clauses sorted, are
+  sorted orders. Decide whether they are deliberate exceptions, say for lookup and byte-identity, or debts against
+  P-001. mbse-schemas' `docs/OPEN_WORLD.md` also proposes writing preserved properties sorted by name, against P-001.
 - **P-004 beyond mbse-schemas.** Whether mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
   mbse-patterns' predicate and transform builders follow it, and whether `Schemas.OfX.Builder`, which implements
   `Visitors.OfX` for schemas of kind X, is the same policy at the meta level.

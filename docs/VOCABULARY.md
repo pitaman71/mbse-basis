@@ -27,17 +27,9 @@ block. Wherever one of ours meets a language's own, in docs and examples, qualif
 - **V-007** · adopted · **Property**, never "field", which means only the host language's member that holds one.
 - **V-008** · adopted · **Term**: an element of an expression's tree. *Never*: a bare "node".
 - **V-009** · adopted · **Syntax node**: an element of a program's tree. *Never*: a bare "node".
-- **V-020** · adopted · **Datatype**: a type characterized by its values and properties, apart from how they are
-  represented, as ISO/IEC 11404 defines it.
-- **V-022** · adopted · **Plain value** and **undeclared property**: a value whose type is unrefined, or refined only by
-  a dialect not loaded, is held as its wire value and written back as read; so is a property no schema declares,
-  after the declared ones, in the order read. Checking reports both as unknown (P-002).
-- **V-023** · adopted · **Shape constraint**: a bound on an index, a capacity or a tensor's shape, a constraint on the
-  type of the property that keys a relation's entries, not part of the schema.
-- **V-024** · adopted · **Subsumption**: a type that must be of another is one wherever the other is expected, and
-  reads its properties as its own (`car.mass`); composition (`car.Vehicle.mass`) is not a policy.
 
-V-006, V-010 to V-019 and V-021 became modeling constructs, listed below; their IDs are not reused.
+V-006, V-010 to V-019 and V-021 became modeling constructs, listed below; V-020 and V-022 to V-024 were withdrawn.
+Their IDs are not reused.
 
 ## Modeling constructs
 
@@ -45,29 +37,27 @@ Links are to `main` unless marked. Repositories are at `https://github.com/pitam
 
 ### mbse-schemas
 
-- `OfObject`, `OfProperty`, `OfRelation`, `OfAdjacency`, `OfEntry`, `OfParameter`, `OfApply`:
+- `OfAny`, `OfNative`, `OfObject`, `OfProperty`, `OfRelation`, `OfAdjacency`, `OfEntry`, `OfUnion`,
+  `OfIntersection`, `OfIndexed`, `OfParameter`, `OfApply`:
   [Elements](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#elements)
+- Native type, token: [Native types](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#native-types)
+- Branch, part, flat: [Unions and intersections by name](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#unions-and-intersections-by-name)
+- List, keyed list, extent: [Lists](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#lists)
 - Value object, reference object:
   [Value objects and reference objects](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#value-objects-and-reference-objects)
 - Cardinality, `unique`: [Cardinality](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#cardinality)
 - Meta-schema, module: [Meta-schemas](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#meta-schemas)
 - Store, singleton: [Stores](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#stores)
 - Constraint, `requires`: [What a specification is made of](https://github.com/pitaman71/mbse-schemas/blob/main/MBSE.md#what-a-specification-is-made-of)
-- On the `scalars` branch, not yet pushed: `OfName`, `Intersects`, `Unions`, variant, meta-relation, `uses`, open and
-  one-link relations: [Schema vocabulary](https://github.com/pitaman71/mbse-schemas/blob/scalars/docs/VOCABULARY.md).
-  Retiring there: `OfAny`, `OfNative`, `OfUnion`, `OfIntersection`, `OfIndexed`, and a list's extent (a store's
-  extent stays).
 
 ### mbse-expressions
 
 - Expression, `OfLiteral`, `OfOperation`, `OfVariable`, `OfLet`, `OfQuantifier`:
-  [The Basic dialect](https://github.com/pitaman71/mbse-expressions/blob/main/docs/EXPRESSIONS.md#the-basic-dialect),
-  being removed with Basic (F-004)
+  [The Basic dialect](https://github.com/pitaman71/mbse-expressions/blob/main/docs/EXPRESSIONS.md#the-basic-dialect)
 - Dialect (`Terms.Dialect`): [The framework](https://github.com/pitaman71/mbse-expressions/blob/main/docs/EXPRESSIONS.md#the-framework),
   [Dialects](https://github.com/pitaman71/mbse-expressions/blob/main/docs/EXPRESSIONS.md#dialects)
 - Translator: [Translators](https://github.com/pitaman71/mbse-expressions/blob/main/docs/EXPRESSIONS.md#translators)
-- Value domain: [Value domains](https://github.com/pitaman71/mbse-expressions/blob/main/docs/EXPRESSIONS.md#value-domains),
-  giving way to the ISO/IEC 11404 dialect's datatypes (V-020)
+- Value domain: [Value domains](https://github.com/pitaman71/mbse-expressions/blob/main/docs/EXPRESSIONS.md#value-domains)
 
 ### mbse-patterns
 
@@ -93,7 +83,6 @@ Links are to `main` unless marked. Repositories are at `https://github.com/pitam
 
 - **Retire the copies.** The vocabulary invariant in each repository's `AGENTS.md` and "What a specification is made
   of" in each `MBSE.md` restate V-001 to V-009; replace them with citations of this file.
-- **Links into the `scalars` branch** resolve once it is pushed, and move to `main` when it lands.
 
 ---
 

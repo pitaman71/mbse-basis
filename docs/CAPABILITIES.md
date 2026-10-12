@@ -17,14 +17,12 @@ lives here rather than in each repository's design document.
     mbse-codegen-python.
 - **C-002** · proposed · Open-world schemas: a module extends a schema it does not own, and data written for the
   original stays valid. *Implements* F-005, F-006.
-  - L1 open in content (nothing mandatory but by constraint; three-valued checking); L2 plain values and undeclared
-    properties preserved by default (V-022, P-002); L3 lists, dicts and maps as relations, the schema model's own lists
-    as adjacencies; L4 types refined by any module, `OfName`, `Intersects` and `Unions`, by subsumption (V-024);
-    L5 scalars as datatypes of a loaded dialect, mbse-expressions' 11404 dialect, with Basic removed (V-020, F-004);
-    L6 parameters with `uses`; L7 evolution that keeps data valid. Each level lands in mbse-schemas first, then in its
+  - L1 open in content (nothing mandatory but by constraint; three-valued checking); L2 undeclared properties
+    preserved (P-002); L3 independent extension: subtypes and extension properties declared by a module that does not
+    own the schema; L4 evolution that keeps data valid. Each level lands in mbse-schemas first, then in its
     dependents, each pinning the new release.
-  - **Current**: L1 landed. L2 and L3 built in mbse-schemas on the `scalars` branch (slices 1 to 3c of its
-    `docs/VOCABULARY.md`), not landed; L4 to L6 decided, not built; L7 designed in `docs/OPEN_WORLD.md`.
+  - **Current**: L1 landed (mbse-schemas 0.10.0). L2 to L4 proposed in mbse-schemas' `docs/OPEN_WORLD.md` (its parts
+    2, 1 and 3), not built.
 - **C-003** · adopted · Program models read source as written, semantically incorrect or syntactically incomplete,
   as faithfully as the language's reference front end reads correct code. *Implements* F-008. *Applies* P-002.
   - Per language: L1 complete kinds, built and printed; L2 read by a pinned parser, semantically incorrect code
