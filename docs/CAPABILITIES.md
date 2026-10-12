@@ -37,7 +37,7 @@ lives here rather than in each repository's design document.
     L4: the tree-sitter grammars lag the standards (C++23 and C++26, Python 3.13 and later), and their errors are
     located where recovery starts.
 - **C-004** · proposed · Code generation by language family, invertible and step by step. *Implements* F-001, F-002,
-  F-008.
+  F-008. P-015 depends on it: typed bindings are how code refers to model elements by reference.
   - Per family and per part (types, expressions, patterns): L1 generated; L2 read back, inverting generation; L3 every
     ambiguity a step's parameter.
   - **Current**: Python types L2, partly L3 (`frozen` and `slots` are parameters; other choices are fixed). Python

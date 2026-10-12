@@ -32,10 +32,13 @@ each already holds, so that those local texts can be replaced by citations.
   F-002, F-003.
   *Applied in*: meta-schemas and `Reflection` (mbse-schemas); expressions bound with `Bindings` (mbse-expressions);
   kinds (mbse-programs); traces (mbse-patterns).
-- **P-004** · proposed · One shape for every kind: `Data`, `Builder`, `Spec` and `Schema`; fluent builders with one
-  setter per property taking a `Spec`; `create`, `clone` and `update` finalize and never validate. *Serves* F-003.
-  *Applied in*: mbse-schemas' builders; mbse-expressions' writers; mbse-programs' `LANGUAGE.Builders.<Kind>()`;
-  mbse-patterns' predicates and transforms.
+- **P-004** · adopted · For kind X: `Visitors.OfX` defines the reverse visitor protocol; `Proxies.OfX` defines `Spec`,
+  `Builder` and `Data`; `Proxies.OfX.Builder` must implement `Visitors.OfX`. In the reverse protocol a value writes
+  itself into a visitor (`accept(visitor)`), and visitors pass child visitors to callbacks rather than return them.
+  Builders are fluent, one setter per property taking a `Spec`; `create`, `clone` and `update` finalize and never
+  validate. *Serves* F-003. *Relates to* P-005.
+  *Applied in*: mbse-schemas' `docs/FRAMEWORK.md` (Proxies; Resolved: builders and serializers implement `Visitors`),
+  which states `Proxies.OfX.Data` and the builder's protocol but not `Proxies.OfX.Spec`.
 - **P-005** · proposed · One entry point per kind, named `OfX`: visitors, comparison, evaluation and validation dispatch
   on a value's kind. *Serves* F-003.
   *Applied in*: `Visitors.OfX`, `Comparison.OfX` (mbse-schemas); `Evaluators.OfAny` (mbse-expressions).
@@ -69,12 +72,23 @@ each already holds, so that those local texts can be replaced by citations.
 - **P-014** · proposed · Every ambiguity is a decision: a parameter of one step, taken by a person, an agent or a policy
   chosen up front, and kept in a trace. *Serves* F-001, F-002.
   *Applied in*: `Transforms` (mbse-patterns); code generation (mbse-codegen-python).
+- **P-015** · adopted · References to model elements in code are always by reference, not by string name. Meant in
+  full: any model used in code has typed bindings, generated or written, since dynamic proxies are invisible to type
+  checkers. Names remain how the wire format and modules write references. *Relates to* P-010, C-004.
+  *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
+  (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns);
+  `.links('contact', 'address')` and `.me('contact')` (mbse-schemas).
 
 ## Open items
 
+- **P-015: what it serves, and declarations.** Which features it serves is still to state. Whether declaring a name
+  (`.name('crm.Contact')`, a link's name) counts, or only referring to an element already declared.
+
 - **P-001's exceptions.** A module's schemas sorted by name, and keyed entries sorted by key, are sorted orders.
   Decide whether they are deliberate exceptions, say for lookup and byte-identity, or debts against P-001.
-- **P-004 and P-005 may be one principle**, the uniform shape of a kind, or P-005 a part of P-003.
+- **P-004 beyond mbse-schemas.** Whether mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
+  mbse-patterns' predicate and transform builders follow it, and whether `Schemas.OfX.Builder`, which implements
+  `Visitors.OfX` for schemas of kind X, is the same policy at the meta level.
 
 ---
 

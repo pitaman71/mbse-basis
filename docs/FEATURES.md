@@ -9,8 +9,8 @@ constraint, and the objective is their conjunction, so features may overlap on p
 
 ## Index
 
-- **F-001** · adopted · AI is always in the loop.
-- **F-002** · adopted · Humans are always in the loop.
+- **F-001** · adopted · AI is always in the loop; AI is not the loop - the model trace is.
+- **F-002** · adopted · Humans are always in the loop; Humans are not the loop - the model trace is.
 - **F-003** · adopted · The MBSE project invents a modeling paradigm, constructs and a framework, and does so in an
   opinionated manner.
 - **F-004** · adopted · The MBSE project avoids second-order inventions, things that can be modeled and invented
