@@ -48,7 +48,7 @@ Links are to `main` unless marked. Repositories are at `https://github.com/pitam
 - Cardinality, `unique`: [Cardinality](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#cardinality)
 - Meta-schema, module: [Meta-schemas](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#meta-schemas)
 - Store, singleton: [Stores](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#stores)
-- Constraint, `requires`: [What a specification is made of](https://github.com/pitaman71/mbse-schemas/blob/main/MBSE.md#what-a-specification-is-made-of)
+- Constraint, `requires`: [Where constraints attach](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#open-questions)
 
 ### mbse-expressions
 
@@ -81,8 +81,8 @@ Links are to `main` unless marked. Repositories are at `https://github.com/pitam
 
 ## Open items
 
-- **Retire the copies.** The vocabulary invariant in each repository's `AGENTS.md` and "What a specification is made
-  of" in each `MBSE.md` restate V-001 to V-009; replace them with citations of this file.
+- **Retire the copies.** The vocabulary invariant in each repository's `AGENTS.md` restates V-001 to V-009; replace
+  it with citations of this file.
 
 ---
 

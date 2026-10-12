@@ -7,10 +7,4 @@ repository cites them and records only its local differences.
 
 It holds no code. Start with [the basis](docs/README.md).
 
-| Repository | Its part |
-|---|---|
-| [mbse-schemas](https://github.com/pitaman71/mbse-schemas) | The structure: objects, relations and their properties |
-| [mbse-expressions](https://github.com/pitaman71/mbse-expressions) | The constraints, as expressions in dialects |
-| [mbse-patterns](https://github.com/pitaman71/mbse-patterns) | Constraints over populations of data: predicates, generators, transforms |
-| [mbse-programs](https://github.com/pitaman71/mbse-programs) | The code: languages' syntax trees as data |
-| [mbse-codegen-python](https://github.com/pitaman71/mbse-codegen-python) | Python generated from, and read back into, models |
+Why the mbse repositories exist, and each one's part: [MBSE.md](MBSE.md).
