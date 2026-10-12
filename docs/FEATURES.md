@@ -40,8 +40,8 @@ constraint, and the objective is their conjunction, so features may overlap on p
   `docs/OPEN_WORLD.md` proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
   F-005's "by default" contradicts. Name resolution staying closed (OPEN_WORLD.md, Decided) is consistent with F-005:
   names resolve or are refused, while data is kept.
-- **No feature covers equivalence across languages.** C-001, equivalent Python and TypeScript implementations, is the
-  most enforced capability in the project and implements no feature above. Proposed: a feature that every model and
+- **No feature covers equivalence across languages.** C-001 and C-007 to C-009, equivalent Python and TypeScript
+  implementations, are the most enforced capabilities in the project and implement no feature above. Proposed: a feature that every model and
   every operation on it means the same in every implementation language.
 
 ---

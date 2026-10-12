@@ -20,5 +20,5 @@ Then read the index of whichever kind your task touches; each is short enough to
   constructs, and lists each construct with a link to the repository that defines it.
 - **Record what the user decides as the user decides it.** Adopted items are the user's; an agent proposes, and records
   open items rather than resolving them silently.
-- **Current levels are checked, not guessed.** A capability's current level names where it was checked (a branch,
+- **Current status is checked, not guessed.** A capability's current status names where it was checked (a branch,
   a version, a test), or says it is to assess.

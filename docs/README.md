@@ -15,7 +15,7 @@ Read this file, then the index of each kind below. Each index is one entry per i
 |---|---|---|---|
 | Feature | `F-` | A qualitative objective that holds across the project and stays stable through its lifecycle: why | [FEATURES.md](FEATURES.md) |
 | Principle | `P-` | A design principle reapplied locally across a class of related situations: how, in general | [PRINCIPLES.md](PRINCIPLES.md) |
-| Capability | `C-` | A quantifiable objective that implements features, often as a progression of levels of increasing value: what, measurably | [CAPABILITIES.md](CAPABILITIES.md) |
+| Capability | `C-` | A quantifiable objective that implements features; a feature's capabilities enumerate, in full, how it is met | [CAPABILITIES.md](CAPABILITIES.md) |
 | Vocabulary | `V-` | A term every repository uses alike, with what it never means | [VOCABULARY.md](VOCABULARY.md) |
 
 One kind is planned but not yet scaffolded: **conventions**, how the work is done (equivalent implementations, notebook
@@ -27,7 +27,7 @@ choose; `C-` is taken.
 | Relation | From | To | Meaning |
 |---|---|---|---|
 | *serves* | principle | feature | Applying the principle advances the feature |
-| *implements* | capability | feature | Each level of the capability realizes more of the feature |
+| *implements* | capability | feature | The capability is part of how the feature is met |
 | *applies* | a repository's decision | principle | The decision is the principle in one situation, plus a stated local delta |
 | *relates to* | any item | any item | A tension or overlap worth reading together |
 
@@ -45,7 +45,7 @@ Every item has a status:
   replaced it.
 
 A feature is an objective, not a description of current behavior: an adopted feature may not be met yet. How far it is
-met is what its capabilities' current levels say.
+met is what its capabilities' current status says.
 
 ## Rules for writing items
 
