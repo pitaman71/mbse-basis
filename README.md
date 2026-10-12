@@ -9,7 +9,7 @@ project into an unmanageable mess, is an ongoing priority.
 
 It holds no library code, only the tools every repository runs from here: `scripts/polyrepo.py`, which manages the
 sibling checkouts (`python3 ../mbse-basis/scripts/polyrepo.py help`), and `scripts/update_doc_links.py`, which writes
-each document's navigation links; their tests are `python3 -m unittest discover -s scripts`. Start with
+each document's navigation links ([how to use them](scripts/README.md)). Start with
 [the basis](docs/README.md).
 
 Why the mbse repositories exist, and each one's part: [MBSE.md](MBSE.md).
