@@ -76,6 +76,10 @@ each already holds, so that those local texts can be replaced by citations.
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns);
   `.links('contact', 'address')` and `.me('contact')` (mbse-schemas).
+- **P-016** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
+  implementation's skill shows usage in its own language, covering the same topics in the same order as the other's;
+  concepts live once, in the design document, which each skill links to rather than restates. *Serves* F-001, F-002.
+  *Relates to* C-001.
 
 ## Open items
 
@@ -88,6 +92,14 @@ each already holds, so that those local texts can be replaced by citations.
 - **P-004 beyond mbse-schemas.** Whether mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
   mbse-patterns' predicate and transform builders follow it, and whether `Schemas.OfX.Builder`, which implements
   `Visitors.OfX` for schemas of kind X, is the same policy at the meta level.
+- **P-016 is not applied.** Every repository copies one skill, byte-identical, from `skills/<repo>/` into both
+  packages (`skills/sync.sh`, checked by SKL-01), so each package carries both languages' guides, and the "neutral"
+  references (dialects, translating, languages, transpiling, serialization) teach TypeScript users with Python
+  fragments. To apply it: write `python3/<package>/skill/` all in Python and `typescript5/skill/` all in TypeScript,
+  with deliberate differences in `docs/EQUIVALENCE.md`; move concepts into the design document; remove `skills/`,
+  `skills/sync.sh` and the `.claude/skills/<repo>` symlink, with AGENTS.md routing an agent to the skill for its
+  language; make SKL-01 check that both skills cover the same topics, SKL-02 still running each skill's complete
+  programs. Pilot on mbse-patterns (SKILL.md, python.md, typescript.md only), then the other four.
 
 ---
 

@@ -60,21 +60,6 @@ met is what its capabilities' current status says.
   conjunction is the objective. Overlapping features are not duplicates; never merge them to remove the overlap.
 - **Keep each index under 10 KB.**
 
-## Open items
-
-- **Skills per language.** Every repository copies one skill, byte-identical, from `skills/<repo>/` into both
-  packages (`skills/sync.sh`, checked by SKL-01), so each package carries both languages' guides, and the "neutral"
-  references (dialects, translating, languages, transpiling, serialization) teach TypeScript users with Python
-  fragments. No copies and no symlinks:
-  - two skills per repository, one per language: `python3/<package>/skill/` all Python, `typescript5/skill/` all
-    TypeScript, the same topics in the same order; deliberate differences go in `docs/EQUIVALENCE.md`;
-  - concepts (what a dialect, construct or wire format is) live once, in the design document; each skill links to it
-    on GitHub rather than restating it;
-  - remove `skills/`, `skills/sync.sh` and the `.claude/skills/<repo>` symlink; AGENTS.md routes an agent to the skill
-    for the language it works in;
-  - SKL-01 checks that both skills cover the same topics; SKL-02 still runs each skill's complete programs;
-  - pilot on mbse-patterns (SKILL.md, python.md, typescript.md only), then the other four.
-
 ---
 
 <!-- nav -->
