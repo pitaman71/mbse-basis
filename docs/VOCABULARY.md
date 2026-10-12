@@ -27,6 +27,11 @@ block. Wherever one of ours meets a language's own, in docs and examples, qualif
 - **V-007** · adopted · **Property**, never "field", which means only the host language's member that holds one.
 - **V-008** · adopted · **Term**: an element of an expression's tree. *Never*: a bare "node".
 - **V-009** · adopted · **Syntax node**: an element of a program's tree. *Never*: a bare "node".
+- **V-025** · adopted · **Shape constraint**: a bound on an index, a capacity or a tensor's shape, a constraint on the
+  type of the property that keys a relation's entries, not part of the schema; a parameter bound into it gives a
+  tensor's shape. Planned in mbse-schemas'
+  [Meta-schemas overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/META_SCHEMAS.md), which removes
+  the list's extent.
 
 V-006, V-010 to V-019 and V-021 became modeling constructs, listed below; V-020 and V-022 to V-024 were withdrawn.
 Their IDs are not reused.
@@ -47,6 +52,9 @@ Links are to `main` unless marked. Repositories are at `https://github.com/pitam
   [Value objects and reference objects](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#value-objects-and-reference-objects)
 - Cardinality, `unique`: [Cardinality](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#cardinality)
 - Meta-schema, module: [Meta-schemas](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#meta-schemas)
+- Planned in the [Meta-schemas overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/META_SCHEMAS.md):
+  one-link and open relations, `OfModule`, `Defines`, meta-relation, anonymous adjacency. Retiring there: `OfAny`,
+  `OfIndexed`, and a list's extent (a store's extent stays).
 - Store, singleton: [Stores](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#stores)
 - Constraint, `requires`: [Where constraints attach](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#open-questions)
 
