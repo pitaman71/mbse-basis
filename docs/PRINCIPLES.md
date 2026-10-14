@@ -90,6 +90,8 @@ each already holds, so that those local texts can be replaced by citations.
   and all builder/visitor/reader/write functionality comes from either proxies in mbse-schemas or generated
   dataclasses. No bespoke class implementations are allowed for models. *Relates to* P-003, P-004, P-010, P-017.
   *Not yet applied* in mbse-expressions (its `docs/EXPRESSIONS.md`, Open questions).
+- **P-019** · adopted · "The preferred form of models as data is fluent builder syntax. Not wire format, pseudocode,
+  or imagined shorthand." *Relates to* P-004, P-018.
 
 ## Open items
 
