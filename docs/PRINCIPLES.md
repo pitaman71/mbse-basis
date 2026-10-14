@@ -87,8 +87,8 @@ each already holds, so that those local texts can be replaced by citations.
 - **P-017** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* P-014, P-018.
 - **P-018** · adopted · "No model should need code to read or write. Ever." All model data is governed by a schema,
-  and all builder/visitor/reader/write functionality comes from mbse-schemas. No bespoke class implementations are
-  allowed. *Relates to* P-003, P-004, P-010, P-017.
+  and all builder/visitor/reader/write functionality comes from either proxies in mbse-schemas or generated
+  dataclasses. No bespoke class implementations are allowed for models. *Relates to* P-003, P-004, P-010, P-017.
   *Not yet applied* in mbse-expressions (its `docs/EXPRESSIONS.md`, Open questions).
 
 ## Open items
