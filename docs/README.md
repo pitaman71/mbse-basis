@@ -58,7 +58,8 @@ met is what its capabilities' current status says.
   stand side by side.
 - **Features may overlap.** The features are a specification, each a constraint on the project (V-002), and their
   conjunction is the objective. Overlapping features are not duplicates; never merge them to remove the overlap.
-- **Keep each index under 10 KB.**
+- **Keep each index short, about 10 KB**: a guideline, which the user ranks well below keeping the documents
+  organized.
 
 ---
 

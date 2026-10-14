@@ -29,8 +29,8 @@ each already holds, so that those local texts can be replaced by citations.
 - **P-003** · proposed · Everything is schema data: kinds are registered meta-schemas tagged `kind`, and expressions,
   predicates, syntax trees, modules and traces serialize, reflect and compare like any other data. *Serves* F-001,
   F-002, F-003.
-  *Applied in*: meta-schemas and `Reflection` (mbse-schemas); expressions bound with `Bindings` (mbse-expressions);
-  kinds (mbse-programs); traces (mbse-patterns).
+  *Applied in*: meta-schemas and `Reflection` (mbse-schemas); kinds (mbse-programs); traces (mbse-patterns).
+  *Not yet applied*: mbse-expressions (P-018).
 - **P-004** · adopted · For kind X: `Visitors.OfX` is the one protocol through which code reads and writes a value of
   X, whether or not it knows the schema; `Proxies.OfX` defines `Spec`, `Builder` and `Data`, and both data instances
   and builders implement `Visitors.OfX`. Algorithms receive a visitor and pull through it; a value never writes itself
@@ -84,6 +84,12 @@ each already holds, so that those local texts can be replaced by citations.
   implementation's skill shows usage in its own language, covering the same topics in the same order as the other's;
   concepts live once, in the design document, which each skill links to rather than restates. *Serves* F-001, F-002.
   *Relates to* C-001.
+- **P-017** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
+  *Relates to* P-014, P-018.
+- **P-018** · adopted · "No model should need code to read or write. Ever." Only schema-driven machinery (stores,
+  builders, data instances or generated code, `Plain`, validation, comparison) reads and writes a model; behavior over
+  models uses it too. *Serves* F-001, F-003. *Relates to* P-003, P-010, P-017.
+  *Not yet applied* in mbse-expressions (its `docs/EXPRESSIONS.md`, Open questions).
 
 ## Open items
 
