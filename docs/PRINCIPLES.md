@@ -14,8 +14,8 @@ each already holds, so that those local texts can be replaced by citations.
   in modules' meta-schemas; a store's `names()` in registration order; a keyed list's items in insertion order;
   reachability and symbols in first-reference order (mbse-schemas `Reachable`, `Plain`); a transform session's
   candidates in the order it first saw them (mbse-patterns).
-  *Exceptions*: `Reflection` lists each kind's schemas, and `Paths` routes from the schemas, in name order; a relation's
-  `unique` clauses are written each sorted (mbse-schemas).
+  *Exceptions*: a relation's entries are written sorted by the key it declares, where the key's values are ordered
+  (mbse-schemas, PLN-16): an order by value, not by name.
 - **P-002** · adopted · Open world means preserving unstructured data: don't lose, preserve, validate and cleanse on
   request. What is read is kept, undeclared or not, and written back as read; validation reports what does not fit,
   as unknown where the model is silent; cleansing removes or repairs it only when the caller asks. Only where a step
@@ -41,7 +41,9 @@ each already holds, so that those local texts can be replaced by citations.
   and never validate. Anything that has a builder has a `Spec`: either a callable that takes that builder and returns
   it, or an instance of what the builder builds. *Serves* F-003. *Relates to* P-005.
   *Applied in*: mbse-schemas' `docs/VISITOR_PATTERN.md`, which supersedes the reverse protocol (`accept(visitor)`, a
-  value writing itself into serializers and recorders that implemented `Visitors`); not yet built.
+  value writing itself into serializers and recorders that implemented `Visitors`); built in mbse-schemas 0.11, where
+  each schema builder, `Schemas.OfX.Builder`, is a `Visitors.OfObject` over its meta-schema: the same policy at the
+  meta level.
 - **P-005** · proposed · One entry point per kind, named `OfX`: visitors, comparison, evaluation and validation dispatch
   on a value's kind. *Serves* F-003.
   *Applied in*: `Visitors.OfX`, `Comparison.OfX` (mbse-schemas); `Evaluators.OfAny` (mbse-expressions).
@@ -76,10 +78,13 @@ each already holds, so that those local texts can be replaced by citations.
   *Applied in*: `Transforms` (mbse-patterns); code generation (mbse-codegen-python).
 - **P-015** · adopted · References to model elements in code are always by reference, not by string name. Meant in
   full: any model used in code has typed bindings, generated or written, since dynamic proxies are invisible to type
-  checkers. Names remain how the wire format and modules write references. *Relates to* P-010, C-004.
+  checkers. Names remain how the wire format and modules write references. "A declaration is not a reference," as
+  the user decided: declaring a name (`.name('crm.Contact')`, a link's name) is not covered. *Relates to* P-010, C-004.
+  *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
+  properties by string, as the user decided (its `docs/FRAMEWORK.md`, Resolved, "Schema builders align with their
+  meta-schemas").
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
-  (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns);
-  `.links('contact', 'address')` and `.me('contact')` (mbse-schemas).
+  (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
 - **P-016** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
   implementation's skill shows usage in its own language, covering the same topics in the same order as the other's;
   concepts live once, in the design document, which each skill links to rather than restates. *Serves* F-001, F-002.
@@ -95,15 +100,14 @@ each already holds, so that those local texts can be replaced by citations.
 
 ## Open items
 
-- **P-015: what it serves, and declarations.** Which features it serves is still to state. Whether declaring a name
-  (`.name('crm.Contact')`, a link's name) counts, or only referring to an element already declared.
+- **P-015: what it serves.** Which features it serves is still to state.
 
-- **P-001's exceptions.** Schemas listed in name order by `Reflection` and `Paths`, and `unique` clauses sorted, are
-  sorted orders. Decide whether they are deliberate exceptions, say for lookup and byte-identity, or debts against
-  P-001. mbse-schemas' `docs/OPEN_WORLD.md` also proposes writing preserved properties sorted by name, against P-001.
-- **P-004 beyond mbse-schemas.** Whether mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
-  mbse-patterns' predicate and transform builders follow it, and whether `Schemas.OfX.Builder`, which implements
-  `Visitors.OfX` for schemas of kind X, is the same policy at the meta level.
+- **P-001's exception and a proposal against it.** Decide whether entries sorted by their relation's key are a
+  deliberate exception (an order by value, for byte-identity) or a debt against P-001. mbse-schemas'
+  `docs/OPEN_WORLD.md` also proposes writing preserved properties sorted by name, against P-001.
+- **P-004 beyond mbse-schemas.** mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
+  mbse-patterns' predicate and transform builders do not follow it yet; each comes to, building its models through
+  mbse-schemas' builders (P-018, P-019), as it migrates to mbse-schemas 0.11.
 - **P-016 is not applied.** Every repository copies one skill, byte-identical, from `skills/<repo>/` into both
   packages (`skills/sync.sh`, checked by SKL-01), so each package carries both languages' guides, and the "neutral"
   references (dialects, translating, languages, transpiling, serialization) teach TypeScript users with Python
