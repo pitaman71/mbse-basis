@@ -76,13 +76,22 @@ each already holds, so that those local texts can be replaced by citations.
 - **P-014** · proposed · Every ambiguity is a decision: a parameter of one step, taken by a person, an agent or a policy
   chosen up front, and kept in a trace. *Serves* F-001, F-002.
   *Applied in*: `Transforms` (mbse-patterns); code generation (mbse-codegen-python).
-- **P-015** · adopted · References to model elements in code are always by reference, not by string name. Meant in
-  full: any model used in code has typed bindings, generated or written, since dynamic proxies are invisible to type
+- **P-015** · adopted · A *concrete reference* to a model object in code 
+  is always by programmatic reference, not by string name. This is distinct
+  from a *symbolic reference* which stands in place for a yet-to-be-bound
+  model object. A *symbol* at the point of declaration (schema parameter 
+  or function formal) or at the point of reference (expression term) 
+  is a natural string or by an object declared with `stores.Symbols`. 
+  Meant in full: any model used in code has typed bindings, generated or written, since dynamic proxies are invisible to type
   checkers. Names remain how the wire format and modules write references. "A declaration is not a reference," as
   the user decided: declaring a name (`.name('crm.Contact')`, a link's name) is not covered. *Relates to* P-010, C-004.
   *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
   properties by string, as the user decided (its `docs/FRAMEWORK.md`, Resolved, "Schema builders align with their
-  meta-schemas").
+  meta-schemas"). A store path's `as_instance` (`store.Instances.crm.Contacts.as_instance('Anna Baker')`, mbse-schemas'
+  `docs/OBJECT_IDENTITY.md`) "is the one and only one api location where the identity of an object can be used to
+  reference the object", as the user decided, "and it is necessary because we can no longer retain instances in global
+  files like Expressions.Framework.*.py": no schema object or other instance is shared across stores (mbse-schemas'
+  `docs/SCHEMA_EXTENSION.md`, Decided, 23).
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
 - **P-016** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
