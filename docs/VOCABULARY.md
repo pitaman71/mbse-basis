@@ -42,21 +42,42 @@ Links are to `main` unless marked. Repositories are at `https://github.com/pitam
 
 ### mbse-schemas
 
-- `OfAny`, `OfNative`, `OfObject`, `OfProperty`, `OfRelation`, `OfAdjacency`, `OfEntry`, `OfUnion`,
-  `OfIntersection`, `OfIndexed`, `OfParameter`, `OfApply`:
+For usage, read what its tests run, which cannot drift from the code, not its prose design documents, which give the
+reasons: the API on a page per language, [python.md](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/references/python.md) and
+[typescript.md](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/references/typescript.md), each fenced program run by SKL-02;
+[Corpus.py](https://github.com/pitaman71/mbse-schemas/blob/main/python3/mbse/Schemas/Conformance/Corpus.py), one program building every kind of schema and data,
+whose output in [conformance/python3/](https://github.com/pitaman71/mbse-schemas/blob/main/conformance/python3) is the wire format, byte-identical in both languages;
+and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob/main/python3/tests) (TypeScript's notebooks have the same case IDs), `25_Builders`
+(building in a store, the plain schemas of schemas, paths such as `store.Schemas.OfInt`), `28_Extensions`
+(`store.extend`), `27_Snapshots` (mutation logs, reading without an extension) and `22_Parametrics`.
+
+- `OfAny`, `OfScalar`, `OfObject`, `OfProperty`, `OfRelation`, `OfAdjacency`, `OfEntry`, `OfUnion`,
+  `OfIntersection`, `OfContainer`, `OfParameter`, `OfModule`:
   [Elements](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#elements)
-- Native type, token: [Native types](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#native-types)
+- Basic scalar (`OfBool`, `OfInt`, `OfFloat`, `OfStr`, `OfBytes`): [Scalar types](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#scalar-types).
+  Retiring in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md) (step 3): user scalar schemas and the
+  token; every finer scalar is a value domain (mbse-expressions).
 - Branch, part, flat: [Unions and intersections by name](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#unions-and-intersections-by-name)
-- List, keyed list, extent: [Lists](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#lists)
+- Container: [Lists](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#lists)
 - Value object, reference object:
   [Value objects and reference objects](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#value-objects-and-reference-objects)
 - Cardinality, `unique`: [Cardinality](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#cardinality)
-- Meta-schema, module: [Meta-schemas](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#meta-schemas)
-- Planned in the [Meta-schemas overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/META_SCHEMAS.md):
-  one-link and open relations, `OfModule`, `Defines`, meta-relation, anonymous adjacency. Retiring there: `OfAny`,
-  `OfIndexed`, and a list's extent (a store's extent stays).
-- Store, singleton: [Stores](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#stores)
-- Constraint, `requires`: [Where constraints attach](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#open-questions)
+- Level (data, schema, plain schema of schemas, meta-schema):
+  [Store overhaul, Levels](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
+  (`Schemas.OfObject`, level 2) is what an extension extends; a *meta-schema* (level 3) is static code describing it.
+- Module: [Meta-schemas](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#meta-schemas)
+- Planned in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md): `HasBranch` and `HasPart`
+  (step 3); object identity, `OfIdentity`, `as_instance` (step 4, [Object identity](https://github.com/pitaman71/mbse-schemas/blob/main/docs/OBJECT_IDENTITY.md));
+  `Parameters.Bind` and `Parameters.Apply` ([Parametrics](https://github.com/pitaman71/mbse-schemas/blob/main/docs/PARAMETRICS.md)).
+- Store, singleton: [Stores](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#stores).
+  Each store holds its own schemas, built when it is made or through `store.extend`; no schema object is shared
+  across stores ([Schema extension](https://github.com/pitaman71/mbse-schemas/blob/main/docs/SCHEMA_EXTENSION.md#decided), Decided, 23). There is one store type,
+  `Builders.Store`, which registers a named schema by building it; `Stores.Combined` is deprecated (since 0.16.0).
+- Parameter (`OfParameter`): a name only, a symbol standing for a schema (since 0.17.0); terms, applications and
+  widths are mbse-expressions'. Bound by `Parameters.Bind` and `Parameters.Apply`, planned
+  ([Parametrics](https://github.com/pitaman71/mbse-schemas/blob/main/docs/PARAMETRICS.md)).
+- Constraint: [Where constraints attach](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#open-questions). `requires` left mbse-schemas in 0.17.0, for
+  mbse-patterns ([Schema extension](https://github.com/pitaman71/mbse-schemas/blob/main/docs/SCHEMA_EXTENSION.md#decided), Decided, 5 to 7).
 
 ### mbse-expressions
 

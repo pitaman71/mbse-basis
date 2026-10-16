@@ -11,7 +11,7 @@ each already holds, so that those local texts can be replaced by citations.
 
 - **P-001** · adopted · Declaration order over sorted order. *Serves* F-002.
   *Applied in*: a schema's properties, adjacencies, branches, parts and parameters in declared order, in builders and
-  in modules' meta-schemas; a store's `names()` in registration order; a keyed list's items in insertion order;
+  in the plain schemas of schemas; a store's `names()` in registration order; a keyed list's items in insertion order;
   reachability and symbols in first-reference order (mbse-schemas `Reachable`, `Plain`); a transform session's
   candidates in the order it first saw them (mbse-patterns).
   *Exceptions*: a relation's entries are written sorted by the key it declares, where the key's values are ordered
@@ -26,10 +26,10 @@ each already holds, so that those local texts can be replaced by citations.
   (mbse-programs); drops recorded as steps (mbse-codegen-python).
   *Not yet applied* in mbse-schemas: decoding refuses undeclared keys. Its `docs/OPEN_WORLD.md` proposes preserving
   them as a reading policy (Undeclared properties, policy 3).
-- **P-003** · proposed · Everything is schema data: kinds are registered meta-schemas tagged `kind`, and expressions,
-  predicates, syntax trees, modules and traces serialize, reflect and compare like any other data. *Serves* F-001,
-  F-002, F-003.
-  *Applied in*: meta-schemas and `Reflection` (mbse-schemas); kinds (mbse-programs); traces (mbse-patterns).
+- **P-003** · proposed · Everything is schema data: each kind of schema is a plain schema of schemas held by the store
+  (`Schemas.OfObject`; mbse-schemas' store overhaul, Levels), and expressions, predicates, syntax trees, modules and
+  traces serialize, reflect and compare like any other data. *Serves* F-001, F-002, F-003.
+  *Applied in*: the plain schemas of schemas (mbse-schemas); kinds (mbse-programs); traces (mbse-patterns).
   *Not yet applied*: mbse-expressions (P-018).
 - **P-004** · adopted · For kind X: `Visitors.OfX` is the one protocol through which code reads and writes a value of
   X, whether or not it knows the schema; `Proxies.OfX` defines `Spec`, `Builder` and `Data`, and both data instances
@@ -42,8 +42,8 @@ each already holds, so that those local texts can be replaced by citations.
   it, or an instance of what the builder builds. *Serves* F-003. *Relates to* P-005.
   *Applied in*: mbse-schemas' `docs/VISITOR_PATTERN.md`, which supersedes the reverse protocol (`accept(visitor)`, a
   value writing itself into serializers and recorders that implemented `Visitors`); built in mbse-schemas 0.11, where
-  each schema builder, `Schemas.OfX.Builder`, is a `Visitors.OfObject` over its meta-schema: the same policy at the
-  meta level.
+  each schema builder is a `Visitors.OfObject` over its store's plain schema of schemas (`Schemas.OfX`, since 0.14),
+  through which an extension's members reach it: the same policy one level up.
 - **P-005** · proposed · One entry point per kind, named `OfX`: visitors, comparison, evaluation and validation dispatch
   on a value's kind. *Serves* F-003.
   *Applied in*: `Visitors.OfX`, `Comparison.OfX` (mbse-schemas); `Evaluators.OfAny` (mbse-expressions).
