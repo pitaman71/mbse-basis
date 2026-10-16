@@ -96,7 +96,9 @@ each already holds, so that those local texts can be replaced by citations.
   dataclasses. No bespoke class implementations are allowed for models. *Relates to* P-003, P-004, P-010, P-017.
   *Not yet applied* in mbse-expressions (its `docs/EXPRESSIONS.md`, Open questions).
 - **P-019** · adopted · "The preferred form of models as data is fluent builder syntax. Not wire format, pseudocode,
-  or imagined shorthand." *Relates to* P-004, P-018.
+  or imagined shorthand." "Do not invent another DSL by wrapping builder syntax": helper functions that build a model
+  through the builders are such a DSL; models are written in the builders' fluent syntax itself. *Relates to* P-004,
+  P-018.
 
 ## Open items
 
