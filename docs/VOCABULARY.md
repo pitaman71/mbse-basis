@@ -55,9 +55,11 @@ and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob
   `OfIntersection`, `OfContainer`, `OfParameter`, `OfModule`:
   [Elements](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#elements)
 - Basic scalar (`OfBool`, `OfInt`, `OfFloat`, `OfStr`, `OfBytes`): [Scalar types](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#scalar-types).
-  Retiring in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md) (step 3): user scalar schemas and the
-  token; every finer scalar is a value domain (mbse-expressions).
-- Branch, part, flat: [Unions and intersections by name](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#unions-and-intersections-by-name)
+  The only scalar schemas since 0.18.0: a store builds no other, and a scalar has no token; every finer scalar is a
+  value domain (mbse-expressions).
+- Branch, part, flat: [Unions and intersections by name](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#unions-and-intersections-by-name). A
+  branch or part is an entry of `HasBranch` or `HasPart` (since 0.18.0), linking its type and carrying its name and
+  description, not an object of its own.
 - Container: [Lists](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#lists)
 - Value object, reference object:
   [Value objects and reference objects](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#value-objects-and-reference-objects)
@@ -66,15 +68,15 @@ and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob
   [Store overhaul, Levels](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
   (`Schemas.OfObject`, level 2) is what an extension extends; a *meta-schema* (level 3) is static code describing it.
 - Module: [Meta-schemas](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#meta-schemas)
-- Planned in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md): `HasBranch` and `HasPart`
-  (step 3); object identity, `OfIdentity`, `as_instance` (step 4, [Object identity](https://github.com/pitaman71/mbse-schemas/blob/main/docs/OBJECT_IDENTITY.md));
+- Planned in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [Object identity](https://github.com/pitaman71/mbse-schemas/blob/main/docs/OBJECT_IDENTITY.md));
   `Parameters.Bind` and `Parameters.Apply` ([Parametrics](https://github.com/pitaman71/mbse-schemas/blob/main/docs/PARAMETRICS.md)).
 - Store, singleton: [Stores](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#stores).
   Each store holds its own schemas, built when it is made or through `store.extend`; no schema object is shared
   across stores ([Schema extension](https://github.com/pitaman71/mbse-schemas/blob/main/docs/SCHEMA_EXTENSION.md#decided), Decided, 23). There is one store type,
   `Builders.Store`, which registers a named schema by building it; `Stores.Combined` is deprecated (since 0.16.0).
 - Parameter (`OfParameter`): a name only, a symbol standing for a schema (since 0.17.0); terms, applications and
-  widths are mbse-expressions'. Bound by `Parameters.Bind` and `Parameters.Apply`, planned
+  widths are mbse-expressions'. Bound by `Parameters.Bind`, planned: a reference object recording the substitution,
+  which any operation taking the function interprets, applying it lazily or through `Parameters.Apply`
   ([Parametrics](https://github.com/pitaman71/mbse-schemas/blob/main/docs/PARAMETRICS.md)).
 - Constraint: [Where constraints attach](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#open-questions). `requires` left mbse-schemas in 0.17.0, for
   mbse-patterns ([Schema extension](https://github.com/pitaman71/mbse-schemas/blob/main/docs/SCHEMA_EXTENSION.md#decided), Decided, 5 to 7).
