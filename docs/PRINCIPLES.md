@@ -87,11 +87,10 @@ each already holds, so that those local texts can be replaced by citations.
   the user decided: declaring a name (`.name('crm.Contact')`, a link's name) is not covered. *Relates to* P-010, C-004.
   *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
   properties by string, as the user decided (its `docs/FRAMEWORK.md`, Resolved, "Schema builders align with their
-  meta-schemas"). A store path's `as_instance` (`store.Instances.crm.Contacts.as_instance('Anna Baker')`, mbse-schemas'
-  `docs/OBJECT_IDENTITY.md`) "is the one and only one api location where the identity of an object can be used to
-  reference the object", as the user decided, "and it is necessary because we can no longer retain instances in global
-  files like Expressions.Framework.*.py": no schema object or other instance is shared across stores (mbse-schemas'
-  `docs/SCHEMA_EXTENSION.md`, Decided, 23).
+  meta-schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as
+  the user decided, a path from a singleton through ownership entries, each step its adjacency called with the entry's
+  keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, mbse-schemas' `docs/OBJECT_IDENTITY.md`, Decided, 26
+  and 27); the earlier `as_instance` exception is withdrawn.
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
 - **P-016** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
