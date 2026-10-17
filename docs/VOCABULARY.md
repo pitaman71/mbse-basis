@@ -27,6 +27,9 @@ block. Wherever one of ours meets a language's own, in docs and examples, qualif
 - **V-007** · adopted · **Property**, never "field", which means only the host language's member that holds one.
 - **V-008** · adopted · **Term**: an element of an expression's tree. *Never*: a bare "node".
 - **V-009** · adopted · **Syntax node**: an element of a program's tree. *Never*: a bare "node".
+- **V-026** · adopted · **Schema**: what describes a value, a property's, a symbol's, a branch's or a part's, and what
+  a value of any schema is of. *Never*: "type", which "has no meaning in mbse-*", as the user decided; a host
+  language's own type (Python's `int`, TypeScript's `BigInt`) is qualified as the host's.
 - **V-025** · adopted · **Shape constraint**: a bound on an index, a capacity or a tensor's shape, a constraint on the
   type of the property that keys a relation's entries, not part of the schema; a parameter bound into it gives a
   tensor's shape. Planned in mbse-schemas'
