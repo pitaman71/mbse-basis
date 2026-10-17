@@ -57,7 +57,7 @@ and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob
 - `OfAny`, `OfScalar`, `OfObject`, `OfProperty`, `OfRelation`, `OfAdjacency`, `OfEntry`, `OfUnion`,
   `OfIntersection`, `OfContainer`, `OfParameter`, `OfModule`:
   [Elements](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#elements)
-- Basic scalar (`OfBool`, `OfInt`, `OfFloat`, `OfStr`, `OfBytes`): [Scalar types](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#scalar-types).
+- Basic scalar (`OfBool`, `OfInt`, `OfFloat`, `OfStr`, `OfBytes`): [Scalars](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#scalars).
   The only scalar schemas since 0.18.0: a store builds no other, and a scalar has no token; every finer scalar is a
   value domain (mbse-expressions).
 - Branch, part, flat: [Unions and intersections by name](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#unions-and-intersections-by-name). A
