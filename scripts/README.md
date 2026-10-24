@@ -45,8 +45,10 @@ last tested against:
 The pin does what a submodule's recorded commit does, without the submodule: the checkouts stay ordinary repositories
 that you edit, commit and branch as usual, side by side instead of nested. The lock files (`uv.lock`,
 `package-lock.json`) record siblings by path, with no hash, so the pinned commit is what makes a checkout reproducible.
-The version is the compatibility contract: a sibling is compatible when it has the same major version (below 1.0, the
-same minor) and is no older, and `python3/pyproject.toml` requires exactly that range. A release is the tag
+A repository has a Python package, a TypeScript one, or both, which carry its version alike. The version is the
+compatibility contract: a sibling is compatible when it has the same major version (below 1.0, the same minor) and is no
+older. Where both this repository and the sibling have Python packages, `python3/pyproject.toml` requires exactly that
+range; a TypeScript `file:` dependency has no range, so `check` alone holds it to the contract. A release is the tag
 `v<version>`. A sibling without packages, such as mbse-basis, has no version: it is pinned by commit alone and never
 tagged.
 
@@ -55,8 +57,8 @@ tagged.
 | Command | Roughly | What it adds |
 |---|---|---|
 | `clone` | `git clone` each missing sibling, then `git checkout --detach <pin>` | skips siblings already there |
-| `check [--strict]` | `git status` across the siblings | compatible versions, matching `pyproject.toml` ranges; `--strict` requires each sibling clean at its pin |
-| `pin` | `git add` of a submodule's new commit | records each sibling's version and `HEAD` in `siblings.json`, and the range in `pyproject.toml`; refuses a sibling with uncommitted changes |
+| `check [--strict]` | `git status` across the siblings | compatible versions, matching `pyproject.toml` ranges where there are Python packages; `--strict` requires each sibling clean at its pin |
+| `pin` | `git add` of a submodule's new commit | records each sibling's version and `HEAD` in `siblings.json`, and the range in `pyproject.toml` if there is one; refuses a sibling with uncommitted changes |
 | `workspace DIR --branch B [--edit S ...]` | `git worktree add` in every repository at once | worktrees side by side in `DIR`, so the relative paths hold; this repository and the `--edit` siblings on branch `B`, the others detached |
 | `land DIR [--push]` | `git merge --ff-only` in each repository, then `git worktree remove` and `git branch -d` | dependencies first; tags each new version; refuses, before changing anything, anything that would not fast-forward cleanly |
 | `push` | `git push` in each repository | dependencies first, with any new version tag; refuses, before pushing anything, a branch behind its upstream or a pin the sibling's branch does not contain |
@@ -127,8 +129,8 @@ edited sibling at anything other than that sibling's branch. To abandon a worksp
 
 ### Releases
 
-A release is a version bump, made alike in `python3/pyproject.toml` and `typescript5/package.json`, and the tag
-`v<version>`. `land` creates the tag; a bump committed directly on a branch is not tagged until you tag it
+A release is a version bump, made alike in `python3/pyproject.toml` and `typescript5/package.json` (whichever exist),
+and the tag `v<version>`. `land` creates the tag; a bump committed directly on a branch is not tagged until you tag it
 (`git tag -a v0.11.0 -m "Release 0.11.0"`), and `push` then pushes the tag with the branch. Below 1.0, a change that
 dependents must adapt to bumps the minor version.
 
