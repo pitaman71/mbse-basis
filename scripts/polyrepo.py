@@ -14,16 +14,19 @@ tested with:
 Development uses the siblings as they are, so that a change in one is seen at once by the others: Python installs
 `../../<sibling>/python3` (`tool.uv.sources`) and TypeScript `file:../../<sibling>/typescript5`, which their lock files
 record by path, without a hash. The commit makes a checkout reproducible: `clone` checks it out, and `check --strict`
-requires it. The version is the contract: a sibling is compatible when it has the same major version (the same minor
-below 1.0) and is no older, and `python3/pyproject.toml` requires exactly that range, so uv refuses an incompatible
-sibling too. A release of a sibling is the tag `v<version>`. A sibling without packages, such as mbse-basis, has no
-version: it is pinned by commit alone, and never tagged.
+requires it. A repository has a Python package (`python3/pyproject.toml`), a TypeScript one (`typescript5/package.json`)
+or both, and both carry its version alike. The version is the contract: a sibling is compatible when it has the same
+major version (the same minor below 1.0) and is no older. Where this repository has a Python package and the sibling
+has one too, `python3/pyproject.toml` requires exactly that range, so uv refuses an incompatible sibling too; a
+TypeScript `file:` dependency carries no range, so only `check` holds TypeScript to the contract. A release of a sibling
+is the tag `v<version>`. A sibling without packages, such as mbse-basis, has no version: it is pinned by commit alone,
+and never tagged.
 
-    check [--strict]          siblings present, compatible, and required alike by pyproject.toml; --strict also
-                              requires each clean at its pinned commit
+    check [--strict]          siblings present, compatible, and required alike by pyproject.toml where both have
+                              Python packages; --strict also requires each clean at its pinned commit
     clone                     clones each missing sibling at its pinned commit (fresh clones, CI)
     pin                       records each sibling's version and commit (here, and the version's range in
-                              pyproject.toml); a sibling with uncommitted changes cannot be pinned
+                              pyproject.toml, if there is one); a sibling with uncommitted changes cannot be pinned
     workspace DIR [--branch NAME] [--edit SIBLING ...]
                               a workspace for parallel work: git worktrees of this repository and of its siblings,
                               side by side in DIR, so that the relative paths to the siblings hold; this repository on
@@ -83,15 +86,21 @@ def compatible(pinned: str, actual: str) -> bool:
     return same and a >= p
 
 
+def has_python(sibling: Path) -> bool:
+    return (sibling / "python3" / "pyproject.toml").is_file()
+
+
 def version_of(sibling: Path) -> str | None:
-    """The sibling's version, which its Python and TypeScript packages must agree on; None without packages."""
-    if not (sibling / "python3").is_dir() and not (sibling / "typescript5").is_dir():
-        return None
-    python = re.search(r'^version = "([^"]+)"', (sibling / "python3" / "pyproject.toml").read_text(), re.M)
-    typescript = json.loads((sibling / "typescript5" / "package.json").read_text())["version"]
-    if python is None or python.group(1) != typescript:
-        raise SystemExit(f"{sibling.name}: python3 and typescript5 disagree on the version")
-    return typescript
+    """The sibling's version, which its Python and TypeScript packages, whichever it has, agree on; None without."""
+    versions = []
+    if has_python(sibling):
+        python = re.search(r'^version = "([^"]+)"', (sibling / "python3" / "pyproject.toml").read_text(), re.M)
+        versions.append(python and python.group(1))
+    if (sibling / "typescript5" / "package.json").is_file():
+        versions.append(json.loads((sibling / "typescript5" / "package.json").read_text()).get("version"))
+    if None in versions or len(set(versions)) > 1:
+        raise SystemExit(f"{sibling.name}: its packages must each have the version, alike; they have {versions}")
+    return versions[0] if versions else None
 
 
 def git(sibling: Path, *args: str) -> str:
@@ -112,7 +121,7 @@ def check(strict: bool) -> int:
             failures += 1
             continue
         actual = version_of(sibling)
-        ranges = required(name)
+        ranges = required(name) if PYPROJECT.is_file() and has_python(sibling) else None
         if (pinned is None) != (actual is None):
             print(f"{name}: pinned {'without' if pinned is None else 'with'} a version, but "
                   f"{'has one' if actual else 'has none'}; run pin")
@@ -121,7 +130,7 @@ def check(strict: bool) -> int:
         if pinned is not None and not compatible(pinned, actual):
             print(f"{name}: {actual} is not compatible with the pinned {pinned}")
             failures += 1
-        if pinned is not None and (not ranges or any(r != requirement(pinned) for r in ranges)):
+        if pinned is not None and ranges is not None and (not ranges or any(r != requirement(pinned) for r in ranges)):
             print(f"{name}: pyproject.toml must require {name}{requirement(pinned)}, not {ranges}; run pin")
             failures += 1
         commit = entry.get("commit")
@@ -155,7 +164,7 @@ def clone() -> int:
 
 def pin() -> int:
     config = json.loads(CONFIG.read_text())
-    text = PYPROJECT.read_text()
+    text = PYPROJECT.read_text() if PYPROJECT.is_file() else None
     dirty = [name for name in config if git(ROOT.parent / name, "status", "--porcelain")]
     if dirty:
         raise SystemExit(f"uncommitted changes in {dirty}: a pin is a commit, so commit them first")
@@ -165,13 +174,15 @@ def pin() -> int:
         entry.pop("version", None)
         if version is not None:
             entry["version"] = version
+        if version is not None and text is not None and has_python(sibling):
             text = re.sub(rf'"({re.escape(name)}(?:\[[^\]]*\])?)[^"]*"', rf'"\g<1>{requirement(version)}"', text)
         entry["commit"] = git(sibling, "rev-parse", "HEAD")
         print(f"{name}: pinned {version or 'by commit'} at {entry['commit'][:7]}")
         if not git(sibling, "branch", "--remotes", "--contains", entry["commit"]):
             print(f"{name}: {entry['commit'][:7]} is not pushed yet; clone needs it pushed")
     CONFIG.write_text(json.dumps(config, indent=2) + "\n")
-    PYPROJECT.write_text(text)
+    if text is not None:
+        PYPROJECT.write_text(text)
     return 0
 
 
@@ -205,8 +216,10 @@ def workspace(directory: Path, branch: str | None, edit: list[str]) -> int:
     worktree(ROOT, directory / ROOT.name, branch)
     for name in siblings:
         worktree(ROOT.parent / name, directory / name, branch if name in edit else None)
-    print(f"next: cd {directory / ROOT.name}, then install: (cd python3 && uv sync --all-extras) and"
-          " (cd typescript5 && npm install)")
+    installs = [f"({cmd})" for package, cmd in (("python3/pyproject.toml", "cd python3 && uv sync --all-extras"),
+                                                 ("typescript5/package.json", "cd typescript5 && npm install"))
+                if (ROOT / package).is_file()]
+    print(f"next: cd {directory / ROOT.name}" + (f", then install: {' and '.join(installs)}" if installs else ""))
     return 0
 
 

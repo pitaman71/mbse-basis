@@ -3,7 +3,8 @@
     python3 -m unittest discover -s scripts
 
 Three repositories stand for the mbse ones: `lower` (no siblings), `middle` (pins lower) and `upper` (pins both), for
-which polyrepo.py runs, as each repository runs it. Standard library only, as polyrepo.py is.
+which polyrepo.py runs, as each repository runs it; each has a Python and a TypeScript package, and some tests add a
+repository with only one of the two. Standard library only, as polyrepo.py is.
 """
 
 from __future__ import annotations
@@ -53,18 +54,37 @@ class Workspaces(unittest.TestCase):
         self.workspace = self.root / "worktrees" / "change"
         self.call(polyrepo.workspace, self.workspace, "change", ["lower", "middle"])
 
-    def write(self, name: str, version: str, pinned: list[str], where: Path | None = None) -> None:
+    def write(self, name: str, version: str, pinned: list[str], where: Path | None = None,
+              languages: tuple[str, ...] = ("python3", "typescript5")) -> None:
         """A repository's versions, and its siblings.json and requirements when it pins polyrepo."""
         where = where or self.repos / name
-        (where / "python3").mkdir(exist_ok=True)
-        (where / "typescript5").mkdir(exist_ok=True)
-        requires = ", ".join(f'"{s}>=0.1.0,<0.2"' for s in pinned)
-        (where / "python3" / "pyproject.toml").write_text(f'[project]\nversion = "{version}"\n'
-                                                          f"dependencies = [{requires}]\n")
-        (where / "typescript5" / "package.json").write_text(json.dumps({"version": version}))
+        if "python3" in languages:
+            (where / "python3").mkdir(exist_ok=True)
+            requires = ", ".join(f'"{s}>=0.1.0,<0.2"' for s in pinned)
+            (where / "python3" / "pyproject.toml").write_text(f'[project]\nversion = "{version}"\n'
+                                                              f"dependencies = [{requires}]\n")
+        if "typescript5" in languages:
+            (where / "typescript5").mkdir(exist_ok=True)
+            dependencies = {s: f"file:../../{s}/typescript5" for s in pinned}
+            (where / "typescript5" / "package.json").write_text(json.dumps({"version": version,
+                                                                            "dependencies": dependencies}))
         if pinned:
             entries = {s: {"repository": "", "version": "0.1.0"} for s in pinned}
             (where / "siblings.json").write_text(json.dumps(entries))
+
+    def repository(self, name: str, languages: tuple[str, ...], pinned: list[str]) -> Path:
+        """Another repository, with only the packages in `languages`, released as 0.1.0, and pinning `pinned`."""
+        remote, where = self.root / "remotes" / f"{name}.git", self.repos / name
+        subprocess.run(["git", "init", "--quiet", "--bare", "--initial-branch=main", str(remote)], check=True)
+        subprocess.run(["git", "clone", "--quiet", str(remote), str(where)], check=True, capture_output=True)
+        self.write(name, "0.1.0", pinned, languages=languages)
+        run(where, "add", "-A")
+        run(where, "commit", "--quiet", "-m", "first")
+        run(where, "tag", "--annotate", "v0.1.0", "--message", "Release 0.1.0")
+        if pinned:
+            self.pin(where)
+        run(where, "push", "--quiet", "--set-upstream", "origin", "main", "v0.1.0")
+        return where
 
     def at(self, tree: Path):
         """polyrepo.py as run from `tree`."""
@@ -299,6 +319,74 @@ class Workspaces(unittest.TestCase):
         self.assertIn("unversioned, so no release", out.getvalue())
         self.assertEqual(run(remote, "rev-parse", "main"), run(notes, "rev-parse", "HEAD"))
         self.assertEqual(run(remote, "tag", "--list"), "")
+
+    def test_a_typescript_only_repository(self) -> None:
+        web = self.repository("web", ("typescript5",), ["lower", "middle"])
+        self.assertFalse((web / "python3").exists())  # pin wrote no pyproject.toml
+        pinned = json.loads((web / "siblings.json").read_text())
+        self.assertEqual({name: entry["commit"] for name, entry in pinned.items()},
+                         {name: run(self.repos / name, "rev-parse", "HEAD") for name in ("lower", "middle")})
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(polyrepo.main(web, ["check", "--strict"]), 0)
+            self.assertEqual(polyrepo.main(web, ["clone"]), 0)
+        self.assertIn("middle: 0.1.0, at its pinned commit", out.getvalue())
+        workspace = self.root / "worktrees" / "web"
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            polyrepo.main(web, ["workspace", str(workspace), "--branch", "web", "--edit", "middle"])
+        self.assertIn("then install: (cd typescript5 && npm install)\n", out.getvalue())
+        self.write("middle", "0.2.0", ["lower"], workspace / "middle")
+        self.pin(workspace / "middle")
+        self.write("web", "0.2.0", ["lower", "middle"], workspace / "web", ("typescript5",))
+        self.pin(workspace / "web")
+        self.assertFalse((workspace / "web" / "python3").exists())
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(polyrepo.main(web, ["land", str(workspace), "--push"]), 0)
+        self.assertIn("web: main at", out.getvalue())
+        self.assertIn("web: pushed main v0.2.0", out.getvalue())
+        self.assertEqual(self.remote("web", "v0.2.0^{commit}"), run(web, "rev-parse", "HEAD"))
+        self.assertEqual(json.loads((web / "siblings.json").read_text())["middle"]["version"], "0.2.0")
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(polyrepo.main(web, ["check", "--strict"]), 0)
+        pinned = json.loads((web / "siblings.json").read_text())
+        pinned["middle"]["version"] = "0.1.0"  # the version is still the contract, with no range to require it
+        (web / "siblings.json").write_text(json.dumps(pinned))
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(polyrepo.main(web, ["check"]), 1)
+        self.assertIn("middle: 0.2.0 is not compatible with the pinned 0.1.0", out.getvalue())
+
+    def test_siblings_with_one_package_each(self) -> None:
+        """A dependent with both packages requires, in pyproject.toml, only the siblings with Python packages."""
+        web = self.repository("web", ("typescript5",), [])
+        api = self.repository("api", ("python3",), ["lower"])
+        upper = self.repos / "upper"
+        config = json.loads((upper / "siblings.json").read_text())
+        config.update({name: {"repository": str(self.root / "remotes" / f"{name}.git")} for name in ("web", "api")})
+        (upper / "siblings.json").write_text(json.dumps(config))
+        self.pin(upper)
+        pinned = json.loads((upper / "siblings.json").read_text())
+        self.assertEqual((pinned["web"]["version"], pinned["api"]["version"]), ("0.1.0", "0.1.0"))
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(polyrepo.main(upper, ["check"]), 1)
+        self.assertIn("api: pyproject.toml must require api>=0.1.0,<0.2, not []; run pin", out.getvalue())
+        self.assertNotIn("web: pyproject.toml", out.getvalue())
+        pyproject = upper / "python3" / "pyproject.toml"
+        pyproject.write_text(pyproject.read_text().replace('"middle', '"api>=0.0.1", "middle'))
+        self.pin(upper)
+        self.assertIn('"api>=0.1.0,<0.2"', pyproject.read_text())
+        self.assertNotIn("web", pyproject.read_text())
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(polyrepo.main(upper, ["check", "--strict"]), 0)
+            self.assertEqual(polyrepo.main(upper, ["push"]), 0)
+        self.assertIn("web: 0.1.0, at its pinned commit", out.getvalue())
+        self.assertIn("api: 0.1.0, at its pinned commit", out.getvalue())
+        self.assertIn("upper: pushed main", out.getvalue())
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(polyrepo.main(api, ["push"]), 0)  # a Python-only repository, run for itself
+        self.assertEqual(out.getvalue(), "lower: up to date\napi: up to date\n")
+        (web / "typescript5" / "package.json").write_text(json.dumps({}))
+        with self.assertRaises(SystemExit) as raised:
+            polyrepo.version_of(web)
+        self.assertIn("web: its packages must each have the version, alike; they have [None]", str(raised.exception))
 
     def test_root_is_the_checkout_of_the_current_directory(self) -> None:
         (self.repos / "upper" / "python3").mkdir(exist_ok=True)
