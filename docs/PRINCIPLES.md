@@ -3,11 +3,19 @@
 
 # Principles
 
-Design principles that can be reapplied locally across a class of related situations. Principles sit outside the
-design spec's tiers: each is a durable decision that delivers quality as a repeatable engineering pattern, and serves
-qualities. PRI-001 and PRI-002 are the original draft; PRI-003 to PRI-019 are proposed, promoted from decisions each
-repository made separately. *Applied in* names where each already holds, so that those local texts can be replaced
-by citations.
+A principle is a durable design decision, made once and reapplied wherever its situation recurs, across repositories,
+interfaces and implementations. A capability says what a release solves; a principle says how every solution is
+shaped. Principles sit outside the design spec's tiers: each serves qualities, delivering them as a repeatable
+engineering pattern.
+
+Most principles shape the product: a user could notice one broken, in how the product behaves or how its API reads
+(PRI-004, one visitor protocol per kind; PRI-007, three-valued checking). Some shape the work instead, and only a
+contributor could notice them broken (PRI-016, guidance written once); these are conventions, which serve qualities an
+engineering persona values (README, Conventions).
+
+A principle is cited where it applies, never restated there. *Applied in* names where each already holds, so that
+those local texts can be replaced by citations. PRI-001 and PRI-002 are the original draft; PRI-003 to PRI-019 were
+promoted from decisions each repository made separately.
 
 ## Index
 
