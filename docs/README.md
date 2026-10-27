@@ -59,8 +59,8 @@ The doc spec organizes what humans and agents read and run, on four shelves.
 | Shelf | What it is | Status |
 |---|---|---|
 | Tutorials | Executable documents, mostly Jupyter notebooks, that together are the user guide for humans and agents. Each doubles as a unit test | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
-| Skills | Skill documents that together are a user guide optimized for agents | As tutorials |
-| Tests | Executable, platform-specific programs that unit-test mbse components | As tutorials |
+| Skills | Skill documents that together are a user guide optimized for agents | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
+| Tests | Executable, platform-specific programs that unit-test mbse components | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
 | References | Between vocabulary and tutorials: for an advanced human or agent with a specific goal in mind, organized around such goals, cross-linked with vocabulary, tutorials and capabilities | Not yet built, and not needed yet |
 
 ## Other documents
