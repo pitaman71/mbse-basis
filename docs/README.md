@@ -34,8 +34,8 @@ many-to-many, not as a tree.
 **Every feature is external or internal.** An external feature serves a user persona; an internal feature serves an
 engineering persona. Today's features are generally external, and today's tech debt generally internal.
 
-**A capability's proven space should only grow.** Each release, the part of the problem space a capability is proven
-to solve should be at least what it was.
+**A feature's proven space should only grow.** Each capability that lands is an increment of it: each release, the
+part of a feature's problem space its capabilities are proven to solve should be at least what it was.
 
 **Tasks are not enumerated.** Their tracking is latent in git history; there is no need to surface them yet.
 
