@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Features](FEATURES.md) · [Home](README.md) · [Principles →](PRINCIPLES.md)
+[← Features](features/README.md) · [Home](README.md) · [Principles →](PRINCIPLES.md)
 
 # Capabilities
 
@@ -222,4 +222,4 @@ CAP-001 to CAP-023 kept the IDs they had in the workspace's `VISUALIZATION.md`.
 ---
 
 <!-- nav -->
-[← Features](FEATURES.md) · [Home](README.md) · [Principles →](PRINCIPLES.md)
+[← Features](features/README.md) · [Home](README.md) · [Principles →](PRINCIPLES.md)

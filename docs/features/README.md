@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Qualities](QUALITIES.md) · [Home](README.md) · [Capabilities →](CAPABILITIES.md)
+[← Qualities](../QUALITIES.md) · [Home](../README.md) · [Capabilities →](../CAPABILITIES.md)
 
 # Features
 
@@ -43,25 +43,25 @@ adopted before it is met. Features may overlap on purpose.
 
 ### Schema-driven visualization and editing
 
-An index site for any mbse app, driven by its schemas. Each feature's [detail](features/) holds its capabilities'
+An index site for any mbse app, driven by its schemas. Each feature's detail file holds its capabilities'
 specifications.
 
 - <a id="FEA-001"></a>**FEA-001** · adopted · external · Schema-driven UI: services and UI present an app driven by its
-  schemas, extended by schema-aware code only where wanted. *Confers* QUA-008. [Detail](features/FEA-001.md)
+  schemas, extended by schema-aware code only where wanted. *Confers* QUA-008. [Detail](FEA-001.md)
 - <a id="FEA-003"></a>**FEA-003** · adopted · external · No-code logical views: query formats the backend serves as
-  mutation expressions, requested alone or nested in one response. *Confers* QUA-008. [Detail](features/FEA-003.md)
+  mutation expressions, requested alone or nested in one response. *Confers* QUA-008. [Detail](FEA-003.md)
 - <a id="FEA-004"></a>**FEA-004** · adopted · external · Index site browser views: browsing schemas, objects and
-  relation entries as lists of chips. *Confers* QUA-008. [Detail](features/FEA-004.md)
+  relation entries as lists of chips. *Confers* QUA-008. [Detail](FEA-004.md)
 - <a id="FEA-005"></a>**FEA-005** · adopted · external · Inspector views: inspecting, navigating among and editing
-  objects, adjacencies and relations from any view. *Confers* QUA-008. [Detail](features/FEA-005.md)
+  objects, adjacencies and relations from any view. *Confers* QUA-008. [Detail](FEA-005.md)
 - <a id="FEA-006"></a>**FEA-006** · adopted · external · Persistence: an app's store outlives its service. *Confers*
-  QUA-008. [Detail](features/FEA-006.md)
+  QUA-008. [Detail](FEA-006.md)
 - <a id="FEA-007"></a>**FEA-007** · adopted · external · Property kinds: each property is shown and edited as its kind
-  calls for, with who wrote it and when. *Confers* QUA-008. [Detail](features/FEA-007.md)
+  calls for, with who wrote it and when. *Confers* QUA-008. [Detail](FEA-007.md)
 
 ## Not yet planned
 
-Features without an ID are not in plan yet. Their notes are in [features/UNPLANNED.md](features/UNPLANNED.md): no-code
+Features without an ID are not in plan yet. Their notes are in [features/UNPLANNED.md](UNPLANNED.md): no-code
 secure services, search-sort-filter, view paging, hybrid search, tenancy, agent chat integration, and constraint
 enforcement replacing bespoke workarounds.
 
@@ -93,4 +93,4 @@ the work tracker's seed data uses it as an example ID.
 ---
 
 <!-- nav -->
-[← Qualities](QUALITIES.md) · [Home](README.md) · [Capabilities →](CAPABILITIES.md)
+[← Qualities](../QUALITIES.md) · [Home](../README.md) · [Capabilities →](../CAPABILITIES.md)

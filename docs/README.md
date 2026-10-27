@@ -27,7 +27,7 @@ many-to-many, not as a tree.
 | Tier | Prefix | What it is | Index |
 |---|---|---|---|
 | 1. Quality | `QUA-` | How a persona, human or agent, instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | [QUALITIES.md](QUALITIES.md) |
-| 2. Feature | `FEA-` | A cohesive, focused category of utility a persona values: what problems the product solves for that persona, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [FEATURES.md](FEATURES.md) |
+| 2. Feature | `FEA-` | A cohesive, focused category of utility a persona values: what problems the product solves for that persona, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [features/README.md](features/README.md) |
 | 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [CAPABILITIES.md](CAPABILITIES.md) |
 | 4. Task | | A unit of work toward a capability | not enumerated |
 

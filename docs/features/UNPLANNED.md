@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Features](../FEATURES.md) · [Home](../README.md)
+[← Features](README.md) · [Home](../README.md)
 
 # Features not yet planned
 
@@ -76,4 +76,4 @@ Users can share data views with one another on a read-only basis.
 ---
 
 <!-- nav -->
-[← Features](../FEATURES.md) · [Home](../README.md)
+[← Features](README.md) · [Home](../README.md)

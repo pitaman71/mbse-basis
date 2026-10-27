@@ -1,5 +1,5 @@
 <!-- nav -->
-[← The mbse basis](README.md) · [Home](README.md) · [Features →](FEATURES.md)
+[← The mbse basis](README.md) · [Home](README.md) · [Features →](features/README.md)
 
 # Qualities
 
@@ -46,4 +46,4 @@ QUA-001 to QUA-005 restate features of the first draft, which moved here:
 ---
 
 <!-- nav -->
-[← The mbse basis](README.md) · [Home](README.md) · [Features →](FEATURES.md)
+[← The mbse basis](README.md) · [Home](README.md) · [Features →](features/README.md)
