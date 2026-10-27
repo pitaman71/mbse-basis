@@ -1,5 +1,5 @@
 <!-- nav -->
-[Home](README.md) · [Features →](FEATURES.md)
+[Home](README.md) · [Qualities →](QUALITIES.md)
 
 # The mbse basis
 
@@ -26,7 +26,7 @@ many-to-many, not as a tree.
 
 | Tier | Prefix | What it is | Index |
 |---|---|---|---|
-| 1. Quality | `QUA-` | How a persona, human or agent, instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | to scaffold |
+| 1. Quality | `QUA-` | How a persona, human or agent, instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | [QUALITIES.md](QUALITIES.md) |
 | 2. Feature | `FEA-` | A cohesive, focused category of utility a persona values: what problems the product solves for that persona, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [FEATURES.md](FEATURES.md) |
 | 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [CAPABILITIES.md](CAPABILITIES.md) |
 | 4. Task | | A unit of work toward a capability | not enumerated |
@@ -128,7 +128,7 @@ met is what its capabilities' current status says.
   local decision turns out to be a general one, promote it here and replace the local text with the citation.
 - **Edit, never append.** A statement that changes is edited, or its item superseded; contradicting statements never
   stand side by side.
-- **Items may overlap.** The qualities and features are a specification, each a constraint on the project (V-002), and
+- **Items may overlap.** The qualities and features are a specification, each a constraint on the project (VOC-002), and
   their conjunction is the objective. Overlapping items are not duplicates; never merge them to remove the overlap.
 - **Keep each index short, about 10 KB**: a guideline, which is ranked well below keeping the documents
   organized.
@@ -136,4 +136,4 @@ met is what its capabilities' current status says.
 ---
 
 <!-- nav -->
-[Home](README.md) · [Features →](FEATURES.md)
+[Home](README.md) · [Qualities →](QUALITIES.md)
