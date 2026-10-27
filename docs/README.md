@@ -27,8 +27,8 @@ many-to-many, not as a tree.
 | Tier | Prefix | What it is | Index |
 |---|---|---|---|
 | 1. Quality | `QUA-` | How a user instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | to scaffold |
-| 2. Feature | `FEA-` | An increment of useful, user-valued utility: what problem the product solves for its user, not how. Confers qualities | [FEATURES.md](FEATURES.md) |
-| 3. Capability | `CAP-` | How, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [CAPABILITIES.md](CAPABILITIES.md) |
+| 2. Feature | `FEA-` | A cohesive, focused category of user-valued utility: what problems the product solves for its user, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [FEATURES.md](FEATURES.md) |
+| 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [CAPABILITIES.md](CAPABILITIES.md) |
 | 4. Task | | A unit of work toward a capability | not enumerated |
 
 **Every feature is external or internal.** An external feature serves a user persona; an internal feature serves an
