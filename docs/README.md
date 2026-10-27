@@ -130,7 +130,7 @@ met is what its capabilities' current status says.
   stand side by side.
 - **Items may overlap.** The qualities and features are a specification, each a constraint on the project (V-002), and
   their conjunction is the objective. Overlapping items are not duplicates; never merge them to remove the overlap.
-- **Keep each index short, about 10 KB**: a guideline, which the user ranks well below keeping the documents
+- **Keep each index short, about 10 KB**: a guideline, which is ranked well below keeping the documents
   organized.
 
 ---
