@@ -46,9 +46,11 @@ Two kinds of item sit outside the tiers:
 | Principle | `PRI-` | A design principle reapplied across repositories, interfaces and implementations: a durable decision that delivers quality as a repeatable engineering pattern | [PRINCIPLES.md](PRINCIPLES.md) |
 | Vocabulary | `VOC-` | A borrowed, clarified or novel concept, and the one term that names it across code, documents, tutorials and skills, with a focus on the dimensions, domains, seams and gradients of the project's own engineering space | [VOCABULARY.md](VOCABULARY.md) |
 
-One kind is planned but not yet scaffolded: **conventions**, how the work is done (equivalent implementations, notebook
-tests, coverage, navigation; today the shared invariants in each repository's `AGENTS.md`). Its prefix is still to
-choose.
+**Conventions are not a kind of their own.** A convention, how the work is done (equivalent implementations, notebook
+tests, coverage, navigation; today the shared invariants in each repository's `AGENTS.md`), is either a principle that
+serves a quality an engineering persona values, or a rule of one of the doc spec's shelves. A repository's `AGENTS.md`
+cites them rather than stating them. A principle governs the product when a user could notice it broken, and the work
+when only a contributor could.
 
 ## The doc spec
 
