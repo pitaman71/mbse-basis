@@ -26,8 +26,8 @@ many-to-many, not as a tree.
 
 | Tier | Prefix | What it is | Index |
 |---|---|---|---|
-| 1. Quality | `QUA-` | How a user instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | to scaffold |
-| 2. Feature | `FEA-` | A cohesive, focused category of user-valued utility: what problems the product solves for its user, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [FEATURES.md](FEATURES.md) |
+| 1. Quality | `QUA-` | How a persona, human or agent, instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | to scaffold |
+| 2. Feature | `FEA-` | A cohesive, focused category of utility a persona values: what problems the product solves for that persona, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [FEATURES.md](FEATURES.md) |
 | 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [CAPABILITIES.md](CAPABILITIES.md) |
 | 4. Task | | A unit of work toward a capability | not enumerated |
 
@@ -54,14 +54,14 @@ when only a contributor could.
 
 ## The doc spec
 
-The doc spec organizes what users and agents read and run, on four shelves.
+The doc spec organizes what humans and agents read and run, on four shelves.
 
 | Shelf | What it is | Status |
 |---|---|---|
 | Tutorials | Executable documents, mostly Jupyter notebooks, that together are the user guide for humans and agents. Each doubles as a unit test | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
 | Skills | Skill documents that together are a user guide optimized for agents | As tutorials |
 | Tests | Executable, platform-specific programs that unit-test mbse components | As tutorials |
-| References | Between vocabulary and tutorials: for an advanced user or agent with a specific goal in mind, organized around such goals, cross-linked with vocabulary, tutorials and capabilities | Not yet built, and not needed yet |
+| References | Between vocabulary and tutorials: for an advanced human or agent with a specific goal in mind, organized around such goals, cross-linked with vocabulary, tutorials and capabilities | Not yet built, and not needed yet |
 
 ## Other documents
 
