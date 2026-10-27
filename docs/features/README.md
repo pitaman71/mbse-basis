@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Qualities](../QUALITIES.md) · [Home](../README.md) · [Capabilities →](../CAPABILITIES.md)
+[← Qualities](../QUALITIES.md) · [Home](../README.md) · [Capabilities →](../capabilities/README.md)
 
 # Features
 
@@ -93,4 +93,4 @@ the work tracker's seed data uses it as an example ID.
 ---
 
 <!-- nav -->
-[← Qualities](../QUALITIES.md) · [Home](../README.md) · [Capabilities →](../CAPABILITIES.md)
+[← Qualities](../QUALITIES.md) · [Home](../README.md) · [Capabilities →](../capabilities/README.md)

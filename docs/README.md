@@ -17,7 +17,7 @@ Read this file, then the index of each kind below. Each index is one entry per i
 | `mbse-basis/docs/<NAME>.md` | the project: what every repository shares | definitions on the web |
 | `mbse-<repo>/docs/<NAME>.md` | one repository | the project's documents, and definitions on the web |
 
-`<NAME>` is a long name in capitals (`CAPABILITIES.md`, `OBJECT_IDENTITY.md`).
+`<NAME>` is a long name in capitals (`PRINCIPLES.md`, `OBJECT_IDENTITY.md`).
 
 ## The design spec
 
@@ -28,7 +28,7 @@ many-to-many, not as a tree.
 |---|---|---|---|
 | 1. Quality | `QUA-` | How a persona, human or agent, instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | [QUALITIES.md](QUALITIES.md) |
 | 2. Feature | `FEA-` | A cohesive, focused category of utility a persona values: what problems the product solves for that persona, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [features/README.md](features/README.md) |
-| 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [CAPABILITIES.md](CAPABILITIES.md) |
+| 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [capabilities/README.md](capabilities/README.md) |
 | 4. Task | | A unit of work toward a capability | not enumerated |
 
 **Every feature is external or internal.** An external feature serves a user persona; an internal feature serves an

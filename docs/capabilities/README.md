@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Features](features/README.md) · [Home](README.md) · [Principles →](PRINCIPLES.md)
+[← Features](../features/README.md) · [Home](../README.md) · [Principles →](../PRINCIPLES.md)
 
 # Capabilities
 
@@ -100,88 +100,88 @@ was checked, so that build status lives here rather than in each repository's de
 
 ### Schema-driven visualization and editing
 
-Each capability's specification is in its feature's detail file, linked from the ID. **Current** for these is as the
+Each capability's specification is in its own detail file, linked from the ID. **Current** for these is as the
 workspace's `VISUALIZATION.md` left it; each is to assess against mbse-rest, mbse-react, mbse-dynamodb and
 mbse-demo-apps.
 
-- <a id="CAP-001"></a>**[CAP-001](features/FEA-001.md#CAP-001)** · adopted · No-code index view: services and UI
+- <a id="CAP-001"></a>**[CAP-001](CAP-001.md)** · adopted · No-code index view: services and UI
   present a useful and usable index site driven exclusively by the schema. *Implements* FEA-001.
   - **Current**: to assess.
-- <a id="CAP-002"></a>**[CAP-002](features/FEA-003.md#CAP-002)** · adopted · Named schema list: an endpoint returns
+- <a id="CAP-002"></a>**[CAP-002](CAP-002.md)** · adopted · Named schema list: an endpoint returns
   every named schema. *Implements* FEA-003.
   - **Current**: returns the store's whole schema snapshot instead, while CAP-003 is blocked.
-- <a id="CAP-003"></a>**[CAP-003](features/FEA-003.md#CAP-003)** · adopted · Schema inspector: given a schema's name,
+- <a id="CAP-003"></a>**[CAP-003](CAP-003.md)** · adopted · Schema inspector: given a schema's name,
   the UI obtains its full detail, unnamed schemas defined inline and named ones referenced. *Implements* FEA-003.
   - **Current**: blocked: mbse-schemas cannot yet write one schema object as a document.
-- <a id="CAP-004"></a>**[CAP-004](features/FEA-003.md#CAP-004)** · adopted · Logical view templates: an endpoint
+- <a id="CAP-004"></a>**[CAP-004](CAP-004.md)** · adopted · Logical view templates: an endpoint
   returns, for every logical view kind, a mutation-query template whose symbols the UI gives each a schema or a
   reference. *Implements* FEA-003.
   - **Current**: to assess.
-- <a id="CAP-012"></a>**[CAP-012](features/FEA-003.md#CAP-012)** · adopted · Logical view endpoints: one endpoint per
+- <a id="CAP-012"></a>**[CAP-012](CAP-012.md)** · adopted · Logical view endpoints: one endpoint per
   logical view kind, taking a template with its symbols given and returning a stream of frames. *Implements* FEA-003.
   - **Current**: to assess.
-- <a id="CAP-005"></a>**[CAP-005](features/FEA-003.md#CAP-005)** · adopted · Logical view as label and summary: the
+- <a id="CAP-005"></a>**[CAP-005](CAP-005.md)** · adopted · Logical view as label and summary: the
   minimum-sized view of an object or a relation entry. *Implements* FEA-003.
   - **Current**: to assess.
-- <a id="CAP-006"></a>**[CAP-006](features/FEA-003.md#CAP-006)** · adopted · Logical view as chip: a medium-sized,
+- <a id="CAP-006"></a>**[CAP-006](CAP-006.md)** · adopted · Logical view as chip: a medium-sized,
   abbreviated view of an object or a relation entry. *Implements* FEA-003.
   - **Current**: to assess.
-- <a id="CAP-007"></a>**[CAP-007](features/FEA-003.md#CAP-007)** · adopted · Logical view of an object as detail: every
+- <a id="CAP-007"></a>**[CAP-007](CAP-007.md)** · adopted · Logical view of an object as detail: every
   schema-defined property and adjacency. *Implements* FEA-003.
   - **Current**: to assess.
-- <a id="CAP-008"></a>**[CAP-008](features/FEA-003.md#CAP-008)** · adopted · Logical view of an adjacency as a list of
+- <a id="CAP-008"></a>**[CAP-008](CAP-008.md)** · adopted · Logical view of an adjacency as a list of
   chips: the immediate adjacencies of an object through one named adjacency. *Implements* FEA-003.
   - **Current**: to assess.
-- <a id="CAP-009"></a>**[CAP-009](features/FEA-004.md#CAP-009)** · adopted · Schema browser: a section per named app
+- <a id="CAP-009"></a>**[CAP-009](CAP-009.md)** · adopted · Schema browser: a section per named app
   schema, with a scrollable list of object chips. *Implements* FEA-004.
   - **Current**: to assess.
-- <a id="CAP-010"></a>**[CAP-010](features/FEA-004.md#CAP-010)** · adopted · Object browser: a section per directory,
+- <a id="CAP-010"></a>**[CAP-010](CAP-010.md)** · adopted · Object browser: a section per directory,
   with the chips of the objects its singleton holds. *Implements* FEA-004.
   - **Current**: to assess.
-- <a id="CAP-011"></a>**[CAP-011](features/FEA-004.md#CAP-011)** · adopted · Relation browser: a section per relation
+- <a id="CAP-011"></a>**[CAP-011](CAP-011.md)** · adopted · Relation browser: a section per relation
   entry, its properties' chip aside its linked objects' chips. *Implements* FEA-004.
   - **Current**: to assess.
-- <a id="CAP-017"></a>**[CAP-017](features/FEA-005.md#CAP-017)** · adopted · Object inspector: a shared panel showing
+- <a id="CAP-017"></a>**[CAP-017](CAP-017.md)** · adopted · Object inspector: a shared panel showing
   the detail view of whatever object a gesture picks. *Implements* FEA-005.
   - **Current**: complete (mbse-react, M3; editing added by CAP-014).
-- <a id="CAP-018"></a>**[CAP-018](features/FEA-005.md#CAP-018)** · adopted · Adjacency inspector: viewing and editing an
+- <a id="CAP-018"></a>**[CAP-018](CAP-018.md)** · adopted · Adjacency inspector: viewing and editing an
   entry and its outbound object, extant or proposed. *Implements* FEA-005.
   - **Current**: to assess.
-- <a id="CAP-019"></a>**[CAP-019](features/FEA-005.md#CAP-019)** · adopted · Adjacencies at the end of a detail, each
+- <a id="CAP-019"></a>**[CAP-019](CAP-019.md)** · adopted · Adjacencies at the end of a detail, each
   entry previewed as one chip. *Implements* FEA-005.
   - **Current**: to assess.
-- <a id="CAP-020"></a>**[CAP-020](features/FEA-005.md#CAP-020)** · adopted · Provenance display: who created an object,
+- <a id="CAP-020"></a>**[CAP-020](CAP-020.md)** · adopted · Provenance display: who created an object,
   and when it was created and last modified. *Implements* FEA-005.
   - **Current**: to assess.
-- <a id="CAP-021"></a>**[CAP-021](features/FEA-005.md#CAP-021)** · adopted · Adjacency lists ordered by creation where
+- <a id="CAP-021"></a>**[CAP-021](CAP-021.md)** · adopted · Adjacency lists ordered by creation where
   provenance is present. *Implements* FEA-005.
   - **Current**: to assess.
-- <a id="CAP-023"></a>**[CAP-023](features/FEA-005.md#CAP-023)** · adopted · Relation inspector: the object inspector of
+- <a id="CAP-023"></a>**[CAP-023](CAP-023.md)** · adopted · Relation inspector: the object inspector of
   one object among its siblings, stepping to the previous or next. *Implements* FEA-005.
   - **Current**: to assess.
-- <a id="CAP-013"></a>**[CAP-013](features/FEA-006.md#CAP-013)** · adopted · An in-memory store journaled to DynamoDB,
+- <a id="CAP-013"></a>**[CAP-013](CAP-013.md)** · adopted · An in-memory store journaled to DynamoDB,
   with occasional snapshots, replayed at startup. *Implements* FEA-006.
   - **Current**: to assess.
-- <a id="CAP-014"></a>**[CAP-014](features/FEA-007.md#CAP-014)** · adopted · Object properties as markdown, viewed and
+- <a id="CAP-014"></a>**[CAP-014](CAP-014.md)** · adopted · Object properties as markdown, viewed and
   edited in the inspector. *Implements* FEA-007.
   - **Current**: to assess.
-- <a id="CAP-022"></a>**[CAP-022](features/FEA-007.md#CAP-022)** · adopted · Boolean properties as checkboxes.
+- <a id="CAP-022"></a>**[CAP-022](CAP-022.md)** · adopted · Boolean properties as checkboxes.
   *Implements* FEA-007.
   - **Current**: to assess.
-- <a id="CAP-015"></a>**[CAP-015](features/FEA-007.md#CAP-015)** · adopted · Transaction provenance: services keep a
+- <a id="CAP-015"></a>**[CAP-015](CAP-015.md)** · adopted · Transaction provenance: services keep a
   record of each transaction that writes, as mbse-schemas' `Provenance` module defines it. *Implements* FEA-007.
   - **Current**: to assess.
-- <a id="CAP-016"></a>**[CAP-016](features/FEA-007.md#CAP-016)** · adopted · Comments, as data in an app's schema,
+- <a id="CAP-016"></a>**[CAP-016](CAP-016.md)** · adopted · Comments, as data in an app's schema,
   shown and posted through general, schema-driven capabilities. *Implements* FEA-007.
   - **Current**: to assess.
 
 ## Not yet planned
 
-Capabilities without an ID are not in plan yet. Each planned feature's are at the end of its detail file: low-code
+Capabilities without an ID are not in plan yet. Each planned feature's are at the end of its detail file in `../features/`: low-code
 custom views (FEA-001); detail with closures, closure as a list of chips (FEA-003); store over DynamoDB (FEA-006);
 object links in markdown, shared property handling by the UI, properties as text and dates, and as financial,
 scientific and engineering values (FEA-007). Those of unplanned features are in
-[features/UNPLANNED.md](features/UNPLANNED.md).
+[features/UNPLANNED.md](../features/UNPLANNED.md).
 
 ## Earlier IDs
 
@@ -222,4 +222,4 @@ CAP-001 to CAP-023 kept the IDs they had in the workspace's `VISUALIZATION.md`.
 ---
 
 <!-- nav -->
-[← Features](features/README.md) · [Home](README.md) · [Principles →](PRINCIPLES.md)
+[← Features](../features/README.md) · [Home](../README.md) · [Principles →](../PRINCIPLES.md)

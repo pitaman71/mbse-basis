@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Capabilities](CAPABILITIES.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
+[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
 
 # Principles
 
@@ -152,4 +152,4 @@ features became (Features, Earlier IDs).
 ---
 
 <!-- nav -->
-[← Capabilities](CAPABILITIES.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
+[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
