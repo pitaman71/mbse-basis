@@ -43,7 +43,7 @@ Two kinds of item sit outside the tiers:
 
 | Kind | Prefix | What it is | Index |
 |---|---|---|---|
-| Principle | `PRI-` | A design principle reapplied across repositories, interfaces and implementations: a durable decision that delivers quality as a repeatable engineering pattern | [PRINCIPLES.md](PRINCIPLES.md) |
+| Principle | `PRI-` | A durable design or engineering decision that reinforces qualities when consistently applied across repositories, components, source code and the rest | [PRINCIPLES.md](PRINCIPLES.md) |
 | Vocabulary | `VOC-` | A borrowed, clarified or novel concept, and the one term that names it across code, documents, tutorials and skills, with a focus on the dimensions, domains, seams and gradients of the project's own engineering space | [VOCABULARY.md](VOCABULARY.md) |
 
 **Conventions are not a kind of their own.** A convention, how the work is done (equivalent implementations, notebook

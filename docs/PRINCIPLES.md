@@ -3,10 +3,9 @@
 
 # Principles
 
-A principle is a durable design decision, made once and reapplied wherever its situation recurs, across repositories,
-interfaces and implementations. A capability says what a release solves; a principle says how every solution is
-shaped. Principles sit outside the design spec's tiers: each serves qualities, delivering them as a repeatable
-engineering pattern.
+A principle is a durable design or engineering decision that reinforces qualities when consistently applied across
+repositories, components, source code and the rest. Principles sit outside the design spec's tiers: a capability says
+what a release solves, a principle how every solution is shaped.
 
 Most principles shape the product: a user could notice one broken, in how the product behaves or how its API reads
 (PRI-004, one visitor protocol per kind; PRI-007, three-valued checking). Some shape the work instead, and only a
