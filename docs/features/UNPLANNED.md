@@ -3,7 +3,7 @@
 
 # Features not yet planned
 
-From the workspace's `VISUALIZATION.md`: features and capabilities without an ID, not in plan yet. A planned feature's own unplanned capabilities are in its detail file.
+Features and capabilities without an ID, not in plan yet. A planned feature's own unplanned capabilities are in its detail file.
 
 ## no-code secure services
 

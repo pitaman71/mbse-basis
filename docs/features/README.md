@@ -78,7 +78,7 @@ enforcement replacing bespoke workarounds.
 | F-007 | [QUA-002: open-world models](../QUALITIES.md#QUA-002), [PRI-021: refinement by constraint](../PRINCIPLES.md#PRI-021) |
 | F-008 to F-016 | [FEA-008: expressive program models](#FEA-008) to [FEA-016: community behavior](#FEA-016) |
 
-[FEA-001: schema-driven UI](FEA-001.md) and [FEA-003: no-code logical views](FEA-003.md) to [FEA-007: property kinds](FEA-007.md) kept the IDs they had in the workspace's `VISUALIZATION.md`. FEA-002 is unassigned:
+[FEA-001: schema-driven UI](FEA-001.md) and [FEA-003: no-code logical views](FEA-003.md) to [FEA-007: property kinds](FEA-007.md) kept the IDs they had in the workspace's former `VISUALIZATION.md`. FEA-002 is unassigned:
 the work tracker's seed data uses it as an example ID.
 
 ## Open items
