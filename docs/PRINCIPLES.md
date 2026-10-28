@@ -93,7 +93,7 @@ promoted from decisions each repository made separately.
   is a natural string or by an object declared with `stores.Symbols`. 
   Meant in full: any model used in code has typed bindings, generated or written, since dynamic proxies are invisible to type
   checkers. Names remain how the wire format and modules write references. "A declaration is not a reference," as
-  the user decided: declaring a name (`.name('crm.Contact')`, a link's name) is not covered. *Relates to* [PRI-010: proxies and generated code read alike](#PRI-010), [CAP-027: code generated from models](capabilities/README.md#CAP-027).
+  the user decided: declaring a name (`.name('crm.Contact')`, a link's name) is not covered. *Relates to* [PRI-010: proxies and generated code read alike](#PRI-010), [CAP-027: code generated from models](capabilities/CAP-027.md).
   *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
   properties by string, as the user decided (its [`docs/FRAMEWORK.md`, Resolved](../../mbse-schemas/docs/FRAMEWORK.md#resolved), "Schema builders align with their
   meta-schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as

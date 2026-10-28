@@ -117,7 +117,7 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
 ### mbse-codegen-python
 
 - The transforms of type generation (`Dataclass`, `Union`, `Alias`, ...), drop (`Codegen.Dropped`):
-  [Transforms](../../mbse-codegen-python/docs/CODEGEN.md#transforms)
+  [Transforms](capabilities/CAP-027.md#transforms)
 
 ## Open items
 
