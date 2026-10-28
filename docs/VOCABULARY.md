@@ -19,7 +19,7 @@ block. Wherever one of ours meets a language's own, in docs and examples, qualif
   or *generated from*, never *executed*. *Never*: "rule".
 - <a id="VOC-003"></a>**VOC-003** · adopted · **Refinement**: what a constraint does in formal logic. Adding a constraint refines a model,
   narrowing the values and implementations consistent with it. Each refinement is descriptive; a collection of them
-  can amount to a prescription ([QUA-002](QUALITIES.md#QUA-002), [PRI-021](PRINCIPLES.md#PRI-021)).
+  can amount to a prescription ([QUA-002: open-world models](QUALITIES.md#QUA-002), [PRI-021: refinement by constraint](PRINCIPLES.md#PRI-021)).
 - <a id="VOC-004"></a>**VOC-004** · adopted · **Variable**: what constraints bind; unrestricted, restricted or determined. A derived value is
   a variable determined by resolving a constraint, not a kind of its own.
 - <a id="VOC-005"></a>**VOC-005** · adopted · **Value**: a constraint that determines its variable (`total = 5`). Given data, observed data
@@ -36,7 +36,7 @@ block. Wherever one of ours meets a language's own, in docs and examples, qualif
   [Meta-schemas overhaul](../../mbse-schemas/docs/META_SCHEMAS.md), which removes
   the list's extent.
 - <a id="VOC-027"></a>**VOC-027** · adopted · **Second-order invention**: a thing that can be modeled and invented
-  elsewhere, such as a neutral expression language or datatypes. The project avoids them ([QUA-003](QUALITIES.md#QUA-003)), save as [PRI-022](PRINCIPLES.md#PRI-022)
+  elsewhere, such as a neutral expression language or datatypes. The project avoids them ([QUA-003: no second-order inventions](QUALITIES.md#QUA-003)), save as [PRI-022: second-order inventions by approval](PRINCIPLES.md#PRI-022)
   permits.
 - <a id="VOC-028"></a>**VOC-028** · adopted · **Human** and **agent**: sibling categories of who reads, writes and
   operates. A **user** is one persona of humans, beside engineering personas. *Never*: "user" as a synonym for humans.
@@ -121,12 +121,12 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
 
 ## Open items
 
-- **Retire the copies.** The vocabulary invariant in each repository's `AGENTS.md` restates [VOC-001](#VOC-001) to [VOC-009](#VOC-009); replace
+- **Retire the copies.** The vocabulary invariant in each repository's `AGENTS.md` restates [VOC-001: specification](#VOC-001) to [VOC-009: syntax node](#VOC-009); replace
   it with citations of this file.
 
 ## Earlier IDs
 
-V-001 to V-026 are [VOC-001](#VOC-001) to [VOC-026](#VOC-026), the same numbers.
+V-001 to V-026 are [VOC-001: specification](#VOC-001) to [VOC-026: schema](#VOC-026), the same numbers.
 
 ---
 

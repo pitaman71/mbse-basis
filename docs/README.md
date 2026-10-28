@@ -127,18 +127,22 @@ met is what its capabilities' current status says.
   linked from the entry and read only when needed.
 - **Bridge, don't duplicate.** A statement has one source of truth. Every other mention links to it, introduced by
   bridge language: just enough to tie the current text to the target that a reader can keep reading without following
-  the link. Sometimes the target's name or title is enough ("applies [PRI-019](PRINCIPLES.md#PRI-019), fluent builder syntax"). Sometimes a
+  the link. Sometimes the target's name or title is enough ("applies [PRI-019: fluent builder syntax](PRINCIPLES.md#PRI-019), fluent builder syntax"). Sometimes a
   phrase is enough, tying the target to the context. Sometimes it takes a sentence or two, restating a little of the
   target. Keep it as brief as that allows. A bridge never carries the target's full detail, and never diverges from
   it: a repository's document gives a principle's gist and its local change, not the principle's full statement. When
   a local decision turns out to be a general one, promote it here and replace the local text with a bridged citation.
-- **A link is a link.** A citation of an item, a document or a file is markdown link syntax, never a bare ID or file
-  name that only looks like one. Its path is relative and resolves in a polyrepo checkout, where every repository sits
-  beside mbse-basis (`../mbse-schemas/docs/OPEN_WORLD.md` from a repository's root). A link to an item reaches its own
-  anchor, or its detail file where it has one.
+- **A link is a link.** A citation of an item or a document is markdown link syntax, never a bare ID or file name
+  that only looks like one, in documents and in source comments alike. Its path is relative and resolves in a polyrepo
+  checkout, where every repository sits beside mbse-basis (`../mbse-schemas/docs/OPEN_WORLD.md` from a repository's
+  root). Its label is legible: an item's ID and abbreviated title (`[CAP-013: an in-memory store journaled to
+  DynamoDB](…)`), a document's path without the leading `../` (`[mbse-schemas/docs/OPEN_WORLD.md](…)`). A link to an
+  item reaches its own anchor, or its detail file where it has one.
+- **Documents don't link source files.** Links between documents and code point the other way: a source file names,
+  in a comment, the items it addresses, and a commit message names the items it advances.
 - **Edit, never append.** A statement that changes is edited, or its item superseded; contradicting statements never
   stand side by side.
-- **Items may overlap.** The qualities and features are a specification, each a constraint on the project ([VOC-002](VOCABULARY.md#VOC-002)), and
+- **Items may overlap.** The qualities and features are a specification, each a constraint on the project ([VOC-002: constraint](VOCABULARY.md#VOC-002)), and
   their conjunction is the objective. Overlapping items are not duplicates; never merge them to remove the overlap.
 - **Keep each index short, about 10 KB**: a guideline, which is ranked well below keeping the documents
   organized.
