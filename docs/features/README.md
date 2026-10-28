@@ -46,6 +46,10 @@ adopted before it is met. Features may overlap on purpose.
 An index site for any mbse app, driven by its schemas. Each feature's detail file holds its capabilities'
 specifications.
 
+- <a id="FEA-021"></a>**[FEA-021: every generation ambiguity a parameter](FEA-021.md)** · proposed · external · Every
+  ambiguity in generation is a parameter of the step that resolves it, decided by a human, an agent or a policy chosen
+  up front, and kept in the trace. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001). *Relates to*
+  [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014). Formerly CAP-040.
 - <a id="FEA-001"></a>**FEA-001: schema-driven UI** · adopted · external · Services and UI present an app driven by its
   schemas, extended by schema-aware code only where wanted. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-001.md)
 - <a id="FEA-003"></a>**FEA-003: no-code logical views** · adopted · external · Query formats the backend serves as
@@ -83,6 +87,11 @@ the work tracker's seed data uses it as an example ID.
 
 ## Open items
 
+- **[FEA-021: every generation ambiguity a parameter](FEA-021.md) counts parameters, not coverage of ambiguities.** It
+  needs a measure, such as the decisions fixed for every schema that should be parameters ([CAP-027: Python3 source
+  generated from schemas](../capabilities/CAP-027.md#bridges) lists them).
+- **Generation has no capability beyond schemas' Python3 and TypeScript5.** CAP-027 once covered expressions and
+  patterns, and the C and C++ and Verilog families; each is a capability still to name.
 - **[QUA-002: open-world models](../QUALITIES.md#QUA-002) is not met in shape.** mbse-schemas' decoding refuses an undeclared key, where [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002) preserves it; its
   [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
   [QUA-002: open-world models](../QUALITIES.md#QUA-002)'s "by default" contradicts. Name resolution staying closed ([OPEN_WORLD.md, Decided](../../../mbse-schemas/docs/OPEN_WORLD.md#decided)) is consistent with

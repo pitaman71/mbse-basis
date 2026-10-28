@@ -79,19 +79,22 @@ was checked, so that build status lives here rather than in each repository's de
 
 ### Code generation and the model trace
 
-- <a id="CAP-027"></a>**[CAP-027: code generated from models](CAP-027.md)** · proposed · Code is generated from models for each language family, for types,
-  expressions and patterns. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018), [FEA-008: expressive program models](../features/README.md#FEA-008). [PRI-015: concrete references are programmatic](../PRINCIPLES.md#PRI-015) depends on it: typed bindings are how
-  code refers to model elements by reference.
-  - **Current**: met for Python types; not for Python expressions and patterns, nor the C and C++, TypeScript and
-    Verilog families.
-- <a id="CAP-039"></a>**[CAP-039: generated code read back](CAP-039.md)** · proposed · Generated code is read back into the model, inverting generation.
-  *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: as [CAP-027: code generated from models](CAP-027.md)'s: met for Python types; not for Python expressions and patterns, nor the C and C++, TypeScript and
-    Verilog families.
-- <a id="CAP-040"></a>**[CAP-040: every generation ambiguity a parameter](CAP-040.md)** · proposed · Every ambiguity in generation is a parameter of the step that resolves
-  it. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: partly met for Python types (`frozen` and `slots` are parameters; other choices are fixed); not met
-    elsewhere.
+- <a id="CAP-027"></a>**[CAP-027: Python3 source generated from schemas](CAP-027.md)** · proposed · MBSE can generate Python3
+  source code from schema models. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018),
+  [FEA-008: expressive program models](../features/README.md#FEA-008), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  [PRI-015: concrete references are programmatic](../PRINCIPLES.md#PRI-015) depends on it: typed bindings are how code refers to model elements by reference.
+  - **Current**: met for schemas' types, as dataclasses and type aliases (mbse-codegen-python's `Types`); bindings,
+    value parameters and applications not yet.
+- <a id="CAP-045"></a>**CAP-045: TypeScript5 source generated from schemas** · proposed · MBSE can generate TypeScript5
+  source code from schema models. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018),
+  [FEA-008: expressive program models](../features/README.md#FEA-008), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: not met.
+- <a id="CAP-039"></a>**[CAP-039: schemas round-trip through Python3](CAP-039.md)** · proposed · MBSE can round-trip schema
+  models through Python3 source: schemas to source and back give the same schemas, and source to schemas and back the
+  same source, given the same decisions. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: met for schemas' types (mbse-codegen-python's `Types`: the round trips are laws, tested both ways).
+- <a id="CAP-040"></a>**CAP-040: every generation ambiguity a parameter** · superseded by [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md) · Every
+  ambiguity in generation is a parameter of the step that resolves it. It is a feature, not an increment of one.
 
 ### Interaction models
 
@@ -191,9 +194,9 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 | Earlier | Now | Earlier | Now | Earlier | Now |
 |---|---|---|---|---|---|
 | C-001 | [CAP-024: the same conformance corpora](#CAP-024) | C-008 | [CAP-031: 100% coverage of both](#CAP-031) | C-015 | [CAP-038: every construct of the standards](#CAP-038) |
-| C-002 | [CAP-025: schemas open in content](#CAP-025) | C-009 | [CAP-032: deliberate differences listed](#CAP-032) | C-016 | [CAP-039: generated code read back](CAP-039.md) |
-| C-003 | [CAP-026: source read as written](#CAP-026) | C-010 | [CAP-033: undeclared properties preserved](#CAP-033) | C-017 | [CAP-040: every generation ambiguity a parameter](CAP-040.md) |
-| C-004 | [CAP-027: code generated from models](CAP-027.md) | C-011 | [CAP-034: extension of schemas a module does not own](#CAP-034) | C-018 | [CAP-041: every kind of participant](#CAP-041) |
+| C-002 | [CAP-025: schemas open in content](#CAP-025) | C-009 | [CAP-032: deliberate differences listed](#CAP-032) | C-016 | [CAP-039: schemas round-trip through Python3](CAP-039.md) |
+| C-003 | [CAP-026: source read as written](#CAP-026) | C-010 | [CAP-033: undeclared properties preserved](#CAP-033) | C-017 | [CAP-040: every generation ambiguity a parameter](#CAP-040) |
+| C-004 | [CAP-027: Python3 source generated from schemas](CAP-027.md) | C-011 | [CAP-034: extension of schemas a module does not own](#CAP-034) | C-018 | [CAP-041: every kind of participant](#CAP-041) |
 | C-005 | [CAP-028: layered interaction models](#CAP-028) | C-012 | [CAP-035: schema evolution](#CAP-035) | C-019 | [CAP-042: data generated from constraints](#CAP-042) |
 | C-006 | [CAP-029: three-valued constraint checking](#CAP-029) | C-013 | [CAP-036: complete kinds](#CAP-036) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
 | C-007 | [CAP-030: the same cases in both languages](#CAP-030) | C-014 | [CAP-037: trees as faithful as the reference front end's](#CAP-037) | C-021 | [CAP-044: reference front ends](#CAP-044) |
@@ -213,8 +216,6 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 - The capabilities above are drafted from each repository's status sections; confirm them, then remove those sections
   and cite the capabilities instead. Schema capabilities land in mbse-schemas first, then in its dependents, each
   pinning the new release.
-- [CAP-040: every generation ambiguity a parameter](CAP-040.md) counts parameters, not coverage of ambiguities: it needs a measure, such as decisions fixed for every schema
-  that should be parameters ([CAP-027: code generated from models](CAP-027.md#bridges) lists them).
 - **[CAP-033: undeclared properties preserved](#CAP-033) implements no feature.** It implemented F-005, now a quality ([QUA-002: open-world models](../QUALITIES.md#QUA-002)). Preserving undeclared data is not
   refinement ([FEA-020: refinable models](../features/README.md#FEA-020)); a feature for it is missing.
 - **[CAP-015: transaction provenance](CAP-015.md) and [CAP-016: comments](CAP-016.md) sit under [FEA-007: property kinds](../features/FEA-007.md)** as they were first placed; provenance and comments

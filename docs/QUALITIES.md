@@ -10,7 +10,8 @@ principles serve them.
 ## Index
 
 - <a id="QUA-001"></a>**QUA-001: AI and humans in the loop** · adopted · AI and humans are always in the loop at every step. *Conferred by*
-  [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018).
+  [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018),
+  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md).
 - <a id="QUA-002"></a>**QUA-002: open-world models** · adopted · Models are open-world by default, allowing incremental addition of detail
   that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020).
 - <a id="QUA-003"></a>**QUA-003: no second-order inventions** · adopted · The project avoids second-order inventions ([VOC-027: second-order invention](VOCABULARY.md#VOC-027)).
