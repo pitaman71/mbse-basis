@@ -3,13 +3,15 @@
 
 # Tools for every mbse repository
 
-Two tools live here, and every mbse repository runs them from here rather than keeping a copy:
+Three tools live here, and every mbse repository runs them from here rather than keeping a copy:
 
 - [`polyrepo.py`](polyrepo.py) keeps the repositories, which are separate git repositories checked out side by side,
   working as one project.
 - [`update_doc_links.py`](update_doc_links.py) writes the navigation links at the top and bottom of each document.
+- [`update_item_titles.py`](update_item_titles.py) labels every link to an mbse-basis item with the item's ID and
+  title.
 
-Both use only the standard library, so they run before anything is installed. Run them from inside the repository
+All three use only the standard library, so they run before anything is installed. Run them from inside the repository
 they are for; the examples below assume its root, with mbse-basis beside it. Their tests are
 `python3 -m unittest discover -s scripts`, run from mbse-basis.
 
@@ -158,6 +160,26 @@ python3 ../mbse-basis/scripts/update_doc_links.py ../mbse-schemas ../mbse-progra
 ```
 
 Link text is each document's title, never a path. A document without a `# ` title is an error.
+
+## update_item_titles.py
+
+A link to an mbse-basis item is labeled with the item's ID and title, `[CAP-013: an in-memory store journaled to
+DynamoDB](…)`, wherever it is: in a document or in a source comment, in any repository (the basis'
+[`docs/README.md`](../docs/README.md), "A link is a link"). The title is written once, in the head of the item's
+index entry (`**CAP-013: an in-memory store journaled to DynamoDB**`), and this tool copies it into every label and
+into the heading of the item's detail file.
+
+It relabels a link only when its label starts with an item's ID and its path resolves to that item, its anchor in an
+index or its detail file, so a link that merely mentions an ID is left alone. It does not turn a bare ID into a link:
+where and how to cite is a writer's call.
+
+Run it after retitling an item, and check with `--check`, which writes nothing and exits 1 if any label is out of date:
+
+```sh
+cd mbse-rest
+python3 ../mbse-basis/scripts/update_item_titles.py --check    # this repository: list what is out of date
+python3 ../mbse-basis/scripts/update_item_titles.py ../mbse-react ../mbse-dynamodb   # relabel the ones named
+```
 
 ---
 
