@@ -6,7 +6,8 @@
 The mbse repositories keep promoting the same ideas into local special cases, each repository deciding again what
 another already decided. This basis states those ideas once, as a small ontology every repository cites by ID, so that
 a local document records only how it applies them and what differs. Each idea has one source of truth, its detailed
-statement in one place; every other document links to it with a concise bridge statement rather than restating it.
+statement in one place; every other document links to it, introduced by bridge language that tells the reader enough
+to keep reading without following the link (Rules for writing items, below).
 
 Read this file, then the index of each kind below. Each index is one entry per item, kept short enough to read whole.
 
@@ -124,8 +125,13 @@ met is what its capabilities' current status says.
 - **One entry per item in its index**: ID, status, one sentence, relations, and for a feature, external or internal.
   Rationale, examples and history go in an optional detail file, `features/FEA-005.md`, `principles/PRI-002.md`,
   linked from the entry and read only when needed.
-- **Cite, never restate.** A repository's document writes "applies PRI-007: ..." with only its local delta. When a
-  local decision turns out to be a general one, promote it here and replace the local text with the citation.
+- **Bridge, don't duplicate.** A statement has one source of truth. Every other mention links to it, introduced by
+  bridge language: just enough to tie the current text to the target that a reader can keep reading without following
+  the link. Sometimes the target's name or title is enough ("applies PRI-019, fluent builder syntax"). Sometimes a
+  phrase is enough, tying the target to the context. Sometimes it takes a sentence or two, restating a little of the
+  target. Keep it as brief as that allows. A bridge never carries the target's full detail, and never diverges from
+  it: a repository's document gives a principle's gist and its local change, not the principle's full statement. When
+  a local decision turns out to be a general one, promote it here and replace the local text with a bridged citation.
 - **Edit, never append.** A statement that changes is edited, or its item superseded; contradicting statements never
   stand side by side.
 - **Items may overlap.** The qualities and features are a specification, each a constraint on the project (VOC-002), and
