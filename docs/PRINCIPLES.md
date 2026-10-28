@@ -12,8 +12,8 @@ Most principles shape the product: a user could notice one broken, in how the pr
 contributor could notice them broken (PRI-016, guidance written once); these are conventions, which serve qualities an
 engineering persona values (README, Conventions).
 
-A principle is cited where it applies, never restated there. *Applied in* names where each already holds, so that
-those local texts can be replaced by citations. PRI-001 and PRI-002 are the original draft; PRI-003 to PRI-019 were
+A principle is cited where it applies, with bridge language giving its gist, not its full statement. *Applied in*
+names where each already holds, so that those local texts can be replaced by bridged citations. PRI-001 and PRI-002 are the original draft; PRI-003 to PRI-019 were
 promoted from decisions each repository made separately.
 
 ## Index
