@@ -1,7 +1,7 @@
 # Priorities
 
 The order in which the schema-driven visualization ([FEA-001: schema-driven UI](../docs/features/FEA-001.md) and the features beside it)
-is built, from the workspace's `VISUALIZATION.md`. Each section is a step, in order; Later lists what comes after,
+is built. Each section is a step, in order; Later lists what comes after,
 unordered.
 
 ## clean mutation-based transactional API

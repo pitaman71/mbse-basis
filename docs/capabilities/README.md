@@ -104,9 +104,8 @@ was checked, so that build status lives here rather than in each repository's de
 
 ### Schema-driven visualization and editing
 
-Each capability's specification is in its own detail file, linked from the ID. **Current** for these is as the
-workspace's `VISUALIZATION.md` left it; each is to assess against mbse-rest, mbse-react, mbse-dynamodb and
-mbse-demo-apps.
+Each capability's specification is in its own detail file, linked from the ID. **Current** for these is as recorded
+before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dynamodb and mbse-demo-apps.
 
 - <a id="CAP-001"></a>**[CAP-001: no-code index view](CAP-001.md)** · adopted · Services and UI
   present a useful and usable index site driven exclusively by the schema. *Implements* [FEA-001: schema-driven UI](../features/FEA-001.md).
@@ -199,7 +198,7 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 | C-006 | [CAP-029: three-valued constraint checking](#CAP-029) | C-013 | [CAP-036: complete kinds](#CAP-036) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
 | C-007 | [CAP-030: the same cases in both languages](#CAP-030) | C-014 | [CAP-037: trees as faithful as the reference front end's](#CAP-037) | C-021 | [CAP-044: reference front ends](#CAP-044) |
 
-[CAP-001: no-code index view](CAP-001.md) to [CAP-023: relation inspector](CAP-023.md) kept the IDs they had in the workspace's `VISUALIZATION.md`.
+[CAP-001: no-code index view](CAP-001.md) to [CAP-023: relation inspector](CAP-023.md) kept the IDs they had in the workspace's former `VISUALIZATION.md`.
 
 ## Open items
 
@@ -218,7 +217,7 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
   that should be parameters (mbse-codegen-python's [`docs/BRIDGES.md`](../../../mbse-codegen-python/docs/BRIDGES.md) lists them).
 - **[CAP-033: undeclared properties preserved](#CAP-033) implements no feature.** It implemented F-005, now a quality ([QUA-002: open-world models](../QUALITIES.md#QUA-002)). Preserving undeclared data is not
   refinement ([FEA-020: refinable models](../features/README.md#FEA-020)); a feature for it is missing.
-- **[CAP-015: transaction provenance](CAP-015.md) and [CAP-016: comments](CAP-016.md) sit under [FEA-007: property kinds](../features/FEA-007.md)** (property kinds) as `VISUALIZATION.md` placed them; provenance and comments
+- **[CAP-015: transaction provenance](CAP-015.md) and [CAP-016: comments](CAP-016.md) sit under [FEA-007: property kinds](../features/FEA-007.md)** as they were first placed; provenance and comments
   may be features of their own.
 - **Tech debt in the visualization capabilities.** Counted objects have no reference, so they are neither recorded nor
   transmitted ([FEA-003: no-code logical views](../features/FEA-003.md)), and browsers leave them out ([CAP-010: object browser](CAP-010.md), [CAP-011: relation browser](CAP-011.md)). It is to become a capability of a feature.
