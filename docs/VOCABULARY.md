@@ -12,33 +12,33 @@ block. Wherever one of ours meets a language's own, in docs and examples, qualif
 
 ## Terms
 
-- <a id="VOC-001"></a>**VOC-001** · adopted · **Specification**: constraints over variables, attached to the parts of a system they
+- <a id="VOC-001"></a>**VOC-001: specification** · adopted · **Specification**: constraints over variables, attached to the parts of a system they
   constrain. It is executable, nondeterministically: executing it chooses values consistent with every constraint.
   Each correct implementation is one such choice; generated test data is another.
-- <a id="VOC-002"></a>**VOC-002** · adopted · **Constraint** is a modeling construct (see mbse-schemas, below). It is *checked*, *resolved*
+- <a id="VOC-002"></a>**VOC-002: constraint** · adopted · **Constraint** is a modeling construct (see mbse-schemas, below). It is *checked*, *resolved*
   or *generated from*, never *executed*. *Never*: "rule".
-- <a id="VOC-003"></a>**VOC-003** · adopted · **Refinement**: what a constraint does in formal logic. Adding a constraint refines a model,
+- <a id="VOC-003"></a>**VOC-003: refinement** · adopted · **Refinement**: what a constraint does in formal logic. Adding a constraint refines a model,
   narrowing the values and implementations consistent with it. Each refinement is descriptive; a collection of them
   can amount to a prescription ([QUA-002: open-world models](QUALITIES.md#QUA-002), [PRI-021: refinement by constraint](PRINCIPLES.md#PRI-021)).
-- <a id="VOC-004"></a>**VOC-004** · adopted · **Variable**: what constraints bind; unrestricted, restricted or determined. A derived value is
+- <a id="VOC-004"></a>**VOC-004: variable** · adopted · **Variable**: what constraints bind; unrestricted, restricted or determined. A derived value is
   a variable determined by resolving a constraint, not a kind of its own.
-- <a id="VOC-005"></a>**VOC-005** · adopted · **Value**: a constraint that determines its variable (`total = 5`). Given data, observed data
+- <a id="VOC-005"></a>**VOC-005: value** · adopted · **Value**: a constraint that determines its variable (`total = 5`). Given data, observed data
   and test fixtures are values, so checking an implementation adds its observed values to the constraints.
-- <a id="VOC-007"></a>**VOC-007** · adopted · **Property**, never "field", which means only the host language's member that holds one.
-- <a id="VOC-008"></a>**VOC-008** · adopted · **Term**: an element of an expression's tree. *Never*: a bare "node".
-- <a id="VOC-009"></a>**VOC-009** · adopted · **Syntax node**: an element of a program's tree. *Never*: a bare "node".
-- <a id="VOC-026"></a>**VOC-026** · adopted · **Schema**: what describes a value, a property's, a symbol's, a branch's or a part's, and what
+- <a id="VOC-007"></a>**VOC-007: property** · adopted · **Property**, never "field", which means only the host language's member that holds one.
+- <a id="VOC-008"></a>**VOC-008: term** · adopted · **Term**: an element of an expression's tree. *Never*: a bare "node".
+- <a id="VOC-009"></a>**VOC-009: syntax node** · adopted · **Syntax node**: an element of a program's tree. *Never*: a bare "node".
+- <a id="VOC-026"></a>**VOC-026: schema** · adopted · **Schema**: what describes a value, a property's, a symbol's, a branch's or a part's, and what
   a value of any schema is of. *Never*: "type", which "has no meaning in mbse-*", as the user decided; a host
   language's own type (Python's `int`, TypeScript's `BigInt`) is qualified as the host's.
-- <a id="VOC-025"></a>**VOC-025** · adopted · **Shape constraint**: a bound on an index, a capacity or a tensor's shape, a constraint on the
+- <a id="VOC-025"></a>**VOC-025: shape constraint** · adopted · **Shape constraint**: a bound on an index, a capacity or a tensor's shape, a constraint on the
   type of the property that keys a relation's entries, not part of the schema; a parameter bound into it gives a
   tensor's shape. Planned in mbse-schemas'
   [Meta-schemas overhaul](../../mbse-schemas/docs/META_SCHEMAS.md), which removes
   the list's extent.
-- <a id="VOC-027"></a>**VOC-027** · adopted · **Second-order invention**: a thing that can be modeled and invented
+- <a id="VOC-027"></a>**VOC-027: second-order invention** · adopted · **Second-order invention**: a thing that can be modeled and invented
   elsewhere, such as a neutral expression language or datatypes. The project avoids them ([QUA-003: no second-order inventions](QUALITIES.md#QUA-003)), save as [PRI-022: second-order inventions by approval](PRINCIPLES.md#PRI-022)
   permits.
-- <a id="VOC-028"></a>**VOC-028** · adopted · **Human** and **agent**: sibling categories of who reads, writes and
+- <a id="VOC-028"></a>**VOC-028: human and agent** · adopted · **Human** and **agent**: sibling categories of who reads, writes and
   operates. A **user** is one persona of humans, beside engineering personas. *Never*: "user" as a synonym for humans.
 
 VOC-006, VOC-010 to VOC-019 and VOC-021 became modeling constructs, listed below; VOC-020 and VOC-022 to VOC-024 were withdrawn.

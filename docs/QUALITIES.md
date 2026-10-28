@@ -9,20 +9,20 @@ principles serve them.
 
 ## Index
 
-- <a id="QUA-001"></a>**QUA-001** · adopted · AI and humans are always in the loop at every step. *Conferred by*
+- <a id="QUA-001"></a>**QUA-001: AI and humans in the loop** · adopted · AI and humans are always in the loop at every step. *Conferred by*
   [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018).
-- <a id="QUA-002"></a>**QUA-002** · adopted · Models are open-world by default, allowing incremental addition of detail
+- <a id="QUA-002"></a>**QUA-002: open-world models** · adopted · Models are open-world by default, allowing incremental addition of detail
   that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020).
-- <a id="QUA-003"></a>**QUA-003** · adopted · The project avoids second-order inventions ([VOC-027: second-order invention](VOCABULARY.md#VOC-027)).
-- <a id="QUA-004"></a>**QUA-004** · adopted · Models are a concise, precise, comprehensive and neutral alternative
+- <a id="QUA-003"></a>**QUA-003: no second-order inventions** · adopted · The project avoids second-order inventions ([VOC-027: second-order invention](VOCABULARY.md#VOC-027)).
+- <a id="QUA-004"></a>**QUA-004: models as an alternative representation of source code** · adopted · Models are a concise, precise, comprehensive and neutral alternative
   representation for source code. *Conferred by* [FEA-008: expressive program models](features/README.md#FEA-008), [FEA-009: layered interaction models](features/README.md#FEA-009).
-- <a id="QUA-005"></a>**QUA-005** · adopted · The project invents a modeling paradigm, constructs and a framework, and
+- <a id="QUA-005"></a>**QUA-005: an opinionated paradigm** · adopted · The project invents a modeling paradigm, constructs and a framework, and
   does so in an opinionated manner.
-- <a id="QUA-006"></a>**QUA-006** · proposed · A model means the same, and every operation on it gives the same result,
+- <a id="QUA-006"></a>**QUA-006: the same in every language** · proposed · A model means the same, and every operation on it gives the same result,
   in every implementation language. *Conferred by* [FEA-019: equivalent implementations](features/README.md#FEA-019).
-- <a id="QUA-007"></a>**QUA-007** · proposed · One modeling paradigm represents a system at every level, from hardware
+- <a id="QUA-007"></a>**QUA-007: one paradigm at every level of a system** · proposed · One modeling paradigm represents a system at every level, from hardware
   to community, and the interfaces between levels. *Conferred by* [FEA-010: system behavior](features/README.md#FEA-010) to [FEA-016: community behavior](features/README.md#FEA-016).
-- <a id="QUA-008"></a>**QUA-008** · proposed · Any model is usable without code written for it: browsed, inspected,
+- <a id="QUA-008"></a>**QUA-008: usable without code** · proposed · Any model is usable without code written for it: browsed, inspected,
   edited and persisted from its schemas alone. *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md), [FEA-003: no-code logical views](features/FEA-003.md) to [FEA-007: property kinds](features/FEA-007.md).
 
 ## Earlier IDs
@@ -38,7 +38,7 @@ principles serve them.
 
 ## Open items
 
-- **[QUA-005](#QUA-005)'s tier.** F-003 moved here by an agent's reading, not by the examples that set the tiers; confirm it is
+- **[QUA-005: an opinionated paradigm](#QUA-005)'s tier.** F-003 moved here by an agent's reading, not by the examples that set the tiers; confirm it is
   a quality rather than a principle.
 - **No quality an engineering persona values** exists yet, so the conventions among the principles ([PRI-011: the lowest repository that can own it](PRINCIPLES.md#PRI-011), [PRI-016: guidance written once](PRINCIPLES.md#PRI-016))
   serve nothing in that tier; see Principles, open items.

@@ -137,7 +137,8 @@ met is what its capabilities' current status says.
   checkout, where every repository sits beside mbse-basis (`../mbse-schemas/docs/OPEN_WORLD.md` from a repository's
   root). Its label is legible: an item's ID and abbreviated title (`[CAP-013: an in-memory store journaled to
   DynamoDB](…)`), a document's path without the leading `../` (`[mbse-schemas/docs/OPEN_WORLD.md](…)`). A link to an
-  item reaches its own anchor, or its detail file where it has one.
+  item reaches its own anchor, or its detail file where it has one. An item's title is written once, in the head of its
+  index entry; `scripts/update_item_titles.py` copies it into every label.
 - **Documents don't link source files.** Links between documents and code point the other way: a source file names,
   in a comment, the items it addresses, and a commit message names the items it advances.
 - **Edit, never append.** A statement that changes is edited, or its item superseded; contradicting statements never
