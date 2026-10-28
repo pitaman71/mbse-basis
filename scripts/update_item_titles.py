@@ -27,6 +27,7 @@ BASIS = Path(__file__).resolve().parent.parent
 INDEXES = ["QUALITIES.md", "features/README.md", "capabilities/README.md", "PRINCIPLES.md", "VOCABULARY.md"]
 DETAILED = ["features", "capabilities"]
 SUFFIXES = {".md", ".py", ".ts", ".tsx", ".js", ".json", ".toml", ".ipynb"}
+FIXTURES = Path(__file__).resolve().parent / "test_update_item_titles.py"  # stale labels on purpose
 ID = r"(?:QUA|FEA|CAP|PRI|VOC)-\d{3}"
 HEAD = re.compile(rf'^- <a id="({ID})"></a>\*\*\[?\1: (.+?)(?:\]\([^)]*\))?\*\*', re.M)
 LINK = re.compile(rf"\[({ID})(?::[^\]\n]*)?\]\(([^)\s#]*)(#[^)\s]*)?\)")
@@ -76,7 +77,8 @@ def files(root: Path) -> list[Path]:
     """The repository's tracked text files that can hold a link."""
     listed = subprocess.run(["git", "-C", str(root), "ls-files"], capture_output=True, text=True)
     names = listed.stdout.split() if listed.returncode == 0 else [p.relative_to(root).as_posix() for p in root.rglob("*")]
-    return [root / name for name in names if Path(name).suffix in SUFFIXES and (root / name).is_file()]
+    return [root / name for name in names if Path(name).suffix in SUFFIXES and (root / name).is_file()
+            and (root / name).resolve() != FIXTURES]
 
 
 def update(roots: list[Path], basis: Path = BASIS, check: bool = False) -> list[Path]:
