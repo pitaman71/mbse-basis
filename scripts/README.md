@@ -171,7 +171,7 @@ into the heading of the item's detail file.
 
 It relabels a link only when its label starts with an item's ID and its path resolves to that item, its anchor in an
 index or its detail file, so a link that merely mentions an ID is left alone. It does not turn a bare ID into a link:
-where and how to cite is a writer's call.
+where and how to cite is a writer's call. It reads only the files git tracks, so `git add` a new file before running it.
 
 Run it after retitling an item, and check with `--check`, which writes nothing and exits 1 if any label is out of date:
 
