@@ -121,8 +121,32 @@ Every item has a status:
 - **superseded by X**: replaced. The item keeps its ID and its entry, so that citations still resolve, and says what
   replaced it.
 
+An item is adopted only as the user decides it: an agent proposes, and records an open item rather than resolve one
+silently.
+
 A feature is an objective, not a description of current behavior: an adopted feature may not be met yet. How far it is
-met is what its capabilities' current status says.
+met is what its capabilities' current status says. A capability's **Current** is checked, never guessed: it names where
+it was checked (a branch, a version, a test), or says that it is blocked or to assess.
+
+## Detail files
+
+An item's detail file (`features/FEA-003.md`, `capabilities/CAP-013.md`) holds what its one-sentence entry cannot, in
+these sections, each only where it has something to hold:
+
+- **As built**: how a repository built the item, and what it fixes where the item is silent. A repository's design
+  document is drained into it once what it proposes is built.
+- **Blocked**: a gap in another repository that keeps the item from being met, reported rather than worked around.
+- **Open questions**: what stays undecided.
+- **Decided**: the user's decisions, adopted, each recorded completely as the rule, every point and condition of it,
+  quoted where the wording matters, never reduced to an example of what was built.
+- **Decided by an agent, for review**: where the item was silent, the simplest default consistent with it and with the
+  repositories it builds on, each *proposed* until reviewed, labeled with the repository and number it was decided
+  under (`mbse-rest 12`).
+
+An agent working in any repository records a decision it takes where an item is silent in that item's detail file,
+under Decided by an agent, for review, in a pull request to mbse-basis beside its own; it records an open question
+there too. That is the only edit to mbse-basis such work makes. Before deciding, it checks the item's Decided sections
+and cites the entry rather than describe the decision again.
 
 ## Rules for writing items
 

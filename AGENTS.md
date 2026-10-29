@@ -13,18 +13,5 @@ Then read the index of whichever kind your task touches; each is short enough to
 
 ## Invariants
 
-- **Only what spans repositories belongs here.** A decision that holds in one repository stays in that repository's
-  design documents, citing the items it applies. When a local decision turns out to be general, promote it here and
-  replace the local text with a citation.
-- **Follow the rules in [docs/README.md](docs/README.md#rules-for-writing-items)**: IDs are permanent, one entry per
-  item, bridge don't duplicate (every link introduced by enough bridge language to read on without following it), edit
-  never append, items may overlap, and each index stays short (about 10 KB, a guideline that yields to keeping the
-  documents organized).
-- **A modeling construct is named, not defined.** [VOCABULARY.md](docs/VOCABULARY.md) defines terms that are not
-  constructs, and lists each construct with a link to the repository that defines it.
-- **Record what the user decides as the user decides it.** Adopted items are the user's; an agent proposes, and records
-  open items rather than resolving them silently.
-- **Current status is checked, not guessed.** A capability's current status names where it was checked (a branch,
-  a version, a test), or says it is to assess.
-- **A capability never grows.** Scope still to build, or found while building, is a new capability under the feature
-  that contains it, never a "not yet" inside an existing one ([docs/README.md](docs/README.md#the-design-spec)).
+- **Follow [docs/README.md](docs/README.md)**: the kinds of item and their relations, statuses, detail files and the
+  rules for writing items are stated there once. This file restates none of them; a rule found here belongs there.
