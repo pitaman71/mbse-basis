@@ -66,6 +66,8 @@ specifications.
   family's own form, and are read back from it: a model is the source's alternative representation, not a description
   of it. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004). Its capabilities: [CAP-027: Python3 source generated from schemas](../capabilities/CAP-027.md),
   [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061).
+- <a id="FEA-023"></a>**[FEA-023: patterns over data](FEA-023.md)** · proposed · external · A pattern, one predicate over a store's
+  data, is validated, queried, sampled from and generated from alike. *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002).
 
 ## Not yet planned
 

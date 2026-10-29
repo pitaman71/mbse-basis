@@ -35,7 +35,7 @@ than in each repository's design document.
 ### Open-world models
 
 - <a id="CAP-025"></a>**CAP-025: schemas open in content** · proposed · Schemas are open in content: nothing is mandatory but by constraint
-  (checked as [CAP-029: three-valued constraint checking](#CAP-029) says). *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
+  (checked as [CAP-029: three-valued constraint checking](CAP-029.md) says). *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: met in mbse-schemas 0.10.0; its dependents to assess.
 - <a id="CAP-033"></a>**CAP-033: undeclared properties preserved** · proposed · Properties a schema does not declare are preserved when data is read,
   and written back as read. *Implements*: none (see Open items). *Applies* [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002).
@@ -46,13 +46,62 @@ than in each repository's design document.
 - <a id="CAP-035"></a>**CAP-035: schema evolution** · proposed · A schema evolves so that data written for it stays valid. *Implements*
   [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: proposed in [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) ([its part 3](../../../mbse-schemas/docs/OPEN_WORLD.md#3--evolution-that-keeps-data-valid)), not built.
-- <a id="CAP-029"></a>**CAP-029: three-valued constraint checking** · proposed · Constraints are checked, three-valued. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
-  - **Current**: met; where it was checked is to record.
-- <a id="CAP-042"></a>**CAP-042: data generated from constraints** · proposed · Data is generated from constraints: sampled, and pseudorandom.
-  *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
-  - **Current**: met; where it was checked is to record.
+- <a id="CAP-029"></a>**[CAP-029: three-valued constraint checking](CAP-029.md)** · proposed · Constraints are checked, three-valued. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020), [FEA-023: patterns over data](../features/FEA-023.md).
+  - **Current**: met: mbse-patterns' validators (0.1; the VAL suites).
+- <a id="CAP-042"></a>**[CAP-042: data generated from constraints](CAP-042.md)** · proposed · Data is generated from constraints: sampled, and pseudorandom.
+  *Implements* [FEA-020: refinable models](../features/README.md#FEA-020), [FEA-023: patterns over data](../features/FEA-023.md).
+  - **Current**: met: mbse-patterns' sampling and generators (0.3, 0.4; the GEN suites).
 - <a id="CAP-043"></a>**CAP-043: constraints resolved in any direction** · proposed · Constraints are resolved in any direction. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: to assess.
+
+### Patterns over data
+
+- <a id="CAP-069"></a>**[CAP-069: predicates as data](CAP-069.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
+  data, applied by reference, and checked when asked. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+  - **Current**: met (mbse-patterns 0.1, 0.5, 0.6; the CON suites).
+- <a id="CAP-070"></a>**[CAP-070: constraints as queries](CAP-070.md)** · proposed · A predicate is a query: its matches among a store's data stream lazily, planned from the constraint's
+  shape, and a store that answers queries natively answers them. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+  - **Current**: met (mbse-patterns 0.1; the QRY suites).
+- <a id="CAP-071"></a>**[CAP-071: links mandatory, possible or forbidden](CAP-071.md)** · proposed · Whether a link is mandatory, possible or forbidden is a predicate: quantifiers over a
+  store's extents, tests of an adjacency's entries, and weighted alternatives. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+  - **Current**: met (mbse-patterns 0.2; the ALG suites).
+- <a id="CAP-072"></a>**[CAP-072: distributions in predicates](CAP-072.md)** · proposed · A predicate's constraint says how its matches are distributed, by weighted alternatives and
+  distributions of values, so that one predicate is validated, queried, sampled and generated from alike. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+  - **Current**: met (mbse-patterns 0.3, 0.4; the DST suites).
+- <a id="CAP-073"></a>**[CAP-073: distributions fit from data](CAP-073.md)** · proposed · A characterizer reads a stream of objects and fits a distribution to them, in one pass and bounded
+  memory, round-tripping with the generators. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+  - **Current**: not met.
+
+### Transforms
+
+- <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · proposed · A transform, a rewrite with a before and an after, is applied by a session one decision per
+  step, a policy ranking the candidates, and the steps kept as a trace. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: met (mbse-patterns 0.7; the TRF suites).
+- <a id="CAP-075"></a>**[CAP-075: steps linked to what they matched and wrote](CAP-075.md)** · proposed · Each step of a transform links the elements it matched and wrote, each in
+  a role, as relations that predicates query. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: met (mbse-patterns 0.9).
+- <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · proposed · A rerun takes each earlier decision again where its key still occurs, reports the orphans, and diffs
+  the traces. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: met (mbse-patterns 0.8; TRF-08).
+- <a id="CAP-077"></a>**[CAP-077: changes explained across runs](CAP-077.md)** · proposed · A source diff names what changed in the model, and a target diff traces each change in the
+  output to the model change or the answer that caused it. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: blocked: diffing stores in general is mbse-journals', which is planned.
+- <a id="CAP-078"></a>**[CAP-078: incremental rebuild](CAP-078.md)** · proposed · A rerun after a model change reuses the work of every step whose reads did not change, by recorded reads,
+  fingerprints and invalidation, with the same result as a run from scratch. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met.
+- <a id="CAP-079"></a>**[CAP-079: steps undone](CAP-079.md)** · proposed · A session takes back its last step exactly, every step's effect recorded as mutations with what they replaced. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met.
+- <a id="CAP-080"></a>**[CAP-080: invertible transforms](CAP-080.md)** · proposed · A transform declares its inverse, so that a target and its trace give back the source, and an edit of
+  the output is carried back to the model or named as one no inverse can carry. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met.
+- <a id="CAP-081"></a>**[CAP-081: transforms composed into pipelines](CAP-081.md)** · proposed · Transforms compose as passes, one's after-symbols bound to the next one's before-symbols, a
+  pipeline itself a transform. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met.
+- <a id="CAP-082"></a>**[CAP-082: completeness reported](CAP-082.md)** · proposed · A session reports every element no transform has rewritten that some transform could match. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met.
+- <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · proposed · A policy's clauses are guarded by predicates over the match, and weigh a parameter's values by
+  a distribution over its domain, written as data. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met.
 
 ### Program models
 
@@ -278,8 +327,8 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 | C-002 | [CAP-025: schemas open in content](#CAP-025) | C-009 | [CAP-032: deliberate differences listed](#CAP-032) | C-016 | [CAP-039: schemas round-trip through Python3](CAP-039.md) |
 | C-003 | [CAP-026: Python, TypeScript and C and C++ read as written](#CAP-026) | C-010 | [CAP-033: undeclared properties preserved](#CAP-033) | C-017 | [CAP-040: every generation ambiguity a parameter](#CAP-040) |
 | C-004 | [CAP-027: Python3 source generated from schemas](CAP-027.md) | C-011 | [CAP-034: extension of schemas a module does not own](#CAP-034) | C-018 | [CAP-041: every kind of participant](#CAP-041) |
-| C-005 | [CAP-028: layered interaction models](#CAP-028) | C-012 | [CAP-035: schema evolution](#CAP-035) | C-019 | [CAP-042: data generated from constraints](#CAP-042) |
-| C-006 | [CAP-029: three-valued constraint checking](#CAP-029) | C-013 | [CAP-036: complete kinds for Python, TypeScript and C and C++](#CAP-036) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
+| C-005 | [CAP-028: layered interaction models](#CAP-028) | C-012 | [CAP-035: schema evolution](#CAP-035) | C-019 | [CAP-042: data generated from constraints](CAP-042.md) |
+| C-006 | [CAP-029: three-valued constraint checking](CAP-029.md) | C-013 | [CAP-036: complete kinds for Python, TypeScript and C and C++](#CAP-036) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
 | C-007 | [CAP-030: the same cases in both languages](#CAP-030) | C-014 | [CAP-037: Python and TypeScript trees as faithful as the reference front end's](#CAP-037) | C-021 | [CAP-044: Verilog and SystemVerilog read by slang](#CAP-044) |
 
 [CAP-001: no-code index view](CAP-001.md) to [CAP-023: relation inspector](CAP-023.md) kept the IDs they had in the workspace's former `VISUALIZATION.md`.

@@ -13,7 +13,8 @@ principles serve them.
   [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018),
   [FEA-021: every generation ambiguity a parameter](features/FEA-021.md).
 - <a id="QUA-002"></a>**QUA-002: open-world models** · adopted · Models are open-world by default, allowing incremental addition of detail
-  that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020).
+  that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020),
+  [FEA-023: patterns over data](features/FEA-023.md).
 - <a id="QUA-003"></a>**QUA-003: no second-order inventions** · adopted · The project avoids second-order inventions ([VOC-027: second-order invention](VOCABULARY.md#VOC-027)).
 - <a id="QUA-004"></a>**QUA-004: models as an alternative representation of source code** · adopted · Models are a concise, precise, comprehensive and neutral alternative
   representation for source code. *Conferred by* [FEA-008: expressive program models](features/README.md#FEA-008), [FEA-009: layered interaction models](features/README.md#FEA-009),
