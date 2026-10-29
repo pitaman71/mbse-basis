@@ -141,9 +141,12 @@ promoted from decisions each repository made separately.
   visitor protocol](#PRI-026), [PRI-004: one visitor protocol per kind](#PRI-004).
   *Not yet applied* in mbse-schemas: a value of an `OfAny` restricted to several schemas is written bare and read by
   the one schema whose plain form fits it, refused where several fit (Str, Bytes and a non-finite Float all write text).
-- <a id="PRI-026"></a>**PRI-026: serialization through the visitor protocol** · adopted · "serialization is handled via visitor protocol": "a reader tracks the
-  expected schema as context while traversing wire data", and "the wire format *usually* tracks each recursion by the
-  writer while traversing in-memory data". *Relates to* [PRI-025: never guess the schema](#PRI-025),
+- <a id="PRI-026"></a>**PRI-026: serialization through the visitor protocol** · adopted · "serialization is handled via visitor protocol", and
+  a reader tracks the expected schema as context while traversing wire data. "The wire format *usually* tracks each
+  recursion by the writer while traversing in-memory data which has the effect of wrapping unions explicitly.
+  Shorthands permit these wrappers to be skipped in cases where the correct behavior can be unambiguously and
+  trivially inferred from context by a reader that already knows the expected schema. This makes the format more
+  concise and resilient to errors from humans and agents in the loop." *Relates to* [PRI-025: never guess the schema](#PRI-025),
   [PRI-004: one visitor protocol per kind](#PRI-004); its shorthands are [CAP-055: wire format shorthand
   (scalars)](capabilities/README.md#CAP-055) and [CAP-056: wire format shorthand (containers)](capabilities/README.md#CAP-056).
 
