@@ -31,7 +31,7 @@ promoted from decisions each repository made separately.
   cannot preserve, such as a third-party parser that drops what it cannot read, or a translation with no form in the
   target, is the input refused, by name and position; nothing is dropped silently. *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002).
   *Relates to* [PRI-007: three-valued checking on request](#PRI-007).
-  *Applied in*: parsers that read semantically incorrect code ([CAP-026: source read as written](capabilities/README.md#CAP-026)); names a language cannot spell kept in the tree and flagged by validation, never renamed; `TranspileError`
+  *Applied in*: parsers that read semantically incorrect code ([CAP-026: Python, TypeScript and C and C++ read as written](capabilities/README.md#CAP-026)); names a language cannot spell kept in the tree and flagged by validation, never renamed; `TranspileError`
   (mbse-programs); drops recorded as steps (mbse-codegen-python).
   *Not yet applied* in mbse-schemas: decoding refuses undeclared keys. Its [`docs/OPEN_WORLD.md`](../../mbse-schemas/docs/OPEN_WORLD.md) proposes preserving
   them as a reading policy (Undeclared properties, policy 3).
