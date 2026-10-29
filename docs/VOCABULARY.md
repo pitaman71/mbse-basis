@@ -101,12 +101,12 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
 
 ### mbse-patterns
 
-- Predicate (`OfPredicate`), symbol, match: [Predicates](../../mbse-patterns/docs/PATTERNS.md#predicates)
-- `Exists`, `Forall`, `Contains`: [The predicate algebra](../../mbse-patterns/docs/PATTERNS.md#the-predicate-algebra)
-- Application of a predicate: [Parameters and application](../../mbse-patterns/docs/PATTERNS.md#parameters-and-application)
-- Pattern, `Choices`, distributions of values: [Distributions](../../mbse-patterns/docs/PATTERNS.md#distributions)
-- Transform, session, policy, trace: [The model](../../mbse-patterns/docs/TRANSFORMS.md#the-model),
-  [Data](../../mbse-patterns/docs/TRANSFORMS.md#data)
+- Predicate (`OfPredicate`), symbol, match: [Predicates](capabilities/CAP-069.md#predicates)
+- `Exists`, `Forall`, `Contains`: [The predicate algebra](capabilities/CAP-071.md#the-predicate-algebra)
+- Application of a predicate: [Parameters and application](capabilities/CAP-069.md#parameters-and-application)
+- Pattern, `Choices`, distributions of values: [Distributions](capabilities/CAP-072.md#distributions)
+- Transform, session, policy, trace: [The model](capabilities/CAP-074.md#the-model),
+  [Data](capabilities/CAP-074.md#data)
 
 ### mbse-programs
 

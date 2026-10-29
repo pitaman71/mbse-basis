@@ -136,6 +136,7 @@ these sections, each only where it has something to hold:
 
 - **As built**: how a repository built the item, and what it fixes where the item is silent. A repository's design
   document is drained into it once what it proposes is built.
+- **Design**: how an item not yet met is to be built, until it is; then what was built is its As built.
 - **Blocked**: a gap in another repository that keeps the item from being met, reported rather than worked around.
 - **Open questions**: what stays undecided.
 - **Decided**: the user's decisions, adopted, each recorded completely as the rule, every point and condition of it,
