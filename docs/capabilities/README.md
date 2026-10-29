@@ -141,10 +141,21 @@ than in each repository's design document.
 - <a id="CAP-065"></a>**CAP-065: Verilog and SystemVerilog trees as faithful as the reference front end's** · proposed · Verilog and SystemVerilog program models read source as faithfully as
   slang reads correct code, their trees checked against its. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   - **Current**: to assess.
-- <a id="CAP-038"></a>**[CAP-038: every construct of the standards](CAP-038.md)** · proposed · Program models read every construct of the language's standards, and
-  locate an error where the text goes wrong. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
-  - **Current**: not met: the tree-sitter grammars lag the standards (C++23 and C++26, Python 3.13 and
-    later), and their errors are located where recovery starts.
+- <a id="CAP-038"></a>**[CAP-038: every construct of Python's standards](CAP-038.md)** · proposed · Python's program model reads every
+  construct of Python's standards, and locates an error where the text goes wrong. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met: tree-sitter-python 0.25 lags Python 3.13 and later, and its errors are located where recovery
+    starts.
+- <a id="CAP-092"></a>**[CAP-092: every construct of TypeScript's standards](CAP-092.md)** · proposed · TypeScript's and JavaScript's
+  program model reads every construct of their standards, and locates an error where the text goes wrong. *Implements*
+  [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met: tree-sitter-typescript 0.23 lags TypeScript 4.7 and later.
+- <a id="CAP-093"></a>**[CAP-093: every construct of C's and C++'s standards](CAP-093.md)** · proposed · C's and C++'s program model
+  reads every construct of their standards, and locates an error where the text goes wrong. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met: tree-sitter-cpp 0.23 lags C++23 and C++26.
+- <a id="CAP-094"></a>**[CAP-094: every construct of Verilog's and SystemVerilog's standards](CAP-094.md)** · proposed · Verilog's and
+  SystemVerilog's program model reads every construct of IEEE 1364 and IEEE 1800, and locates an error where the text
+  goes wrong. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current** (main, v0.3.28): met.
 
 - <a id="CAP-084"></a>**[CAP-084: program trees as data](CAP-084.md)** · proposed · Programs are complete abstract syntax trees, plain objects of kinds in categories, validated by
   path and written and read as data, with the traversals and fluent builders every language shares. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
@@ -348,7 +359,7 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 
 | Earlier | Now | Earlier | Now | Earlier | Now |
 |---|---|---|---|---|---|
-| C-001 | [CAP-024: the same conformance corpora](#CAP-024) | C-008 | [CAP-031: 100% coverage of both](#CAP-031) | C-015 | [CAP-038: every construct of the standards](CAP-038.md) |
+| C-001 | [CAP-024: the same conformance corpora](#CAP-024) | C-008 | [CAP-031: 100% coverage of both](#CAP-031) | C-015 | [CAP-038: every construct of Python's standards](CAP-038.md) |
 | C-002 | [CAP-025: schemas open in content](#CAP-025) | C-009 | [CAP-032: deliberate differences listed](#CAP-032) | C-016 | [CAP-039: schemas round-trip through Python3](CAP-039.md) |
 | C-003 | [CAP-026: Python, TypeScript and C and C++ read as written](CAP-026.md) | C-010 | [CAP-033: undeclared properties preserved](#CAP-033) | C-017 | [CAP-040: every generation ambiguity a parameter](#CAP-040) |
 | C-004 | [CAP-027: Python3 source generated from schemas](CAP-027.md) | C-011 | [CAP-034: extension of schemas a module does not own](#CAP-034) | C-018 | [CAP-041: every kind of participant](#CAP-041) |
