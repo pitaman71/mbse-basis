@@ -147,8 +147,8 @@ promoted from decisions each repository made separately.
   Shorthands permit these wrappers to be skipped in cases where the correct behavior can be unambiguously and
   trivially inferred from context by a reader that already knows the expected schema. This makes the format more
   concise and resilient to errors from humans and agents in the loop." *Relates to* [PRI-025: never guess the schema](#PRI-025),
-  [PRI-004: one visitor protocol per kind](#PRI-004); its shorthands are [CAP-055: wire format shorthand
-  (scalars)](capabilities/README.md#CAP-055) and [CAP-056: wire format shorthand (containers)](capabilities/README.md#CAP-056).
+  [PRI-004: one visitor protocol per kind](#PRI-004); its shorthands are [CAP-069: wire format shorthand
+  (scalars)](capabilities/README.md#CAP-069) and [CAP-070: wire format shorthand (containers)](capabilities/README.md#CAP-070).
 
 ## Open items
 

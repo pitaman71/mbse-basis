@@ -151,23 +151,23 @@ than in each repository's design document.
 
 ### Wire format
 
-- <a id="CAP-055"></a>**CAP-055: wire format shorthand (scalars)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
+- <a id="CAP-069"></a>**CAP-069: wire format shorthand (scalars)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
   scalar (such as `Schemas.OfScalar` -> `Schemas.OfInt`) the wire format may omit the implied union wrapper(s) e.g.
   `1` instead of `{ "scalar": { "int": 1 } }` provided the written form unambiguously aligns with the schema (e.g.
   `scalar` -> `int`) and the reader must tolerate this optionality of representation": from `OfAny` through `OfScalar`
   to `OfInt`, up to two wrapper levels ("Yes, if you start with `OfAny` then go through `OfScalar` then `OfInt` you
-  get up to 2 wrapper levels"). The unrestricted case is [CAP-057](#CAP-057). *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
+  get up to 2 wrapper levels"). The unrestricted case is [CAP-071](#CAP-071). *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
   [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
   - **Current**: not met in mbse-schemas: a restricted `OfAny` is written bare and read by the schema whose plain
     form fits, a guess, refused where several fit; no explicit wrapper is written.
-- <a id="CAP-056"></a>**CAP-056: wire format shorthand (containers)** · proposed · "in the container case of a `Schemas.OfAny` that represents a
+- <a id="CAP-070"></a>**CAP-070: wire format shorthand (containers)** · proposed · "in the container case of a `Schemas.OfAny` that represents a
   specific container (e.g. `Schemas.OfContainer`) the wire format may omit the implied union wrapper
   `[ "dog", "cat", "mouse" ]` instead of `{ "container": [ "dog", "cat", "mouse" ] }` and the reader must tolerate this
   optionality of representation". *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
   [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
   - **Current**: not met in mbse-schemas: a container value of an `OfAny` is tagged by its schema's name, or written
     bare where a restriction leaves one container schema.
-- <a id="CAP-057"></a>**CAP-057: an unrestricted `OfAny` on the wire** · proposed · "in the unrestricted case of `Schemas.OfAny` the wire
+- <a id="CAP-071"></a>**CAP-071: an unrestricted `OfAny` on the wire** · proposed · "in the unrestricted case of `Schemas.OfAny` the wire
   format is simply plain data". As the user put it, "a complex case that deserves its own CAPABILITY id and name. it
   seems to involve open world modeling that allows the wire format to be written unrestricted and read restricted
   which implies a schema change between writing and reading. I think that may be correct interpretation and possibly
