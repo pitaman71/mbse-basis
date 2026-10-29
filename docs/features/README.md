@@ -68,6 +68,9 @@ specifications.
   [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061), and [CAP-088: TypeScript transpiled to Python](../capabilities/CAP-088.md) to [CAP-091: Ccpp expressions bridged to C and C++ source](../capabilities/CAP-091.md).
 - <a id="FEA-023"></a>**[FEA-023: patterns over data](FEA-023.md)** · proposed · external · A pattern, one predicate over a store's
   data, is validated, queried, sampled from and generated from alike. *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002).
+- <a id="FEA-024"></a>**[FEA-024: expressions as data](FEA-024.md)** · proposed · external · Constraints are written once, as terms of
+  expression dialects, and are stored, evaluated, validated and translated among the languages they come from.
+  *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002), [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
 
 ## Not yet planned
 

@@ -51,7 +51,7 @@ than in each repository's design document.
 - <a id="CAP-042"></a>**[CAP-042: data generated from constraints](CAP-042.md)** · proposed · Data is generated from constraints: sampled, and pseudorandom.
   *Implements* [FEA-020: refinable models](../features/README.md#FEA-020), [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: met: mbse-patterns' sampling and generators (0.3, 0.4; the GEN suites).
-- <a id="CAP-043"></a>**CAP-043: constraints resolved in any direction** · proposed · Constraints are resolved in any direction. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
+- <a id="CAP-043"></a>**[CAP-043: constraints resolved in any direction](CAP-043.md)** · proposed · Constraints are resolved in any direction. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: to assess.
 
 ### Patterns over data
@@ -101,6 +101,44 @@ than in each repository's design document.
   - **Current**: not met.
 - <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · proposed · A policy's clauses are guarded by predicates over the match, and weigh a parameter's values by
   a distribution over its domain, written as data. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met.
+
+### Expressions as data
+
+- <a id="CAP-095"></a>**[CAP-095: Basic terms as data](CAP-095.md)** · proposed · Constraints are written as terms of Basic's core vocabulary, total and pure so that any is also a
+  constraint, and are validated, stored, serialized and compared as any value of their schemas. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-106"></a>**[CAP-106: expressions evaluated three-valued](CAP-106.md)** · proposed · An expression is evaluated in three-valued
+  logic (Kleene's): an absent property is unknown, nothing is coerced, and everything but a reference object compares
+  deeply. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-096"></a>**[CAP-096: collections in expressions](CAP-096.md)** · proposed · Expressions read lists and an object's entries as collections, quantify over their items, and
+  compare them deeply. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-097"></a>**[CAP-097: value domains of published standards](CAP-097.md)** · proposed · A value's domain names a published standard (IEEE 754, IEEE 1164, two's complement integers),
+  with exact-then-rounded arithmetic, bitwise operations and explicit conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-098"></a>**[CAP-098: dialects over one framework](CAP-098.md)** · proposed · Expression languages are dialects of one framework, which validates, infers, evaluates and
+  translates any of them from its kinds' roles, a dialect extending another. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-099"></a>**[CAP-099: partial evaluation](CAP-099.md)** · proposed · An expression is reduced over the variables given, to a residual that agrees with it wherever it evaluates. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
+  dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-101"></a>**[CAP-101: translation between dialects](CAP-101.md)** · proposed · Each pair of dialects translates both ways by declared rules, round-tripping what both can write, and
+  agreeing with a translation through a third. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current** (main, v0.5.4): met.
+- <a id="CAP-102"></a>**[CAP-102: collections translated to LaTeX and C and C++](CAP-102.md)** · proposed · Collections translate to LaTeX and C and C++, and directly between
+  SystemVerilog and the other dialects. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
+- <a id="CAP-103"></a>**[CAP-103: SystemVerilog's other operations translated](CAP-103.md)** · proposed · `has`, the logical `>>` and the 4-state comparisons translate between
+  Basic and SystemVerilog. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
+- <a id="CAP-104"></a>**[CAP-104: typed values translated beyond C and SystemVerilog](CAP-104.md)** · proposed · Conversions and typed values translate to Python, MATLAB, Excel and LaTeX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
+- <a id="CAP-105"></a>**[CAP-105: Excel ranges and structured references](CAP-105.md)** · proposed · Excel's ranges (`A1:B3`) and structured references (`Table1[@age]`) are
+  modeled, as array values. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
 
 ### Program models
