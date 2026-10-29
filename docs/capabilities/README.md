@@ -93,6 +93,24 @@ was checked, so that build status lives here rather than in each repository's de
   - **Current**: partly met for Python types (`frozen` and `slots` are parameters; other choices are fixed); not met
     elsewhere.
 
+### Wire format
+
+- <a id="CAP-055"></a>**CAP-055: wire format shorthand (scalars)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
+  scalar (such as `Schemas.OfScalar` -> `Schemas.OfInt`) the wire format may omit the implied union wrapper(s) e.g.
+  `1` instead of `{ "scalar": { "int": 1 } }` provided the written form unambiguously aligns with the schema (e.g.
+  `scalar` -> `int`) and the reader must tolerate this optionality of representation". In "the unrestricted case of
+  `Schemas.OfAny` the wire format is simply plain data". *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
+  [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
+  - **Current**: not met in mbse-schemas: an unrestricted `OfAny` is written tagged by one level (`{"int": 1}`, a
+    value object by its schema's name), and a restricted one bare, read by the schema whose plain form fits.
+- <a id="CAP-056"></a>**CAP-056: wire format shorthand (containers)** · proposed · "in the container case of a `Schemas.OfAny` that represents a
+  specific container (e.g. `Schemas.OfContainer`) the wire format may omit the implied union wrapper
+  `[ "dog", "cat", "mouse" ]` instead of `{ "container": [ "dog", "cat", "mouse" ] }` and the reader must tolerate this
+  optionality of representation". *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
+  [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
+  - **Current**: not met in mbse-schemas: a container value of an `OfAny` is tagged by its schema's name, or written
+    bare where a restriction leaves one container schema.
+
 ### Interaction models
 
 - <a id="CAP-028"></a>**CAP-028: layered interaction models** · proposed · Interaction models layer functional behavior. *Implements* [FEA-009: layered interaction models](../features/README.md#FEA-009).

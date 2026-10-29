@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
+[← Why the mbse repositories exist](../MBSE.md) · [Home](../README.md) · [Qualities →](QUALITIES.md)
 
 # Principles
 
@@ -135,6 +135,17 @@ promoted from decisions each repository made separately.
   *Applied in*: mbse-rest's wire format ([CAP-012: logical view endpoints](capabilities/CAP-012.md)); mbse-dynamodb's
   table, which keeps JSON rather than DynamoDB maps, whose numbers would lose `1` against `1.0`
   ([CAP-013: an in-memory store journaled to DynamoDB](capabilities/CAP-013.md)).
+- <a id="PRI-025"></a>**PRI-025: never guess the schema** · adopted · "Never guess the schema": what a value is, is never inferred from
+  the shape of its data. A reader tracks the expected schema as context while traversing wire data, and the wire
+  names a value's schema wherever that context leaves it open. *Relates to* [PRI-026: serialization through the
+  visitor protocol](#PRI-026), [PRI-004: one visitor protocol per kind](#PRI-004).
+  *Not yet applied* in mbse-schemas: a value of an `OfAny` restricted to several schemas is written bare and read by
+  the one schema whose plain form fits it, refused where several fit (Str, Bytes and a non-finite Float all write text).
+- <a id="PRI-026"></a>**PRI-026: serialization through the visitor protocol** · adopted · "serialization is handled via visitor protocol": "a reader tracks the
+  expected schema as context while traversing wire data", and "the wire format *usually* tracks each recursion by the
+  writer while traversing in-memory data". *Relates to* [PRI-025: never guess the schema](#PRI-025),
+  [PRI-004: one visitor protocol per kind](#PRI-004); its shorthands are [CAP-055: wire format shorthand
+  (scalars)](capabilities/README.md#CAP-055) and [CAP-056: wire format shorthand (containers)](capabilities/README.md#CAP-056).
 
 ## Open items
 
@@ -166,4 +177,4 @@ features became (Features, Earlier IDs).
 ---
 
 <!-- nav -->
-[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
+[← Why the mbse repositories exist](../MBSE.md) · [Home](../README.md) · [Qualities →](QUALITIES.md)
