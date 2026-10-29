@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Why the mbse repositories exist](../MBSE.md) · [Home](../README.md) · [Qualities →](QUALITIES.md)
+[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
 
 # Principles
 
@@ -177,4 +177,4 @@ features became (Features, Earlier IDs).
 ---
 
 <!-- nav -->
-[← Why the mbse repositories exist](../MBSE.md) · [Home](../README.md) · [Qualities →](QUALITIES.md)
+[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
