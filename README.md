@@ -2,7 +2,7 @@
 
 The mbse repositories kept deciding the same things separately, each restating what another had already decided, until
 their design documents no longer fit in anyone's head or an agent's context. mbse-basis states those shared ideas
-once, as a small ontology of features, principles, capabilities and vocabulary with permanent IDs, so that every other
+once, as a small ontology of qualities, features, capabilities, principles and vocabulary with permanent IDs, so that every other
 repository cites them and records only its local differences. The markdown, notebooks and skills across the
 repositories had grown past what any person or agent can absorb; keeping them consolidated, and not special-casing the
 project into an unmanageable mess, is an ongoing priority.

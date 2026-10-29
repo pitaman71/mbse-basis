@@ -46,6 +46,10 @@ adopted before it is met. Features may overlap on purpose.
 An index site for any mbse app, driven by its schemas. Each feature's detail file holds its capabilities'
 specifications.
 
+- <a id="FEA-021"></a>**[FEA-021: every generation ambiguity a parameter](FEA-021.md)** · proposed · external · Every
+  ambiguity in generation is a parameter of the step that resolves it, decided by a human, an agent or a policy chosen
+  up front, and kept in the trace. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001). *Relates to*
+  [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014). Formerly CAP-040.
 - <a id="FEA-001"></a>**FEA-001: schema-driven UI** · adopted · external · Services and UI present an app driven by its
   schemas, extended by schema-aware code only where wanted. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-001.md)
 - <a id="FEA-003"></a>**FEA-003: no-code logical views** · adopted · external · Query formats the backend serves as
@@ -58,6 +62,10 @@ specifications.
   [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-006.md)
 - <a id="FEA-007"></a>**FEA-007: property kinds** · adopted · external · Each property is shown and edited as its kind
   calls for, with who wrote it and when. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-007.md)
+- <a id="FEA-022"></a>**FEA-022: code generation** · proposed · external · Models generate source code in each language
+  family's own form, and are read back from it: a model is the source's alternative representation, not a description
+  of it. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004). Its capabilities: [CAP-027: Python3 source generated from schemas](../capabilities/CAP-027.md),
+  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061).
 
 ## Not yet planned
 
@@ -83,6 +91,9 @@ the work tracker's seed data uses it as an example ID.
 
 ## Open items
 
+- **[FEA-021: every generation ambiguity a parameter](FEA-021.md) counts parameters, not coverage of ambiguities.** It
+  needs a measure, such as the decisions fixed for every schema that should be parameters ([CAP-027: Python3 source
+  generated from schemas](../capabilities/CAP-027.md#bridges) lists them).
 - **[QUA-002: open-world models](../QUALITIES.md#QUA-002) is not met in shape.** mbse-schemas' decoding refuses an undeclared key, where [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002) preserves it; its
   [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
   [QUA-002: open-world models](../QUALITIES.md#QUA-002)'s "by default" contradicts. Name resolution staying closed ([OPEN_WORLD.md, Decided](../../../mbse-schemas/docs/OPEN_WORLD.md#decided)) is consistent with
