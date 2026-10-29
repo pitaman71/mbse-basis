@@ -110,9 +110,9 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
 
 ### mbse-programs
 
-- Syntax node, kind, category: [Trees](../../mbse-programs/docs/PROGRAMS.md#trees)
-- Standard: [Standards](../../mbse-programs/docs/PROGRAMS.md#standards)
-- Language, entity, scope, program, transpiler, bridge: [Layers](../../mbse-programs/docs/PROGRAMS.md#layers)
+- Syntax node, kind, category: [Trees](capabilities/CAP-084.md#trees)
+- Standard: [Standards](capabilities/CAP-085.md#standards)
+- Language, entity, scope, program, transpiler, bridge: [Layers](capabilities/CAP-084.md#layers)
 
 ### mbse-codegen-python
 

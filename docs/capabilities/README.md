@@ -56,13 +56,13 @@ than in each repository's design document.
 
 ### Patterns over data
 
-- <a id="CAP-069"></a>**[CAP-069: predicates as data](CAP-069.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
+- <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
   data, applied by reference, and checked when asked. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: met (mbse-patterns 0.1, 0.5, 0.6; the CON suites).
-- <a id="CAP-070"></a>**[CAP-070: constraints as queries](CAP-070.md)** · proposed · A predicate is a query: its matches among a store's data stream lazily, planned from the constraint's
+- <a id="CAP-070"></a>**[CAP-070: wire format shorthand (containers)](CAP-070.md)** · proposed · A predicate is a query: its matches among a store's data stream lazily, planned from the constraint's
   shape, and a store that answers queries natively answers them. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: met (mbse-patterns 0.1; the QRY suites).
-- <a id="CAP-071"></a>**[CAP-071: links mandatory, possible or forbidden](CAP-071.md)** · proposed · Whether a link is mandatory, possible or forbidden is a predicate: quantifiers over a
+- <a id="CAP-071"></a>**[CAP-071: an unrestricted `OfAny` on the wire](CAP-071.md)** · proposed · Whether a link is mandatory, possible or forbidden is a predicate: quantifiers over a
   store's extents, tests of an adjacency's entries, and weighted alternatives. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: met (mbse-patterns 0.2; the ALG suites).
 - <a id="CAP-072"></a>**[CAP-072: distributions in predicates](CAP-072.md)** · proposed · A predicate's constraint says how its matches are distributed, by weighted alternatives and
@@ -105,21 +105,21 @@ than in each repository's design document.
 
 ### Program models
 
-- <a id="CAP-036"></a>**CAP-036: complete kinds for Python, TypeScript and C and C++** · proposed · Python's, TypeScript's and C
+- <a id="CAP-036"></a>**[CAP-036: complete kinds for Python, TypeScript and C and C++](CAP-036.md)** · proposed · Python's, TypeScript's and C
   and C++'s program models have complete kinds, built and printed. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   - **Current** (main, v0.3.28): met.
-- <a id="CAP-063"></a>**CAP-063: complete kinds for Verilog and SystemVerilog** · proposed · Verilog's and SystemVerilog's program models have complete kinds, built
+- <a id="CAP-063"></a>**[CAP-063: complete kinds for Verilog and SystemVerilog](CAP-063.md)** · proposed · Verilog's and SystemVerilog's program models have complete kinds, built
   and printed. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
-  - **Current**: to assess.
-- <a id="CAP-026"></a>**CAP-026: Python, TypeScript and C and C++ read as written** · adopted · Source code transpilers read
+  - **Current** (main, v0.3.28): met.
+- <a id="CAP-026"></a>**[CAP-026: Python, TypeScript and C and C++ read as written](CAP-026.md)** · adopted · Source code transpilers read
   Python, TypeScript and C and C++ source as written, semantically incorrect code included, through a pinned parser
   (tree-sitter, a practical choice at the time) whose gaps are corrected on the tree. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   *Applies* [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002).
   - **Current** (main, v0.3.28): met.
-- <a id="CAP-062"></a>**CAP-062: Verilog and SystemVerilog read as written** · proposed · Verilog and SystemVerilog source is read as written, semantically incorrect code included,
+- <a id="CAP-062"></a>**[CAP-062: Verilog and SystemVerilog read as written](CAP-062.md)** · proposed · Verilog and SystemVerilog source is read as written, semantically incorrect code included,
   through slang. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
-  - **Current**: to assess.
-- <a id="CAP-044"></a>**CAP-044: Verilog and SystemVerilog read by slang** · proposed · Verilog and SystemVerilog source is read
+  - **Current** (main, v0.3.28): met.
+- <a id="CAP-044"></a>**[CAP-044: Verilog and SystemVerilog read by slang](CAP-044.md)** · proposed · Verilog and SystemVerilog source is read
   by its reference front end, slang, rather than tree-sitter. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   - **Current** (main, v0.3.28): met.
 - <a id="CAP-066"></a>**CAP-066: Python read by CPython's ast** · proposed · Python source is read by its reference front end, CPython's `ast`, rather than
@@ -128,9 +128,9 @@ than in each repository's design document.
 - <a id="CAP-067"></a>**CAP-067: TypeScript read by the TypeScript compiler API** · proposed · TypeScript and JavaScript source is read by their reference front end, the
   TypeScript compiler API, rather than tree-sitter. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   - **Current**: not met: read through tree-sitter.
-- <a id="CAP-068"></a>**CAP-068: C and C++ read by Clang** · proposed · C and C++ source is read by its reference front end, Clang, rather than tree-sitter. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
+- <a id="CAP-068"></a>**[CAP-068: C and C++ read by Clang](CAP-068.md)** · proposed · C and C++ source is read by its reference front end, Clang, rather than tree-sitter. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   - **Current**: not met: read through tree-sitter.
-- <a id="CAP-037"></a>**CAP-037: Python and TypeScript trees as faithful as the reference front end's** · proposed · Python and
+- <a id="CAP-037"></a>**[CAP-037: Python and TypeScript trees as faithful as the reference front end's](CAP-037.md)** · proposed · Python and
   TypeScript program models read source as faithfully as the language's reference front end reads correct code: their
   trees are checked against that front end's wherever it reads the code. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   - **Current** (main, v0.3.28): met on the conformance sources (PYPRS-01 against CPython's `ast`, TSPRS-01 against
@@ -141,10 +141,34 @@ than in each repository's design document.
 - <a id="CAP-065"></a>**CAP-065: Verilog and SystemVerilog trees as faithful as the reference front end's** · proposed · Verilog and SystemVerilog program models read source as faithfully as
   slang reads correct code, their trees checked against its. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
   - **Current**: to assess.
-- <a id="CAP-038"></a>**CAP-038: every construct of the standards** · proposed · Program models read every construct of the language's standards, and
-  locate an error where the text goes wrong. *Implements* [FEA-008: expressive program models](../features/README.md#FEA-008).
-  - **Current**: not met: the tree-sitter grammars lag the standards (C++23 and C++26, Python 3.13 and
-    later), and their errors are located where recovery starts.
+- <a id="CAP-038"></a>**[CAP-038: every construct of Python's standards](CAP-038.md)** · proposed · Python's program model reads every
+  construct of Python's standards, and locates an error where the text goes wrong. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met: tree-sitter-python 0.25 lags Python 3.13 and later, and its errors are located where recovery
+    starts.
+- <a id="CAP-092"></a>**[CAP-092: every construct of TypeScript's standards](CAP-092.md)** · proposed · TypeScript's and JavaScript's
+  program model reads every construct of their standards, and locates an error where the text goes wrong. *Implements*
+  [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met: tree-sitter-typescript 0.23 lags TypeScript 4.7 and later.
+- <a id="CAP-093"></a>**[CAP-093: every construct of C's and C++'s standards](CAP-093.md)** · proposed · C's and C++'s program model
+  reads every construct of their standards, and locates an error where the text goes wrong. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met: tree-sitter-cpp 0.23 lags C++23 and C++26.
+- <a id="CAP-094"></a>**[CAP-094: every construct of Verilog's and SystemVerilog's standards](CAP-094.md)** · proposed · Verilog's and
+  SystemVerilog's program model reads every construct of IEEE 1364 and IEEE 1800, and locates an error where the text
+  goes wrong. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current** (main, v0.3.28): met.
+
+- <a id="CAP-084"></a>**[CAP-084: program trees as data](CAP-084.md)** · proposed · Programs are complete abstract syntax trees, plain objects of kinds in categories, validated by
+  path and written and read as data, with the traversals and fluent builders every language shares. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current** (main, v0.3.28): met.
+- <a id="CAP-085"></a>**[CAP-085: standards record availability](CAP-085.md)** · proposed · Every kind and feature records the standards that have it, so that a standard checks a tree
+  against what it lacks, by path. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current** (main, v0.3.28): met.
+- <a id="CAP-086"></a>**[CAP-086: programs printed](CAP-086.md)** · proposed · Each language's trees print in one fixed layout, parenthesized by precedence, so that printing then
+  parsing gives the same tree. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current** (main, v0.3.28): met for Ccpp, Python, TypeScript and Verilog.
+- <a id="CAP-087"></a>**[CAP-087: definitions resolve names](CAP-087.md)** · proposed · Each language's definitions read a tree into the entities and scopes it declares, and resolve a
+  name from a syntax node, by the language's own scoping rules. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current** (main, v0.3.28): met for Ccpp, Python, TypeScript and Verilog.
 
 ### Code generation and the model trace
 
@@ -191,6 +215,18 @@ than in each repository's design document.
   - **Current**: not met.
 - <a id="CAP-061"></a>**CAP-061: TypeScript5 source from pattern models** · proposed · MBSE can generate TypeScript5 source code from pattern models. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: not met.
+- <a id="CAP-088"></a>**[CAP-088: TypeScript transpiled to Python](CAP-088.md)** · proposed · A TypeScript program's tree is translated into a Python module's, covering the subset ordinary code
+  is written with, and refusing by path what it does not cover. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current** (main, v0.3.28): met.
+- <a id="CAP-089"></a>**[CAP-089: Python expressions bridged to Python source](CAP-089.md)** · proposed · The Python dialect's terms and Python syntax nodes map into each other, so that a
+  constraint stored as data becomes Python code and Python code a constraint. *Implements* [FEA-022: code generation](../features/README.md#FEA-022).
+  - **Current** (main, v0.3.28): met.
+- <a id="CAP-090"></a>**[CAP-090: SystemVerilog expressions bridged to Verilog source](CAP-090.md)** · proposed · The SystemVerilog dialect's terms and Verilog syntax nodes map into each other:
+  a constraint becomes a function, a `constraint` block or an assertion, and back. *Implements* [FEA-022: code generation](../features/README.md#FEA-022).
+  - **Current** (main, v0.3.28): met.
+- <a id="CAP-091"></a>**[CAP-091: Ccpp expressions bridged to C and C++ source](CAP-091.md)** · proposed · The Ccpp dialect's terms and Ccpp syntax nodes map into each other, as Python's and
+  SystemVerilog's bridges do. *Implements* [FEA-022: code generation](../features/README.md#FEA-022).
+  - **Current**: not met.
 - <a id="CAP-039"></a>**[CAP-039: schemas round-trip through Python3](CAP-039.md)** · proposed · MBSE can round-trip schema
   models through Python3 source: schemas to source and back give the same schemas, and source to schemas and back the
   same source, given the same decisions. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
@@ -205,7 +241,7 @@ than in each repository's design document.
   `1` instead of `{ "scalar": { "int": 1 } }` provided the written form unambiguously aligns with the schema (e.g.
   `scalar` -> `int`) and the reader must tolerate this optionality of representation": from `OfAny` through `OfScalar`
   to `OfInt`, up to two wrapper levels ("Yes, if you start with `OfAny` then go through `OfScalar` then `OfInt` you
-  get up to 2 wrapper levels"). The unrestricted case is [CAP-071](#CAP-071). *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
+  get up to 2 wrapper levels"). The unrestricted case is [CAP-071: an unrestricted `OfAny` on the wire](#CAP-071). *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
   [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
   - **Current**: not met in mbse-schemas: a restricted `OfAny` is written bare and read by the schema whose plain
     form fits, a guess, refused where several fit; no explicit wrapper is written.
@@ -323,13 +359,13 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 
 | Earlier | Now | Earlier | Now | Earlier | Now |
 |---|---|---|---|---|---|
-| C-001 | [CAP-024: the same conformance corpora](#CAP-024) | C-008 | [CAP-031: 100% coverage of both](#CAP-031) | C-015 | [CAP-038: every construct of the standards](#CAP-038) |
+| C-001 | [CAP-024: the same conformance corpora](#CAP-024) | C-008 | [CAP-031: 100% coverage of both](#CAP-031) | C-015 | [CAP-038: every construct of Python's standards](CAP-038.md) |
 | C-002 | [CAP-025: schemas open in content](#CAP-025) | C-009 | [CAP-032: deliberate differences listed](#CAP-032) | C-016 | [CAP-039: schemas round-trip through Python3](CAP-039.md) |
-| C-003 | [CAP-026: Python, TypeScript and C and C++ read as written](#CAP-026) | C-010 | [CAP-033: undeclared properties preserved](#CAP-033) | C-017 | [CAP-040: every generation ambiguity a parameter](#CAP-040) |
+| C-003 | [CAP-026: Python, TypeScript and C and C++ read as written](CAP-026.md) | C-010 | [CAP-033: undeclared properties preserved](#CAP-033) | C-017 | [CAP-040: every generation ambiguity a parameter](#CAP-040) |
 | C-004 | [CAP-027: Python3 source generated from schemas](CAP-027.md) | C-011 | [CAP-034: extension of schemas a module does not own](#CAP-034) | C-018 | [CAP-041: every kind of participant](#CAP-041) |
 | C-005 | [CAP-028: layered interaction models](#CAP-028) | C-012 | [CAP-035: schema evolution](#CAP-035) | C-019 | [CAP-042: data generated from constraints](CAP-042.md) |
-| C-006 | [CAP-029: three-valued constraint checking](CAP-029.md) | C-013 | [CAP-036: complete kinds for Python, TypeScript and C and C++](#CAP-036) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
-| C-007 | [CAP-030: the same cases in both languages](#CAP-030) | C-014 | [CAP-037: Python and TypeScript trees as faithful as the reference front end's](#CAP-037) | C-021 | [CAP-044: Verilog and SystemVerilog read by slang](#CAP-044) |
+| C-006 | [CAP-029: three-valued constraint checking](CAP-029.md) | C-013 | [CAP-036: complete kinds for Python, TypeScript and C and C++](CAP-036.md) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
+| C-007 | [CAP-030: the same cases in both languages](#CAP-030) | C-014 | [CAP-037: Python and TypeScript trees as faithful as the reference front end's](CAP-037.md) | C-021 | [CAP-044: Verilog and SystemVerilog read by slang](CAP-044.md) |
 
 [CAP-001: no-code index view](CAP-001.md) to [CAP-023: relation inspector](CAP-023.md) kept the IDs they had in the workspace's former `VISUALIZATION.md`.
 
@@ -342,8 +378,7 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
   recovery, while Pyright's parser (Pylance's; MIT, written in TypeScript) and Ruff's recover from them. slang parses
   tolerantly and elaborates separately. C++ is the exception: its grammar depends on whether a name is a type, so a
   parser must resolve names, and Clang drops what it cannot resolve; EDG (Microsoft's C/C++ IntelliSense) copes but
-  is commercial, so for Ccpp [CAP-068: C and C++ read by Clang](#CAP-068) conflicts with [CAP-026: Python, TypeScript and C and C++ read as written](#CAP-026). mbse-programs' [`docs/PROGRAMS.md`](../../../mbse-programs/docs/PROGRAMS.md) keeps Ccpp's front
-  end under its Open questions until this is decided.
+  is commercial, so for Ccpp [CAP-068: C and C++ read by Clang](CAP-068.md) conflicts with [CAP-026: Python, TypeScript and C and C++ read as written](CAP-026.md). [CAP-068: C and C++ read by Clang](CAP-068.md) keeps Ccpp's front end among its open questions until this is decided.
 - The capabilities above are drafted from each repository's status sections; confirm them, then remove those sections
   and cite the capabilities instead. Schema capabilities land in mbse-schemas first, then in its dependents, each
   pinning the new release.
