@@ -16,7 +16,8 @@ principles serve them.
   that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020).
 - <a id="QUA-003"></a>**QUA-003: no second-order inventions** · adopted · The project avoids second-order inventions ([VOC-027: second-order invention](VOCABULARY.md#VOC-027)).
 - <a id="QUA-004"></a>**QUA-004: models as an alternative representation of source code** · adopted · Models are a concise, precise, comprehensive and neutral alternative
-  representation for source code. *Conferred by* [FEA-008: expressive program models](features/README.md#FEA-008), [FEA-009: layered interaction models](features/README.md#FEA-009).
+  representation for source code. *Conferred by* [FEA-008: expressive program models](features/README.md#FEA-008), [FEA-009: layered interaction models](features/README.md#FEA-009),
+  [FEA-022: code generation](features/README.md#FEA-022).
 - <a id="QUA-005"></a>**QUA-005: an opinionated paradigm** · adopted · The project invents a modeling paradigm, constructs and a framework, and
   does so in an opinionated manner.
 - <a id="QUA-006"></a>**QUA-006: the same in every language** · proposed · A model means the same, and every operation on it gives the same result,

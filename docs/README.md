@@ -38,6 +38,12 @@ engineering persona. Today's features are generally external, and today's tech d
 **A feature's proven space should only grow.** Each capability that lands is an increment of it: each release, the
 part of a feature's problem space its capabilities are proven to solve should be at least what it was.
 
+**Scope is enumerated by capabilities and contained by features.** A capability is one increment, met or not: it
+carries no plan of its own, no "met for this, not yet for that". Scope still to build, or found while building, is a
+further capability, each its own increment, implementing the feature that contains it. A feature grows by gaining
+capabilities; a capability never grows. Its **Current** says only whether it is met and where that was checked, or
+that it is blocked or to assess.
+
 **Tasks are not enumerated.** Their tracking is latent in git history; there is no need to surface them yet.
 
 Two kinds of item sit outside the tiers:

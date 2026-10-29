@@ -62,6 +62,10 @@ specifications.
   [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-006.md)
 - <a id="FEA-007"></a>**FEA-007: property kinds** · adopted · external · Each property is shown and edited as its kind
   calls for, with who wrote it and when. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-007.md)
+- <a id="FEA-022"></a>**FEA-022: code generation** · proposed · external · Models generate source code in each language
+  family's own form, and are read back from it: a model is the source's alternative representation, not a description
+  of it. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004). Its capabilities: [CAP-027: Python3 source generated from schemas](../capabilities/CAP-027.md),
+  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-054: Verilog and SystemVerilog source from schema models](../capabilities/README.md#CAP-054).
 
 ## Not yet planned
 
@@ -90,8 +94,6 @@ the work tracker's seed data uses it as an example ID.
 - **[FEA-021: every generation ambiguity a parameter](FEA-021.md) counts parameters, not coverage of ambiguities.** It
   needs a measure, such as the decisions fixed for every schema that should be parameters ([CAP-027: Python3 source
   generated from schemas](../capabilities/CAP-027.md#bridges) lists them).
-- **Generation has no capability beyond schemas' Python3 and TypeScript5.** CAP-027 once covered expressions and
-  patterns, and the C and C++ and Verilog families; each is a capability still to name.
 - **[QUA-002: open-world models](../QUALITIES.md#QUA-002) is not met in shape.** mbse-schemas' decoding refuses an undeclared key, where [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002) preserves it; its
   [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
   [QUA-002: open-world models](../QUALITIES.md#QUA-002)'s "by default" contradicts. Name resolution staying closed ([OPEN_WORLD.md, Decided](../../../mbse-schemas/docs/OPEN_WORLD.md#decided)) is consistent with

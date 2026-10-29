@@ -5,8 +5,10 @@
 
 The third tier of the design spec: an increment of utility within a feature, how in a coming release the product
 solves a problem, circumscribing the part of the problem space it can solve. A feature's capabilities enumerate, in
-full, how it is met; a capability has no parts or levels below it. **Current** says where each is met and where that
-was checked, so that build status lives here rather than in each repository's design document.
+full, how it is met; a capability has no parts or levels below it, and no plan: what remains to build is
+another capability ([the basis](../README.md#the-design-spec), scope is enumerated by capabilities and contained by
+features). **Current** says whether each is met and where that was checked, so that build status lives here rather
+than in each repository's design document.
 
 ## Index
 
@@ -80,18 +82,36 @@ was checked, so that build status lives here rather than in each repository's de
 ### Code generation and the model trace
 
 - <a id="CAP-027"></a>**[CAP-027: Python3 source generated from schemas](CAP-027.md)** · proposed · MBSE can generate Python3
-  source code from schema models. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018),
-  [FEA-008: expressive program models](../features/README.md#FEA-008), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  source code from schema models: their types, as dataclasses and type aliases. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md),
+  [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   [PRI-015: concrete references are programmatic](../PRINCIPLES.md#PRI-015) depends on it: typed bindings are how code refers to model elements by reference.
-  - **Current**: met for schemas' types, as dataclasses and type aliases (mbse-codegen-python's `Types`); bindings,
-    value parameters and applications not yet.
+  - **Current**: met (mbse-codegen-python's `Types`).
 - <a id="CAP-045"></a>**CAP-045: TypeScript5 source generated from schemas** · proposed · MBSE can generate TypeScript5
-  source code from schema models. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018),
-  [FEA-008: expressive program models](../features/README.md#FEA-008), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  source code from schema models. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: not met.
+- <a id="CAP-046"></a>**CAP-046: generated Python3 bound to its schemas** · proposed · Classes generated in Python3 are bound to their schemas (mbse-schemas' `Bindings`), so that they serialize,
+  validate and are queried as a store's objects. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: not met.
+- <a id="CAP-047"></a>**CAP-047: parametric schemas as Python3 generics** · proposed · A parametric schema generates a Python3 generic: its value parameters as PEP 695 type parameters bounded by
+  their types (`class Matrix[rows: int, cols: int]`), an application with `Literal` arguments. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: not met.
+- <a id="CAP-048"></a>**CAP-048: terms in generated Python3** · proposed · A width, an extent or an argument that is a term is written in generated Python3. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: blocked: terms are written by [CAP-051: Python3 source from expression models](#CAP-051).
+- <a id="CAP-049"></a>**CAP-049: type parameters in Python3** · proposed · A schema's type parameters generate a generic Python3 class (`class Box[T]`). *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: blocked: mbse-schemas has no type parameters.
+- <a id="CAP-050"></a>**CAP-050: anonymous adjacencies in Python3** · proposed · An anonymous adjacency, participation without storage, is listed by its class in generated Python3. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: blocked: mbse-schemas has no anonymous adjacencies.
+- <a id="CAP-051"></a>**CAP-051: Python3 source from expression models** · proposed · MBSE can generate Python3 source code from expression models. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: not met.
+- <a id="CAP-052"></a>**CAP-052: Python3 source from pattern models** · proposed · MBSE can generate Python3 source code from pattern models. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: not met.
+- <a id="CAP-053"></a>**CAP-053: C and C++ source from schema models** · proposed · MBSE can generate C and C++ source code from schema models. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+  - **Current**: not met.
+- <a id="CAP-054"></a>**CAP-054: Verilog and SystemVerilog source from schema models** · proposed · MBSE can generate Verilog and SystemVerilog source code from schema models. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: not met.
 - <a id="CAP-039"></a>**[CAP-039: schemas round-trip through Python3](CAP-039.md)** · proposed · MBSE can round-trip schema
   models through Python3 source: schemas to source and back give the same schemas, and source to schemas and back the
-  same source, given the same decisions. *Implements* [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  same source, given the same decisions. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: met for schemas' types (mbse-codegen-python's `Types`: the round trips are laws, tested both ways).
 - <a id="CAP-040"></a>**CAP-040: every generation ambiguity a parameter** · superseded by [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md) · Every
   ambiguity in generation is a parameter of the step that resolves it. It is a feature, not an increment of one.
@@ -204,6 +224,11 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 [CAP-001: no-code index view](CAP-001.md) to [CAP-023: relation inspector](CAP-023.md) kept the IDs they had in the workspace's former `VISUALIZATION.md`.
 
 ## Open items
+
+- **Capabilities that still carry their own plan** ("met for this, not yet for that"), against the basis' rule that
+  scope is enumerated by capabilities: [CAP-026: source read as written](#CAP-026), [CAP-036: complete kinds](#CAP-036), [CAP-037: trees as faithful as the reference front end's](#CAP-037),
+  [CAP-038: every construct of the standards](#CAP-038) and [CAP-044: reference front ends](#CAP-044) (each to split by language, with mbse-programs' batch), and
+  [CAP-002: named schema list](CAP-002.md) (met by a stand-in while [CAP-003: schema inspector](CAP-003.md) is blocked).
 
 - **Which parser for each language** (low priority). Tolerance and spec-awareness differ by language, as the editors'
   language services show. TypeScript's compiler, which tsserver is, parses any text to a full tree, type errors never

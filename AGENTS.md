@@ -26,3 +26,5 @@ Then read the index of whichever kind your task touches; each is short enough to
   open items rather than resolving them silently.
 - **Current status is checked, not guessed.** A capability's current status names where it was checked (a branch,
   a version, a test), or says it is to assess.
+- **A capability never grows.** Scope still to build, or found while building, is a new capability under the feature
+  that contains it, never a "not yet" inside an existing one ([docs/README.md](docs/README.md#the-design-spec)).
