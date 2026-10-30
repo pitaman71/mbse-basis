@@ -149,6 +149,10 @@ promoted from decisions each repository made separately.
   concise and resilient to errors from humans and agents in the loop." *Relates to* [PRI-025: never guess the schema](#PRI-025),
   [PRI-004: one visitor protocol per kind](#PRI-004); its shorthands are [CAP-069: wire format shorthand
   (scalars)](capabilities/CAP-069.md) and [CAP-070: wire format shorthand (containers)](capabilities/CAP-070.md).
+- <a id="PRI-027"></a>**PRI-027: developers can assume completely consistent behavior across bindings and generated source code** · proposed · Code
+  written against one binding, or against generated source code, behaves the same against any other: the same
+  results, errors and wire format, so that a developer need not test each binding apart. *Serves*
+  [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Applied in*: [FEA-036: serialization behavior is consistent across bindings and generated source code](features/FEA-036.md).
 
 ## Open items
 

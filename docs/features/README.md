@@ -82,6 +82,14 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
 - <a id="FEA-034"></a>**[FEA-034: analytic behavior conventions in schema](FEA-034.md)** · proposed · external · Data of any schema is compared, ordered, hashed and validated by conventions its schema declares, never by
   the host language's own. *Confers*
   [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-035"></a>**[FEA-035: clean modeling separation between value objects and reference objects](FEA-035.md)** · proposed · external · A
+  model separates what it holds as values, owned and nested in containers, from what it links as reference objects,
+  identified and related, so that each application of a construct is clean. *Confers*
+  [QUA-009: modeling provides clean separation of applications across constructs](../QUALITIES.md#QUA-009).
+- <a id="FEA-036"></a>**[FEA-036: serialization behavior is consistent across bindings and generated source code](FEA-036.md)** · proposed · external · Data
+  is read and written alike, with the same results and errors, by every binding and by generated source code.
+  *Confers* [QUA-006: the same in every language](../QUALITIES.md#QUA-006). *Applies*
+  [PRI-027: developers can assume completely consistent behavior across bindings and generated source code](../PRINCIPLES.md#PRI-027).
 - <a id="FEA-031"></a>**[FEA-031: schemas as extensible data](FEA-031.md)** · proposed · external · Schemas are data, reference objects of their meta-schemas in modules, that any store holding them extends. *Confers*
   [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 - <a id="FEA-032"></a>**[FEA-032: schema loading and wire alignment](FEA-032.md)** · proposed · external · Schemas are loaded into a store by idempotent installs and read by name, so that every implementation holds and
