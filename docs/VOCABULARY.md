@@ -8,7 +8,10 @@ defined here; a modeling construct is only named here, by the repository that de
 definition. A repository's documents cite these rather than define them again.
 
 Across this many languages, terms collide: an SVA `property`, a C++ template parameter, a SystemVerilog `constraint`
-block. Wherever one of ours meets a language's own, in docs and examples, qualify the colliding term with whose it is.
+block. As the user put it: "Apparent collisions across this many languages are inevitable. Just be sure any
+documentation and examples properly qualify a potentially colliding term along the seam." Wherever a document or
+example stands at a seam between languages or frameworks, a term that collides across them is qualified with whose it
+is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbse "schema" ([VOC-026: schema](#VOC-026)).
 
 ## Terms
 

@@ -14,7 +14,7 @@ adopted before it is met. Features may overlap on purpose.
 
 - <a id="FEA-008"></a>**[FEA-008: expressive program models](FEA-008.md)** · adopted · external · Program models have sufficient expressive power to concisely
   and precisely represent source code in its native and idiomatic form. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
-- <a id="FEA-009"></a>**FEA-009: layered interaction models** · adopted · external · Interaction models can model layered abstractions of
+- <a id="FEA-009"></a>**[FEA-009: layered interaction models](FEA-009.md)** · adopted · external · Interaction models can model layered abstractions of
   functional behavior. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
 - <a id="FEA-010"></a>**FEA-010: system behavior** · adopted · external · Interaction models are a suitable representation of
   system-level behavior. *Confers* [QUA-007: one paradigm at every level of a system](../QUALITIES.md#QUA-007).
@@ -72,6 +72,12 @@ specifications.
   expression dialects, and are stored, evaluated, validated and translated among the languages they come from.
   *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002), [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
 
+- <a id="FEA-038"></a>**[FEA-038: no-code secure services](FEA-038.md)** · proposed · external · An mbse app is served securely without code written for it: its schemas revised by numbered migrations, its server set up with credentials from its environment, and its image built. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-039"></a>**[FEA-039: search, sort and filter in browser views](FEA-039.md)** · proposed · external · Users search, sort and filter browser views, through logical views as the lens of every search. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-040"></a>**[FEA-040: tenancy](FEA-040.md)** · proposed · external · An app's instances keep each tenant's data as private as its tenancy says, from one private instance for a demo to many users who share only what they choose. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-041"></a>**[FEA-041: agent chat integration](FEA-041.md)** · proposed · external · Users chat in the app, with an AI agent and model of their choice, over its modeled data. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+- <a id="FEA-042"></a>**[FEA-042: constraint enforcement in place of bespoke workarounds](FEA-042.md)** · proposed · external · What bespoke workarounds handle today, such as properties shared among objects, is enforced by constraints. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+
 ### Schema-driven data
 
 mbse-schemas' generic machinery: data of any schema, its identity, its transactions and its queries.
@@ -113,11 +119,16 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
   build is declared, not sequenced: whether it creates, updates or clones, and what it builds is identified by, follow
   from its schema, and a spec cannot read in order to write. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 
-## Not yet planned
+- <a id="FEA-043"></a>**[FEA-043: interoperation with imported datatypes](FEA-043.md)** · proposed · external · Models interoperate, efficiently and incrementally, with datatypes imported from cross-language frameworks. *Confers* [QUA-003: no second-order inventions](../QUALITIES.md#QUA-003).
 
-Features without an ID are not in plan yet. Their notes are in [features/UNPLANNED.md](UNPLANNED.md): no-code
-secure services, search-sort-filter, view paging, hybrid search, tenancy, agent chat integration, and constraint
-enforcement replacing bespoke workarounds.
+### Internal
+
+Features that serve an engineering persona: the framework's maintainers.
+
+- <a id="FEA-037"></a>**[FEA-037: the framework built on its own protocols](FEA-037.md)** · proposed · internal · The
+  framework's own code reads and writes its schemas and specs through the protocols and builders it offers every
+  model, so that its maintainers keep one paradigm, not a special case beside it. *Confers*
+  [QUA-007: one paradigm at every level of a system](../QUALITIES.md#QUA-007).
 
 ## Earlier IDs
 
@@ -144,8 +155,6 @@ the work tracker's seed data uses it as an example ID.
   proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
   [QUA-002: open-world models](../QUALITIES.md#QUA-002)'s "by default" contradicts. Name resolution staying closed ([FEA-020: refinable models](FEA-020.md#decided-by-an-agent-for-review)) is consistent with
   [QUA-002: open-world models](../QUALITIES.md#QUA-002): names resolve or are refused, while data is kept.
-- **No internal feature exists yet.** Pure tech debt is to become capabilities of internal features; the logs it sits
-  in today are drained in a later batch.
 
 ---
 

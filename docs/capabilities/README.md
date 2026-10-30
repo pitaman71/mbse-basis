@@ -121,6 +121,12 @@ than in each repository's design document.
 - <a id="CAP-097"></a>**[CAP-097: value domains of published standards](CAP-097.md)** · proposed · A value's domain names a published standard (IEEE 754, IEEE 1164, two's complement integers),
   with exact-then-rounded arithmetic, bitwise operations and explicit conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
+- <a id="CAP-180"></a>**[CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md)** · proposed · The
+  general-purpose datatypes of ISO/IEC 11404 replace the Basic expression dialect, their operations modeled, not
+  coded. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
+- <a id="CAP-203"></a>**[CAP-203: evaluators delegating to per-language libraries](CAP-203.md)** · proposed · An expression evaluator may delegate to a library of its language, perhaps in a sub-repository. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
 - <a id="CAP-098"></a>**[CAP-098: dialects over one framework](CAP-098.md)** · proposed · Expression languages are dialects of one framework, which validates, infers, evaluates and
   translates any of them from its kinds' roles, a dialect extending another. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
@@ -167,6 +173,11 @@ than in each repository's design document.
   *Implements* [FEA-035: clean modeling separation between value objects and reference objects](../features/FEA-035.md).
   - **Current**: met in mbse-schemas 0.26.3; value and reference objects checked in the code at 0.26.4 (`.ref()`,
     `Proxies.owner_of`, validation's refusals).
+- <a id="CAP-205"></a>**[CAP-205: anonymous adjacencies, a link filled without storage on the object](CAP-205.md)** ·
+  proposed · An object schema may declare an adjacency without naming it: the object may fill that link of the
+  relation, checked by validation, with no member and nothing held on the object. *Implements*
+  [FEA-035: clean modeling separation between value objects and reference objects](../features/FEA-035.md).
+  - **Current**: met since before mbse-schemas 0.20.0, the first tag after it was built (checked in the code at 0.26.4).
 - <a id="CAP-154"></a>**[CAP-154: value objects and reference objects](CAP-154.md)** · superseded by [CAP-108: relations as scalable containers](CAP-108.md) · An
   object schema describes reference objects, linked by relations and identified, or value objects, owned by one
   owner, nested and compared deeply. Merged into [CAP-108: relations as scalable containers](CAP-108.md), with its content.
@@ -245,6 +256,10 @@ than in each repository's design document.
 
 - <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are bound and applied in mbse-expressions, bound by predicates in mbse-patterns and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
   - **Current**: not met.
+- <a id="CAP-181"></a>**[CAP-181: parameters wherever literals may appear](CAP-181.md)** · proposed · Anywhere a
+  literal may appear, a parameter may appear in its place. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
+  [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
+  - **Current**: not met.
 ### Deterministic object identity
 
 - <a id="CAP-118"></a>**[CAP-118: singletons, owned and counted objects](CAP-118.md)** · proposed · A reference object
@@ -312,6 +327,12 @@ than in each repository's design document.
 
 - <a id="CAP-164"></a>**[CAP-164: subsequent snapshots sent as transactions](CAP-164.md)** · proposed · A stateful writer sends a store's later snapshots as the transactions since the last, without its modules and schemas again. *Implements* [FEA-030: transactions](../features/FEA-030.md).
   - **Current**: not met.
+- <a id="CAP-178"></a>**[CAP-178: an object's provenance read through its own named adjacencies](CAP-178.md)** · proposed · An
+  object whose schema has a history links its provenance records through named adjacencies of its own, so that they
+  are read from its side, not by a map over every record. *Implements* [FEA-030: transactions](../features/FEA-030.md). *Relates to*
+  [CAP-134: transactions recorded with provenance](CAP-134.md).
+  - **Current**: not met (checked in mbse-schemas 0.26.4: `Provenance.extend` gives anonymous adjacencies).
+
 ### Mutations as queries
 
 - <a id="CAP-131"></a>**[CAP-131: frames witness values and entries](CAP-131.md)** · proposed · A frame witnesses the
@@ -353,6 +374,11 @@ than in each repository's design document.
   plans a query from its patterns' specs and constraints, rather than enumerating each cross product. *Implements*
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
+- <a id="CAP-174"></a>**[CAP-174: a spec that clears then inserts holds when re-run](CAP-174.md)** · proposed · A spec
+  that clears an adjacency and then inserts into it holds where the adjacency holds just what it inserts, so that
+  running it again writes nothing. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md). *Relates to*
+  [CAP-140: entries removed through a spec](CAP-140.md).
+  - **Current**: not met (the store overhaul's 4j finding, open; mbse-schemas 0.26.4).
 
 ### One API surface for all data access
 
@@ -360,10 +386,6 @@ than in each repository's design document.
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-126"></a>**[CAP-126: schema objects read through the store protocol](CAP-126.md)** · proposed · Schema
-  objects are read and written through `Visitors.OfStore`, as data is, not field by field. *Implements*
-  [FEA-028: one API surface for all data access](../features/FEA-028.md).
-  - **Current**: not met.
 
 - <a id="CAP-161"></a>**[CAP-161: isolated stores, with no global registry](CAP-161.md)** · proposed · Code reaches schemas, builders and objects only through a store; stores are isolated, and a store's data is what its singletons reach. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: "the object belongs to another store").
@@ -380,6 +402,19 @@ than in each repository's design document.
   in order to write: a builder in a spec context is a writer, so that a spec is declarative. *Implements*
   [FEA-029: excluding imperative visitor expressions](../features/FEA-029.md).
   - **Current**: not met.
+
+### The framework built on its own protocols
+
+- <a id="CAP-126"></a>**[CAP-126: schema objects read through the store protocol](CAP-126.md)** · proposed · Schema
+  objects are read and written through `Visitors.OfStore`, as data is, not field by field, keeping the rule that a
+  change to an existing schema is seen once its transaction commits. *Implements*
+  [FEA-037: the framework built on its own protocols](../features/FEA-037.md).
+  - **Current**: not met (checked in mbse-schemas 0.26.4: field reads, and `_defers` and `_pending` in `Builders`).
+- <a id="CAP-173"></a>**[CAP-173: spec items written through ordinary builders over a mutation sink](CAP-173.md)** · proposed · A
+  spec item is written through the builders data objects get, over a sink that records mutations rather than writing a
+  store, not through a tracer of its own. *Implements* [FEA-037: the framework built on its own protocols](../features/FEA-037.md). *Relates to*
+  [CAP-136: one finisher for every build](CAP-136.md).
+  - **Current**: not met (checked in mbse-schemas 0.26.4: `Transactions._Recorder`, TypeScript's `Recorder`).
 
 ### Program models
 
@@ -553,6 +588,17 @@ than in each repository's design document.
   firmware, software, device, user, community, cloud resource, agent) and the interfaces between them. *Implements*
   [FEA-010: system behavior](../features/README.md#FEA-010) to [FEA-016: community behavior](../features/README.md#FEA-016).
   - **Current**: no kind covered.
+- <a id="CAP-182"></a>**[CAP-182: modeling system structure as containers, axes and containment](CAP-182.md)** · proposed · A
+  system's structure is modeled as containers that contain one another hard or soft, and axes that orient soft
+  containers. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041).
+  - **Current**: not met.
+- <a id="CAP-183"></a>**[CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md)** · proposed · A
+  system's interactions are modeled as modules with interfaces and ports, implemented by instances of other modules
+  cooperating over channels that carry messages of one schema. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to*
+  [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041), [CAP-182: modeling system structure as containers, axes and containment](CAP-182.md).
+  - **Current**: not met.
+- <a id="CAP-204"></a>**[CAP-204: cost estimates of a declared work metric over patterns of system architecture activity](CAP-204.md)** · proposed · A system architecture declares a work metric, and cost estimates of it are associated with patterns of its activity. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-182: modeling system structure as containers, axes and containment](CAP-182.md), [CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md).
+  - **Current**: not met.
 
 ### Schema-driven visualization and editing
 
@@ -617,6 +663,19 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-013"></a>**[CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md)** · adopted · An in-memory store journaled to DynamoDB,
   with occasional snapshots, replayed at startup. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: to assess.
+- <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until committed](CAP-176.md)** · proposed · A
+  transaction's changes are held in builders and mutation frames until it commits, so that one refused or failed
+  leaves nothing to undo; where a persistence stack journals, it commits once the journal accepts it. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
+  [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
+- <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
+  - **Current**: not met.
+- <a id="CAP-200"></a>**[CAP-200: journals persisted to AWS S3](CAP-200.md)** · proposed · A journal is persisted in AWS S3, by a new repository mbse-s3. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  - **Current**: not met.
+- <a id="CAP-201"></a>**[CAP-201: MCP served through the journal protocol](CAP-201.md)** · proposed · A new repository mbse-mcp serves MCP through the journal protocol and schema introspection. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md).
+  - **Current**: not met.
+- <a id="CAP-202"></a>**[CAP-202: journals persisted to MySQL](CAP-202.md)** · proposed · A journal is persisted in MySQL, by a new repository mbse-mysql. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  - **Current**: not met.
 - <a id="CAP-014"></a>**[CAP-014: properties as markdown](CAP-014.md)** · adopted · Object properties as markdown, viewed and
   edited in the inspector. *Implements* [FEA-007: property kinds](../features/FEA-007.md).
   - **Current**: to assess.
@@ -629,14 +688,65 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-016"></a>**[CAP-016: comments](CAP-016.md)** · adopted · Comments, as data in an app's schema,
   shown and posted through general, schema-driven capabilities. *Implements* [FEA-007: property kinds](../features/FEA-007.md).
   - **Current**: to assess.
+- <a id="CAP-177"></a>**[CAP-177: sessions and identities from a validated token](CAP-177.md)** · proposed · A service
+  writes into each transaction the session and identity a validated token gives, never one it is configured with or
+  a client names. *Implements* [FEA-007: property kinds](../features/FEA-007.md). *Relates to* [CAP-015: transaction provenance](CAP-015.md), [CAP-191: private tenancy, behind login with sessions](CAP-191.md).
+  - **Current**: not met (checked in mbse-rest's code on main: `MBSE_REST_USER`, the `x-mbse-session` header).
+
+### No-code secure services
+
+- <a id="CAP-184"></a>**[CAP-184: schema revisions numbered `<migration>.<revision>`](CAP-184.md)** · proposed · An app's schemas are revised under numbers of the form `<migration>.<revision>`. *Implements* [FEA-038: no-code secure services](../features/FEA-038.md).
+  - **Current**: not met.
+- <a id="CAP-185"></a>**[CAP-185: secure server setup with credentials from the service's environment](CAP-185.md)** · proposed · A service's server is set up securely, with credentials given in the service's environment. *Implements* [FEA-038: no-code secure services](../features/FEA-038.md).
+  - **Current**: not met.
+- <a id="CAP-186"></a>**[CAP-186: a Docker Ubuntu image build](CAP-186.md)** · proposed · A service is built as a Docker image on Ubuntu. *Implements* [FEA-038: no-code secure services](../features/FEA-038.md).
+  - **Current**: not met.
+
+### Search, sort and filter in browser views
+
+- <a id="CAP-187"></a>**[CAP-187: exact property match in the browser](CAP-187.md)** · proposed · A browser view is filtered, in the browser, by a text match of a whole property value of its target objects. *Implements* [FEA-039: search, sort and filter in browser views](../features/FEA-039.md).
+  - **Current**: not met.
+- <a id="CAP-188"></a>**[CAP-188: browser views paged](CAP-188.md)** · proposed · A browser view is shown a page at a time. *Implements* [FEA-039: search, sort and filter in browser views](../features/FEA-039.md).
+  - **Current**: not met.
+- <a id="CAP-189"></a>**[CAP-189: keyword, semantic and hybrid search](CAP-189.md)** · proposed · Browser views are searched by keyword, semantically, and by both together. *Implements* [FEA-039: search, sort and filter in browser views](../features/FEA-039.md).
+  - **Current**: not met.
+
+### Tenancy
+
+- <a id="CAP-190"></a>**[CAP-190: local tenancy, for demos](CAP-190.md)** · proposed · Each instance of an application is entirely private, for demos. *Implements* [FEA-040: tenancy](../features/FEA-040.md).
+  - **Current**: not met.
+- <a id="CAP-191"></a>**[CAP-191: private tenancy, behind login with sessions](CAP-191.md)** · proposed · An application requires login for any access, and records each session's identity with every transaction. *Implements* [FEA-040: tenancy](../features/FEA-040.md). *Relates to* [CAP-177: sessions and identities from a validated token](CAP-177.md).
+  - **Current**: not met.
+- <a id="CAP-192"></a>**[CAP-192: sequestered tenancy](CAP-192.md)** · proposed · Many users log in to one application instance without seeing one another's data in any way. *Implements* [FEA-040: tenancy](../features/FEA-040.md).
+  - **Current**: not met.
+- <a id="CAP-193"></a>**[CAP-193: data views shared read-only](CAP-193.md)** · proposed · Users share data views with one another, read-only. *Implements* [FEA-040: tenancy](../features/FEA-040.md).
+  - **Current**: not met.
+- <a id="CAP-194"></a>**[CAP-194: groups and topics](CAP-194.md)** · proposed · Tenants are organized in groups and topics. *Implements* [FEA-040: tenancy](../features/FEA-040.md).
+  - **Current**: not met.
+- <a id="CAP-195"></a>**[CAP-195: projections and forms](CAP-195.md)** · proposed · Tenants see data through projections and forms. *Implements* [FEA-040: tenancy](../features/FEA-040.md).
+  - **Current**: not met.
+
+### Agent chat integration
+
+- <a id="CAP-196"></a>**[CAP-196: in-app AI chats over modeled data](CAP-196.md)** · proposed · A user creates, holds and manages in-app chat sessions with an AI agent over the app's modeled data. *Implements* [FEA-041: agent chat integration](../features/FEA-041.md).
+  - **Current**: not met.
+
+### Constraint enforcement in place of bespoke workarounds
+
+- <a id="CAP-197"></a>**[CAP-197: shared property handling by constraints](CAP-197.md)** · proposed · Properties shared among objects are handled by constraints, not by bespoke code. *Implements* [FEA-042: constraint enforcement in place of bespoke workarounds](../features/FEA-042.md).
+  - **Current**: not met.
+
+### Interoperation with imported datatypes
+
+- <a id="CAP-198"></a>**[CAP-198: NumPy, Safetensors, Pandas and Protobuf datatypes](CAP-198.md)** · proposed · Models interoperate with NumPy's, Safetensors', Pandas DataFrames' and Protobuf's datatypes. *Implements* [FEA-043: interoperation with imported datatypes](../features/FEA-043.md).
+  - **Current**: not met.
 
 ## Not yet planned
 
 Capabilities without an ID are not in plan yet. Each planned feature's are at the end of its detail file in `../features/`: low-code
 custom views ([FEA-001: schema-driven UI](../features/FEA-001.md)); detail with closures, closure as a list of chips ([FEA-003: no-code logical views](../features/FEA-003.md)); store over DynamoDB ([FEA-006: persistence](../features/FEA-006.md));
 object links in markdown, shared property handling by the UI, properties as text and dates, and as financial,
-scientific and engineering values ([FEA-007: property kinds](../features/FEA-007.md)). Those of unplanned features are in
-[features/UNPLANNED.md](../features/UNPLANNED.md).
+scientific and engineering values ([FEA-007: property kinds](../features/FEA-007.md)).
 
 ## Earlier IDs
 
