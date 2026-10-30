@@ -588,7 +588,7 @@ than in each repository's design document.
   firmware, software, device, user, community, cloud resource, agent) and the interfaces between them. *Implements*
   [FEA-010: system behavior](../features/README.md#FEA-010) to [FEA-016: community behavior](../features/README.md#FEA-016).
   - **Current**: no kind covered.
-- <a id="CAP-182"></a>**[CAP-182: system structure as containers, axes and containment](CAP-182.md)** · proposed · A
+- <a id="CAP-182"></a>**[CAP-182: modeling system structure as containers, axes and containment](CAP-182.md)** · proposed · A
   system's structure is modeled as containers that contain one another hard or soft, and axes that orient soft
   containers. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041).
   - **Current**: not met.
@@ -663,9 +663,9 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-013"></a>**[CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md)** · adopted · An in-memory store journaled to DynamoDB,
   with occasional snapshots, replayed at startup. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: to assess.
-- <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until journaled](CAP-176.md)** · proposed · A
-  service holds a transaction's changes in builders and mutation frames until its journal accepts it, so that nothing
-  commits before it is journaled and nothing need be undone. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
+- <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until committed](CAP-176.md)** · proposed · A
+  transaction's changes are held in builders and mutation frames until it commits, so that one refused or failed
+  leaves nothing to undo; where a persistence stack journals, it commits once the journal accepts it. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
   [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
 - <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
