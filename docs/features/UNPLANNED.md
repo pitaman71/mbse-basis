@@ -73,6 +73,40 @@ Users can share data views with one another on a read-only basis.
 
 ### shared property handling by constraints
 
+## journals
+
+A new repository, mbse-journals: "Journal is an extension of Store and may be queried. Any Journal may optionally
+predicates that describe portion contained." A transaction's expression as data, and journals replayed by executing
+it, are built in mbse-schemas ([CAP-129: journals replayed by execution](../capabilities/CAP-129.md)); diffing stores is what [CAP-077: changes explained across runs](../capabilities/CAP-077.md) waits on.
+
+- schema-kind-specific serializable mutation protocols (`mbse/Journals/Framework/Mutations`, one per schema kind and
+  `OfStore`), and their dataclasses (`mbse/Journals/Proxies/Mutations`), serialized by the builder, visitor and
+  meta-schema pattern
+- "All Builders - whether proxy or generated - must implement the appropriate mutation protocol. Can this be
+  accomplished without littering the syntax with lots of extra '.get' and '.set' calls?"
+- protocols: `Journals.OfStore`, of streaming atomic transactions; `OfSender`, a transmitter endpoint; `OfReceiver`, a
+  receiver endpoint; and stores: `Cache`, in memory, and `File`, a local filesystem copy
+- `Journal.from_batch(transaction)`, `Journal.to_batch()`, `Journal.diff(a, b)` of two stores,
+  `Sender.send(source)`, `Sender.subscribe(observable)`, `Receiver.observe()`
+- new repositories: mbse-s3, to persist in AWS S3; mbse-mcp, which "implements MCP via Journal protocol and schema
+  introspection"; mbse-mysql, to persist in MySQL. mbse-dynamodb is [CAP-013: an in-memory store journaled to DynamoDB](../capabilities/CAP-013.md)'s.
+
+### reference evaluators
+
+"Should Evaluators delegate to a per-language library? Perhaps optionally. This could be in sub-repos."
+
+## imported datatypes
+
+"MBSE must have an efficient, incrementally updateable model-centric process that supports interoperation with
+imported datatypes, particularly datatypes from cross-language frameworks like Numpy, Safetensors, Pandas Dataframes.
+Also first-class synergy with Protobufs."
+
+Open: "How does this interoperate with Expression Dialects and Program Dialects?"
+
+## imported functionality
+
+## cost models
+
 ---
 
 <!-- nav -->

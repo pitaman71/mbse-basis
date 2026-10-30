@@ -65,7 +65,7 @@ specifications.
 - <a id="FEA-022"></a>**FEA-022: code generation** · proposed · external · Models generate source code in each language
   family's own form, and are read back from it: a model is the source's alternative representation, not a description
   of it. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004). Its capabilities: [CAP-027: Python3 source generated from schemas](../capabilities/CAP-027.md),
-  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061), [CAP-088: TypeScript transpiled to Python](../capabilities/CAP-088.md) to [CAP-091: Ccpp expressions bridged to C and C++ source](../capabilities/CAP-091.md), and [CAP-162: Python dataclasses translated to and from schemas](../capabilities/CAP-162.md).
+  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061), [CAP-088: TypeScript transpiled to Python](../capabilities/CAP-088.md) to [CAP-091: Ccpp expressions bridged to C and C++ source](../capabilities/CAP-091.md), [CAP-162: Python dataclasses translated to and from schemas](../capabilities/CAP-162.md), and [CAP-179: dataclass schemas built through the store's builders](../capabilities/CAP-179.md).
 - <a id="FEA-023"></a>**[FEA-023: patterns over data](FEA-023.md)** · proposed · external · A pattern, one predicate over a store's
   data, is validated, queried, sampled from and generated from alike. *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002).
 - <a id="FEA-024"></a>**[FEA-024: expressions as data](FEA-024.md)** · proposed · external · Constraints are written once, as terms of
@@ -113,11 +113,20 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
   build is declared, not sequenced: whether it creates, updates or clones, and what it builds is identified by, follow
   from its schema, and a spec cannot read in order to write. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 
+### Internal
+
+Features that serve an engineering persona: the framework's maintainers.
+
+- <a id="FEA-037"></a>**[FEA-037: the framework built on its own protocols](FEA-037.md)** · proposed · internal · The
+  framework's own code reads and writes its schemas and specs through the protocols and builders it offers every
+  model, so that its maintainers keep one paradigm, not a special case beside it. *Confers*
+  [QUA-007: one paradigm at every level of a system](../QUALITIES.md#QUA-007).
+
 ## Not yet planned
 
 Features without an ID are not in plan yet. Their notes are in [features/UNPLANNED.md](UNPLANNED.md): no-code
-secure services, search-sort-filter, view paging, hybrid search, tenancy, agent chat integration, and constraint
-enforcement replacing bespoke workarounds.
+secure services, search-sort-filter, view paging, hybrid search, tenancy, agent chat integration, constraint
+enforcement replacing bespoke workarounds, journals, imported datatypes, imported functionality and cost models.
 
 ## Earlier IDs
 
@@ -144,8 +153,6 @@ the work tracker's seed data uses it as an example ID.
   proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
   [QUA-002: open-world models](../QUALITIES.md#QUA-002)'s "by default" contradicts. Name resolution staying closed ([FEA-020: refinable models](FEA-020.md#decided-by-an-agent-for-review)) is consistent with
   [QUA-002: open-world models](../QUALITIES.md#QUA-002): names resolve or are refused, while data is kept.
-- **No internal feature exists yet.** Pure tech debt is to become capabilities of internal features; the logs it sits
-  in today are drained in a later batch.
 
 ---
 

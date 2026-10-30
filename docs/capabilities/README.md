@@ -312,6 +312,12 @@ than in each repository's design document.
 
 - <a id="CAP-164"></a>**[CAP-164: subsequent snapshots sent as transactions](CAP-164.md)** · proposed · A stateful writer sends a store's later snapshots as the transactions since the last, without its modules and schemas again. *Implements* [FEA-030: transactions](../features/FEA-030.md).
   - **Current**: not met.
+- <a id="CAP-178"></a>**[CAP-178: an object's provenance read through its own named adjacencies](CAP-178.md)** · proposed · An
+  object whose schema has a history links its provenance records through named adjacencies of its own, so that they
+  are read from its side, not by a map over every record. *Implements* [FEA-030: transactions](../features/FEA-030.md). *Relates to*
+  [CAP-134: transactions recorded with provenance](CAP-134.md).
+  - **Current**: not met (checked in mbse-schemas 0.26.4: `Provenance.extend` gives anonymous adjacencies).
+
 ### Mutations as queries
 
 - <a id="CAP-131"></a>**[CAP-131: frames witness values and entries](CAP-131.md)** · proposed · A frame witnesses the
@@ -353,6 +359,11 @@ than in each repository's design document.
   plans a query from its patterns' specs and constraints, rather than enumerating each cross product. *Implements*
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
+- <a id="CAP-174"></a>**[CAP-174: a spec that clears then inserts holds when re-run](CAP-174.md)** · proposed · A spec
+  that clears an adjacency and then inserts into it holds where the adjacency holds just what it inserts, so that
+  running it again writes nothing. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md). *Relates to*
+  [CAP-140: entries removed through a spec](CAP-140.md).
+  - **Current**: not met (the store overhaul's 4j finding, open; mbse-schemas 0.26.4).
 
 ### One API surface for all data access
 
@@ -380,6 +391,19 @@ than in each repository's design document.
   in order to write: a builder in a spec context is a writer, so that a spec is declarative. *Implements*
   [FEA-029: excluding imperative visitor expressions](../features/FEA-029.md).
   - **Current**: not met.
+
+### The framework built on its own protocols
+
+- <a id="CAP-172"></a>**[CAP-172: schema objects read through the visitor protocol](CAP-172.md)** · proposed · The
+  framework reads schema objects through the visitor protocol, as it reads data, not field by field, keeping the rule
+  that a change to an existing schema is seen once its transaction commits. *Implements*
+  [FEA-037: the framework built on its own protocols](../features/FEA-037.md). *Relates to* [CAP-126: schema objects read through the store protocol](CAP-126.md).
+  - **Current**: not met (checked in mbse-schemas 0.26.4: field reads, and `_defers` and `_pending` in `Builders`).
+- <a id="CAP-173"></a>**[CAP-173: spec items written through ordinary builders over a mutation sink](CAP-173.md)** · proposed · A
+  spec item is written through the builders data objects get, over a sink that records mutations rather than writing a
+  store, not through a tracer of its own. *Implements* [FEA-037: the framework built on its own protocols](../features/FEA-037.md). *Relates to*
+  [CAP-136: one finisher for every build](CAP-136.md).
+  - **Current**: not met (checked in mbse-schemas 0.26.4: `Transactions._Recorder`, TypeScript's `Recorder`).
 
 ### Program models
 
@@ -514,6 +538,12 @@ than in each repository's design document.
 
 - <a id="CAP-162"></a>**[CAP-162: Python dataclasses translated to and from schemas](CAP-162.md)** · proposed · Python dataclasses are read as the schemas they describe, in an install, and schemas written back as dataclasses, through `ast` trees. *Implements* [FEA-022: code generation](../features/README.md#FEA-022).
   - **Current**: met in mbse-schemas 0.26.4, Python only (checked in the code at 0.26.4: `Adapters/Dataclasses.py`).
+- <a id="CAP-179"></a>**[CAP-179: dataclass schemas built through the store's builders](CAP-179.md)** · proposed · The
+  dataclass adapter builds the schemas it reads through the store's builders, in a transaction, never as schema
+  objects made outside a store for the caller to register; Python only. *Implements* [FEA-022: code generation](../features/README.md#FEA-022). It follows
+  [CAP-162: Python dataclasses translated to and from schemas](CAP-162.md).
+  - **Current**: met in mbse-schemas 0.23.0 (checked in the code at 0.26.4: `FromDataclass.install` writes one upsert;
+    `FromDataclass.model` is gone).
 ### Wire format
 
 - <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
@@ -617,6 +647,11 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-013"></a>**[CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md)** · adopted · An in-memory store journaled to DynamoDB,
   with occasional snapshots, replayed at startup. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: to assess.
+- <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until journaled](CAP-176.md)** · proposed · A
+  service holds a transaction's changes in builders and mutation frames until its journal accepts it, so that nothing
+  commits before it is journaled and nothing need be undone. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
+  [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
 - <a id="CAP-014"></a>**[CAP-014: properties as markdown](CAP-014.md)** · adopted · Object properties as markdown, viewed and
   edited in the inspector. *Implements* [FEA-007: property kinds](../features/FEA-007.md).
   - **Current**: to assess.
@@ -629,6 +664,10 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-016"></a>**[CAP-016: comments](CAP-016.md)** · adopted · Comments, as data in an app's schema,
   shown and posted through general, schema-driven capabilities. *Implements* [FEA-007: property kinds](../features/FEA-007.md).
   - **Current**: to assess.
+- <a id="CAP-177"></a>**[CAP-177: sessions and identities from a validated token](CAP-177.md)** · proposed · A service
+  writes into each transaction the session and identity a validated token gives, never one it is configured with or
+  a client names. *Implements* [FEA-007: property kinds](../features/FEA-007.md). *Relates to* [CAP-015: transaction provenance](CAP-015.md).
+  - **Current**: not met (checked in mbse-rest's code on main: `MBSE_REST_USER`, the `x-mbse-session` header).
 
 ## Not yet planned
 
