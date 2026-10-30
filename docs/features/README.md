@@ -76,9 +76,19 @@ specifications.
 
 mbse-schemas' generic machinery: data of any schema, its identity, its transactions and its queries.
 
-- <a id="FEA-025"></a>**[FEA-025: behavior conventions in schema](FEA-025.md)** · proposed · external · How data of any schema is
-  read, written, compared and extended follows conventions its schema declares, so that no model needs code of its own.
-  *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018).
+- <a id="FEA-025"></a>**[FEA-025: serialization behavior conventions in schema](FEA-025.md)** · proposed · external · Data of any schema is read and written, as values and containers, by conventions its schema declares, through
+  one visitor protocol, so that no model needs code of its own to be serialized. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-034"></a>**[FEA-034: analytic behavior conventions in schema](FEA-034.md)** · proposed · external · Data of any schema is compared, ordered, hashed and validated by conventions its schema declares, never by
+  the host language's own. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-031"></a>**[FEA-031: schemas as extensible data](FEA-031.md)** · proposed · external · Schemas are data, reference objects of their meta-schemas in modules, that any store holding them extends. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-032"></a>**[FEA-032: schema loading and wire alignment](FEA-032.md)** · proposed · external · Schemas are loaded into a store by idempotent installs and read by name, so that every implementation holds and
+  writes them alike. *Confers*
+  [QUA-006: the same in every language](../QUALITIES.md#QUA-006).
+- <a id="FEA-033"></a>**[FEA-033: model parameters](FEA-033.md)** · proposed · external · Models take parameters: a definition declares them, binds them, and has its bindings substituted and checked. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 - <a id="FEA-026"></a>**[FEA-026: deterministic object identity](FEA-026.md)** · proposed · external · Objects are
   identified from the model, never at random, so that the same model built twice, or in another language, gives the
   same identities. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).

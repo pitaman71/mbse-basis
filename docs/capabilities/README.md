@@ -142,55 +142,67 @@ than in each repository's design document.
   modeled, as array values. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
 
-### Behavior conventions in schema
+### Serialization behavior conventions in schema
 
 - <a id="CAP-107"></a>**[CAP-107: one visitor protocol reads and writes data](CAP-107.md)** · proposed · Code reads and
   writes a value of any schema through one protocol per kind, `Visitors.OfX`, its read-only view `Readers.OfX` and their
-  shorthands, the visitor's mode deciding whether a write takes effect. *Implements* [FEA-025: behavior conventions in schema](../features/FEA-025.md).
+  shorthands, the visitor's mode deciding whether a write takes effect. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   *Applies* [PRI-004: one visitor protocol per kind](../PRINCIPLES.md#PRI-004).
   - **Current**: met in mbse-schemas 0.26.3.
 - <a id="CAP-108"></a>**[CAP-108: containers of any index and element](CAP-108.md)** · proposed · A container holds
   elements of any schema by an index of any schema, dense, sparse or by key, and containers nest. *Implements*
-  [FEA-025: behavior conventions in schema](../features/FEA-025.md).
+  [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   - **Current**: met in mbse-schemas 0.26.3.
-- <a id="CAP-109"></a>**[CAP-109: schemas as linked objects in modules](CAP-109.md)** · proposed · Every schema object
-  is a reference object of its kind's meta-schema, linked to the others by relations, built by builders that are
-  visitors of it, and defined in nesting modules. *Implements* [FEA-025: behavior conventions in schema](../features/FEA-025.md).
-  - **Current**: met in mbse-schemas 0.26.3.
-- <a id="CAP-110"></a>**[CAP-110: a store's schemas read as one module](CAP-110.md)** · proposed · A store's schemas are
-  read as one hierarchical root module, each by its module-qualified name, which resolves or is refused. *Implements*
-  [FEA-025: behavior conventions in schema](../features/FEA-025.md).
-  - **Current**: not met.
+
+### Analytic behavior conventions in schema
+
 - <a id="CAP-111"></a>**[CAP-111: equality and ordering defined by the schema](CAP-111.md)** · proposed · Values are
   compared, ordered and hashed by their schema, never by the host language's equality. *Implements*
-  [FEA-025: behavior conventions in schema](../features/FEA-025.md).
+  [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
   - **Current**: met in mbse-schemas 0.26.3.
-- <a id="CAP-112"></a>**[CAP-112: parameters declared by an installed module](CAP-112.md)** · proposed · A definition's
-  parameters are declared through `Parametrics`, a module installed before use, which validates them. *Implements*
-  [FEA-025: behavior conventions in schema](../features/FEA-025.md).
-  - **Current**: met in mbse-schemas 0.24.0.
-- <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · proposed · A definition binds
-  each of its parameters to a value or an object, through `Parametrics`' bindings. *Implements*
-  [FEA-025: behavior conventions in schema](../features/FEA-025.md).
+- <a id="CAP-147"></a>**[CAP-147: links validated against their schemas](CAP-147.md)** · proposed · Validation checks
+  each linked object against the schema its link declares. *Implements* [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
   - **Current**: not met.
-- <a id="CAP-114"></a>**[CAP-114: bindings substituted and checked](CAP-114.md)** · proposed · A binding is substituted
-  where its definition is used, and its value checked against the schema its parameter is for. *Implements*
-  [FEA-025: behavior conventions in schema](../features/FEA-025.md).
-  - **Current**: not met.
-- <a id="CAP-115"></a>**[CAP-115: schemas defined by idempotent installs](CAP-115.md)** · proposed · Every schema is
-  defined in a module-scope `install(txn)`, a transaction that upserts it, so that installing again writes nothing, and
-  the framework defines its own schemas the same way. *Implements* [FEA-025: behavior conventions in schema](../features/FEA-025.md).
-  - **Current**: met in mbse-schemas 0.23.0.
+
+### Schemas as extensible data
+
+- <a id="CAP-109"></a>**[CAP-109: schemas as linked objects in modules](CAP-109.md)** · proposed · Every schema object
+  is a reference object of its kind's meta-schema, linked to the others by relations, built by builders that are
+  visitors of it, and defined in nesting modules. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md).
+  - **Current**: met in mbse-schemas 0.26.3.
 - <a id="CAP-116"></a>**[CAP-116: framework schemas extended, checked](CAP-116.md)** · proposed · Any transaction may
   add members to a schema the store was made holding, meta-schemas included, but not change or remove them, each store
-  extending its own. *Implements* [FEA-025: behavior conventions in schema](../features/FEA-025.md), [FEA-020: refinable models](../features/FEA-020.md).
+  extending its own. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md), [FEA-020: refinable models](../features/FEA-020.md).
   - **Current**: met in mbse-schemas 0.23.0.
 - <a id="CAP-117"></a>**[CAP-117: extension adjacencies to any relation](CAP-117.md)** · proposed · An extension's
   adjacency may be to any relation, one with properties or more than two links included. *Implements*
-  [FEA-025: behavior conventions in schema](../features/FEA-025.md).
+  [FEA-031: schemas as extensible data](../features/FEA-031.md).
   - **Current**: not met.
-- <a id="CAP-147"></a>**[CAP-147: links validated against their schemas](CAP-147.md)** · proposed · Validation checks
-  each linked object against the schema its link declares. *Implements* [FEA-025: behavior conventions in schema](../features/FEA-025.md).
+
+### Schema loading and wire alignment
+
+- <a id="CAP-115"></a>**[CAP-115: schemas defined by idempotent installs](CAP-115.md)** · proposed · Every schema is
+  defined in a module-scope `install(txn)`, a transaction that upserts it, so that installing again writes nothing, and
+  the framework defines its own schemas the same way. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: met in mbse-schemas 0.23.0.
+- <a id="CAP-110"></a>**[CAP-110: a store's schemas read as one module](CAP-110.md)** · proposed · A store's schemas are
+  read as one hierarchical root module, each by its module-qualified name, which resolves or is refused. *Implements*
+  [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: not met.
+
+### Model parameters
+
+- <a id="CAP-112"></a>**[CAP-112: parameters declared by an installed module](CAP-112.md)** · proposed · A definition's
+  parameters are declared through `Parametrics`, a module installed before use, which validates them. *Implements*
+  [FEA-033: model parameters](../features/FEA-033.md).
+  - **Current**: met in mbse-schemas 0.24.0.
+- <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · proposed · A definition binds
+  each of its parameters to a value or an object, through `Parametrics`' bindings. *Implements*
+  [FEA-033: model parameters](../features/FEA-033.md).
+  - **Current**: not met.
+- <a id="CAP-114"></a>**[CAP-114: bindings substituted and checked](CAP-114.md)** · proposed · A binding is substituted
+  where its definition is used, and its value checked against the schema its parameter is for. *Implements*
+  [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
 
 ### Deterministic object identity
