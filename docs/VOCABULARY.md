@@ -33,7 +33,7 @@ block. Wherever one of ours meets a language's own, in docs and examples, qualif
 - <a id="VOC-025"></a>**VOC-025: shape constraint** · adopted · **Shape constraint**: a bound on an index, a capacity or a tensor's shape, a constraint on the
   type of the property that keys a relation's entries, not part of the schema; a parameter bound into it gives a
   tensor's shape. Planned in mbse-schemas'
-  [Meta-schemas overhaul](../../mbse-schemas/docs/META_SCHEMAS.md), which removes
+  meta-schemas overhaul ([CAP-108: containers of any index and element](capabilities/CAP-108.md), containers), which removes
   the list's extent.
 - <a id="VOC-027"></a>**VOC-027: second-order invention** · adopted · **Second-order invention**: a thing that can be modeled and invented
   elsewhere, such as a neutral expression language or datatypes. The project avoids them ([QUA-003: no second-order inventions](QUALITIES.md#QUA-003)), save as [PRI-022: second-order inventions by approval](PRINCIPLES.md#PRI-022)
@@ -77,18 +77,18 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
   [Store overhaul, Levels](../../mbse-schemas/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
   (`Schemas.OfObject`, level 2) is what an extension extends; a *meta-schema* (level 3) is static code describing it.
 - Module: [Meta-schemas](../../mbse-schemas/docs/FRAMEWORK.md#meta-schemas)
-- Planned in the [Store overhaul](../../mbse-schemas/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [Object identity](../../mbse-schemas/docs/OBJECT_IDENTITY.md));
-  `Parameters.Bind` and `Parameters.Apply` ([Parametrics](../../mbse-schemas/docs/PARAMETRICS.md)).
+- Planned in the [Store overhaul](../../mbse-schemas/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [FEA-026: identity and transactions](features/FEA-026.md));
+  `Parameters.Bind` and `Parameters.Apply` ([CAP-114: bindings substituted and checked](capabilities/CAP-114.md)).
 - Store, singleton: [Stores](../../mbse-schemas/docs/FRAMEWORK.md#stores).
   Each store holds its own schemas, built when it is made or through `store.extend`; no schema object is shared
-  across stores ([Schema extension](../../mbse-schemas/docs/SCHEMA_EXTENSION.md#decided), Decided, 23). There is one store type,
+  across stores (schema extension 23 in [CAP-116: framework schemas extended, checked](capabilities/CAP-116.md#decided)). There is one store type,
   `Builders.Store`, which registers a named schema by building it; `Stores.Combined` is deprecated (since 0.16.0).
 - Parameter (`OfParameter`): a name only, a symbol standing for a schema (since 0.17.0); terms, applications and
   widths are mbse-expressions'. Bound by `Parameters.Bind`, planned: a reference object recording the substitution,
   which any operation taking the function interprets, applying it lazily or through `Parameters.Apply`
-  ([Parametrics](../../mbse-schemas/docs/PARAMETRICS.md)).
+  ([CAP-114: bindings substituted and checked](capabilities/CAP-114.md)).
 - Constraint: [Where constraints attach](../../mbse-schemas/docs/FRAMEWORK.md#open-questions). `requires` left mbse-schemas in 0.17.0, for
-  mbse-patterns ([Schema extension](../../mbse-schemas/docs/SCHEMA_EXTENSION.md#decided), Decided, 5 to 7).
+  mbse-patterns (schema extension 5 to 7 in [FEA-024: expressions as data](features/FEA-024.md#decided)).
 
 ### mbse-expressions
 

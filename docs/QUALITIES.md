@@ -11,7 +11,7 @@ principles serve them.
 
 - <a id="QUA-001"></a>**QUA-001: AI and humans in the loop** · adopted · AI and humans are always in the loop at every step. *Conferred by*
   [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018),
-  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md).
+  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md), [FEA-026: identity and transactions](features/FEA-026.md).
 - <a id="QUA-002"></a>**QUA-002: open-world models** · adopted · Models are open-world by default, allowing incremental addition of detail
   that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020),
   [FEA-023: patterns over data](features/FEA-023.md).
@@ -26,7 +26,8 @@ principles serve them.
 - <a id="QUA-007"></a>**QUA-007: one paradigm at every level of a system** · proposed · One modeling paradigm represents a system at every level, from hardware
   to community, and the interfaces between levels. *Conferred by* [FEA-010: system behavior](features/README.md#FEA-010) to [FEA-016: community behavior](features/README.md#FEA-016).
 - <a id="QUA-008"></a>**QUA-008: usable without code** · proposed · Any model is usable without code written for it: browsed, inspected,
-  edited and persisted from its schemas alone. *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md), [FEA-003: no-code logical views](features/FEA-003.md) to [FEA-007: property kinds](features/FEA-007.md).
+  edited and persisted from its schemas alone. *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md), [FEA-003: no-code logical views](features/FEA-003.md) to [FEA-007: property kinds](features/FEA-007.md),
+  [FEA-025: schema-driven data](features/FEA-025.md), [FEA-027: mutations as queries](features/FEA-027.md), [FEA-028: one API surface for all data access](features/FEA-028.md), [FEA-029: excluding imperative visitor expressions](features/FEA-029.md).
 
 ## Earlier IDs
 

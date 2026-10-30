@@ -38,7 +38,7 @@ adopted before it is met. Features may overlap on purpose.
   *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
 - <a id="FEA-019"></a>**FEA-019: equivalent implementations** · proposed · external · Every model and every operation on it means the same in every
   implementation language: Python and TypeScript give the same results, errors and wire format. *Confers* [QUA-006: the same in every language](../QUALITIES.md#QUA-006).
-- <a id="FEA-020"></a>**FEA-020: refinable models** · adopted · external · All models allow refinements to be added, closing details in
+- <a id="FEA-020"></a>**[FEA-020: refinable models](FEA-020.md)** · adopted · external · All models allow refinements to be added, closing details in
   a targeted and agile manner. *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002).
 
 ### Schema-driven visualization and editing
@@ -72,6 +72,27 @@ specifications.
   expression dialects, and are stored, evaluated, validated and translated among the languages they come from.
   *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002), [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
 
+### Schema-driven data
+
+mbse-schemas' generic machinery: data of any schema, its identity, its transactions and its queries.
+
+- <a id="FEA-025"></a>**[FEA-025: schema-driven data](FEA-025.md)** · proposed · external · Data of any schema is built,
+  read, written, compared and stored through generic machinery its schema drives; no model needs code of its own.
+  *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018).
+- <a id="FEA-026"></a>**[FEA-026: identity and transactions](FEA-026.md)** · proposed · external · Objects are
+  identified from the model, never at random, and a store changes only by transactions that commit all or nothing, so
+  that the same model built twice, or in another language, gives the same identities and the same snapshots. *Confers*
+  [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+- <a id="FEA-027"></a>**[FEA-027: mutations as queries](FEA-027.md)** · proposed · external · A store is queried and
+  changed in one language: patterns over its data, whose frames stream through terms that match, update and upsert, in
+  one transaction. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-028"></a>**[FEA-028: one API surface for all data access](FEA-028.md)** · proposed · external · Every
+  access to data goes through one clean surface, the store's protocol `Visitors.OfStore`, so that any store serves any
+  code alike. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-029"></a>**[FEA-029: excluding imperative visitor expressions](FEA-029.md)** · proposed · external · A
+  build is declared, not sequenced: whether it creates, updates or clones, and what it builds is identified by, follow
+  from its schema, and a spec cannot read in order to write. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+
 ## Not yet planned
 
 Features without an ID are not in plan yet. Their notes are in [features/UNPLANNED.md](UNPLANNED.md): no-code
@@ -99,9 +120,9 @@ the work tracker's seed data uses it as an example ID.
 - **[FEA-021: every generation ambiguity a parameter](FEA-021.md) counts parameters, not coverage of ambiguities.** It
   needs a measure, such as the decisions fixed for every schema that should be parameters ([CAP-027: Python3 source
   generated from schemas](../capabilities/CAP-027.md#bridges) lists them).
-- **[QUA-002: open-world models](../QUALITIES.md#QUA-002) is not met in shape.** mbse-schemas' decoding refuses an undeclared key, where [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002) preserves it; its
-  [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
-  [QUA-002: open-world models](../QUALITIES.md#QUA-002)'s "by default" contradicts. Name resolution staying closed ([OPEN_WORLD.md, Decided](../../../mbse-schemas/docs/OPEN_WORLD.md#decided)) is consistent with
+- **[QUA-002: open-world models](../QUALITIES.md#QUA-002) is not met in shape.** mbse-schemas' decoding refuses an undeclared key, where [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002) preserves it; [CAP-033: undeclared properties preserved](../capabilities/CAP-033.md#design)
+  proposes preserving (Undeclared properties, policy 3) but keeps closed as the default, which
+  [QUA-002: open-world models](../QUALITIES.md#QUA-002)'s "by default" contradicts. Name resolution staying closed ([FEA-020: refinable models](FEA-020.md#decided-by-an-agent-for-review)) is consistent with
   [QUA-002: open-world models](../QUALITIES.md#QUA-002): names resolve or are refused, while data is kept.
 - **No internal feature exists yet.** Pure tech debt is to become capabilities of internal features; the logs it sits
   in today are drained in a later batch.
