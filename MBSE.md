@@ -1,5 +1,5 @@
 <!-- nav -->
-[← mbse-basis](README.md) · [The mbse basis →](docs/README.md)
+[← mbse-basis](README.md) · [Principles →](docs/PRINCIPLES.md)
 
 # Why the mbse repositories exist
 
@@ -29,7 +29,7 @@ on mbse-schemas, and lives beside the others as a sibling checkout.
 
 A specification ([V-001](docs/VOCABULARY.md)) is constraints (V-002) over variables (V-004), each held by a property
 named `requires` on the part of a system it constrains; which parts those are is
-[not decided yet](https://github.com/pitaman71/mbse-schemas/blob/main/docs/FRAMEWORK.md#open-questions).
+[not decided yet](docs/capabilities/CAP-166.md#open-questions).
 
 - **A constraint** is descriptive, not prescriptive (V-003): it bounds the space in which implementations operate
   correctly, and never says how. It binds variables, and is never executed. It is
@@ -50,4 +50,4 @@ named `requires` on the part of a system it constrains; which parts those are is
 ---
 
 <!-- nav -->
-[← mbse-basis](README.md) · [The mbse basis →](docs/README.md)
+[← mbse-basis](README.md) · [Principles →](docs/PRINCIPLES.md)

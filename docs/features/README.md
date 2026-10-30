@@ -65,7 +65,7 @@ specifications.
 - <a id="FEA-022"></a>**FEA-022: code generation** · proposed · external · Models generate source code in each language
   family's own form, and are read back from it: a model is the source's alternative representation, not a description
   of it. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004). Its capabilities: [CAP-027: Python3 source generated from schemas](../capabilities/CAP-027.md),
-  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061), and [CAP-088: TypeScript transpiled to Python](../capabilities/CAP-088.md) to [CAP-091: Ccpp expressions bridged to C and C++ source](../capabilities/CAP-091.md).
+  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061), [CAP-088: TypeScript transpiled to Python](../capabilities/CAP-088.md) to [CAP-091: Ccpp expressions bridged to C and C++ source](../capabilities/CAP-091.md), and [CAP-162: Python dataclasses translated to and from schemas](../capabilities/CAP-162.md).
 - <a id="FEA-023"></a>**[FEA-023: patterns over data](FEA-023.md)** · proposed · external · A pattern, one predicate over a store's
   data, is validated, queried, sampled from and generated from alike. *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002).
 - <a id="FEA-024"></a>**[FEA-024: expressions as data](FEA-024.md)** · proposed · external · Constraints are written once, as terms of
@@ -82,6 +82,14 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
 - <a id="FEA-034"></a>**[FEA-034: analytic behavior conventions in schema](FEA-034.md)** · proposed · external · Data of any schema is compared, ordered, hashed and validated by conventions its schema declares, never by
   the host language's own. *Confers*
   [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-035"></a>**[FEA-035: clean modeling separation between value objects and reference objects](FEA-035.md)** · proposed · external · A
+  model separates what it holds as values, owned and nested in containers, from what it links as reference objects,
+  identified and related, so that each application of a construct is clean. *Confers*
+  [QUA-009: modeling provides clean separation of applications across constructs](../QUALITIES.md#QUA-009).
+- <a id="FEA-036"></a>**[FEA-036: serialization behavior is consistent across bindings and generated source code](FEA-036.md)** · proposed · external · Data
+  is read and written alike, with the same results and errors, by every binding and by generated source code.
+  *Confers* [QUA-006: the same in every language](../QUALITIES.md#QUA-006). *Applies*
+  [PRI-027: developers can assume completely consistent behavior across bindings and generated source code](../PRINCIPLES.md#PRI-027).
 - <a id="FEA-031"></a>**[FEA-031: schemas as extensible data](FEA-031.md)** · proposed · external · Schemas are data, reference objects of their meta-schemas in modules, that any store holding them extends. *Confers*
   [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 - <a id="FEA-032"></a>**[FEA-032: schema loading and wire alignment](FEA-032.md)** · proposed · external · Schemas are loaded into a store by idempotent installs and read by name, so that every implementation holds and
