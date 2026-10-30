@@ -1,3 +1,6 @@
+<!-- nav -->
+[Why the mbse repositories exist →](MBSE.md)
+
 # mbse-basis
 
 The mbse repositories kept deciding the same things separately, each restating what another had already decided, until
@@ -14,3 +17,8 @@ each document's navigation links, and `scripts/update_item_titles.py`, which lab
 [the basis](docs/README.md).
 
 Why the mbse repositories exist, and each one's part: [MBSE.md](MBSE.md).
+
+---
+
+<!-- nav -->
+[Why the mbse repositories exist →](MBSE.md)

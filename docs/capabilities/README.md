@@ -55,16 +55,18 @@ than in each repository's design document.
 - <a id="CAP-043"></a>**[CAP-043: constraints resolved in any direction](CAP-043.md)** · proposed · Constraints are resolved in any direction. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: to assess.
 
+- <a id="CAP-167"></a>**[CAP-167: schemas refined by other schemas](CAP-167.md)** · proposed · An object or container schema refines another through `Schemas.Refines`, inheriting its members and narrowing them where validation confirms it. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-034: schemas specialized by classifier intersection and union](CAP-034.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.Refines`).
 ### Patterns over data
 
-- <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
-  data, applied by reference, and checked when asked. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+- <a id="CAP-150"></a>**[CAP-150: predicates as data](CAP-150.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
+  data, applied by reference, and checked when asked. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
   - **Current**: met (mbse-patterns 0.1, 0.5, 0.6; the CON suites).
-- <a id="CAP-070"></a>**[CAP-070: wire format shorthand (containers)](CAP-070.md)** · proposed · A predicate is a query: its matches among a store's data stream lazily, planned from the constraint's
-  shape, and a store that answers queries natively answers them. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+- <a id="CAP-151"></a>**[CAP-151: constraints as queries](CAP-151.md)** · proposed · A predicate is a query: its matches among a store's data stream lazily, planned from the constraint's
+  shape, and a store that answers queries natively answers them. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
   - **Current**: met (mbse-patterns 0.1; the QRY suites).
-- <a id="CAP-071"></a>**[CAP-071: an unrestricted `OfAny` on the wire](CAP-071.md)** · proposed · Whether a link is mandatory, possible or forbidden is a predicate: quantifiers over a
-  store's extents, tests of an adjacency's entries, and weighted alternatives. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+- <a id="CAP-152"></a>**[CAP-152: links mandatory, possible or forbidden](CAP-152.md)** · proposed · Whether a link is mandatory, possible or forbidden is a predicate: quantifiers over a
+  store's extents, tests of an adjacency's entries, and weighted alternatives. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
   - **Current**: met (mbse-patterns 0.2; the ALG suites).
 - <a id="CAP-072"></a>**[CAP-072: distributions in predicates](CAP-072.md)** · proposed · A predicate's constraint says how its matches are distributed, by weighted alternatives and
   distributions of values, so that one predicate is validated, queried, sampled and generated from alike. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
@@ -154,6 +156,16 @@ than in each repository's design document.
   [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   - **Current**: met in mbse-schemas 0.26.3.
 
+- <a id="CAP-153"></a>**[CAP-153: unions and intersections of named branches and parts](CAP-153.md)** · proposed · A union holds exactly one of its named branches and an intersection every one of its named parts, written unpacked, by name, and read flat where the schema says so. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `HasBranch`, `HasPart`, flat unions and intersections, unique names).
+- <a id="CAP-154"></a>**[CAP-154: value objects and reference objects](CAP-154.md)** · proposed · An object schema describes reference objects, linked by relations and identified, or value objects, owned by one owner, nested and compared deeply. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `.ref()`, `Proxies.owner_of`, validation's refusals).
+- <a id="CAP-155"></a>**[CAP-155: relations of named links, keyed by `unique` clauses](CAP-155.md)** · proposed · A relation links two or more reference objects by named links, and its `unique` clauses decide whether its entries are a set or a list and what keys them from each end. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: equal entries elided in a set, an adjacency's `at` and `project`).
+- <a id="CAP-157"></a>**[CAP-157: values of any schema, restricted or not](CAP-157.md)** · proposed · An `OfAny` holds a value of any schema, or of the schemas its builder selects, refusing any other when written and read. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.OfAny.Value`, the refusal of another host type).
+- <a id="CAP-168"></a>**[CAP-168: containers by an index neither ordered nor hashable read back](CAP-168.md)** · proposed · A container whose index is neither ordered nor hashable is read back from a snapshot. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
+  - **Current**: not met (checked in the code: reading one is refused, "not read from snapshots yet").
 ### Analytic behavior conventions in schema
 
 - <a id="CAP-111"></a>**[CAP-111: equality and ordering defined by the schema](CAP-111.md)** · proposed · Values are
@@ -164,6 +176,10 @@ than in each repository's design document.
   each linked object against the schema its link declares. *Implements* [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
   - **Current**: not met.
 
+- <a id="CAP-160"></a>**[CAP-160: data validated against its schema on request](CAP-160.md)** · proposed · Data is checked against its schema, with what is reachable from it, only when the caller asks, problems reported by path and what cannot be decided as unknown. *Implements* [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md). *Applies* [PRI-007: three-valued checking on request](../PRINCIPLES.md#PRI-007).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Validators.Validate`, `Check`, `Reachable`).
+- <a id="CAP-166"></a>**[CAP-166: constraints attached where they constrain](CAP-166.md)** · proposed · Constraints are attached to the parts of a model they constrain, and those attached to a model combine into one conjunction. *Implements* [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
+  - **Current**: not met: not designed (Open questions).
 ### Schemas as extensible data
 
 - <a id="CAP-109"></a>**[CAP-109: schemas as linked objects in modules](CAP-109.md)** · proposed · Every schema object
@@ -179,6 +195,8 @@ than in each repository's design document.
   [FEA-031: schemas as extensible data](../features/FEA-031.md).
   - **Current**: not met.
 
+- <a id="CAP-165"></a>**[CAP-165: snapshots read by a store lacking their extensions](CAP-165.md)** · proposed · A store reading a snapshot made with an extension it lacks ignores, and lists, each member whose meaning needs that extension. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `ignored` in `Plain`, `JSON` and `YAML`).
 ### Schema loading and wire alignment
 
 - <a id="CAP-115"></a>**[CAP-115: schemas defined by idempotent installs](CAP-115.md)** · proposed · Every schema is
@@ -190,6 +208,14 @@ than in each repository's design document.
   [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: not met.
 
+- <a id="CAP-156"></a>**[CAP-156: the five basic scalars](CAP-156.md)** · proposed · Every store holds the five basic scalars, `Schemas.OfBool` to `Schemas.OfBytes`, each mapped to each language's host type, and builds no other scalar schema. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: met since mbse-schemas 0.18.0 (checked in the code at 0.26.4: "a store builds no scalar schema").
+- <a id="CAP-158"></a>**[CAP-158: values written as plain data, JSON and YAML](CAP-158.md)** · proposed · Any value is written as plain data, strict JSON or YAML 1.2, through a store that names its schemas, and read back, byte-identical in every implementation. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Plain`, `JSON`, `YAML` in both languages).
+- <a id="CAP-159"></a>**[CAP-159: decoding errors the same in every binding](CAP-159.md)** · proposed · Every problem in decoded data raises one `DecodeError`, with a one-line reason and a location, identical in every binding but for a YAML parser's own syntax errors. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md). *Applies* [PRI-009: one error shape](../PRINCIPLES.md#PRI-009).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Errors.DecodeError` in both languages).
+- <a id="CAP-169"></a>**[CAP-169: mutations written in their smallest form](CAP-169.md)** · proposed · Of the forms a change can be written in, the writer chooses by a mode, by default the smallest, while a reader accepts every form. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: not met (checked in the code: `Plain.ToPlain` takes no mode but `flat`).
 ### Model parameters
 
 - <a id="CAP-112"></a>**[CAP-112: parameters declared by an installed module](CAP-112.md)** · proposed · A definition's
@@ -205,6 +231,8 @@ than in each repository's design document.
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
 
+- <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are bound and applied in mbse-expressions, bound by predicates in mbse-patterns and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: bindings substituted and checked](CAP-114.md).
+  - **Current**: not met.
 ### Deterministic object identity
 
 - <a id="CAP-118"></a>**[CAP-118: singletons, owned and counted objects](CAP-118.md)** · proposed · A reference object
@@ -270,6 +298,8 @@ than in each repository's design document.
   *Implements* [FEA-030: transactions](../features/FEA-030.md).
   - **Current**: not met.
 
+- <a id="CAP-164"></a>**[CAP-164: subsequent snapshots sent as transactions](CAP-164.md)** · proposed · A stateful writer sends a store's later snapshots as the transactions since the last, without its modules and schemas again. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: not met.
 ### Mutations as queries
 
 - <a id="CAP-131"></a>**[CAP-131: frames witness values and entries](CAP-131.md)** · proposed · A frame witnesses the
@@ -323,6 +353,8 @@ than in each repository's design document.
   [FEA-028: one API surface for all data access](../features/FEA-028.md).
   - **Current**: not met.
 
+- <a id="CAP-161"></a>**[CAP-161: isolated stores, with no global registry](CAP-161.md)** · proposed · Code reaches schemas, builders and objects only through a store; stores are isolated, and a store's data is what its singletons reach. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
+  - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: "the object belongs to another store").
 ### Excluding imperative visitor expressions
 
 - <a id="CAP-136"></a>**[CAP-136: one finisher for every build](CAP-136.md)** · proposed · A single `done()` replaces
@@ -468,31 +500,33 @@ than in each repository's design document.
 - <a id="CAP-040"></a>**CAP-040: every generation ambiguity a parameter** · superseded by [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md) · Every
   ambiguity in generation is a parameter of the step that resolves it. It is a feature, not an increment of one.
 
+- <a id="CAP-162"></a>**[CAP-162: Python dataclasses translated to and from schemas](CAP-162.md)** · proposed · Python dataclasses are read as the schemas they describe, in an install, and schemas written back as dataclasses, through `ast` trees. *Implements* [FEA-022: code generation](../features/README.md#FEA-022).
+  - **Current**: met in mbse-schemas 0.26.4, Python only (checked in the code at 0.26.4: `Adapters/Dataclasses.py`).
 ### Wire format
 
-- <a id="CAP-069"></a>**CAP-069: wire format shorthand (scalars)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
+- <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
   scalar (such as `Schemas.OfScalar` -> `Schemas.OfInt`) the wire format may omit the implied union wrapper(s) e.g.
   `1` instead of `{ "scalar": { "int": 1 } }` provided the written form unambiguously aligns with the schema (e.g.
   `scalar` -> `int`) and the reader must tolerate this optionality of representation": from `OfAny` through `OfScalar`
   to `OfInt`, up to two wrapper levels ("Yes, if you start with `OfAny` then go through `OfScalar` then `OfInt` you
-  get up to 2 wrapper levels"). The unrestricted case is [CAP-071: an unrestricted `OfAny` on the wire](#CAP-071). *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
+  get up to 2 wrapper levels"). The unrestricted case is [CAP-071: an unrestricted `OfAny` on the wire](#CAP-071). *Implements* [FEA-006: persistence](../features/README.md#FEA-006), [FEA-032: schema loading and wire alignment](../features/FEA-032.md); applies
   [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
-  - **Current**: not met in mbse-schemas: a restricted `OfAny` is written bare and read by the schema whose plain
-    form fits, a guess, refused where several fit; no explicit wrapper is written.
-- <a id="CAP-070"></a>**CAP-070: wire format shorthand (containers)** · proposed · "in the container case of a `Schemas.OfAny` that represents a
+  - **Current**: met in mbse-schemas 0.26.3 (checked in the code of both languages, and by the ANY suite: wrapped by
+    kind and schema, bare only where one of the restriction's schemas takes the plain form).
+- <a id="CAP-070"></a>**[CAP-070: wire format shorthand (containers)](CAP-070.md)** · proposed · "in the container case of a `Schemas.OfAny` that represents a
   specific container (e.g. `Schemas.OfContainer`) the wire format may omit the implied union wrapper
   `[ "dog", "cat", "mouse" ]` instead of `{ "container": [ "dog", "cat", "mouse" ] }` and the reader must tolerate this
-  optionality of representation". *Implements* [FEA-006: persistence](../features/README.md#FEA-006); applies
+  optionality of representation". *Implements* [FEA-006: persistence](../features/README.md#FEA-006), [FEA-032: schema loading and wire alignment](../features/FEA-032.md); applies
   [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
-  - **Current**: not met in mbse-schemas: a container value of an `OfAny` is tagged by its schema's name, or written
-    bare where a restriction leaves one container schema.
-- <a id="CAP-071"></a>**CAP-071: an unrestricted `OfAny` on the wire** · proposed · "in the unrestricted case of `Schemas.OfAny` the wire
+  - **Current**: met in mbse-schemas 0.26.3 (checked in the code of both languages: `{"container": [...]}`, bare where
+    the restriction's one container schema takes the plain form).
+- <a id="CAP-071"></a>**[CAP-071: an unrestricted `OfAny` on the wire](CAP-071.md)** · proposed · "in the unrestricted case of `Schemas.OfAny` the wire
   format is simply plain data". As the user put it, "a complex case that deserves its own CAPABILITY id and name. it
   seems to involve open world modeling that allows the wire format to be written unrestricted and read restricted
   which implies a schema change between writing and reading. I think that may be correct interpretation and possibly
   useful but I don't want to get stuck litigating it." Not designed: what a reader with no expected schema makes of
   plain data, and how a later, restricted reading of it applies [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025).
-  *Implements* [FEA-006: persistence](../features/README.md#FEA-006); *relates to* [FEA-020: refinable models](../features/README.md#FEA-020).
+  *Implements* [FEA-006: persistence](../features/README.md#FEA-006), [FEA-032: schema loading and wire alignment](../features/FEA-032.md); *relates to* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: in mbse-schemas an unrestricted `OfAny`'s value is written tagged by one level, `{"int": 1}`, a value
     object by its schema's registered name, and read back as that schema's.
 

@@ -1,5 +1,5 @@
 <!-- nav -->
-[← The mbse basis](README.md) · [Home](README.md) · [Features →](features/README.md)
+[← Principles](PRINCIPLES.md) · [Home](../README.md) · [The mbse basis →](README.md)
 
 # Qualities
 
@@ -50,4 +50,4 @@ principles serve them.
 ---
 
 <!-- nav -->
-[← The mbse basis](README.md) · [Home](README.md) · [Features →](features/README.md)
+[← Principles](PRINCIPLES.md) · [Home](../README.md) · [The mbse basis →](README.md)

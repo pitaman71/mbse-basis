@@ -1,5 +1,5 @@
 <!-- nav -->
-[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
+[← Why the mbse repositories exist](../MBSE.md) · [Home](../README.md) · [Qualities →](QUALITIES.md)
 
 # Principles
 
@@ -95,7 +95,7 @@ promoted from decisions each repository made separately.
   checkers. Names remain how the wire format and modules write references. "A declaration is not a reference," as
   the user decided: declaring a name (`.name('crm.Contact')`, a link's name) is not covered. *Relates to* [PRI-010: proxies and generated code read alike](#PRI-010), [CAP-027: Python3 source generated from schemas](capabilities/CAP-027.md).
   *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
-  properties by string, as the user decided (its [`docs/FRAMEWORK.md`, Resolved](../../mbse-schemas/docs/FRAMEWORK.md#resolved), "Schema builders align with their
+  properties by string, as the user decided ([CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md#decided), "Schema builders align with their
   meta-schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as
   the user decided, a path from a singleton through ownership entries, each step its adjacency called with the entry's
   keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
@@ -139,8 +139,8 @@ promoted from decisions each repository made separately.
   the shape of its data. A reader tracks the expected schema as context while traversing wire data, and the wire
   names a value's schema wherever that context leaves it open. *Relates to* [PRI-026: serialization through the
   visitor protocol](#PRI-026), [PRI-004: one visitor protocol per kind](#PRI-004).
-  *Not yet applied* in mbse-schemas: a value of an `OfAny` restricted to several schemas is written bare and read by
-  the one schema whose plain form fits it, refused where several fit (Str, Bytes and a non-finite Float all write text).
+  *Applied in*: mbse-schemas 0.26.3, a value of an `OfAny` restricted to several schemas wrapped by its kind and
+  schema, bare only where one of its schemas takes its plain form ([CAP-069: wire format shorthand (scalars)](capabilities/CAP-069.md)).
 - <a id="PRI-026"></a>**PRI-026: serialization through the visitor protocol** · adopted · "serialization is handled via visitor protocol", and
   a reader tracks the expected schema as context while traversing wire data. "The wire format *usually* tracks each
   recursion by the writer while traversing in-memory data which has the effect of wrapping unions explicitly.
@@ -148,7 +148,7 @@ promoted from decisions each repository made separately.
   trivially inferred from context by a reader that already knows the expected schema. This makes the format more
   concise and resilient to errors from humans and agents in the loop." *Relates to* [PRI-025: never guess the schema](#PRI-025),
   [PRI-004: one visitor protocol per kind](#PRI-004); its shorthands are [CAP-069: wire format shorthand
-  (scalars)](capabilities/README.md#CAP-069) and [CAP-070: wire format shorthand (containers)](capabilities/README.md#CAP-070).
+  (scalars)](capabilities/CAP-069.md) and [CAP-070: wire format shorthand (containers)](capabilities/CAP-070.md).
 
 ## Open items
 
@@ -180,4 +180,4 @@ features became (Features, Earlier IDs).
 ---
 
 <!-- nav -->
-[← Capabilities](capabilities/README.md) · [Home](README.md) · [Vocabulary →](VOCABULARY.md)
+[← Why the mbse repositories exist](../MBSE.md) · [Home](../README.md) · [Qualities →](QUALITIES.md)

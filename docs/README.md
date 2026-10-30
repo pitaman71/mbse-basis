@@ -1,5 +1,5 @@
 <!-- nav -->
-[Home](README.md) · [Qualities →](QUALITIES.md)
+[← Qualities](QUALITIES.md) · [Home](../README.md) · [Vocabulary →](VOCABULARY.md)
 
 # The mbse basis
 
@@ -183,4 +183,4 @@ and cites the entry rather than describe the decision again.
 ---
 
 <!-- nav -->
-[Home](README.md) · [Qualities →](QUALITIES.md)
+[← Qualities](QUALITIES.md) · [Home](../README.md) · [Vocabulary →](VOCABULARY.md)
