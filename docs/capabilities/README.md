@@ -221,7 +221,8 @@ than in each repository's design document.
 - <a id="CAP-110"></a>**[CAP-110: a store's schemas read as one module](CAP-110.md)** · proposed · A store's schemas are
   read as one hierarchical root module, each by its module-qualified name, which resolves or is refused. *Implements*
   [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-schemas 0.26.4, by schema objects' paths from the root module `"."` and `References`, not
+    by a `root_module()` method.
 
 - <a id="CAP-156"></a>**[CAP-156: the five basic scalars with boundless domains](CAP-156.md)** · proposed · Every store holds the five basic scalars, `Schemas.OfBool` to `Schemas.OfBytes`, each mapped to each language's host type, and builds no other scalar schema. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: met since mbse-schemas 0.18.0 (checked in the code at 0.26.4: "a store builds no scalar schema").
