@@ -173,6 +173,11 @@ than in each repository's design document.
   *Implements* [FEA-035: clean modeling separation between value objects and reference objects](../features/FEA-035.md).
   - **Current**: met in mbse-schemas 0.26.3; value and reference objects checked in the code at 0.26.4 (`.ref()`,
     `Proxies.owner_of`, validation's refusals).
+- <a id="CAP-205"></a>**[CAP-205: anonymous adjacencies, a link filled without storage on the object](CAP-205.md)** ·
+  proposed · An object schema may declare an adjacency without naming it: the object may fill that link of the
+  relation, checked by validation, with no member and nothing held on the object. *Implements*
+  [FEA-035: clean modeling separation between value objects and reference objects](../features/FEA-035.md).
+  - **Current**: met since before mbse-schemas 0.20.0, the first tag after it was built (checked in the code at 0.26.4).
 - <a id="CAP-154"></a>**[CAP-154: value objects and reference objects](CAP-154.md)** · superseded by [CAP-108: relations as scalable containers](CAP-108.md) · An
   object schema describes reference objects, linked by relations and identified, or value objects, owned by one
   owner, nested and compared deeply. Merged into [CAP-108: relations as scalable containers](CAP-108.md), with its content.
