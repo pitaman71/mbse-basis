@@ -77,7 +77,7 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
   [Store overhaul, Levels](../../mbse-schemas/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
   (`Schemas.OfObject`, level 2) is what an extension extends; a *meta-schema* (level 3) is static code describing it.
 - Module: [Meta-schemas](../../mbse-schemas/docs/FRAMEWORK.md#meta-schemas)
-- Planned in the [Store overhaul](../../mbse-schemas/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [FEA-026: identity and transactions](features/FEA-026.md));
+- Planned in the [Store overhaul](../../mbse-schemas/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [FEA-026: deterministic object identity](features/FEA-026.md));
   `Parameters.Bind` and `Parameters.Apply` ([CAP-114: bindings substituted and checked](capabilities/CAP-114.md)).
 - Store, singleton: [Stores](../../mbse-schemas/docs/FRAMEWORK.md#stores).
   Each store holds its own schemas, built when it is made or through `store.extend`; no schema object is shared

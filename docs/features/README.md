@@ -76,13 +76,15 @@ specifications.
 
 mbse-schemas' generic machinery: data of any schema, its identity, its transactions and its queries.
 
-- <a id="FEA-025"></a>**[FEA-025: schema-driven data](FEA-025.md)** · proposed · external · Data of any schema is built,
-  read, written, compared and stored through generic machinery its schema drives; no model needs code of its own.
+- <a id="FEA-025"></a>**[FEA-025: behavior conventions in schema](FEA-025.md)** · proposed · external · How data of any schema is
+  read, written, compared and extended follows conventions its schema declares, so that no model needs code of its own.
   *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018).
-- <a id="FEA-026"></a>**[FEA-026: identity and transactions](FEA-026.md)** · proposed · external · Objects are
-  identified from the model, never at random, and a store changes only by transactions that commit all or nothing, so
-  that the same model built twice, or in another language, gives the same identities and the same snapshots. *Confers*
-  [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+- <a id="FEA-026"></a>**[FEA-026: deterministic object identity](FEA-026.md)** · proposed · external · Objects are
+  identified from the model, never at random, so that the same model built twice, or in another language, gives the
+  same identities. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+- <a id="FEA-030"></a>**[FEA-030: transactions](FEA-030.md)** · proposed · external · A store changes only by transactions
+  that commit all or nothing, journaled, snapshotted and replayed, each recorded with who made it and when, so that a
+  store's history is the trace of what changed. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
 - <a id="FEA-027"></a>**[FEA-027: mutations as queries](FEA-027.md)** · proposed · external · A store is queried and
   changed in one language: patterns over its data, whose frames stream through terms that match, update and upsert, in
   one transaction. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
