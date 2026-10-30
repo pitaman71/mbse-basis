@@ -11,11 +11,11 @@ principles serve them.
 
 - <a id="QUA-001"></a>**QUA-001: AI and humans in the loop** · adopted · AI and humans are always in the loop at every step. *Conferred by*
   [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018),
-  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md), [FEA-026: deterministic object identity](features/FEA-026.md), [FEA-030: transactions](features/FEA-030.md).
+  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md), [FEA-026: deterministic object identity](features/FEA-026.md), [FEA-030: transactions](features/FEA-030.md), [FEA-041: agent chat integration](features/FEA-041.md).
 - <a id="QUA-002"></a>**QUA-002: open-world models** · adopted · Models are open-world by default, allowing incremental addition of detail
   that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020),
   [FEA-023: patterns over data](features/FEA-023.md).
-- <a id="QUA-003"></a>**QUA-003: no second-order inventions** · adopted · The project avoids second-order inventions ([VOC-027: second-order invention](VOCABULARY.md#VOC-027)).
+- <a id="QUA-003"></a>**QUA-003: no second-order inventions** · adopted · The project avoids second-order inventions ([VOC-027: second-order invention](VOCABULARY.md#VOC-027)). *Conferred by* [FEA-043: interoperation with imported datatypes](features/FEA-043.md).
 - <a id="QUA-004"></a>**QUA-004: models as an alternative representation of source code** · adopted · Models are a concise, precise, comprehensive and neutral alternative
   representation for source code. *Conferred by* [FEA-008: expressive program models](features/README.md#FEA-008), [FEA-009: layered interaction models](features/README.md#FEA-009),
   [FEA-022: code generation](features/README.md#FEA-022).
@@ -27,7 +27,7 @@ principles serve them.
   to community, and the interfaces between levels. *Conferred by* [FEA-010: system behavior](features/README.md#FEA-010) to [FEA-016: community behavior](features/README.md#FEA-016), and [FEA-037: the framework built on its own protocols](features/FEA-037.md).
 - <a id="QUA-008"></a>**QUA-008: usable without code** · proposed · Any model is usable without code written for it: browsed, inspected,
   edited and persisted from its schemas alone. *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md), [FEA-003: no-code logical views](features/FEA-003.md) to [FEA-007: property kinds](features/FEA-007.md),
-  [FEA-025: serialization behavior conventions in schema](features/FEA-025.md), [FEA-027: mutations as queries](features/FEA-027.md), [FEA-028: one API surface for all data access](features/FEA-028.md), [FEA-029: excluding imperative visitor expressions](features/FEA-029.md), [FEA-034: analytic behavior conventions in schema](features/FEA-034.md), [FEA-031: schemas as extensible data](features/FEA-031.md), [FEA-033: model parameters](features/FEA-033.md).
+  [FEA-025: serialization behavior conventions in schema](features/FEA-025.md), [FEA-027: mutations as queries](features/FEA-027.md), [FEA-028: one API surface for all data access](features/FEA-028.md), [FEA-029: excluding imperative visitor expressions](features/FEA-029.md), [FEA-034: analytic behavior conventions in schema](features/FEA-034.md), [FEA-031: schemas as extensible data](features/FEA-031.md), [FEA-033: model parameters](features/FEA-033.md), [FEA-038: no-code secure services](features/FEA-038.md) to [FEA-040: tenancy](features/FEA-040.md), [FEA-042: constraint enforcement in place of bespoke workarounds](features/FEA-042.md).
 - <a id="QUA-009"></a>**QUA-009: modeling provides clean separation of applications across constructs** · proposed · Each
   modeling construct has one clean application, so that what a model means does not depend on how a construct is
   stretched to serve another's. *Conferred by* [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md).

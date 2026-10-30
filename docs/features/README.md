@@ -72,6 +72,12 @@ specifications.
   expression dialects, and are stored, evaluated, validated and translated among the languages they come from.
   *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002), [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
 
+- <a id="FEA-038"></a>**[FEA-038: no-code secure services](FEA-038.md)** · proposed · external · An mbse app is served securely without code written for it: its schemas revised by numbered migrations, its server set up with credentials from its environment, and its image built. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-039"></a>**[FEA-039: search, sort and filter in browser views](FEA-039.md)** · proposed · external · Users search, sort and filter browser views, through logical views as the lens of every search. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-040"></a>**[FEA-040: tenancy](FEA-040.md)** · proposed · external · An app's instances keep each tenant's data as private as its tenancy says, from one private instance for a demo to many users who share only what they choose. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-041"></a>**[FEA-041: agent chat integration](FEA-041.md)** · proposed · external · Users chat in the app, with an AI agent and model of their choice, over its modeled data. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+- <a id="FEA-042"></a>**[FEA-042: constraint enforcement in place of bespoke workarounds](FEA-042.md)** · proposed · external · What bespoke workarounds handle today, such as properties shared among objects, is enforced by constraints. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+
 ### Schema-driven data
 
 mbse-schemas' generic machinery: data of any schema, its identity, its transactions and its queries.
@@ -113,6 +119,8 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
   build is declared, not sequenced: whether it creates, updates or clones, and what it builds is identified by, follow
   from its schema, and a spec cannot read in order to write. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 
+- <a id="FEA-043"></a>**[FEA-043: interoperation with imported datatypes](FEA-043.md)** · proposed · external · Models interoperate, efficiently and incrementally, with datatypes imported from cross-language frameworks. *Confers* [QUA-003: no second-order inventions](../QUALITIES.md#QUA-003).
+
 ### Internal
 
 Features that serve an engineering persona: the framework's maintainers.
@@ -121,12 +129,6 @@ Features that serve an engineering persona: the framework's maintainers.
   framework's own code reads and writes its schemas and specs through the protocols and builders it offers every
   model, so that its maintainers keep one paradigm, not a special case beside it. *Confers*
   [QUA-007: one paradigm at every level of a system](../QUALITIES.md#QUA-007).
-
-## Not yet planned
-
-Features without an ID are not in plan yet. Their notes are in [features/UNPLANNED.md](UNPLANNED.md): no-code
-secure services, search-sort-filter, view paging, hybrid search, tenancy, agent chat integration, constraint
-enforcement replacing bespoke workarounds, journals, imported datatypes, imported functionality and cost models.
 
 ## Earlier IDs
 
