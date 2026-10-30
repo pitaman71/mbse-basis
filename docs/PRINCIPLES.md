@@ -33,7 +33,7 @@ promoted from decisions each repository made separately.
   *Relates to* [PRI-007: three-valued checking on request](#PRI-007).
   *Applied in*: parsers that read semantically incorrect code ([CAP-026: Python, TypeScript and C and C++ read as written](capabilities/CAP-026.md)); names a language cannot spell kept in the tree and flagged by validation, never renamed; `TranspileError`
   (mbse-programs); drops recorded as steps (mbse-codegen-python).
-  *Not yet applied* in mbse-schemas: decoding refuses undeclared keys. Its [`docs/OPEN_WORLD.md`](../../mbse-schemas/docs/OPEN_WORLD.md) proposes preserving
+  *Not yet applied* in mbse-schemas: decoding refuses undeclared keys. [CAP-033: undeclared properties preserved](capabilities/CAP-033.md#design) proposes preserving
   them as a reading policy (Undeclared properties, policy 3).
 - <a id="PRI-003"></a>**PRI-003: everything is schema data** · proposed · Each kind of schema is a plain schema of schemas held by the store
   (`Schemas.OfObject`; mbse-schemas' store overhaul, Levels), and expressions, predicates, syntax trees, modules and
@@ -49,7 +49,7 @@ promoted from decisions each repository made separately.
   a prefix no schema-defined name may take. Builders are fluent, one setter per property taking a `Spec`; `create`, `clone` and `update` finalize
   and never validate. Anything that has a builder has a `Spec`: either a callable that takes that builder and returns
   it, or an instance of what the builder builds. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005). *Relates to* [PRI-005: one entry point per kind](#PRI-005).
-  *Applied in*: mbse-schemas' [`docs/VISITOR_PATTERN.md`](../../mbse-schemas/docs/VISITOR_PATTERN.md), which supersedes the reverse protocol (`accept(visitor)`, a
+  *Applied in*: mbse-schemas, as [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md) records it, which supersedes the reverse protocol (`accept(visitor)`, a
   value writing itself into serializers and recorders that implemented `Visitors`); built in mbse-schemas 0.11, where
   each schema builder is a `Visitors.OfObject` over its store's plain schema of schemas (`Schemas.OfX`, since 0.14),
   through which an extension's members reach it: the same policy one level up.
@@ -98,8 +98,8 @@ promoted from decisions each repository made separately.
   properties by string, as the user decided (its [`docs/FRAMEWORK.md`, Resolved](../../mbse-schemas/docs/FRAMEWORK.md#resolved), "Schema builders align with their
   meta-schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as
   the user decided, a path from a singleton through ownership entries, each step its adjacency called with the entry's
-  keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, mbse-schemas' [`docs/OBJECT_IDENTITY.md`, Decided](../../mbse-schemas/docs/OBJECT_IDENTITY.md#decided), 26
-  and 27); the earlier `as_instance` exception is withdrawn.
+  keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
+  and 27 in [CAP-119: owned objects found by path](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
 - <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
@@ -158,8 +158,8 @@ promoted from decisions each repository made separately.
   and none exists yet (Qualities, open items). The conventions in each repository's `AGENTS.md` join them in a later
   batch.
 - **[PRI-001: declaration order](#PRI-001)'s exception and a proposal against it.** Decide whether entries sorted by their relation's key are a
-  deliberate exception (an order by value, for byte-identity) or a debt against [PRI-001: declaration order](#PRI-001). mbse-schemas'
-  [`docs/OPEN_WORLD.md`](../../mbse-schemas/docs/OPEN_WORLD.md) also proposes writing preserved properties sorted by name, against [PRI-001: declaration order](#PRI-001).
+  deliberate exception (an order by value, for byte-identity) or a debt against [PRI-001: declaration order](#PRI-001). [CAP-033: undeclared properties preserved](capabilities/CAP-033.md#open-questions)
+  also proposes writing preserved properties sorted by name, against [PRI-001: declaration order](#PRI-001).
 - **[PRI-004: one visitor protocol per kind](#PRI-004) beyond mbse-schemas.** mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
   mbse-patterns' predicate and transform builders do not follow it yet; each comes to, building its models through
   mbse-schemas' builders ([PRI-018: no model needs code to read or write](#PRI-018), [PRI-019: fluent builder syntax](#PRI-019)), as it migrates to mbse-schemas 0.11.

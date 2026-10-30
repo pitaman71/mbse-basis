@@ -34,18 +34,19 @@ than in each repository's design document.
 
 ### Open-world models
 
-- <a id="CAP-025"></a>**CAP-025: schemas open in content** · proposed · Schemas are open in content: nothing is mandatory but by constraint
-  (checked as [CAP-029: three-valued constraint checking](CAP-029.md) says). *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
+- <a id="CAP-025"></a>**[CAP-025: nothing mandatory but by constraint](CAP-025.md)** · proposed · Nothing in a schema's content is mandatory but by
+  a constraint, the open-world default ([PRI-020: no constraint, any configuration](../PRINCIPLES.md#PRI-020)) applied to schemas (checked as [CAP-029: three-valued constraint checking](CAP-029.md) says). *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: met in mbse-schemas 0.10.0; its dependents to assess.
-- <a id="CAP-033"></a>**CAP-033: undeclared properties preserved** · proposed · Properties a schema does not declare are preserved when data is read,
+- <a id="CAP-033"></a>**[CAP-033: undeclared properties preserved](CAP-033.md)** · proposed · Properties a schema does not declare are preserved when data is read,
   and written back as read. *Implements*: none (see Open items). *Applies* [PRI-002: preserve, don't lose](../PRINCIPLES.md#PRI-002).
-  - **Current**: proposed in mbse-schemas' [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) ([its part 2](../../../mbse-schemas/docs/OPEN_WORLD.md#2--undeclared-properties)), not built.
-- <a id="CAP-034"></a>**CAP-034: extension of schemas a module does not own** · proposed · A module declares subtypes and extension properties of a schema it does
-  not own. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
-  - **Current**: proposed in [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) ([its part 1](../../../mbse-schemas/docs/OPEN_WORLD.md#1--intersections-as-subtyping)), not built.
-- <a id="CAP-035"></a>**CAP-035: schema evolution** · proposed · A schema evolves so that data written for it stays valid. *Implements*
+  - **Current**: not met.
+- <a id="CAP-034"></a>**[CAP-034: schemas specialized by classifier intersection and union](CAP-034.md)** · proposed · A module declares subtypes of a
+  schema it does not own by intersecting and uniting classifiers, as KerML and SysML v2 do, with qualified extension
+  properties. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
+  - **Current**: not met.
+- <a id="CAP-035"></a>**[CAP-035: schema evolution](CAP-035.md)** · proposed · A schema evolves so that data written for it stays valid. *Implements*
   [FEA-020: refinable models](../features/README.md#FEA-020).
-  - **Current**: proposed in [`docs/OPEN_WORLD.md`](../../../mbse-schemas/docs/OPEN_WORLD.md) ([its part 3](../../../mbse-schemas/docs/OPEN_WORLD.md#3--evolution-that-keeps-data-valid)), not built.
+  - **Current**: not met.
 - <a id="CAP-029"></a>**[CAP-029: three-valued constraint checking](CAP-029.md)** · proposed · Constraints are checked, three-valued. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020), [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: met: mbse-patterns' validators (0.1; the VAL suites).
 - <a id="CAP-042"></a>**[CAP-042: data generated from constraints](CAP-042.md)** · proposed · Data is generated from constraints: sampled, and pseudorandom.
@@ -139,6 +140,201 @@ than in each repository's design document.
   - **Current**: not met.
 - <a id="CAP-105"></a>**[CAP-105: Excel ranges and structured references](CAP-105.md)** · proposed · Excel's ranges (`A1:B3`) and structured references (`Table1[@age]`) are
   modeled, as array values. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
+
+### Serialization behavior conventions in schema
+
+- <a id="CAP-107"></a>**[CAP-107: one visitor protocol reads and writes data](CAP-107.md)** · proposed · Code reads and
+  writes a value of any schema through one protocol per kind, `Visitors.OfX`, its read-only view `Readers.OfX` and their
+  shorthands, the visitor's mode deciding whether a write takes effect. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
+  *Applies* [PRI-004: one visitor protocol per kind](../PRINCIPLES.md#PRI-004).
+  - **Current**: met in mbse-schemas 0.26.3.
+- <a id="CAP-108"></a>**[CAP-108: containers of any index and element](CAP-108.md)** · proposed · A container holds
+  elements of any schema by an index of any schema, dense, sparse or by key, and containers nest. *Implements*
+  [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
+  - **Current**: met in mbse-schemas 0.26.3.
+
+### Analytic behavior conventions in schema
+
+- <a id="CAP-111"></a>**[CAP-111: equality and ordering defined by the schema](CAP-111.md)** · proposed · Values are
+  compared, ordered and hashed by their schema, never by the host language's equality. *Implements*
+  [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
+  - **Current**: met in mbse-schemas 0.26.3.
+- <a id="CAP-147"></a>**[CAP-147: links validated against their schemas](CAP-147.md)** · proposed · Validation checks
+  each linked object against the schema its link declares. *Implements* [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
+  - **Current**: not met.
+
+### Schemas as extensible data
+
+- <a id="CAP-109"></a>**[CAP-109: schemas as linked objects in modules](CAP-109.md)** · proposed · Every schema object
+  is a reference object of its kind's meta-schema, linked to the others by relations, built by builders that are
+  visitors of it, and defined in nesting modules. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md).
+  - **Current**: met in mbse-schemas 0.26.3.
+- <a id="CAP-116"></a>**[CAP-116: framework schemas extended, checked](CAP-116.md)** · proposed · Any transaction may
+  add members to a schema the store was made holding, meta-schemas included, but not change or remove them, each store
+  extending its own. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md), [FEA-020: refinable models](../features/FEA-020.md).
+  - **Current**: met in mbse-schemas 0.23.0.
+- <a id="CAP-117"></a>**[CAP-117: extension adjacencies to any relation](CAP-117.md)** · proposed · An extension's
+  adjacency may be to any relation, one with properties or more than two links included. *Implements*
+  [FEA-031: schemas as extensible data](../features/FEA-031.md).
+  - **Current**: not met.
+
+### Schema loading and wire alignment
+
+- <a id="CAP-115"></a>**[CAP-115: schemas defined by idempotent installs](CAP-115.md)** · proposed · Every schema is
+  defined in a module-scope `install(txn)`, a transaction that upserts it, so that installing again writes nothing, and
+  the framework defines its own schemas the same way. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: met in mbse-schemas 0.23.0.
+- <a id="CAP-110"></a>**[CAP-110: a store's schemas read as one module](CAP-110.md)** · proposed · A store's schemas are
+  read as one hierarchical root module, each by its module-qualified name, which resolves or is refused. *Implements*
+  [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: not met.
+
+### Model parameters
+
+- <a id="CAP-112"></a>**[CAP-112: parameters declared by an installed module](CAP-112.md)** · proposed · A definition's
+  parameters are declared through `Parametrics`, a module installed before use, which validates them. *Implements*
+  [FEA-033: model parameters](../features/FEA-033.md).
+  - **Current**: met in mbse-schemas 0.24.0.
+- <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · proposed · A definition binds
+  each of its parameters to a value or an object, through `Parametrics`' bindings. *Implements*
+  [FEA-033: model parameters](../features/FEA-033.md).
+  - **Current**: not met.
+- <a id="CAP-114"></a>**[CAP-114: bindings substituted and checked](CAP-114.md)** · proposed · A binding is substituted
+  where its definition is used, and its value checked against the schema its parameter is for. *Implements*
+  [FEA-033: model parameters](../features/FEA-033.md).
+  - **Current**: not met.
+
+### Deterministic object identity
+
+- <a id="CAP-118"></a>**[CAP-118: singletons, owned and counted objects](CAP-118.md)** · proposed · A reference object
+  is a singleton, owned or counted, as its schema declares, and nothing about its identity is drawn at random.
+  *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: met in mbse-schemas 0.20.0.
+- <a id="CAP-119"></a>**[CAP-119: owned objects found by path](CAP-119.md)** · proposed · An owned object is found by
+  its path, each step's adjacency called with the keys of the entry that leads to it, and its path is read off its
+  ownership entries. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: met in mbse-schemas 0.20.0.
+- <a id="CAP-120"></a>**[CAP-120: owned objects named and placed when built](CAP-120.md)** · proposed · An owned
+  object's keys are generated from its owning relation's key patterns, and an object built without an owner is given the
+  one owner possible when its transaction ends. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: met in mbse-schemas 0.20.0.
+- <a id="CAP-121"></a>**[CAP-121: owned objects deleted in cascade](CAP-121.md)** · proposed · Removing an owned
+  object's owning entry deletes it, and in cascade everything it owns, within the transaction. *Implements*
+  [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: met in mbse-schemas 0.20.0.
+- <a id="CAP-123"></a>**[CAP-123: schema objects identified by path](CAP-123.md)** · proposed · A named schema object's
+  identity is its path from the root module; an unnamed one has none, and is written nested in the one object that links
+  it. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: met in mbse-schemas 0.21.0.
+- <a id="CAP-130"></a>**[CAP-130: references to objects, entries and frames](CAP-130.md)** · proposed · An object, a
+  relation entry and a frame each have a reference, a value written and read as any, which resolves to what it
+  designates in a store. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: met in mbse-schemas 0.25.0.
+- <a id="CAP-132"></a>**[CAP-132: paths retired for references](CAP-132.md)** · proposed · Paths are retired: references
+  designate objects, entries and frames, and paths no longer overlap them. *Implements*
+  [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: not met.
+- <a id="CAP-133"></a>**[CAP-133: no durable references to counted objects](CAP-133.md)** · proposed · Nothing holds a
+  durable reference to a counted object: the executor finds what an upsert made without one. *Implements*
+  [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: not met.
+
+### Transactions
+
+- <a id="CAP-124"></a>**[CAP-124: writes all-or-nothing in transactions](CAP-124.md)** · proposed · Every write to a
+  store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
+  apart from another's. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · proposed · Code that calls builders
+  writes within a transaction's imperative scope, all or nothing, as an expression's terms do. *Implements*
+  [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-127"></a>**[CAP-127: snapshots made of transactions](CAP-127.md)** · proposed · A store's snapshot is two
+  transactions, its schemas then its data, and reading one replays them. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-128"></a>**[CAP-128: graphs sent as one-transaction documents](CAP-128.md)** · proposed · A graph sent
+  without its store is one transaction, its counted objects numbered within it, and the owned objects and singletons it
+  links referred to by path. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-129"></a>**[CAP-129: journals replayed by execution](CAP-129.md)** · proposed · A journal is the list of
+  transactions as submitted, replayed by executing each again. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-134"></a>**[CAP-134: transactions recorded with provenance](CAP-134.md)** · proposed · Each transaction
+  that writes is recorded with when and where it ran, its session and its identity, and linked to the objects it created
+  or last modified, for the schemas an app chooses. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: met in mbse-schemas 0.26.3.
+- <a id="CAP-135"></a>**[CAP-135: provenance records reproducible and attributable](CAP-135.md)** · proposed · Every
+  transaction's provenance record is reproducible and attributable: none gets a random `uid`, the clock's time or the
+  shared session `unknown`, whether it comes from an imperative scope or from an expression that names none.
+  *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  - **Current**: not met.
+
+### Mutations as queries
+
+- <a id="CAP-131"></a>**[CAP-131: frames witness values and entries](CAP-131.md)** · proposed · A frame witnesses the
+  property values and relation entries it asserts, each by its objects' references. *Implements*
+  [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: met in mbse-schemas 0.26.3.
+- <a id="CAP-137"></a>**[CAP-137: patterns of symbols, variables and specs](CAP-137.md)** · proposed · A pattern
+  declares symbols bound to reference objects and variables assigned values, and its spec says what must hold of a
+  frame, all as schema data. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-138"></a>**[CAP-138: mutation expressions over frame streams](CAP-138.md)** · proposed · A transaction's
+  expression is a chain of terms, map, reduce, partition, update and upsert, each consuming and producing a stream of
+  frames. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-139"></a>**[CAP-139: upserts find before they create](CAP-139.md)** · proposed · An upsert finds the object
+  its spec designates before it creates one: an owned object by its owning entry, a counted one by what made it, a
+  schema object by its name. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-140"></a>**[CAP-140: entries removed through a spec](CAP-140.md)** · proposed · A spec removes entries as
+  it inserts them, through an adjacency's `remove` and `clear`. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: met in mbse-schemas 0.23.0.
+- <a id="CAP-141"></a>**[CAP-141: queries start from a referenced object](CAP-141.md)** · proposed · A pattern's symbol
+  may be given a reference in place of a schema, binding the one object it designates, so that a query starts from it.
+  *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: met in mbse-schemas 0.26.3.
+- <a id="CAP-142"></a>**[CAP-142: expressions evaluated in queries](CAP-142.md)** · proposed · The executor evaluates
+  the expressions of a query: a pattern's `requires` and variables, a collector's fold, a branch's condition.
+  *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: blocked: its evaluation is mbse-expressions', in its port ([CAP-142: expressions evaluated in queries](CAP-142.md#blocked)).
+- <a id="CAP-144"></a>**[CAP-144: transactions sharded and run in parallel](CAP-144.md)** · proposed · A transaction is
+  divided into shards that run in parallel, as MapReduce runs, with the same effect as run in order. *Implements*
+  [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: not met.
+- <a id="CAP-145"></a>**[CAP-145: queries over a distributed persistent store](CAP-145.md)** · proposed · Queries run
+  over a persistent store distributed beyond one process, through a transactional cache, with certificates that track
+  their writes. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: not met.
+- <a id="CAP-146"></a>**[CAP-146: queries planned from specs and constraints](CAP-146.md)** · proposed · The executor
+  plans a query from its patterns' specs and constraints, rather than enumerating each cross product. *Implements*
+  [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: not met.
+
+### One API surface for all data access
+
+- <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
+  property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
+  which a transaction's `Proposals` implements. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
+  - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-126"></a>**[CAP-126: schema objects read through the store protocol](CAP-126.md)** · proposed · Schema
+  objects are read and written through `Visitors.OfStore`, as data is, not field by field. *Implements*
+  [FEA-028: one API surface for all data access](../features/FEA-028.md).
+  - **Current**: not met.
+
+### Excluding imperative visitor expressions
+
+- <a id="CAP-136"></a>**[CAP-136: one finisher for every build](CAP-136.md)** · proposed · A single `done()` replaces
+  `create`, `update` and `clone`. *Implements* [FEA-029: excluding imperative visitor expressions](../features/FEA-029.md).
+  - **Current**: not met.
+- <a id="CAP-148"></a>**[CAP-148: sense inferred by the executor](CAP-148.md)** · proposed · Whether a build creates,
+  updates or clones is inferred from the object's identity information and its schema's value or reference distinction,
+  with callbacks from caller to callee. *Implements* [FEA-029: excluding imperative visitor expressions](../features/FEA-029.md).
+  - **Current**: not met.
+- <a id="CAP-143"></a>**[CAP-143: specs declarative, no read-modify-write](CAP-143.md)** · proposed · A spec cannot read
+  in order to write: a builder in a spec context is a writer, so that a spec is declarative. *Implements*
+  [FEA-029: excluding imperative visitor expressions](../features/FEA-029.md).
   - **Current**: not met.
 
 ### Program models
@@ -398,9 +594,9 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 | Earlier | Now | Earlier | Now | Earlier | Now |
 |---|---|---|---|---|---|
 | C-001 | [CAP-024: the same conformance corpora](#CAP-024) | C-008 | [CAP-031: 100% coverage of both](#CAP-031) | C-015 | [CAP-038: every construct of Python's standards](CAP-038.md) |
-| C-002 | [CAP-025: schemas open in content](#CAP-025) | C-009 | [CAP-032: deliberate differences listed](#CAP-032) | C-016 | [CAP-039: schemas round-trip through Python3](CAP-039.md) |
+| C-002 | [CAP-025: nothing mandatory but by constraint](#CAP-025) | C-009 | [CAP-032: deliberate differences listed](#CAP-032) | C-016 | [CAP-039: schemas round-trip through Python3](CAP-039.md) |
 | C-003 | [CAP-026: Python, TypeScript and C and C++ read as written](CAP-026.md) | C-010 | [CAP-033: undeclared properties preserved](#CAP-033) | C-017 | [CAP-040: every generation ambiguity a parameter](#CAP-040) |
-| C-004 | [CAP-027: Python3 source generated from schemas](CAP-027.md) | C-011 | [CAP-034: extension of schemas a module does not own](#CAP-034) | C-018 | [CAP-041: every kind of participant](#CAP-041) |
+| C-004 | [CAP-027: Python3 source generated from schemas](CAP-027.md) | C-011 | [CAP-034: schemas specialized by classifier intersection and union](#CAP-034) | C-018 | [CAP-041: every kind of participant](#CAP-041) |
 | C-005 | [CAP-028: layered interaction models](#CAP-028) | C-012 | [CAP-035: schema evolution](#CAP-035) | C-019 | [CAP-042: data generated from constraints](CAP-042.md) |
 | C-006 | [CAP-029: three-valued constraint checking](CAP-029.md) | C-013 | [CAP-036: complete kinds for Python, TypeScript and C and C++](CAP-036.md) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
 | C-007 | [CAP-030: the same cases in both languages](#CAP-030) | C-014 | [CAP-037: Python and TypeScript trees as faithful as the reference front end's](CAP-037.md) | C-021 | [CAP-044: Verilog and SystemVerilog read by slang](CAP-044.md) |
