@@ -121,6 +121,10 @@ than in each repository's design document.
 - <a id="CAP-097"></a>**[CAP-097: value domains of published standards](CAP-097.md)** · proposed · A value's domain names a published standard (IEEE 754, IEEE 1164, two's complement integers),
   with exact-then-rounded arithmetic, bitwise operations and explicit conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
+- <a id="CAP-180"></a>**[CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md)** · proposed · The
+  general-purpose datatypes of ISO/IEC 11404 replace the Basic expression dialect, their operations modeled, not
+  coded. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
 - <a id="CAP-098"></a>**[CAP-098: dialects over one framework](CAP-098.md)** · proposed · Expression languages are dialects of one framework, which validates, infers, evaluates and
   translates any of them from its kinds' roles, a dialect extending another. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
@@ -244,6 +248,10 @@ than in each repository's design document.
   - **Current**: not met.
 
 - <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are bound and applied in mbse-expressions, bound by predicates in mbse-patterns and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
+  - **Current**: not met.
+- <a id="CAP-181"></a>**[CAP-181: parameters wherever literals may appear](CAP-181.md)** · proposed · Anywhere a
+  literal may appear, a parameter may appear in its place. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
+  [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
   - **Current**: not met.
 ### Deterministic object identity
 
@@ -371,10 +379,6 @@ than in each repository's design document.
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-126"></a>**[CAP-126: schema objects read through the store protocol](CAP-126.md)** · proposed · Schema
-  objects are read and written through `Visitors.OfStore`, as data is, not field by field. *Implements*
-  [FEA-028: one API surface for all data access](../features/FEA-028.md).
-  - **Current**: not met.
 
 - <a id="CAP-161"></a>**[CAP-161: isolated stores, with no global registry](CAP-161.md)** · proposed · Code reaches schemas, builders and objects only through a store; stores are isolated, and a store's data is what its singletons reach. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: "the object belongs to another store").
@@ -394,10 +398,10 @@ than in each repository's design document.
 
 ### The framework built on its own protocols
 
-- <a id="CAP-172"></a>**[CAP-172: schema objects read through the visitor protocol](CAP-172.md)** · proposed · The
-  framework reads schema objects through the visitor protocol, as it reads data, not field by field, keeping the rule
-  that a change to an existing schema is seen once its transaction commits. *Implements*
-  [FEA-037: the framework built on its own protocols](../features/FEA-037.md). *Relates to* [CAP-126: schema objects read through the store protocol](CAP-126.md).
+- <a id="CAP-126"></a>**[CAP-126: schema objects read through the store protocol](CAP-126.md)** · proposed · Schema
+  objects are read and written through `Visitors.OfStore`, as data is, not field by field, keeping the rule that a
+  change to an existing schema is seen once its transaction commits. *Implements*
+  [FEA-037: the framework built on its own protocols](../features/FEA-037.md).
   - **Current**: not met (checked in mbse-schemas 0.26.4: field reads, and `_defers` and `_pending` in `Builders`).
 - <a id="CAP-173"></a>**[CAP-173: spec items written through ordinary builders over a mutation sink](CAP-173.md)** · proposed · A
   spec item is written through the builders data objects get, over a sink that records mutations rather than writing a
@@ -538,12 +542,6 @@ than in each repository's design document.
 
 - <a id="CAP-162"></a>**[CAP-162: Python dataclasses translated to and from schemas](CAP-162.md)** · proposed · Python dataclasses are read as the schemas they describe, in an install, and schemas written back as dataclasses, through `ast` trees. *Implements* [FEA-022: code generation](../features/README.md#FEA-022).
   - **Current**: met in mbse-schemas 0.26.4, Python only (checked in the code at 0.26.4: `Adapters/Dataclasses.py`).
-- <a id="CAP-179"></a>**[CAP-179: dataclass schemas built through the store's builders](CAP-179.md)** · proposed · The
-  dataclass adapter builds the schemas it reads through the store's builders, in a transaction, never as schema
-  objects made outside a store for the caller to register; Python only. *Implements* [FEA-022: code generation](../features/README.md#FEA-022). It follows
-  [CAP-162: Python dataclasses translated to and from schemas](CAP-162.md).
-  - **Current**: met in mbse-schemas 0.23.0 (checked in the code at 0.26.4: `FromDataclass.install` writes one upsert;
-    `FromDataclass.model` is gone).
 ### Wire format
 
 - <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
@@ -583,6 +581,15 @@ than in each repository's design document.
   firmware, software, device, user, community, cloud resource, agent) and the interfaces between them. *Implements*
   [FEA-010: system behavior](../features/README.md#FEA-010) to [FEA-016: community behavior](../features/README.md#FEA-016).
   - **Current**: no kind covered.
+- <a id="CAP-182"></a>**[CAP-182: system structure as containers, axes and containment](CAP-182.md)** · proposed · A
+  system's structure is modeled as containers that contain one another hard or soft, and axes that orient soft
+  containers. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041).
+  - **Current**: not met.
+- <a id="CAP-183"></a>**[CAP-183: system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md)** · proposed · A
+  system's interactions are modeled as modules with interfaces and ports, implemented by instances of other modules
+  cooperating over channels that carry messages of one schema. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to*
+  [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041), [CAP-182: system structure as containers, axes and containment](CAP-182.md).
+  - **Current**: not met.
 
 ### Schema-driven visualization and editing
 

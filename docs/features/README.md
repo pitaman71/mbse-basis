@@ -14,7 +14,7 @@ adopted before it is met. Features may overlap on purpose.
 
 - <a id="FEA-008"></a>**[FEA-008: expressive program models](FEA-008.md)** · adopted · external · Program models have sufficient expressive power to concisely
   and precisely represent source code in its native and idiomatic form. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
-- <a id="FEA-009"></a>**FEA-009: layered interaction models** · adopted · external · Interaction models can model layered abstractions of
+- <a id="FEA-009"></a>**[FEA-009: layered interaction models](FEA-009.md)** · adopted · external · Interaction models can model layered abstractions of
   functional behavior. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004).
 - <a id="FEA-010"></a>**FEA-010: system behavior** · adopted · external · Interaction models are a suitable representation of
   system-level behavior. *Confers* [QUA-007: one paradigm at every level of a system](../QUALITIES.md#QUA-007).
@@ -65,7 +65,7 @@ specifications.
 - <a id="FEA-022"></a>**FEA-022: code generation** · proposed · external · Models generate source code in each language
   family's own form, and are read back from it: a model is the source's alternative representation, not a description
   of it. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004). Its capabilities: [CAP-027: Python3 source generated from schemas](../capabilities/CAP-027.md),
-  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061), [CAP-088: TypeScript transpiled to Python](../capabilities/CAP-088.md) to [CAP-091: Ccpp expressions bridged to C and C++ source](../capabilities/CAP-091.md), [CAP-162: Python dataclasses translated to and from schemas](../capabilities/CAP-162.md), and [CAP-179: dataclass schemas built through the store's builders](../capabilities/CAP-179.md).
+  [CAP-039: schemas round-trip through Python3](../capabilities/CAP-039.md), [CAP-045: TypeScript5 source generated from schemas](../capabilities/README.md#CAP-045) and [CAP-046: generated Python3 bound to its schemas](../capabilities/README.md#CAP-046) to [CAP-049: type parameters in Python3](../capabilities/README.md#CAP-049), [CAP-051: Python3 source from expression models](../capabilities/README.md#CAP-051) to [CAP-061: TypeScript5 source from pattern models](../capabilities/README.md#CAP-061), [CAP-088: TypeScript transpiled to Python](../capabilities/CAP-088.md) to [CAP-091: Ccpp expressions bridged to C and C++ source](../capabilities/CAP-091.md), and [CAP-162: Python dataclasses translated to and from schemas](../capabilities/CAP-162.md).
 - <a id="FEA-023"></a>**[FEA-023: patterns over data](FEA-023.md)** · proposed · external · A pattern, one predicate over a store's
   data, is validated, queried, sampled from and generated from alike. *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002).
 - <a id="FEA-024"></a>**[FEA-024: expressions as data](FEA-024.md)** · proposed · external · Constraints are written once, as terms of
