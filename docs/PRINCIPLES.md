@@ -111,7 +111,7 @@ promoted from decisions each repository made separately.
 - <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "No model should need code to read or write. Ever." All model data is governed by a schema,
   and all builder/visitor/reader/write functionality comes from either proxies in mbse-schemas or generated
   dataclasses. No bespoke class implementations are allowed for models. *Relates to* [PRI-003: everything is schema data](#PRI-003), [PRI-004: one visitor protocol per kind](#PRI-004), [PRI-010: proxies and generated code read alike](#PRI-010), [PRI-017: transforms, models, dialects, schemas](#PRI-017).
-  *Not yet applied* in mbse-expressions (its [`docs/EXPRESSIONS.md`, Open questions](../../mbse-expressions/docs/EXPRESSIONS.md#open-questions)).
+  *Not yet applied* in mbse-expressions ([CAP-098: dialects over one framework](capabilities/CAP-098.md#open-questions), Open questions).
 - <a id="PRI-019"></a>**PRI-019: fluent builder syntax** · adopted · "The preferred form of models as data is fluent builder syntax. Not wire format, pseudocode,
   or imagined shorthand." "Do not invent another DSL by wrapping builder syntax": helper functions that build a model
   through the builders are such a DSL; models are written in the builders' fluent syntax itself. *Relates to* [PRI-004: one visitor protocol per kind](#PRI-004),

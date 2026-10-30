@@ -92,12 +92,12 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
 
 ### mbse-expressions
 
-- Expression, `OfLiteral`, `OfOperation`, `OfVariable`, `OfLet`, `OfQuantifier`:
-  [The Basic dialect](../../mbse-expressions/docs/EXPRESSIONS.md#the-basic-dialect)
-- Dialect (`Terms.Dialect`): [The framework](../../mbse-expressions/docs/EXPRESSIONS.md#the-framework),
-  [Dialects](../../mbse-expressions/docs/EXPRESSIONS.md#dialects)
-- Translator: [Translators](../../mbse-expressions/docs/EXPRESSIONS.md#translators)
-- Value domain: [Value domains](../../mbse-expressions/docs/EXPRESSIONS.md#value-domains)
+- Expression (`Expressions.Framework.Expression`), term (`Expressions.Framework.Term`: `literal`, `call`, `variable`,
+  `let`, Basic's `quantifier`): [Terms and the core vocabulary](capabilities/CAP-095.md#terms-and-the-core-vocabulary)
+- Dialect (`Terms.Dialect`): [The framework](capabilities/CAP-098.md#the-framework),
+  [Dialects](capabilities/CAP-100.md#dialects)
+- Translator: [Translators](capabilities/CAP-101.md#translators)
+- Value domain: [Value domains](capabilities/CAP-097.md#value-domains)
 
 ### mbse-patterns
 
