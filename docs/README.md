@@ -18,7 +18,7 @@ Read this file, then the index of each kind below. Each index is one entry per i
 | `mbse-basis/docs/<NAME>.md` | the project: what every repository shares | definitions on the web |
 | `mbse-<repo>/docs/<NAME>.md` | one repository | the project's documents, and definitions on the web |
 
-`<NAME>` is a long name in capitals (`PRINCIPLES.md`, `OBJECT_IDENTITY.md`).
+`<NAME>` is a long name in capitals (`PRINCIPLES.md`, `EQUIVALENCE.md`).
 
 ## The design spec
 
@@ -166,9 +166,9 @@ and cites the entry rather than describe the decision again.
   a local decision turns out to be a general one, promote it here and replace the local text with a bridged citation.
 - **A link is a link.** A citation of an item or a document is markdown link syntax, never a bare ID or file name
   that only looks like one, in documents and in source comments alike. Its path is relative and resolves in a polyrepo
-  checkout, where every repository sits beside mbse-basis (`../mbse-schemas/docs/OPEN_WORLD.md` from a repository's
+  checkout, where every repository sits beside mbse-basis (`../mbse-schemas/docs/EQUIVALENCE.md` from a repository's
   root). Its label is legible: an item's ID and abbreviated title (`[CAP-013: an in-memory store journaled to
-  DynamoDB](…)`), a document's path without the leading `../` (`[mbse-schemas/docs/OPEN_WORLD.md](…)`). A link to an
+  DynamoDB](…)`), a document's path without the leading `../` (`[mbse-schemas/docs/EQUIVALENCE.md](…)`). A link to an
   item reaches its own anchor, or its detail file where it has one. An item's title is written once, in the head of its
   index entry; `scripts/update_item_titles.py` copies it into every label.
 - **Documents don't link source files.** Links between documents and code point the other way: a source file names,
