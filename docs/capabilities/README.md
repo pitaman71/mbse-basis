@@ -542,7 +542,8 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   ambiguity in generation is a parameter of the step that resolves it. It is a feature, not an increment of one.
 
 - <a id="CAP-162"></a>**[CAP-162: Python dataclasses translated to and from schemas](CAP-162.md)** · proposed · Python dataclasses are read as the schemas they describe, in an install, and schemas written back as dataclasses, through `ast` trees. *Implements* [FEA-022: code generation](../features/README.md#FEA-022).
-  - **Current**: met in mbse-schemas 0.26.4, Python only (checked in the code at 0.26.4: `Adapters/Dataclasses.py`).
+  - **Current**: met since mbse-schemas 0.1.0, Python only; built through an install since 0.23.0 (checked in the
+    code at 0.26.4: `Adapters/Dataclasses.py`).
 ### Wire format
 
 - <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
