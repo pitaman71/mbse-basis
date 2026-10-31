@@ -55,10 +55,10 @@ Two kinds of item sit outside the tiers:
 | Vocabulary | `VOC-` | A borrowed, clarified or novel concept, and the one term that names it across code, documents, tutorials and skills, with a focus on the dimensions, domains, seams and gradients of the project's own engineering space | [VOCABULARY.md](VOCABULARY.md) |
 
 **Conventions are not a kind of their own.** A convention, how the work is done (equivalent implementations, notebook
-tests, coverage, navigation; today the shared invariants in each repository's `AGENTS.md`), is either a principle that
-serves a quality an engineering persona values, or a rule of one of the doc spec's shelves. A repository's `AGENTS.md`
-cites them rather than stating them. A principle governs the product when a user could notice it broken, and the work
-when only a contributor could.
+tests, coverage, navigation), is either a principle, which serves a quality ([QUA-010: every repository works alike](QUALITIES.md#QUA-010) where it governs
+the work), or a rule for documents (Rules for every document, below). A repository's `AGENTS.md` cites them rather than
+stating them. A principle governs the product when a user could notice it broken, and the work when only a
+contributor could.
 
 ## The doc spec
 
@@ -70,6 +70,25 @@ The doc spec organizes what humans and agents read and run, on four shelves.
 | Skills | Skill documents that together are a user guide optimized for agents | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
 | Tests | Executable, platform-specific programs that unit-test mbse components | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
 | References | Between vocabulary and tutorials: for an advanced human or agent with a specific goal in mind, organized around such goals, cross-linked with vocabulary, tutorials and capabilities | Not yet built, and not needed yet |
+
+How each shelf is kept is a principle: tutorials run as tests ([PRI-034: tutorials run as tests, committed with their outputs](PRINCIPLES.md#PRI-034)), tests are notebooks ([PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages](PRINCIPLES.md#PRI-035)),
+every program in a skill is run ([PRI-036: every program in a skill is complete and run; fragments are tagged as fragments](PRINCIPLES.md#PRI-036)), and guidance is written once ([PRI-016: guidance written once](PRINCIPLES.md#PRI-016)).
+
+## Rules for every document
+
+- **Navigation.** Each human-facing document of a repository (its README, `MBSE.md`, its tutorials, its `docs/`, its
+  conformance README, and each package's README and test plan) is headed and ended by a `{previous, home, next}` line,
+  in the repository's reading order. `scripts/update_doc_links.py` writes those lines; run it after adding, renaming or
+  retitling a document. Agent-facing files (`AGENTS.md`, `CLAUDE.md`, skills) and test notebooks have none. Link text
+  is human-readable, a document's title or a phrase naming it, never a path.
+- **The README opens with why.** A repository's README says, in its first sentence or paragraph, TL;DR style, why the
+  repository exists, in the terms of [why the mbse repositories exist](../MBSE.md); what it is comes after. Keep that opening true as the repository
+  changes.
+- **What an `AGENTS.md` holds.** What the repository is; a start-here table of what to read for each task; its commands;
+  and its own mechanics (its checks, scripts, contracts and exceptions). It cites the principles, the vocabulary and
+  these rules rather than stating them, with only the local delta where one applies, and it carries one rule of its
+  own: "Never write to `~/.claude/projects/*/memory/` or any hidden memory: what is worth keeping goes in the
+  repository." A repository's `CLAUDE.md` is `@AGENTS.md` and nothing more.
 
 ## Other documents
 
@@ -168,7 +187,7 @@ and cites the entry rather than describe the decision again.
   that only looks like one, in documents and in source comments alike. Its path is relative and resolves in a polyrepo
   checkout, where every repository sits beside mbse-basis (`../mbse-schemas/docs/EQUIVALENCE.md` from a repository's
   root). Its label is legible: an item's ID and abbreviated title (`[CAP-013: an in-memory store journaled to
-  DynamoDB](…)`), a document's path without the leading `../` (`[mbse-schemas/docs/EQUIVALENCE.md](…)`). A link to an
+  DynamoDB](…)`), and a document's title or a phrase naming it, never a path (Rules for every document). A link to an
   item reaches its own anchor, or its detail file where it has one. An item's title is written once, in the head of its
   index entry; `scripts/update_item_titles.py` copies it into every label.
 - **Documents don't link source files.** Links between documents and code point the other way: a source file names,
