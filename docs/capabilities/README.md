@@ -14,23 +14,17 @@ than in each repository's design document.
 
 ### Equivalent implementations
 
-- <a id="CAP-024"></a>**CAP-024: the same conformance corpora** · proposed · Every repository's Python and TypeScript implementations pass the same
-  conformance corpora (CONF suites): the same names, errors and messages, and byte-identical JSON. *Implements*
-  [FEA-019: equivalent implementations](../features/README.md#FEA-019).
-  - **Current**: met in mbse-schemas, mbse-expressions, mbse-patterns and mbse-programs; to assess in
-    mbse-codegen-python.
-- <a id="CAP-030"></a>**CAP-030: the same cases in both languages** · proposed · Every repository's tests and tutorials hold the same cases in both
-  languages. *Implements* [FEA-019: equivalent implementations](../features/README.md#FEA-019).
-  - **Current**: as [CAP-024: the same conformance corpora](#CAP-024)'s: met in mbse-schemas, mbse-expressions, mbse-patterns and mbse-programs; to assess in
-    mbse-codegen-python.
-- <a id="CAP-031"></a>**CAP-031: 100% coverage of both** · proposed · Every repository's tests cover 100% of both implementations. *Implements*
-  [FEA-019: equivalent implementations](../features/README.md#FEA-019).
-  - **Current**: as [CAP-024: the same conformance corpora](#CAP-024)'s: met in mbse-schemas, mbse-expressions, mbse-patterns and mbse-programs; to assess in
-    mbse-codegen-python.
-- <a id="CAP-032"></a>**CAP-032: deliberate differences listed** · proposed · Each deliberate difference between a repository's implementations is
-  listed in its `docs/EQUIVALENCE.md`. *Implements* [FEA-019: equivalent implementations](../features/README.md#FEA-019).
-  - **Current**: as [CAP-024: the same conformance corpora](#CAP-024)'s: met in mbse-schemas, mbse-expressions, mbse-patterns and mbse-programs; to assess in
-    mbse-codegen-python.
+These four were conventions every repository follows rather than increments of one release, and became principles
+that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-019). Their IDs and entries stay, so that citations still resolve.
+
+- <a id="CAP-024"></a>**CAP-024: the same conformance corpora** · superseded by [PRI-037: the same conformance corpora](../PRINCIPLES.md#PRI-037) · Every repository's
+  Python and TypeScript implementations pass the same conformance corpora.
+- <a id="CAP-030"></a>**CAP-030: the same cases in both languages** · superseded by [PRI-038: the same cases in both languages](../PRINCIPLES.md#PRI-038) · Every
+  repository's tests and tutorials hold the same cases in both languages.
+- <a id="CAP-031"></a>**CAP-031: 100% coverage of both** · superseded by [PRI-039: 100% coverage of both](../PRINCIPLES.md#PRI-039) · Every repository's tests
+  cover 100% of both implementations.
+- <a id="CAP-032"></a>**CAP-032: deliberate differences listed** · superseded by [PRI-040: deliberate differences listed](../PRINCIPLES.md#PRI-040) · Each deliberate
+  difference between a repository's implementations is listed in its `docs/EQUIVALENCE.md`.
 
 ### Open-world models
 

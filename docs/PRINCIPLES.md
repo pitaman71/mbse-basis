@@ -10,11 +10,13 @@ what a release solves, a principle how every solution is shaped.
 Most principles shape the product: a user could notice one broken, in how the product behaves or how its API reads
 ([PRI-004: one visitor protocol per kind](#PRI-004); [PRI-007: three-valued checking on request](#PRI-007)). Some shape the work instead, and only a
 contributor could notice them broken ([PRI-016: guidance written once](#PRI-016)); these are conventions, which serve qualities an
-engineering persona values (README, Conventions).
+engineering persona values, such as [QUA-010: every repository works alike](QUALITIES.md#QUA-010) ([the basis](README.md#the-design-spec), Conventions). Each of [PRI-028: both implementations change together](#PRI-028) onward says which
+it governs.
 
 A principle is cited where it applies, with bridge language giving its gist, not its full statement. *Applied in*
 names where each already holds, so that those local texts can be replaced by bridged citations. [PRI-001: declaration order](#PRI-001) and [PRI-002: preserve, don't lose](#PRI-002) are the original draft; [PRI-003: everything is schema data](#PRI-003) to [PRI-019: fluent builder syntax](#PRI-019) were
-promoted from decisions each repository made separately.
+promoted from decisions each repository made separately; [PRI-028: both implementations change together](#PRI-028) to [PRI-040: deliberate differences listed](#PRI-040) were
+promoted from the conventions each repository's `AGENTS.md` copied, and from capabilities of [FEA-019: equivalent implementations](features/README.md#FEA-019).
 
 ## Index
 
@@ -72,7 +74,7 @@ promoted from decisions each repository made separately.
   *Serves* [QUA-004: models as an alternative representation of source code](QUALITIES.md#QUA-004).
   *Applied in*: adjacencies as members, unset as `None`, flat unions (mbse-schemas); bridges (mbse-codegen-python).
 - <a id="PRI-011"></a>**PRI-011: the lowest repository that can own it** · proposed · A capability lives in the lowest repository that can own it without gaining a dependency; a
-  bridge between two lives in the repository that depends on both. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005), [QUA-003: no second-order inventions](QUALITIES.md#QUA-003).
+  bridge between two lives in the repository that depends on both. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005), [QUA-003: no second-order inventions](QUALITIES.md#QUA-003), [QUA-010: every repository works alike](QUALITIES.md#QUA-010).
   *Applied in*: constraints kept in mbse-patterns, not mbse-schemas; parsers and dialect bridges in mbse-programs, not
   mbse-expressions.
 - <a id="PRI-012"></a>**PRI-012: model published standards** · proposed · Model published standards rather than invent: datatypes, value domains, language versions and
@@ -104,8 +106,8 @@ promoted from decisions each repository made separately.
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
 - <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
   implementation's skill shows usage in its own language, covering the same topics in the same order as the other's;
-  concepts live once, in the design document, which each skill links to rather than restates. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001).
-  *Relates to* [CAP-024: the same conformance corpora](capabilities/README.md#CAP-024).
+  concepts live once, in the design document, which each skill links to rather than restates. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001),
+  [QUA-010: every repository works alike](QUALITIES.md#QUA-010). *Relates to* [PRI-037: the same conformance corpora](#PRI-037), [PRI-036: every program in a skill is complete and run; fragments are tagged as fragments](#PRI-036).
 - <a id="PRI-017"></a>**PRI-017: transforms, models, dialects, schemas** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* [PRI-014: every ambiguity a decision](#PRI-014), [PRI-018: no model needs code to read or write](#PRI-018).
 - <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "No model should need code to read or write. Ever." All model data is governed by a schema,
@@ -153,14 +155,87 @@ promoted from decisions each repository made separately.
   written against one binding, or against generated source code, behaves the same against any other: the same
   results, errors and wire format, so that a developer need not test each binding apart. *Serves*
   [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Applied in*: [FEA-036: serialization behavior is consistent across bindings and generated source code](features/FEA-036.md).
+- <a id="PRI-028"></a>**PRI-028: both implementations change together** · proposed · Where a repository has a Python and a
+  TypeScript implementation, they are one library in two languages: the same API (the same modules, classes, methods
+  and argument order, with the same names, snake_case included), the same behavior (the same results, the same error
+  classes and byte-identical error and validation messages, [PRI-009: one error shape](#PRI-009)), and the same data on the wire
+  ([PRI-037: the same conformance corpora](#PRI-037)). A change to one is made to both in the same commit: the same names and messages, the test
+  case added or changed in both suites under the same ID and position ([PRI-038: the same cases in both languages](#PRI-038)), the corpora regenerated in
+  both, and both suites run under their coverage gates ([PRI-039: 100% coverage of both](#PRI-039)). Only a language's unavoidable mechanics
+  differ, and a difference not listed is a bug ([PRI-040: deliberate differences listed](#PRI-040)). *Governs* the product. *Serves* [QUA-006: the same in every language](QUALITIES.md#QUA-006).
+  *Relates to* [PRI-027: developers can assume completely consistent behavior across bindings and generated source code](#PRI-027), [FEA-019: equivalent implementations](features/README.md#FEA-019).
+  *Applied in*: each repository's `docs/EQUIVALENCE.md`, which keeps its own checks, commands and exceptions (mbse-schemas'
+  adapters, each translating its own language's type declarations).
+- <a id="PRI-029"></a>**PRI-029: parallel work in polyrepo workspaces** · proposed · Agents and people working at the same
+  time each work in a workspace, `python3 ../mbse-basis/scripts/polyrepo.py workspace <dir> --branch <name>`: git
+  worktrees of the repository and of its siblings side by side, so that the relative paths to the siblings hold, the
+  repository on the branch, and each sibling the change spans named by `--edit <sibling>` and on the same branch.
+  They install there, and `land` the workspace when done, siblings before their dependents. A sibling is changed only
+  so, never by editing its checkout from another repository's work; a worktree of one repository alone, such as an
+  agent's built-in worktree isolation, breaks the relative paths. *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010).
+  *Relates to* [PRI-032: a sibling's gap is reported, not worked around](#PRI-032), [PRI-033: work lands by branch and pull request](#PRI-033).
+- <a id="PRI-030"></a>**PRI-030: one package layout** · proposed · Every repository lays out its packages alike: Python's under
+  `python3/mbse/<Area>/` as `mbse.<Area>` or `mbse.<Area>.<Name>`, TypeScript's under `typescript5/` as
+  `@mbse/<name>`, the repository's name without `mbse-`; the area and name capitalized as mbse-schemas has them
+  (`mbse.Schemas`, `mbse.Services.Rest`, `mbse.Persistence.DynamoDB`, `mbse.Demos.Apps`). *Governs* the product: a user
+  sees it in every import. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005).
+- <a id="PRI-031"></a>**PRI-031: the version is the contract** · proposed · A repository's Python and TypeScript packages share one
+  version, and a release is the tag `v<version>`. A sibling is compatible when it has the same major version (the same
+  minor below 1.0) and is no older, so below 1.0 a change that dependents must adapt to bumps the minor version.
+  Dependents develop against the sibling's checkout as it is, and pin the version and commit they were tested with in
+  `siblings.json`, with `polyrepo.py pin`; a sibling without packages, such as mbse-basis, is pinned by commit alone.
+  `scripts/polyrepo.py` carries it out (`polyrepo.py help`). *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010).
+- <a id="PRI-032"></a>**PRI-032: a sibling's gap is reported, not worked around** · proposed · A repository uses its siblings as
+  they stand. A gap or bug found in a sibling is reported to the user, and recorded under Blocked in the item it keeps
+  from being met ([the basis](README.md#detail-files), Detail files); it is fixed in the sibling, through a workspace ([PRI-029: parallel work in polyrepo workspaces](#PRI-029)), never worked
+  around locally. *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010). *Relates to* [PRI-011: the lowest repository that can own it](#PRI-011).
+- <a id="PRI-033"></a>**PRI-033: work lands by branch and pull request** · proposed · Work is never committed to a repository's
+  default branch: it is done on a branch, the same name in each repository it changes, pushed after every commit with
+  `polyrepo.py push` (which pushes the siblings first, and refuses a branch behind its remote or a pin of a commit the
+  sibling lacks), and proposed in one pull request per repository, listing the decisions taken for review
+  ([the basis](README.md#detail-files), Decided by an agent, for review). *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010).
+- <a id="PRI-034"></a>**PRI-034: tutorials run as tests, committed with their outputs** · proposed · Each tutorial
+  ([the basis](README.md#the-doc-spec), Tutorials) is run by the repository's test suite, `tutorials/` beside `tests/`; the languages tell the same case
+  studies with the same outputs; and a tutorial is committed with its outputs, re-executed after any change that
+  alters them. *Governs* the product: a reader sees stale outputs. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001). *Relates to* [PRI-038: the same cases in both languages](#PRI-038).
+- <a id="PRI-035"></a>**PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages** · proposed · A
+  repository's tests ([the basis](README.md#the-doc-spec), Tests) are Jupyter notebooks, one suite per notebook, with the same case IDs in the same
+  order in both languages. Each case is a markdown cell `## ID · title` followed by one code cell. Notebooks are JSON
+  written with `indent=1`, `sort_keys=True` and `ensure_ascii=False`. Each language's `tests/TestPlan.md` lists the
+  cases; the second language's lists only its differences. *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010),
+  [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [PRI-038: the same cases in both languages](#PRI-038).
+  *Applied in*: mbse-schemas, mbse-expressions, mbse-patterns, mbse-programs, mbse-codegen-python.
+  *Not yet applied*: mbse-rest, mbse-dynamodb and mbse-demo-apps (pytest modules) and mbse-react (Vitest).
+- <a id="PRI-036"></a>**PRI-036: every program in a skill is complete and run; fragments are tagged as fragments** · proposed · Every
+  fenced block tagged `python` or `typescript` in a skill ([the basis](README.md#the-doc-spec), Skills) is a complete program that the repository's
+  test suite runs (each repository's SKL-02); a fragment is tagged `python fragment` or `typescript fragment`.
+  *Governs* the product: an agent copies what a skill shows. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001). *Relates to* [PRI-016: guidance written once](#PRI-016).
+- <a id="PRI-037"></a>**PRI-037: the same conformance corpora** · proposed · Every repository's Python and TypeScript implementations
+  pass the same conformance corpora (CONF suites): the same names, errors and messages, and byte-identical JSON (the
+  same keys, key order, float formatting, escapes and whitespace); each implementation reads the other's output back
+  into the same values. *Governs* the product. *Serves* [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [FEA-019: equivalent implementations](features/README.md#FEA-019).
+  Formerly [CAP-024: the same conformance corpora](capabilities/README.md#CAP-024).
+  - **Current**: met in mbse-schemas, mbse-expressions, mbse-patterns and mbse-programs; to assess in
+    mbse-codegen-python.
+- <a id="PRI-038"></a>**PRI-038: the same cases in both languages** · proposed · Every repository's tests and tutorials hold the
+  same cases in both languages: the same suites and case IDs, in the same order, with the same assertions. *Governs*
+  the work. *Serves* [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [FEA-019: equivalent implementations](features/README.md#FEA-019). Formerly [CAP-030: the same cases in both languages](capabilities/README.md#CAP-030).
+  - **Current**: as [PRI-037: the same conformance corpora](#PRI-037)'s.
+- <a id="PRI-039"></a>**PRI-039: 100% coverage of both** · proposed · Every repository's tests cover 100% of both implementations'
+  code, gated by each language's coverage tool: statements and branches in Python; statements, branches, functions
+  and lines in TypeScript. A gap is closed by an assertion in the shared case, in both suites under the same ID, or by
+  removing the code no input reaches from both; never by excluding it. *Governs* the work. *Serves* [QUA-006: the same in every language](QUALITIES.md#QUA-006).
+  *Relates to* [FEA-019: equivalent implementations](features/README.md#FEA-019). Formerly [CAP-031: 100% coverage of both](capabilities/README.md#CAP-031).
+  - **Current**: as [PRI-037: the same conformance corpora](#PRI-037)'s.
+- <a id="PRI-040"></a>**PRI-040: deliberate differences listed** · proposed · Each deliberate difference between a repository's
+  implementations, one its languages force, is listed in its `docs/EQUIVALENCE.md` and in both test plans, with the
+  cases that assert it; a difference not listed is a bug. *Governs* the product. *Serves* [QUA-006: the same in every language](QUALITIES.md#QUA-006).
+  *Relates to* [FEA-019: equivalent implementations](features/README.md#FEA-019). Formerly [CAP-032: deliberate differences listed](capabilities/README.md#CAP-032).
+  - **Current**: as [PRI-037: the same conformance corpora](#PRI-037)'s.
 
 ## Open items
 
 - **[PRI-015: concrete references are programmatic](#PRI-015) and [PRI-017: transforms, models, dialects, schemas](#PRI-017) to [PRI-019: fluent builder syntax](#PRI-019): what they serve.** Which qualities each serves is still to state.
-- **Conventions among the principles.** [PRI-011: the lowest repository that can own it](#PRI-011) and [PRI-016: guidance written once](#PRI-016) govern
-  the work rather than the product (README, Conventions). Each is to serve a quality an engineering persona values,
-  and none exists yet (Qualities, open items). The conventions in each repository's `AGENTS.md` join them in a later
-  batch.
 - **[PRI-001: declaration order](#PRI-001)'s exception and a proposal against it.** Decide whether entries sorted by their relation's key are a
   deliberate exception (an order by value, for byte-identity) or a debt against [PRI-001: declaration order](#PRI-001). [CAP-033: undeclared properties preserved](capabilities/CAP-033.md#open-questions)
   also proposes writing preserved properties sorted by name, against [PRI-001: declaration order](#PRI-001).
