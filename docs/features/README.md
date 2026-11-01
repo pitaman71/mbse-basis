@@ -53,7 +53,11 @@ specifications.
   up front, and kept in the trace. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001). *Relates to*
   [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014). Formerly CAP-040.
 - <a id="FEA-001"></a>**FEA-001: schema-driven UI** · adopted · external · Services and UI present an app driven by its
-  schemas, extended by schema-aware code only where wanted. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-001.md)
+  schemas, extended by schema-aware code only where wanted. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008), [QUA-011: fully responsive views](../QUALITIES.md#QUA-011)
+  to [QUA-013: device-native gestures](../QUALITIES.md#QUA-013). [Detail](FEA-001.md)
+- <a id="FEA-044"></a>**[FEA-044: demo apps](FEA-044.md)** · proposed · external · Small, complete mbse apps show the
+  schema-driven UI and services working end to end, from an app's schemas to its index site. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+  *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
 - <a id="FEA-003"></a>**FEA-003: no-code logical views** · adopted · external · Query formats the backend serves as
   mutation expressions, requested alone or nested in one response. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-003.md)
 - <a id="FEA-004"></a>**FEA-004: index site browser views** · adopted · external · Browsing schemas, objects and
@@ -64,6 +68,12 @@ specifications.
   [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-006.md)
 - <a id="FEA-007"></a>**FEA-007: property kinds** · adopted · external · Each property is shown and edited as its kind
   calls for, with who wrote it and when. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). [Detail](FEA-007.md)
+- <a id="FEA-047"></a>**[FEA-047: content management dialect](FEA-047.md)** · proposed · external · Content, text from a
+  word to a document and the comments on it, is modeled in dialects of its own, shown and edited as its kind calls
+  for. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-007: property kinds](FEA-007.md).
+- <a id="FEA-048"></a>**[FEA-048: date/time dialect](FEA-048.md)** · proposed · external · Dates, times, durations and
+  intervals are modeled in an ISO 8601 dialect, each kept as written, validated, and read as the value it encodes.
+  *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-007: property kinds](FEA-007.md).
 - <a id="FEA-022"></a>**FEA-022: code generation** · proposed · external · Models generate source code in each language
   family's own form, and are read back from it: a model is the source's alternative representation, not a description
   of it. *Confers* [QUA-004: models as an alternative representation of source code](../QUALITIES.md#QUA-004). Its capabilities: [CAP-027: Python3 source generated from schemas](../capabilities/CAP-027.md),
@@ -78,7 +88,31 @@ specifications.
 - <a id="FEA-039"></a>**[FEA-039: search, sort and filter in browser views](FEA-039.md)** · proposed · external · Users search, sort and filter browser views, through logical views as the lens of every search. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 - <a id="FEA-040"></a>**[FEA-040: tenancy](FEA-040.md)** · proposed · external · An app's instances keep each tenant's data as private as its tenancy says, from one private instance for a demo to many users who share only what they choose. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 - <a id="FEA-041"></a>**[FEA-041: agent chat integration](FEA-041.md)** · proposed · external · Users chat in the app, with an AI agent and model of their choice, over its modeled data. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+- <a id="FEA-049"></a>**[FEA-049: MCP integration](FEA-049.md)** · proposed · external · AI agents reach an app's modeled data over MCP. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001). *Relates to* [FEA-041: agent chat integration](FEA-041.md).
 - <a id="FEA-042"></a>**[FEA-042: constraint enforcement in place of bespoke workarounds](FEA-042.md)** · proposed · external · What bespoke workarounds handle today, such as properties shared among objects, is enforced by constraints. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+
+### Stacks
+
+The popular stacks the framework supports out of the box, as plugins: each a UI stack, which relates to
+[FEA-001: schema-driven UI](FEA-001.md), or a service stack, which relates to [FEA-003: no-code logical views](FEA-003.md), related
+to that feature but orthogonal to it, as the user decided ([FEA-045: a Python, FastAPI and DynamoDB service stack](FEA-045.md#decided)).
+
+- <a id="FEA-045"></a>**[FEA-045: a Python, FastAPI and DynamoDB service stack](FEA-045.md)** · proposed · external · Services run out of the box on Python and FastAPI, persisted in DynamoDB. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-003: no-code logical views](FEA-003.md).
+- <a id="FEA-051"></a>**[FEA-051: a TypeScript service stack](FEA-051.md)** · proposed · external · Services run out of the box on TypeScript. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-003: no-code logical views](FEA-003.md).
+- <a id="FEA-046"></a>**[FEA-046: a React, TypeScript and CSS-in-TS UI stack](FEA-046.md)** · proposed · external · The UI runs out of the box on React and TypeScript, styled in CSS-in-TS. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
+- <a id="FEA-050"></a>**[FEA-050: a React Native UI stack](FEA-050.md)** · proposed · external · The UI runs out of the box on React Native. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
+- <a id="FEA-052"></a>**[FEA-052: an iOS native UI stack](FEA-052.md)** · proposed · external · The UI runs out of the box natively on iOS. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
+- <a id="FEA-053"></a>**[FEA-053: an Android native UI stack](FEA-053.md)** · proposed · external · The UI runs out of the box natively on Android. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
+- <a id="FEA-054"></a>**[FEA-054: an Angular UI stack](FEA-054.md)** · proposed · external · The UI runs out of the box on Angular. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
+- <a id="FEA-055"></a>**[FEA-055: a Vue UI stack](FEA-055.md)** · proposed · external · The UI runs out of the box on Vue. *Confers*
+  [QUA-008: usable without code](../QUALITIES.md#QUA-008). *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
 
 ### Schema-driven data
 
@@ -108,7 +142,7 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
 - <a id="FEA-026"></a>**[FEA-026: deterministic object identity](FEA-026.md)** · proposed · external · Objects are
   identified from the model, never at random, so that the same model built twice, or in another language, gives the
   same identities. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
-- <a id="FEA-030"></a>**[FEA-030: transactions](FEA-030.md)** · proposed · external · A store changes only by transactions
+- <a id="FEA-030"></a>**[FEA-030: clean mutation-based transactional API](FEA-030.md)** · proposed · external · A store changes only by transactions
   that commit all or nothing, journaled, snapshotted and replayed, each recorded with who made it and when, so that a
   store's history is the trace of what changed. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
 - <a id="FEA-027"></a>**[FEA-027: mutations as queries](FEA-027.md)** · proposed · external · A store is queried and

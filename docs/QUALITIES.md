@@ -11,7 +11,7 @@ principles serve them.
 
 - <a id="QUA-001"></a>**QUA-001: AI and humans in the loop** · adopted · AI and humans are always in the loop at every step. *Conferred by*
   [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018),
-  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md), [FEA-026: deterministic object identity](features/FEA-026.md), [FEA-030: transactions](features/FEA-030.md), [FEA-041: agent chat integration](features/FEA-041.md).
+  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md), [FEA-026: deterministic object identity](features/FEA-026.md), [FEA-030: clean mutation-based transactional API](features/FEA-030.md), [FEA-041: agent chat integration](features/FEA-041.md), [FEA-049: MCP integration](features/FEA-049.md).
 - <a id="QUA-002"></a>**QUA-002: open-world models** · adopted · Models are open-world by default, allowing incremental addition of detail
   that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020),
   [FEA-023: patterns over data](features/FEA-023.md).
@@ -27,7 +27,7 @@ principles serve them.
   to community, and the interfaces between levels. *Conferred by* [FEA-010: system behavior](features/README.md#FEA-010) to [FEA-016: community behavior](features/README.md#FEA-016), and [FEA-037: the framework built on its own protocols](features/FEA-037.md).
 - <a id="QUA-008"></a>**QUA-008: usable without code** · proposed · Any model is usable without code written for it: browsed, inspected,
   edited and persisted from its schemas alone. *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md), [FEA-003: no-code logical views](features/FEA-003.md) to [FEA-007: property kinds](features/FEA-007.md),
-  [FEA-025: serialization behavior conventions in schema](features/FEA-025.md), [FEA-027: mutations as queries](features/FEA-027.md), [FEA-028: one API surface for all data access](features/FEA-028.md), [FEA-029: excluding imperative visitor expressions](features/FEA-029.md), [FEA-034: analytic behavior conventions in schema](features/FEA-034.md), [FEA-031: schemas as extensible data](features/FEA-031.md), [FEA-033: model parameters](features/FEA-033.md), [FEA-038: no-code secure services](features/FEA-038.md) to [FEA-040: tenancy](features/FEA-040.md), [FEA-042: constraint enforcement in place of bespoke workarounds](features/FEA-042.md).
+  [FEA-025: serialization behavior conventions in schema](features/FEA-025.md), [FEA-027: mutations as queries](features/FEA-027.md), [FEA-028: one API surface for all data access](features/FEA-028.md), [FEA-029: excluding imperative visitor expressions](features/FEA-029.md), [FEA-034: analytic behavior conventions in schema](features/FEA-034.md), [FEA-031: schemas as extensible data](features/FEA-031.md), [FEA-033: model parameters](features/FEA-033.md), [FEA-038: no-code secure services](features/FEA-038.md) to [FEA-040: tenancy](features/FEA-040.md), [FEA-042: constraint enforcement in place of bespoke workarounds](features/FEA-042.md), [FEA-044: demo apps](features/FEA-044.md) to [FEA-048: date/time dialect](features/FEA-048.md), and [FEA-050: a React Native UI stack](features/FEA-050.md) to [FEA-055: a Vue UI stack](features/FEA-055.md).
 - <a id="QUA-009"></a>**QUA-009: modeling provides clean separation of applications across constructs** · proposed · Each
   modeling construct has one clean application, so that what a model means does not depend on how a construct is
   stretched to serve another's. *Conferred by* [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md).
@@ -35,6 +35,13 @@ principles serve them.
   agent, who knows how one mbse repository is worked in can work in any other without learning local customs, and
   work done in parallel does not collide. *Conferred by* no feature yet; *served by* the principles that govern the
   work ([PRINCIPLES.md](PRINCIPLES.md)): [PRI-011: the lowest repository that can own it](PRINCIPLES.md#PRI-011), [PRI-016: guidance written once](PRINCIPLES.md#PRI-016), [PRI-029: parallel work in polyrepo workspaces](PRINCIPLES.md#PRI-029), [PRI-031: the version is the contract](PRINCIPLES.md#PRI-031) to [PRI-033: work lands by branch and pull request](PRINCIPLES.md#PRI-033) and [PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages](PRINCIPLES.md#PRI-035).
+- <a id="QUA-011"></a>**QUA-011: fully responsive views** · proposed · Views are fully responsive balancing window
+  resize, proportionate initial allocation of major display sections, value abbreviation, and font scaling.
+  *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md).
+- <a id="QUA-012"></a>**QUA-012: auto-scrolling views** · proposed · Auto scrolling on all views. *Conferred by*
+  [FEA-001: schema-driven UI](features/FEA-001.md).
+- <a id="QUA-013"></a>**QUA-013: device-native gestures** · proposed · Views prefer device-native gestures (esp.
+  pinch/scroll/pan/zoom). *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md).
 
 ## Earlier IDs
 
