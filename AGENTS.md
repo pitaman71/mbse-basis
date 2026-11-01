@@ -8,8 +8,14 @@ and cite its items by ID.
 
 ## Start here
 
-Read [docs/README.md](docs/README.md): the kinds of item, their relations, statuses and the rules for writing them.
-Then read the index of whichever kind your task touches; each is short enough to read whole.
+Agents must read these documents before doing any work:
+
+- [The mbse basis](docs/README.md)
+- [Principles](docs/PRINCIPLES.md)
+- [Features](docs/features/README.md)
+- [Capabilities](docs/capabilities/README.md)
+
+These may be read selectively, on demand: [Vocabulary](docs/VOCABULARY.md) and [Qualities](docs/QUALITIES.md).
 
 ## Invariants
 

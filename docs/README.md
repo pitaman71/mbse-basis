@@ -85,13 +85,16 @@ every program in a skill is run ([PRI-036: every program in a skill is complete 
   repository exists, in the terms of [why the mbse repositories exist](../MBSE.md); what it is comes after. Keep that opening true as the repository
   changes.
 - **What an `AGENTS.md` holds.** What the repository is; a start-here table of what to read for each task; its commands;
-  and its own mechanics (its checks, scripts, contracts and exceptions). It cites the principles, the vocabulary and
-  these rules rather than stating them, with only the local delta where one applies, and it carries one rule of its
-  own: "Never write to `~/.claude/projects/*/memory/` or any hidden memory: what is worth keeping goes in the
-  repository." A citation is the link alone, with no gloss or selective copy of what it states, as the user decided
-  on 2026-11-01: "You are duplicating ideas that are already covered in files the agent should read anyway. Just quote
-  them as a link rather than proliferating selective copies here." A repository's `CLAUDE.md` is `@AGENTS.md` and
-  nothing more.
+  and its own mechanics (its checks, scripts, contracts and exceptions), stated nowhere else. Every repository's
+  `AGENTS.md` gives the same reading list in the same priority. Must read before any work: [the mbse basis](README.md),
+  [principles](PRINCIPLES.md), [features](features/README.md) and [capabilities](capabilities/README.md). Read
+  selectively, on demand: [vocabulary](VOCABULARY.md) and [qualities](QUALITIES.md). It enumerates no items within
+  them, as the user decided on 2026-11-01: "AGENTS.md instructs the agents on a consistent priority of files that must
+  be read. Do not enumerate specific items within the documents that must be read." and "Agents *must* read these docs
+  before doing any work: mbse-basis/docs/README.md, mbse-basis/docs/PRINCIPLES.md, mbse-basis/features/README.md,
+  mbse-basis/capabilities/README.md. VOCAULBARY.md, PRIORITIES.md, QUALITIES.md may be read selectively or on
+  demand." It carries one rule of its own: "Never write to `~/.claude/projects/*/memory/` or any hidden memory: what
+  is worth keeping goes in the repository." A repository's `CLAUDE.md` is `@AGENTS.md` and nothing more.
 
 ## Other documents
 
