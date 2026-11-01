@@ -88,7 +88,10 @@ every program in a skill is run ([PRI-036: every program in a skill is complete 
   and its own mechanics (its checks, scripts, contracts and exceptions). It cites the principles, the vocabulary and
   these rules rather than stating them, with only the local delta where one applies, and it carries one rule of its
   own: "Never write to `~/.claude/projects/*/memory/` or any hidden memory: what is worth keeping goes in the
-  repository." A repository's `CLAUDE.md` is `@AGENTS.md` and nothing more.
+  repository." A citation is the link alone, with no gloss or selective copy of what it states, as the user decided
+  on 2026-11-01: "You are duplicating ideas that are already covered in files the agent should read anyway. Just quote
+  them as a link rather than proliferating selective copies here." A repository's `CLAUDE.md` is `@AGENTS.md` and
+  nothing more.
 
 ## Other documents
 
