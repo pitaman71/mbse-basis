@@ -293,39 +293,41 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
 
 - <a id="CAP-124"></a>**[CAP-124: writes all-or-nothing in transactions](CAP-124.md)** · proposed · Every write to a
   store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
-  apart from another's. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  apart from another's. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · proposed · Code that calls builders
   writes within a transaction's imperative scope, all or nothing, as an expression's terms do. *Implements*
-  [FEA-030: transactions](../features/FEA-030.md).
+  [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-127"></a>**[CAP-127: snapshots made of transactions](CAP-127.md)** · proposed · A store's snapshot is two
-  transactions, its schemas then its data, and reading one replays them. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  transactions, its schemas then its data, and reading one replays them. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-128"></a>**[CAP-128: graphs sent as one-transaction documents](CAP-128.md)** · proposed · A graph sent
   without its store is one transaction, its counted objects numbered within it, and the owned objects and singletons it
-  links referred to by path. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  links referred to by path. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-129"></a>**[CAP-129: journals replayed by execution](CAP-129.md)** · proposed · A journal is the list of
-  transactions as submitted, replayed by executing each again. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  transactions as submitted, replayed by executing each again. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-134"></a>**[CAP-134: transactions recorded with provenance](CAP-134.md)** · proposed · Each transaction
   that writes is recorded with when and where it ran, its session and its identity, and linked to the objects it created
-  or last modified, for the schemas an app chooses. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  or last modified, for the schemas an app chooses. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.26.3.
 - <a id="CAP-135"></a>**[CAP-135: provenance records reproducible and attributable](CAP-135.md)** · proposed · Every
   transaction's provenance record is reproducible and attributable: none gets a random `uid`, the clock's time or the
   shared session `unknown`, whether it comes from an imperative scope or from an expression that names none.
-  *Implements* [FEA-030: transactions](../features/FEA-030.md).
+  *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
 
-- <a id="CAP-164"></a>**[CAP-164: subsequent snapshots sent as transactions](CAP-164.md)** · proposed · A stateful writer sends a store's later snapshots as the transactions since the last, without its modules and schemas again. *Implements* [FEA-030: transactions](../features/FEA-030.md).
+- <a id="CAP-164"></a>**[CAP-164: subsequent snapshots sent as transactions](CAP-164.md)** · proposed · A stateful writer sends a store's later snapshots as the transactions since the last, without its modules and schemas again. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
 - <a id="CAP-178"></a>**[CAP-178: an object's provenance read through its own named adjacencies](CAP-178.md)** · proposed · An
   object whose schema has a history links its provenance records through named adjacencies of its own, so that they
-  are read from its side, not by a map over every record. *Implements* [FEA-030: transactions](../features/FEA-030.md). *Relates to*
+  are read from its side, not by a map over every record. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to*
   [CAP-134: transactions recorded with provenance](CAP-134.md).
   - **Current**: not met (checked in mbse-schemas 0.26.4: `Provenance.extend` gives anonymous adjacencies).
+- <a id="CAP-206"></a>**[CAP-206: transactions sent and answered as mutations over REST](CAP-206.md)** · proposed · mbse-rest sends and answers transactions as mutations, the primary if not exclusive encoding and serialization of its queries and responses. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to* [CAP-012: logical view endpoints](CAP-012.md).
+  - **Current**: not met.
 
 ### Mutations as queries
 
@@ -601,8 +603,10 @@ Each capability's specification is in its own detail file, linked from the ID. *
 before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dynamodb and mbse-demo-apps.
 
 - <a id="CAP-001"></a>**[CAP-001: no-code index view](CAP-001.md)** · adopted · Services and UI
-  present a useful and usable index site driven exclusively by the schema. *Implements* [FEA-001: schema-driven UI](../features/FEA-001.md).
+  present a useful and usable index site driven exclusively by the schema. *Implements* [FEA-001: schema-driven UI](../features/FEA-001.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
+- <a id="CAP-218"></a>**[CAP-218: low-code custom views](CAP-218.md)** · proposed · Services and UI are extended gracefully by schema-aware code a developer provides. *Implements* [FEA-001: schema-driven UI](../features/FEA-001.md).
+  - **Current**: not met.
 - <a id="CAP-002"></a>**[CAP-002: named schema list](CAP-002.md)** · adopted · An endpoint returns
   every named schema. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
   - **Current**: met, by the store's schema snapshot, which holds every named schema ([As built](CAP-002.md#as-built)).
@@ -611,52 +615,56 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   - **Current**: blocked: mbse-schemas cannot yet write one schema object as a document.
 - <a id="CAP-004"></a>**[CAP-004: logical view templates](CAP-004.md)** · adopted · An endpoint
   returns, for every logical view kind, a mutation-query template whose symbols the UI gives each a schema or a
-  reference. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
+  reference. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-012"></a>**[CAP-012: logical view endpoints](CAP-012.md)** · adopted · One endpoint per
-  logical view kind, taking a template with its symbols given and returning a stream of frames. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
+  logical view kind, taking a template with its symbols given and returning a stream of frames. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
   - **Current**: to assess.
 - <a id="CAP-005"></a>**[CAP-005: label and summary view](CAP-005.md)** · adopted · Logical view as label and summary: the
-  minimum-sized view of an object or a relation entry. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
+  minimum-sized view of an object or a relation entry. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-006"></a>**[CAP-006: chip view](CAP-006.md)** · adopted · Logical view as chip: a medium-sized,
-  abbreviated view of an object or a relation entry. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
+  abbreviated view of an object or a relation entry. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-007"></a>**[CAP-007: detail view](CAP-007.md)** · adopted · Logical view of an object as detail: every
-  schema-defined property and adjacency. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
+  schema-defined property and adjacency. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-008"></a>**[CAP-008: adjacency as a list of chips](CAP-008.md)** · adopted · Logical view of an adjacency as a list of
-  chips: the immediate adjacencies of an object through one named adjacency. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
+  chips: the immediate adjacencies of an object through one named adjacency. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-009"></a>**[CAP-009: schema browser](CAP-009.md)** · adopted · A section per named app
-  schema, with a scrollable list of object chips. *Implements* [FEA-004: index site browser views](../features/FEA-004.md).
+  schema, with a scrollable list of object chips. *Implements* [FEA-004: index site browser views](../features/FEA-004.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-010"></a>**[CAP-010: object browser](CAP-010.md)** · adopted · A section per directory,
-  with the chips of the objects its singleton holds. *Implements* [FEA-004: index site browser views](../features/FEA-004.md).
+  with the chips of the objects its singleton holds. *Implements* [FEA-004: index site browser views](../features/FEA-004.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-011"></a>**[CAP-011: relation browser](CAP-011.md)** · adopted · A section per relation
-  entry, its properties' chip aside its linked objects' chips. *Implements* [FEA-004: index site browser views](../features/FEA-004.md).
+  entry, its properties' chip aside its linked objects' chips. *Implements* [FEA-004: index site browser views](../features/FEA-004.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-017"></a>**[CAP-017: object inspector](CAP-017.md)** · adopted · A shared panel showing
-  the detail view of whatever object a gesture picks. *Implements* [FEA-005: inspector views](../features/FEA-005.md).
+  the detail view of whatever object a gesture picks. *Implements* [FEA-005: inspector views](../features/FEA-005.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: complete (mbse-react, M3; editing added by [CAP-014: properties as markdown](CAP-014.md)).
 - <a id="CAP-018"></a>**[CAP-018: adjacency inspector](CAP-018.md)** · adopted · Viewing and editing an
-  entry and its outbound object, extant or proposed. *Implements* [FEA-005: inspector views](../features/FEA-005.md).
+  entry and its outbound object, extant or proposed. *Implements* [FEA-005: inspector views](../features/FEA-005.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-019"></a>**[CAP-019: adjacencies at the end of a detail](CAP-019.md)** · adopted · Adjacencies at the end of a detail, each
-  entry previewed as one chip. *Implements* [FEA-005: inspector views](../features/FEA-005.md).
+  entry previewed as one chip. *Implements* [FEA-005: inspector views](../features/FEA-005.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-020"></a>**[CAP-020: provenance display](CAP-020.md)** · adopted · Who created an object,
-  and when it was created and last modified. *Implements* [FEA-005: inspector views](../features/FEA-005.md).
+  and when it was created and last modified. *Implements* [FEA-005: inspector views](../features/FEA-005.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-021"></a>**[CAP-021: lists ordered by creation](CAP-021.md)** · adopted · Adjacency lists ordered by creation where
-  provenance is present. *Implements* [FEA-005: inspector views](../features/FEA-005.md).
+  provenance is present. *Implements* [FEA-005: inspector views](../features/FEA-005.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
-- <a id="CAP-023"></a>**[CAP-023: relation inspector](CAP-023.md)** · adopted · The object inspector of
-  one object among its siblings, stepping to the previous or next. *Implements* [FEA-005: inspector views](../features/FEA-005.md).
+- <a id="CAP-023"></a>**[CAP-023: relation inspector, read-only](CAP-023.md)** · adopted · The object inspector of
+  one object among its siblings, stepping to the previous or next. *Implements* [FEA-005: inspector views](../features/FEA-005.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
+- <a id="CAP-209"></a>**[CAP-209: every property kind edited in the inspector](CAP-209.md)** · proposed · Every kind of property a schema declares is edited in the object inspector. *Implements* [FEA-005: inspector views](../features/FEA-005.md). *Relates to* [CAP-017: object inspector](CAP-017.md), [FEA-007: property kinds](../features/FEA-007.md).
+  - **Current**: not met.
+- <a id="CAP-210"></a>**[CAP-210: relation entries created, edited and removed in the relation inspector](CAP-210.md)** · proposed · Relation entries are created, edited and removed in the relation inspector. *Implements* [FEA-005: inspector views](../features/FEA-005.md). *Relates to* [CAP-023: relation inspector, read-only](CAP-023.md).
+  - **Current**: not met.
 - <a id="CAP-013"></a>**[CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md)** · adopted · An in-memory store journaled to DynamoDB,
-  with occasional snapshots, replayed at startup. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  with occasional snapshots, replayed at startup. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
   - **Current**: to assess.
 - <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until committed](CAP-176.md)** · proposed · A
   transaction's changes are held in builders and mutation frames until it commits, so that one refused or failed
@@ -667,26 +675,43 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   - **Current**: not met.
 - <a id="CAP-200"></a>**[CAP-200: journals persisted to AWS S3](CAP-200.md)** · proposed · A journal is persisted in AWS S3, by a new repository mbse-s3. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: not met.
-- <a id="CAP-201"></a>**[CAP-201: MCP served through the journal protocol](CAP-201.md)** · proposed · A new repository mbse-mcp serves MCP through the journal protocol and schema introspection. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md).
-  - **Current**: not met.
 - <a id="CAP-202"></a>**[CAP-202: journals persisted to MySQL](CAP-202.md)** · proposed · A journal is persisted in MySQL, by a new repository mbse-mysql. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  - **Current**: not met.
+- <a id="CAP-208"></a>**[CAP-208: a store initialized from its app's schemas](CAP-208.md)** · proposed · An app's store, and the database it persists to, is initialized from the app's schemas. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  - **Current**: not met.
+- <a id="CAP-220"></a>**[CAP-220: persistence in other NoSQL stores](CAP-220.md)** · proposed · A store persists in NoSQL stores besides DynamoDB. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-202: journals persisted to MySQL](CAP-202.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: not met.
 - <a id="CAP-014"></a>**[CAP-014: properties as markdown](CAP-014.md)** · adopted · Object properties as markdown, viewed and
   edited in the inspector. *Implements* [FEA-007: property kinds](../features/FEA-007.md).
   - **Current**: to assess.
 - <a id="CAP-022"></a>**[CAP-022: booleans as checkboxes](CAP-022.md)** · adopted · Boolean properties as checkboxes.
-  *Implements* [FEA-007: property kinds](../features/FEA-007.md).
+  *Implements* [FEA-007: property kinds](../features/FEA-007.md), [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md).
   - **Current**: to assess.
 - <a id="CAP-015"></a>**[CAP-015: transaction provenance](CAP-015.md)** · adopted · Services keep a
   record of each transaction that writes, as mbse-schemas' `Provenance` module defines it. *Implements* [FEA-007: property kinds](../features/FEA-007.md).
-  - **Current**: to assess.
-- <a id="CAP-016"></a>**[CAP-016: comments](CAP-016.md)** · adopted · Comments, as data in an app's schema,
-  shown and posted through general, schema-driven capabilities. *Implements* [FEA-007: property kinds](../features/FEA-007.md).
   - **Current**: to assess.
 - <a id="CAP-177"></a>**[CAP-177: sessions and identities from a validated token](CAP-177.md)** · proposed · A service
   writes into each transaction the session and identity a validated token gives, never one it is configured with or
   a client names. *Implements* [FEA-007: property kinds](../features/FEA-007.md). *Relates to* [CAP-015: transaction provenance](CAP-015.md), [CAP-191: private tenancy, behind login with sessions](CAP-191.md).
   - **Current**: not met (checked in mbse-rest's code on main: `MBSE_REST_USER`, the `x-mbse-session` header).
+
+### Demo apps
+
+- <a id="CAP-207"></a>**[CAP-207: a work-tracking demo app](CAP-207.md)** · proposed · A demo app tracks work: projects, features, capabilities, results and tasks, with comments and schedules. *Implements* [FEA-044: demo apps](../features/FEA-044.md).
+  - **Current**: met (checked in mbse-demo-apps' main at 34ad26f: the WorkTracker's schemas and seed, whose 12 tests pass).
+
+### Content management dialect
+
+- <a id="CAP-016"></a>**[CAP-016: comments](CAP-016.md)** · adopted · Comments, as data in an app's schema,
+  shown and posted through general, schema-driven capabilities. *Implements* [FEA-047: content management dialect](../features/FEA-047.md).
+  - **Current**: to assess.
+- <a id="CAP-211"></a>**[CAP-211: text as words, phrases, paragraphs and documents](CAP-211.md)** · proposed · Text is modeled as words, phrases, paragraphs and documents, dialects of a new repository mbse-domains, and the object detail shows each as its kind calls for. *Implements* [FEA-047: content management dialect](../features/FEA-047.md). *Relates to* [CAP-014: properties as markdown](CAP-014.md).
+  - **Current**: not met.
+
+### Date/time dialect
+
+- <a id="CAP-212"></a>**[CAP-212: dates, times, durations and intervals in ISO 8601](CAP-212.md)** · proposed · Dates, times, durations and intervals are modeled as ISO 8601 dialects of mbse-domains, each keeping its text as written, its validation errors, and the value it encodes. *Implements* [FEA-048: date/time dialect](../features/FEA-048.md). *Relates to* [CAP-134: transactions recorded with provenance](CAP-134.md), [CAP-211: text as words, phrases, paragraphs and documents](CAP-211.md).
+  - **Current**: not met.
 
 ### No-code secure services
 
@@ -708,7 +733,7 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 
 ### Tenancy
 
-- <a id="CAP-190"></a>**[CAP-190: local tenancy, for demos](CAP-190.md)** · proposed · Each instance of an application is entirely private, for demos. *Implements* [FEA-040: tenancy](../features/FEA-040.md).
+- <a id="CAP-190"></a>**[CAP-190: local tenancy on DynamoDB, for demos](CAP-190.md)** · proposed · Each instance of an application is entirely private, for demos. *Implements* [FEA-040: tenancy](../features/FEA-040.md).
   - **Current**: not met.
 - <a id="CAP-191"></a>**[CAP-191: private tenancy, behind login with sessions](CAP-191.md)** · proposed · An application requires login for any access, and records each session's identity with every transaction. *Implements* [FEA-040: tenancy](../features/FEA-040.md). *Relates to* [CAP-177: sessions and identities from a validated token](CAP-177.md).
   - **Current**: not met.
@@ -725,6 +750,19 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 
 - <a id="CAP-196"></a>**[CAP-196: in-app AI chats over modeled data](CAP-196.md)** · proposed · A user creates, holds and manages in-app chat sessions with an AI agent over the app's modeled data. *Implements* [FEA-041: agent chat integration](../features/FEA-041.md).
   - **Current**: not met.
+- <a id="CAP-214"></a>**[CAP-214: index-site AI chats with ChatGPT](CAP-214.md)** · proposed · A user chats in the index site with ChatGPT. *Implements* [FEA-041: agent chat integration](../features/FEA-041.md). *Relates to* [CAP-196: in-app AI chats over modeled data](CAP-196.md).
+  - **Current**: not met.
+- <a id="CAP-215"></a>**[CAP-215: index-site AI chats with Claude](CAP-215.md)** · proposed · A user chats in the index site with Claude. *Implements* [FEA-041: agent chat integration](../features/FEA-041.md). *Relates to* [CAP-214: index-site AI chats with ChatGPT](CAP-214.md).
+  - **Current**: not met.
+- <a id="CAP-216"></a>**[CAP-216: index-site AI chats with self-hosted models](CAP-216.md)** · proposed · A user chats in the index site with a model they host themselves. *Implements* [FEA-041: agent chat integration](../features/FEA-041.md). *Relates to* [CAP-214: index-site AI chats with ChatGPT](CAP-214.md).
+  - **Current**: not met.
+- <a id="CAP-217"></a>**[CAP-217: selectable AI models in chats](CAP-217.md)** · proposed · A user selects the AI model each chat is held with. *Implements* [FEA-041: agent chat integration](../features/FEA-041.md). *Relates to* [CAP-196: in-app AI chats over modeled data](CAP-196.md).
+  - **Current**: not met.
+
+### MCP integration
+
+- <a id="CAP-201"></a>**[CAP-201: MCP served through the journal protocol](CAP-201.md)** · proposed · A new repository mbse-mcp serves MCP through the journal protocol and schema introspection. *Implements* [FEA-049: MCP integration](../features/FEA-049.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md).
+  - **Current**: not met.
 
 ### Constraint enforcement in place of bespoke workarounds
 
@@ -736,12 +774,29 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-198"></a>**[CAP-198: NumPy, Safetensors, Pandas and Protobuf datatypes](CAP-198.md)** · proposed · Models interoperate with NumPy's, Safetensors', Pandas DataFrames' and Protobuf's datatypes. *Implements* [FEA-043: interoperation with imported datatypes](../features/FEA-043.md).
   - **Current**: not met.
 
+### Stacks
+
+- <a id="CAP-213"></a>**[CAP-213: responsive layout configured in CSS-in-TS](CAP-213.md)** · proposed · The UI's responsive layout is configured in CSS-in-TS. *Implements* [FEA-046: a React, TypeScript and CSS-in-TS UI stack](../features/FEA-046.md). *Relates to* [QUA-011: fully responsive views](../QUALITIES.md#QUA-011).
+  - **Current**: not met.
+- <a id="CAP-219"></a>**[CAP-219: the schema-driven UI on React Native](CAP-219.md)** · proposed · The schema-driven UI runs on React Native. *Implements* [FEA-050: a React Native UI stack](../features/FEA-050.md). *Relates to* [CAP-001: no-code index view](CAP-001.md).
+  - **Current**: not met.
+- <a id="CAP-221"></a>**[CAP-221: the logical-view service in TypeScript](CAP-221.md)** · proposed · The service of logical views runs in TypeScript. *Implements* [FEA-051: a TypeScript service stack](../features/FEA-051.md). *Relates to* [CAP-012: logical view endpoints](CAP-012.md).
+  - **Current**: not met.
+- <a id="CAP-222"></a>**[CAP-222: the schema-driven UI on iOS native](CAP-222.md)** · proposed · The schema-driven UI runs natively on iOS. *Implements* [FEA-052: an iOS native UI stack](../features/FEA-052.md). *Relates to* [CAP-001: no-code index view](CAP-001.md).
+  - **Current**: not met.
+- <a id="CAP-223"></a>**[CAP-223: the schema-driven UI on Android native](CAP-223.md)** · proposed · The schema-driven UI runs natively on Android. *Implements* [FEA-053: an Android native UI stack](../features/FEA-053.md). *Relates to* [CAP-001: no-code index view](CAP-001.md).
+  - **Current**: not met.
+- <a id="CAP-224"></a>**[CAP-224: the schema-driven UI on Angular](CAP-224.md)** · proposed · The schema-driven UI runs on Angular. *Implements* [FEA-054: an Angular UI stack](../features/FEA-054.md). *Relates to* [CAP-001: no-code index view](CAP-001.md).
+  - **Current**: not met.
+- <a id="CAP-225"></a>**[CAP-225: the schema-driven UI on Vue](CAP-225.md)** · proposed · The schema-driven UI runs on Vue. *Implements* [FEA-055: a Vue UI stack](../features/FEA-055.md). *Relates to* [CAP-001: no-code index view](CAP-001.md).
+  - **Current**: not met.
+
 ## Not yet planned
 
-Capabilities without an ID are not in plan yet. Each planned feature's are at the end of its detail file in `../features/`: low-code
-custom views ([FEA-001: schema-driven UI](../features/FEA-001.md)); detail with closures, closure as a list of chips ([FEA-003: no-code logical views](../features/FEA-003.md)); store over DynamoDB ([FEA-006: persistence](../features/FEA-006.md));
-object links in markdown, shared property handling by the UI, properties as text and dates, and as financial,
-scientific and engineering values ([FEA-007: property kinds](../features/FEA-007.md)).
+Capabilities without an ID are not in plan yet. Each planned feature's are at the end of its detail file in `../features/`:
+detail with closures, closure as a list of chips ([FEA-003: no-code logical views](../features/FEA-003.md)); store over DynamoDB ([FEA-006: persistence](../features/FEA-006.md));
+object links in markdown, shared property handling by the UI, and properties as financial, scientific and engineering
+values ([FEA-007: property kinds](../features/FEA-007.md)).
 
 ## Earlier IDs
 
@@ -755,7 +810,7 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
 | C-006 | [CAP-029: three-valued constraint checking](CAP-029.md) | C-013 | [CAP-036: complete kinds for Python, TypeScript and C and C++](CAP-036.md) | C-020 | [CAP-043: constraints resolved in any direction](#CAP-043) |
 | C-007 | [CAP-030: the same cases in both languages](#CAP-030) | C-014 | [CAP-037: Python and TypeScript trees as faithful as the reference front end's](CAP-037.md) | C-021 | [CAP-044: Verilog and SystemVerilog read by slang](CAP-044.md) |
 
-[CAP-001: no-code index view](CAP-001.md) to [CAP-023: relation inspector](CAP-023.md) kept the IDs they had in the workspace's former `VISUALIZATION.md`.
+[CAP-001: no-code index view](CAP-001.md) to [CAP-023: relation inspector, read-only](CAP-023.md) kept the IDs they had in the workspace's former `VISUALIZATION.md`.
 
 ## Open items
 
@@ -772,8 +827,8 @@ scientific and engineering values ([FEA-007: property kinds](../features/FEA-007
   pinning the new release.
 - **[CAP-033: undeclared properties preserved](#CAP-033) implements no feature.** It implemented F-005, now a quality ([QUA-002: open-world models](../QUALITIES.md#QUA-002)). Preserving undeclared data is not
   refinement ([FEA-020: refinable models](../features/README.md#FEA-020)); a feature for it is missing.
-- **[CAP-015: transaction provenance](CAP-015.md) and [CAP-016: comments](CAP-016.md) sit under [FEA-007: property kinds](../features/FEA-007.md)** as they were first placed; provenance and comments
-  may be features of their own.
+- **[CAP-015: transaction provenance](CAP-015.md) sits under [FEA-007: property kinds](../features/FEA-007.md)** as it was first placed; provenance may be a feature of its
+  own.
 - **Tech debt in the visualization capabilities.** Counted objects have no reference, so they are neither recorded nor
   transmitted ([FEA-003: no-code logical views](../features/FEA-003.md)), and browsers leave them out ([CAP-010: object browser](CAP-010.md), [CAP-011: relation browser](CAP-011.md)). It is to become a capability of a feature.
 
