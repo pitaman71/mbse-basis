@@ -122,11 +122,6 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
 - The transforms of type generation (`Dataclass`, `Union`, `Alias`, ...), drop (`Codegen.Dropped`):
   [Transforms](capabilities/CAP-027.md#transforms)
 
-## Open items
-
-- **Retire the copies.** The vocabulary invariant in each repository's `AGENTS.md` restates [VOC-001: specification](#VOC-001) to [VOC-009: syntax node](#VOC-009); replace
-  it with citations of this file.
-
 ## Earlier IDs
 
 V-001 to V-026 are [VOC-001: specification](#VOC-001) to [VOC-026: schema](#VOC-026), the same numbers.

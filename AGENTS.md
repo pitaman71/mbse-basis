@@ -15,3 +15,4 @@ Then read the index of whichever kind your task touches; each is short enough to
 
 - **Follow [docs/README.md](docs/README.md)**: the kinds of item and their relations, statuses, detail files and the
   rules for writing items are stated there once. This file restates none of them; a rule found here belongs there.
+- Never write to `~/.claude/projects/*/memory/` or any hidden memory: what is worth keeping goes in the repository.

@@ -38,6 +38,8 @@ adopted before it is met. Features may overlap on purpose.
   *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
 - <a id="FEA-019"></a>**FEA-019: equivalent implementations** · proposed · external · Every model and every operation on it means the same in every
   implementation language: Python and TypeScript give the same results, errors and wire format. *Confers* [QUA-006: the same in every language](../QUALITIES.md#QUA-006).
+  Principles reinforce it rather than capabilities: [PRI-028: both implementations change together](../PRINCIPLES.md#PRI-028) and [PRI-037: the same conformance corpora](../PRINCIPLES.md#PRI-037) to [PRI-040: deliberate differences listed](../PRINCIPLES.md#PRI-040),
+  which superseded its capabilities [CAP-024: the same conformance corpora](../capabilities/README.md#CAP-024) and [CAP-030: the same cases in both languages](../capabilities/README.md#CAP-030) to [CAP-032: deliberate differences listed](../capabilities/README.md#CAP-032).
 - <a id="FEA-020"></a>**[FEA-020: refinable models](FEA-020.md)** · adopted · external · All models allow refinements to be added, closing details in
   a targeted and agile manner. *Confers* [QUA-002: open-world models](../QUALITIES.md#QUA-002).
 

@@ -22,7 +22,7 @@ documentation and coding keeps humans and AI agents in the loop.
 | [mbse-codegen-python](https://github.com/pitaman71/mbse-codegen-python) | The Python an implementation is written in: schemas rendered as dataclasses and read back, step by step with every decision recorded, so that code and specification cannot drift |
 
 Each repository but mbse-basis has two equivalent implementations, in Python and TypeScript, that write
-byte-identical JSON ([CAP-024: the same conformance corpora](docs/capabilities/README.md#CAP-024)), and an `AGENTS.md` for the AI agents that work in it. Each builds
+byte-identical JSON ([PRI-037: the same conformance corpora](docs/PRINCIPLES.md#PRI-037)), and an `AGENTS.md` for the AI agents that work in it. Each builds
 on mbse-schemas, and lives beside the others as a sibling checkout.
 
 ## What a specification is made of

@@ -31,6 +31,10 @@ principles serve them.
 - <a id="QUA-009"></a>**QUA-009: modeling provides clean separation of applications across constructs** · proposed · Each
   modeling construct has one clean application, so that what a model means does not depend on how a construct is
   stretched to serve another's. *Conferred by* [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md).
+- <a id="QUA-010"></a>**QUA-010: every repository works alike** · proposed · An engineering persona, a contributor human or
+  agent, who knows how one mbse repository is worked in can work in any other without learning local customs, and
+  work done in parallel does not collide. *Conferred by* no feature yet; *served by* the principles that govern the
+  work ([PRINCIPLES.md](PRINCIPLES.md)): [PRI-011: the lowest repository that can own it](PRINCIPLES.md#PRI-011), [PRI-016: guidance written once](PRINCIPLES.md#PRI-016), [PRI-029: parallel work in polyrepo workspaces](PRINCIPLES.md#PRI-029), [PRI-031: the version is the contract](PRINCIPLES.md#PRI-031) to [PRI-033: work lands by branch and pull request](PRINCIPLES.md#PRI-033) and [PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages](PRINCIPLES.md#PRI-035).
 
 ## Earlier IDs
 
@@ -47,8 +51,6 @@ principles serve them.
 
 - **[QUA-005: an opinionated paradigm](#QUA-005)'s tier.** F-003 moved here by an agent's reading, not by the examples that set the tiers; confirm it is
   a quality rather than a principle.
-- **No quality an engineering persona values** exists yet, so the conventions among the principles ([PRI-011: the lowest repository that can own it](PRINCIPLES.md#PRI-011), [PRI-016: guidance written once](PRINCIPLES.md#PRI-016))
-  serve nothing in that tier; see Principles, open items.
 
 ---
 
