@@ -62,8 +62,8 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   and only printers write it, through `Text.ToText` and `Text.FromText`. *Serves* [QUA-004: models as an alternative representation of source code](QUALITIES.md#QUA-004).
   *Applied in*: `Text` modules (mbse-expressions); transpilers and the ban on text pre-passes (mbse-programs);
   `Bridges` (mbse-programs).
-- <a id="PRI-007"></a>**PRI-007: three-valued checking on request** · proposed · Checking is three-valued and on request: unknown is not false, an unset property reads as
-  absent, validation runs only when asked, and partial evaluation gives a residual, not a value. *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002).
+- <a id="PRI-007"></a>**PRI-007: three-valued checking on request** · proposed · Checking is three-valued and on request: unknown is not false (treating it as false
+  silently fails good records, and as true silently passes bad ones), an unset property reads as absent, validation runs only when asked, and partial evaluation gives a residual, not a value. *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002).
   *Applied in*: `Validators` (mbse-schemas, mbse-patterns); Kleene evaluation and residuals (mbse-expressions).
 - <a id="PRI-008"></a>**PRI-008: refuse, never silently lose** · superseded by [PRI-002: preserve, don't lose](#PRI-002) · Refuse, never silently lose. Refusal as a default conflicts with the open world;
   it remains only as [PRI-002: preserve, don't lose](#PRI-002)'s fallback where a step cannot preserve.
@@ -106,8 +106,16 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
 - <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
   implementation's skill shows usage in its own language, covering the same topics in the same order as the other's;
-  concepts live once, in the design document, which each skill links to rather than restates. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001),
+  concepts live once, in mbse-basis items, which each skill links to rather than restates. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001),
   [QUA-010: every repository works alike](QUALITIES.md#QUA-010). *Relates to* [PRI-037: the same conformance corpora](#PRI-037), [PRI-036: every program in a skill is complete and run; fragments are tagged as fragments](#PRI-036).
+  - **Decided** (2026-11-02), as the user decided (option A): each package keeps its own skill, in
+    its own language (`python3/<package>/skill/`, `typescript5/skill/`), and the shared source in `skills/<repo>/`,
+    `skills/sync.sh` and the `.claude/skills/<repo>` symlinks go. Piloted in mbse-patterns#3.
+  - **Current**: piloted in mbse-patterns (branch `batch5/tutorials-skills`, mbse-patterns#3, open): Python's skill
+    in `python3/mbse/Patterns/skill/` and TypeScript's in `typescript5/skill/`, with no shared source, copies or
+    symlinks, SKL-01 in both suites checking that the two skills' Markdown files have the same headings in the same
+    order. Not applied on main in mbse-patterns, mbse-schemas, mbse-expressions, mbse-codegen-python and
+    mbse-programs, which keep one source in `skills/<repo>/`, copied into each package by `skills/sync.sh`.
 - <a id="PRI-017"></a>**PRI-017: transforms, models, dialects, schemas** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* [PRI-014: every ambiguity a decision](#PRI-014), [PRI-018: no model needs code to read or write](#PRI-018).
 - <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "No model should need code to read or write. Ever." All model data is governed by a schema,
@@ -203,7 +211,9 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   repository's tests ([the basis](README.md#the-doc-spec), Tests) are Jupyter notebooks, one suite per notebook, with the same case IDs in the same
   order in both languages. Each case is a markdown cell `## ID · title` followed by one code cell. Notebooks are JSON
   written with `indent=1`, `sort_keys=True` and `ensure_ascii=False`. Each language's `tests/TestPlan.md` lists the
-  cases; the second language's lists only its differences. *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010),
+  cases; the second language's lists only its differences. It applies to tutorials too, as the user decided
+  (2026-11-02, "yes"): a tutorial's step headings carry case IDs, `## NN.k · title` (NN the tutorial's number),
+  identical in both languages, so that [PRI-038: the same cases in both languages](#PRI-038)'s parity can be checked. *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010),
   [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [PRI-038: the same cases in both languages](#PRI-038).
   *Applied in*: mbse-schemas, mbse-expressions, mbse-patterns, mbse-programs, mbse-codegen-python.
   *Not yet applied*: mbse-rest, mbse-dynamodb and mbse-demo-apps (pytest modules) and mbse-react (Vitest).
@@ -243,14 +253,14 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
 - **[PRI-004: one visitor protocol per kind](#PRI-004) beyond mbse-schemas.** mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
   mbse-patterns' predicate and transform builders do not follow it yet; each comes to, building its models through
   mbse-schemas' builders ([PRI-018: no model needs code to read or write](#PRI-018), [PRI-019: fluent builder syntax](#PRI-019)), as it migrates to mbse-schemas 0.11.
-- **[PRI-016: guidance written once](#PRI-016) is not applied.** Every repository copies one skill, byte-identical, from `skills/<repo>/` into both
+- **[PRI-016: guidance written once](#PRI-016) is not applied yet**, though decided (option A, its **Decided**). Every repository on main copies one skill, byte-identical, from `skills/<repo>/` into both
   packages (`skills/sync.sh`, checked by SKL-01), so each package carries both languages' guides, and the "neutral"
   references (dialects, translating, languages, transpiling, serialization) teach TypeScript users with Python
   fragments. To apply it: write `python3/<package>/skill/` all in Python and `typescript5/skill/` all in TypeScript,
-  with deliberate differences in `docs/EQUIVALENCE.md`; move concepts into the design document; remove `skills/`,
+  with deliberate differences in `docs/EQUIVALENCE.md`; move concepts into mbse-basis items; remove `skills/`,
   `skills/sync.sh` and the `.claude/skills/<repo>` symlink, with AGENTS.md routing an agent to the skill for its
   language; make SKL-01 check that both skills cover the same topics, SKL-02 still running each skill's complete
-  programs. Pilot on mbse-patterns (SKILL.md, python.md, typescript.md only), then the other four.
+  programs. Pilot on mbse-patterns (SKILL.md, python.md, typescript.md only; mbse-patterns#3), then the other four.
 
 ## Earlier IDs
 
