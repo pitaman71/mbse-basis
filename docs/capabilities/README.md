@@ -167,6 +167,9 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   so that evaluation and translation work in widths, formats, enums and conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Relates to* [CAP-097: value domains of published standards](CAP-097.md).
   - **Current**: not met.
+- <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · proposed · A literal holds any value its `OfAny`
+  can, scalars, containers and value objects; what has no schema is a dialect's constant kind. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
 
 ### Serialization behavior conventions in schema
 
