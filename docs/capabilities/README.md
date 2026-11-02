@@ -114,7 +114,8 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   - **Current** (main, v0.5.4): met.
 - <a id="CAP-097"></a>**[CAP-097: value domains of published standards](CAP-097.md)** · proposed · A value's domain names a published standard (IEEE 754, IEEE 1164, two's complement integers),
   with exact-then-rounded arithmetic, bitwise operations and explicit conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current** (main, v0.5.4): met.
+  - **Current** (main, v0.7.0): not met: domains are data and their semantics code, but no term has a domain until
+    [CAP-232: domains inferred for terms](CAP-232.md); its detail file says what is built.
 - <a id="CAP-180"></a>**[CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md)** · proposed · The
   general-purpose datatypes of ISO/IEC 11404 replace the Basic expression dialect, their operations modeled, not
   coded. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
@@ -142,6 +143,32 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   - **Current**: not met.
 - <a id="CAP-105"></a>**[CAP-105: Excel ranges and structured references](CAP-105.md)** · proposed · Excel's ranges (`A1:B3`) and structured references (`Table1[@age]`) are
   modeled, as array values. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: not met.
+- <a id="CAP-226"></a>**[CAP-226: complete expression dialects](CAP-226.md)** · proposed · A dialect per language and major
+  version covers its language's whole expression syntax, mbse-programs' kinds in its own `Expression`, printed here and
+  parsed by mbse-programs. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met.
+- <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
+  expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met.
+- <a id="CAP-228"></a>**[CAP-228: the TypeScript5 expression dialect](CAP-228.md)** · proposed · `TypeScript5` covers every
+  expression of TypeScript 5, with its types, patterns and JSX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met.
+- <a id="CAP-229"></a>**[CAP-229: the C expression dialect](CAP-229.md)** · proposed · `C` covers every expression of C11
+  to C23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met.
+- <a id="CAP-230"></a>**[CAP-230: the C++ expression dialect](CAP-230.md)** · proposed · `Cpp` covers every expression of
+  C++17 to C++23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met.
+- <a id="CAP-231"></a>**[CAP-231: the SystemVerilog expression dialect, complete](CAP-231.md)** · proposed ·
+  `SystemVerilog` covers every expression of IEEE 1800-2023, Verilog its subset. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
+  - **Current**: not met.
+- <a id="CAP-232"></a>**[CAP-232: domains inferred for terms](CAP-232.md)** · proposed · Each term's domain is inferred,
+  so that evaluation and translation work in widths, formats, enums and conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  *Relates to* [CAP-097: value domains of published standards](CAP-097.md).
+  - **Current**: not met.
+- <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · proposed · A literal holds any value its `OfAny`
+  can, scalars, containers and value objects; what has no schema is a dialect's constant kind. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
 
 ### Serialization behavior conventions in schema
