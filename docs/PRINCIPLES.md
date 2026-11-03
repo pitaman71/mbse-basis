@@ -147,8 +147,10 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
 - <a id="PRI-023"></a>**PRI-023: domain representations** · proposed · A domain representation carries three things at once: unvalidated data,
   usually in string form; a validation indicator for each possible validation error; and encoded properties (such as
   epoch, zone, year, month, day, hour and minute). *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002). *Relates to* [PRI-002: preserve, don't lose](#PRI-002).
-  *Applied in*: planned for text and date properties ([FEA-007: property kinds](features/FEA-007.md), not yet planned), and
-  for the literals of expression dialects ([CAP-233: literals of any value](capabilities/CAP-233.md), not met).
+  *Applied in*: the literals of expression dialects, as built on mbse-expressions' main (unreleased until 0.8.0): a
+  literal's `text`, `problems` and `value`, and Python3's adding the prefix, quote, base and separators its text
+  encodes ([CAP-233: literals of any value](capabilities/CAP-233.md#as-built-mbse-expressions)). Planned for text and
+  date properties ([FEA-007: property kinds](features/FEA-007.md), not yet planned).
 - <a id="PRI-024"></a>**PRI-024: the plain form, carried as written** · proposed · A service or a store carries
   mbse-schemas' plain form as mbse-schemas wrote it, and defines no format of its own: a request's body, a frame, a
   journal entry or a table's item holds the value as written, never reinterpreted or re-encoded into the medium's own
