@@ -104,21 +104,28 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   and 27 in [CAP-119: owned objects found by path](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
-- <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once, in its reader's language: no copies and no symlinks. Each
-  implementation's skill shows usage in its own language, covering the same topics in the same order as the other's;
-  concepts live once, in mbse-basis items, which each skill links to rather than restates. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001),
-  [QUA-010: every repository works alike](QUALITIES.md#QUA-010). *Relates to* [PRI-037: the same conformance corpora](#PRI-037), [PRI-036: every program in a skill is complete and run; fragments are tagged as fragments](#PRI-036).
-  - **Decided** (2026-11-02), as the user decided (option A): each package keeps its own skill, in
-    its own language (`python3/<package>/skill/`, `typescript5/skill/`), and the shared source in `skills/<repo>/`,
-    `skills/sync.sh` and the `.claude/skills/<repo>` symlinks go. Piloted in mbse-patterns#3.
+- <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once: each repository has one source
+  for its skill, `skills/<repo>/`, and the copies packaged with each implementation (`python3/<package>/skill/`,
+  `typescript5/skill/`) are generated from it by `skills/sync.sh` and checked byte for byte by each suite's SKL-01.
+  The skill is mostly language-independent: it says why, when and how, links the items for what, and links each how to
+  its notebook case in each language ([the basis](README.md#the-doc-spec), What, why and how); concepts live once, in
+  mbse-basis items, which it links to rather than restates. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001),
+  [QUA-010: every repository works alike](QUALITIES.md#QUA-010). *Relates to* [PRI-037: the same conformance corpora](#PRI-037), [PRI-038: the same cases in both languages](#PRI-038).
+  - **Decided** (2026-11-02), as the user decided (option A), *superseded* by the decision of 2026-11-03 below: each
+    package keeps its own skill, in its own language (`python3/<package>/skill/`, `typescript5/skill/`), and the
+    shared source in `skills/<repo>/`, `skills/sync.sh` and the `.claude/skills/<repo>` symlinks go. Piloted in
+    mbse-patterns#3.
   - **Decided** (2026-11-03), on how an agent then finds a repository's skill: "via AGENTS.md". Its start-here table
-    names each language's skill by path ([Rules for every document](README.md#rules-for-every-document), "What an
+    names the skill by path ([Rules for every document](README.md#rules-for-every-document), "What an
     `AGENTS.md` holds").
-  - **Current**: applied in mbse-patterns (mbse-patterns#3, merged): Python's skill in `python3/mbse/Patterns/skill/`
-    and TypeScript's in `typescript5/skill/`, with no shared source, copies or symlinks, SKL-01 in both suites checking
-    that the two skills' Markdown files have the same headings in the same order, and AGENTS.md naming both. Not yet
-    applied in mbse-schemas, mbse-expressions, mbse-codegen-python and mbse-programs, which keep one source in
-    `skills/<repo>/`, copied into each package by `skills/sync.sh`.
+  - **Decided** (2026-11-03), as the user decided, superseding option A: "Skills are written once again": one source
+    per repository, with generated packaged copies checked byte for byte. The skill describes *why*, *when* and *how*,
+    mostly language-independent; plan items enumerate *what*; notebooks hold the *how* in one language, each step
+    anchored by its case ID, and the per-language cheat sheets are dropped, each entry becoming a notebook case or
+    dropped where the code states it ([the basis](README.md#the-doc-spec), What, why and how).
+  - **Current**: mbse-patterns is being reverted to one source (skills-notebooks); mbse-schemas,
+    mbse-expressions, mbse-codegen-python and mbse-programs already have one, in `skills/<repo>/`, copied into each
+    package by `skills/sync.sh`.
 - <a id="PRI-017"></a>**PRI-017: transforms, models, dialects, schemas** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* [PRI-014: every ambiguity a decision](#PRI-014), [PRI-018: no model needs code to read or write](#PRI-018).
 - <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "No model should need code to read or write. Ever." All model data is governed by a schema,
@@ -220,10 +227,12 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [PRI-038: the same cases in both languages](#PRI-038).
   *Applied in*: mbse-schemas, mbse-expressions, mbse-patterns, mbse-programs, mbse-codegen-python.
   *Not yet applied*: mbse-rest, mbse-dynamodb and mbse-demo-apps (pytest modules) and mbse-react (Vitest).
-- <a id="PRI-036"></a>**PRI-036: every program in a skill is complete and run; fragments are tagged as fragments** · proposed · Every
-  fenced block tagged `python` or `typescript` in a skill ([the basis](README.md#the-doc-spec), Skills) is a complete program that the repository's
-  test suite runs (each repository's SKL-02); a fragment is tagged `python fragment` or `typescript fragment`.
-  *Governs* the product: an agent copies what a skill shows. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001). *Relates to* [PRI-016: guidance written once](#PRI-016).
+- <a id="PRI-036"></a>**PRI-036: every program in a skill is complete and run; fragments are tagged as fragments** · superseded by
+  [PRI-016: guidance written once](#PRI-016) and [PRI-038: the same cases in both languages](#PRI-038) · Every fenced block tagged `python` or `typescript` in a skill ([the basis](README.md#the-doc-spec), Skills) was a
+  complete program that the repository's test suite ran (each repository's SKL-02); a fragment was tagged `python
+  fragment` or `typescript fragment`. Superseded as the user decided (2026-11-03): a skill holds no programs; they move
+  into notebook cases, which [PRI-034: tutorials run as tests, committed with their outputs](#PRI-034) and [PRI-038: the same cases in both languages](#PRI-038) already run and check, and the skill links
+  them. *Governed* the product. *Served* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001).
 - <a id="PRI-037"></a>**PRI-037: the same conformance corpora** · proposed · Every repository's Python and TypeScript implementations
   pass the same conformance corpora (CONF suites): the same names, errors and messages, and byte-identical JSON (the
   same keys, key order, float formatting, escapes and whitespace); each implementation reads the other's output back
@@ -232,7 +241,8 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   - **Current**: met in mbse-schemas, mbse-expressions, mbse-patterns and mbse-programs; to assess in
     mbse-codegen-python.
 - <a id="PRI-038"></a>**PRI-038: the same cases in both languages** · proposed · Every repository's tests and tutorials hold the
-  same cases in both languages: the same suites and case IDs, in the same order, with the same assertions. *Governs*
+  same cases in both languages: the same suites and case IDs, in the same order, with the same assertions; and every
+  notebook anchor a skill links (`#Tnn.k`, or a test's case ID) exists in both twins. *Governs*
   the work. *Serves* [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [FEA-019: equivalent implementations](features/README.md#FEA-019). Formerly [CAP-030: the same cases in both languages](capabilities/README.md#CAP-030).
   - **Current**: as [PRI-037: the same conformance corpora](#PRI-037)'s.
 - <a id="PRI-039"></a>**PRI-039: 100% coverage of both** · proposed · Every repository's tests cover 100% of both implementations'
@@ -256,14 +266,12 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
 - **[PRI-004: one visitor protocol per kind](#PRI-004) beyond mbse-schemas.** mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
   mbse-patterns' predicate and transform builders do not follow it yet; each comes to, building its models through
   mbse-schemas' builders ([PRI-018: no model needs code to read or write](#PRI-018), [PRI-019: fluent builder syntax](#PRI-019)), as it migrates to mbse-schemas 0.11.
-- **[PRI-016: guidance written once](#PRI-016) is not applied yet**, though decided (option A, its **Decided**). Every repository on main copies one skill, byte-identical, from `skills/<repo>/` into both
-  packages (`skills/sync.sh`, checked by SKL-01), so each package carries both languages' guides, and the "neutral"
-  references (dialects, translating, languages, transpiling, serialization) teach TypeScript users with Python
-  fragments. To apply it: write `python3/<package>/skill/` all in Python and `typescript5/skill/` all in TypeScript,
-  with deliberate differences in `docs/EQUIVALENCE.md`; move concepts into mbse-basis items; remove `skills/`,
-  `skills/sync.sh` and the `.claude/skills/<repo>` symlink, with AGENTS.md routing an agent to the skill for its
-  language; make SKL-01 check that both skills cover the same topics, SKL-02 still running each skill's complete
-  programs. Pilot on mbse-patterns (SKILL.md, python.md, typescript.md only; mbse-patterns#3), then the other four.
+- **[PRI-016: guidance written once](#PRI-016) in mbse-patterns.** The 2026-11-02 pilot (option A, one skill per language) is
+  being reverted to one source, `skills/mbse-patterns/`, language-independent, linking notebook cases for each how.
+  The other repositories keep one source, but their skills still teach in programs: mbse-schemas, mbse-expressions and
+  mbse-programs in per-language references (`references/python.md`, `references/typescript.md`), run by SKL-02. To
+  apply the 2026-11-03 decision there, move each how into a notebook case in both languages, link it from the skill,
+  and drop those references and SKL-02.
 
 ## Earlier IDs
 
