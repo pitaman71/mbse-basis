@@ -67,12 +67,32 @@ The doc spec organizes what humans and agents read and run, on four shelves.
 | Shelf | What it is | Status |
 |---|---|---|
 | Tutorials | Executable documents, mostly Jupyter notebooks, that together are the user guide for humans and agents. Each doubles as a unit test | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
-| Skills | Skill documents that together are a user guide optimized for agents | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
+| Skills | Skill documents that together are a user guide optimized for agents: why, when and how, mostly language-independent, linking the items for what and the notebook cases for how | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
 | Tests | Executable, platform-specific programs that unit-test mbse components | Fairly comprehensive across repositories, features and capabilities; keep their breadth, platform equivalence and level of detail, and add or refine one as each capability lands |
 | References | Between vocabulary and tutorials: for an advanced human or agent with a specific goal in mind, organized around such goals, cross-linked with vocabulary, tutorials and capabilities | Not yet built, and not needed yet |
 
+**What, why and how, each in one place.** The plan, the skills and the notebooks divide the labor, as the user decided
+(2026-11-03):
+
+- Jupyter notebooks contain anchors to cells that describe *how* to do "the thing" in a language.
+- Skill files describe *why*, *when*, *how* to do "the thing" in a mostly language-independent manner.
+- Plan items (FEA, CAP, etc.) enumerate "the things" the product can do in a specific user situation, to solve a
+  problem, define and achieve the specific goal, realize and share value.
+
+Each layer links the next: a skill links the items for *what*, and notebook anchors for *how*. A skill's *how* links its
+notebook case in each language, as `mbse:` links with `#Tnn.k` anchors:
+`[T01.2: checking data](mbse:<repo>/python3/tutorials/<file>.ipynb#T01.2)`, and the same in `typescript5/`. A tutorial
+step's markdown cell starts with `<a id="Tnn.k"></a>`, where `nn.k` is the case ID of its `## nn.k · title` heading; a
+test notebook's case cell starts with its own case ID, `<a id="PAT-03"></a>`; twins in the two languages carry
+identical anchors. Notebooks stay one per tutorial; they are not split per case. **A gap is a bug**: a *how* that a skill
+teaches without a notebook case is untested, as the user put it (2026-11-03): "a gap is a bug, per the new definition
+because it means the examples are untested!" Surfacing such gaps, and writing the notebook cases that close them, is a
+short-term goal.
+
 How each shelf is kept is a principle: tutorials run as tests ([PRI-034: tutorials run as tests, committed with their outputs](PRINCIPLES.md#PRI-034)), tests are notebooks ([PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages](PRINCIPLES.md#PRI-035)),
-every program in a skill is run ([PRI-036: every program in a skill is complete and run; fragments are tagged as fragments](PRINCIPLES.md#PRI-036)), and guidance is written once ([PRI-016: guidance written once](PRINCIPLES.md#PRI-016)).
+the same cases, and every anchor a skill links, are in both languages ([PRI-038: the same cases in both languages](PRINCIPLES.md#PRI-038)), and guidance is written once
+([PRI-016: guidance written once](PRINCIPLES.md#PRI-016)). A skill holds no programs of its own: its *how* is a notebook case, which those
+principles run and check ([PRI-036: every program in a skill is complete and run; fragments are tagged as fragments](PRINCIPLES.md#PRI-036), superseded).
 
 ## Rules for every document
 
@@ -85,7 +105,8 @@ every program in a skill is run ([PRI-036: every program in a skill is complete 
   repository exists, in the terms of [why the mbse repositories exist](../MBSE.md); what it is comes after. Keep that opening true as the repository
   changes.
 - **What an `AGENTS.md` holds.** What the repository is; a start-here table of what to read for each task, naming the
-  repository's skill for each language by path, which is how an agent finds it (no `.claude/skills` link); its commands;
+  repository's skill by path, its one source and the copy packaged in each language, which is how an agent finds it
+  (no `.claude/skills` link); its commands;
   and its own mechanics (its checks, scripts, contracts and exceptions), stated nowhere else. Every repository's
   `AGENTS.md` gives the same reading list in the same priority. Must read before any work: [the mbse basis](README.md),
   [principles](PRINCIPLES.md), [features](features/README.md) and [capabilities](capabilities/README.md). Read
