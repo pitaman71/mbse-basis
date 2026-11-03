@@ -111,11 +111,14 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   - **Decided** (2026-11-02), as the user decided (option A): each package keeps its own skill, in
     its own language (`python3/<package>/skill/`, `typescript5/skill/`), and the shared source in `skills/<repo>/`,
     `skills/sync.sh` and the `.claude/skills/<repo>` symlinks go. Piloted in mbse-patterns#3.
-  - **Current**: piloted in mbse-patterns (branch `batch5/tutorials-skills`, mbse-patterns#3, open): Python's skill
-    in `python3/mbse/Patterns/skill/` and TypeScript's in `typescript5/skill/`, with no shared source, copies or
-    symlinks, SKL-01 in both suites checking that the two skills' Markdown files have the same headings in the same
-    order. Not applied on main in mbse-patterns, mbse-schemas, mbse-expressions, mbse-codegen-python and
-    mbse-programs, which keep one source in `skills/<repo>/`, copied into each package by `skills/sync.sh`.
+  - **Decided** (2026-11-03), on how an agent then finds a repository's skill: "via AGENTS.md". Its start-here table
+    names each language's skill by path ([Rules for every document](README.md#rules-for-every-document), "What an
+    `AGENTS.md` holds").
+  - **Current**: applied in mbse-patterns (mbse-patterns#3, merged): Python's skill in `python3/mbse/Patterns/skill/`
+    and TypeScript's in `typescript5/skill/`, with no shared source, copies or symlinks, SKL-01 in both suites checking
+    that the two skills' Markdown files have the same headings in the same order, and AGENTS.md naming both. Not yet
+    applied in mbse-schemas, mbse-expressions, mbse-codegen-python and mbse-programs, which keep one source in
+    `skills/<repo>/`, copied into each package by `skills/sync.sh`.
 - <a id="PRI-017"></a>**PRI-017: transforms, models, dialects, schemas** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* [PRI-014: every ambiguity a decision](#PRI-014), [PRI-018: no model needs code to read or write](#PRI-018).
 - <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "No model should need code to read or write. Ever." All model data is governed by a schema,
