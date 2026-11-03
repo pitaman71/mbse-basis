@@ -54,6 +54,29 @@ class Titles(unittest.TestCase):
         self.assertEqual((self.ws / "repo/data.bin").read_text(), "[CAP-001](../mbse-basis/docs/capabilities/CAP-001.md)\n")
         self.assertEqual(update_item_titles.update(roots, basis=self.basis), [])
 
+    def test_relabels_github_urls_and_shorthand(self) -> None:
+        github = "https://github.com/pitaman71/mbse-basis/blob/main/docs"
+        (self.ws / "repo/docs").mkdir()
+        (self.ws / "repo/docs/USES.md").write_text(
+            f"Builds [CAP-001]({github}/capabilities/CAP-001.md) and [CAP-024: stale]({github}/capabilities/README.md#CAP-024).\n"
+            f"Mismatched: [CAP-024]({github}/capabilities/CAP-001.md); elsewhere: "
+            "[CAP-001](https://github.com/pitaman71/mbse-schemas/blob/main/docs/capabilities/CAP-001.md).\n")
+        (self.ws / "repo/skills/repo").mkdir(parents=True)
+        (self.ws / "repo/skills/repo/SKILL.md").write_text(
+            "Serves [QUA-001](mbse:mbse-basis/docs/QUALITIES.md#QUA-001), "
+            "[CAP-001: old](mbse:mbse-basis/docs/capabilities/CAP-001.md); not [CAP-024](mbse:mbse-rest/docs/README.md#CAP-024).\n")
+        changed = update_item_titles.update([self.ws / "repo"], basis=self.basis)
+        self.assertIn(self.ws / "repo/docs/USES.md", changed)
+        self.assertEqual((self.ws / "repo/docs/USES.md").read_text(),
+            f"Builds [CAP-001: no-code index view]({github}/capabilities/CAP-001.md) and "
+            f"[CAP-024: the same conformance corpora]({github}/capabilities/README.md#CAP-024).\n"
+            f"Mismatched: [CAP-024]({github}/capabilities/CAP-001.md); elsewhere: "
+            "[CAP-001](https://github.com/pitaman71/mbse-schemas/blob/main/docs/capabilities/CAP-001.md).\n")
+        self.assertEqual((self.ws / "repo/skills/repo/SKILL.md").read_text(),
+            "Serves [QUA-001: AI and humans in the loop](mbse:mbse-basis/docs/QUALITIES.md#QUA-001), "
+            "[CAP-001: no-code index view](mbse:mbse-basis/docs/capabilities/CAP-001.md); "
+            "not [CAP-024](mbse:mbse-rest/docs/README.md#CAP-024).\n")
+
     def test_check_writes_nothing(self) -> None:
         before = (self.ws / "repo/README.md").read_text()
         changed = update_item_titles.update([self.ws / "repo"], basis=self.basis, check=True)

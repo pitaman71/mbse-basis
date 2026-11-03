@@ -93,8 +93,15 @@ every program in a skill is run ([PRI-036: every program in a skill is complete 
   be read. Do not enumerate specific items within the documents that must be read." and "Agents *must* read these docs
   before doing any work: mbse-basis/docs/README.md, mbse-basis/docs/PRINCIPLES.md, mbse-basis/features/README.md,
   mbse-basis/capabilities/README.md. VOCAULBARY.md, PRIORITIES.md, QUALITIES.md may be read selectively or on
-  demand." It carries one rule of its own: "Never write to `~/.claude/projects/*/memory/` or any hidden memory: what
-  is worth keeping goes in the repository." A repository's `CLAUDE.md` is `@AGENTS.md` and nothing more.
+  demand." It carries two rules of its own, each word for word as here, so that a repository copies them verbatim:
+  "Never write to `~/.claude/projects/*/memory/` or any hidden memory: what is worth keeping goes in the repository."
+  and, for the shorthand a link out of a skill or a source comment takes (Rules for writing items, "A link is a link"):
+  "Resolve a link written `mbse:<repo>/<path>`, as skills and source comments write a link into another mbse
+  repository, to the first of these that exists: in a polyrepo checkout, `<repo root>/../<repo>/<path>`, where
+  `<repo root>` is this repository's root; for a link into the installed package's own repository, `<path>` without its language directory (`python3/`
+  or `typescript5/`), under the installed package's root (Python: the `site-packages` directory that holds `mbse/`;
+  npm: the package's directory), where the package ships that file; otherwise
+  `https://github.com/pitaman71/<repo>/blob/main/<path>`." A repository's `CLAUDE.md` is `@AGENTS.md` and nothing more.
 
 ## Other documents
 
@@ -190,9 +197,16 @@ and cites the entry rather than describe the decision again.
   it: a repository's document gives a principle's gist and its local change, not the principle's full statement. When
   a local decision turns out to be a general one, promote it here and replace the local text with a bridged citation.
 - **A link is a link.** A citation of an item or a document is markdown link syntax, never a bare ID or file name
-  that only looks like one, in documents and in source comments alike. Its path is relative and resolves in a polyrepo
-  checkout, where every repository sits beside mbse-basis (`../mbse-schemas/docs/EQUIVALENCE.md` from a repository's
-  root). Its label is legible: an item's ID and abbreviated title (`[CAP-013: an in-memory store journaled to
+  that only looks like one, in documents and in source comments alike. A link that stays inside its repository is a
+  relative path. A link that leaves it takes the form its file calls for. In a markdown file, including a notebook's
+  markdown cells, it is a GitHub URL, `https://github.com/pitaman71/<repo>/blob/main/<path>[#anchor]`, which resolves
+  wherever the document is read. In a skill (any file under a skill directory: `skills/`, `*/skill/`) and in a source
+  comment (in `.py`, `.ts`, `.tsx`, `.js` and `.sh` files, and a notebook's code cells), it is the shorthand
+  `mbse:<repo>/<path>[#anchor]`, `[CAP-013: an in-memory store journaled to DynamoDB](mbse:mbse-basis/docs/capabilities/CAP-013.md)`,
+  which an agent resolves by the rule every `AGENTS.md` carries (Rules for every document): the sibling checkout
+  first, then the installed package's own files, then GitHub. `scripts/update_link_forms.py` writes each link that
+  leaves its repository in its file's form, and with `--check` lists those in the wrong form and those whose file or
+  anchor is missing. Its label is legible: an item's ID and abbreviated title (`[CAP-013: an in-memory store journaled to
   DynamoDB](…)`), and a document's title or a phrase naming it, never a path (Rules for every document). A link to an
   item reaches its own anchor, or its detail file where it has one. An item's title is written once, in the head of its
   index entry; `scripts/update_item_titles.py` copies it into every label.
