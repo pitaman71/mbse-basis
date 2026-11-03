@@ -3,15 +3,17 @@
 
 # Tools for every mbse repository
 
-Three tools live here, and every mbse repository runs them from here rather than keeping a copy:
+Four tools live here, and every mbse repository runs them from here rather than keeping a copy:
 
 - [`polyrepo.py`](polyrepo.py) keeps the repositories, which are separate git repositories checked out side by side,
   working as one project.
 - [`update_doc_links.py`](update_doc_links.py) writes the navigation links at the top and bottom of each document.
 - [`update_item_titles.py`](update_item_titles.py) labels every link to an mbse-basis item with the item's ID and
   title.
+- [`update_link_forms.py`](update_link_forms.py) writes every link into another repository in the form its file calls
+  for.
 
-All three use only the standard library, so they run before anything is installed. Run them from inside the repository
+All four use only the standard library, so they run before anything is installed. Run them from inside the repository
 they are for; the examples below assume its root, with mbse-basis beside it. Their tests are
 `python3 -m unittest discover -s scripts`, run from mbse-basis.
 
@@ -169,8 +171,10 @@ DynamoDB](…)`, wherever it is: in a document or in a source comment, in any re
 index entry (`**CAP-013: an in-memory store journaled to DynamoDB**`), and this tool copies it into every label and
 into the heading of the item's detail file.
 
-It relabels a link only when its label starts with an item's ID and its path resolves to that item, its anchor in an
-index or its detail file, so a link that merely mentions an ID is left alone. It does not turn a bare ID into a link:
+It relabels a link only when its label starts with an item's ID and its target resolves to that item, its anchor in an
+index or its detail file, so a link that merely mentions an ID is left alone. The target may be written in any of the
+three forms of a link (`update_link_forms.py`, below): a relative path, a GitHub URL into mbse-basis or the shorthand
+`mbse:mbse-basis/...`. It does not turn a bare ID into a link:
 where and how to cite is a writer's call. It reads only the files git tracks, so `git add` a new file before running it.
 
 Run it after retitling an item, and check with `--check`, which writes nothing and exits 1 if any label is out of date:
@@ -179,6 +183,32 @@ Run it after retitling an item, and check with `--check`, which writes nothing a
 cd mbse-rest
 python3 ../mbse-basis/scripts/update_item_titles.py --check    # this repository: list what is out of date
 python3 ../mbse-basis/scripts/update_item_titles.py ../mbse-react ../mbse-dynamodb   # relabel the ones named
+```
+
+## update_link_forms.py
+
+A link that stays inside its repository is a relative path. A link into another repository takes the form its file
+calls for (the basis' [`docs/README.md`](../docs/README.md), "A link is a link"):
+
+| Where the link is | Its form |
+|---|---|
+| a markdown file, or a notebook's markdown cell | `https://github.com/pitaman71/<repo>/blob/main/<path>[#anchor]` |
+| a skill (any file under `skills/` or a `skill/` directory), a source comment (`.py`, `.ts`, `.tsx`, `.js`, `.sh`), or a notebook's code cell | `mbse:<repo>/<path>[#anchor]`, resolved by the rule in every `AGENTS.md` |
+
+The tool reads each file git tracks and rewrites each link into a sibling, `](../<repo>/...)` once normalized from the
+file's directory, to its file's form; a GitHub URL or shorthand in the other form is rewritten too. It leaves alone
+links inside the repository, URLs to other sites, and links in markdown's fenced code blocks and code spans, which are
+examples; in a source file, it reads only comments and docstrings. In a notebook it edits only cell sources, and
+rewrites the notebook only if one changed.
+
+`--check` writes nothing. It lists the links in the wrong form, and every link into a sibling, in any form, whose file
+is missing from the sibling's checkout beside the repository or whose anchor (a heading's slug, or an `id`) is not in
+that file, and exits 1 if there are any:
+
+```sh
+cd mbse-rest
+python3 ../mbse-basis/scripts/update_link_forms.py --check    # this repository: list what is wrong
+python3 ../mbse-basis/scripts/update_link_forms.py ../mbse-react ../mbse-dynamodb   # rewrite the ones named
 ```
 
 ---

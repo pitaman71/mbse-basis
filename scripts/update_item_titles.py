@@ -9,8 +9,9 @@ title, or to check that no label has drifted:
     python3 ../mbse-basis/scripts/update_item_titles.py [--check] [repository ...]
 
 The repositories are their roots; by default, the current directory. A link counts as one to an item when its label
-starts with the item's ID and its path resolves to that item: its anchor in an index, or its detail file. Other links
-are left alone. With --check nothing is written: the files whose labels are out of date are listed, and the exit status
+starts with the item's ID and its target resolves to that item: its anchor in an index, or its detail file. The target
+is a relative path, a GitHub URL into mbse-basis (`https://github.com/pitaman71/mbse-basis/blob/main/docs/...`) or the
+shorthand `mbse:mbse-basis/docs/...`, each designating the same item. Other links are left alone. With --check nothing is written: the files whose labels are out of date are listed, and the exit status
 is 1 if there are any.
 
 Like polyrepo.py, this is kept in mbse-basis and run for every mbse repository.
@@ -30,6 +31,7 @@ SUFFIXES = {".md", ".py", ".ts", ".tsx", ".js", ".json", ".toml", ".ipynb"}
 FIXTURES = Path(__file__).resolve().parent / "test_update_item_titles.py"  # stale labels on purpose
 ID = r"(?:QUA|FEA|CAP|PRI|VOC)-\d{3}"
 HEAD = re.compile(rf'^- <a id="({ID})"></a>\*\*\[?\1: (.+?)(?:\]\([^)]*\))?\*\*', re.M)
+FORMS = ("https://github.com/pitaman71/mbse-basis/blob/main/", "mbse:mbse-basis/")  # docs/README.md, "A link is a link"
 LINK = re.compile(rf"\[({ID})(?::[^\]\n]*)?\]\(([^)\s#]*)(#[^)\s]*)?\)")
 
 
@@ -58,11 +60,19 @@ def item(docs: Path, target: Path, anchor: str) -> str | None:
     return None
 
 
+def resolve(path: str, here: Path, docs: Path) -> Path:
+    """The file a link's path designates, from the file `here`: relative to it, or in mbse-basis by URL or shorthand."""
+    for prefix in FORMS:
+        if path.startswith(prefix):
+            return docs.parent / path.removeprefix(prefix)
+    return (here.parent / path) if path else here
+
+
 def relabel(text: str, here: Path, docs: Path, known: dict[str, str]) -> str:
     """`text`, from the file `here`, with each link to an item labeled `ID: title`, and a detail file's heading too."""
     def link(m: re.Match) -> str:
         label, path, anchor = m[1], m[2], (m[3] or "")[1:]
-        target = (here.parent / path) if path else here
+        target = resolve(path, here, docs)
         if item(docs, target, anchor) != label or label not in known:
             return m[0]
         return f"[{label}: {known[label]}]({path}{m[3] or ''})"
