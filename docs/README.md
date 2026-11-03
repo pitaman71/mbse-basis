@@ -84,7 +84,8 @@ every program in a skill is run ([PRI-036: every program in a skill is complete 
 - **The README opens with why.** A repository's README says, in its first sentence or paragraph, TL;DR style, why the
   repository exists, in the terms of [why the mbse repositories exist](../MBSE.md); what it is comes after. Keep that opening true as the repository
   changes.
-- **What an `AGENTS.md` holds.** What the repository is; a start-here table of what to read for each task; its commands;
+- **What an `AGENTS.md` holds.** What the repository is; a start-here table of what to read for each task, naming the
+  repository's skill for each language by path, which is how an agent finds it (no `.claude/skills` link); its commands;
   and its own mechanics (its checks, scripts, contracts and exceptions), stated nowhere else. Every repository's
   `AGENTS.md` gives the same reading list in the same priority. Must read before any work: [the mbse basis](README.md),
   [principles](PRINCIPLES.md), [features](features/README.md) and [capabilities](capabilities/README.md). Read
