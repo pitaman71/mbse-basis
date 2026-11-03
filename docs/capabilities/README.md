@@ -139,6 +139,14 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
 - <a id="CAP-103"></a>**[CAP-103: SystemVerilog's other operations translated](CAP-103.md)** · proposed · `has`, the logical `>>` and the 4-state comparisons translate between
   Basic and SystemVerilog. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
+- <a id="CAP-235"></a>**[CAP-235: `has` translated to C++](CAP-235.md)** · proposed · A term asking whether a value holds
+  a property translates to C++, where an optional property is a `std::optional` member: `has(x, name)` is
+  `x.name.has_value()`. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-230: the C++ expression dialect](CAP-230.md).
+  - **Current**: not met.
+- <a id="CAP-236"></a>**[CAP-236: `has` translated to C](CAP-236.md)** · proposed · A term asking whether a value holds a
+  property translates to C, by whatever representation of an optional property code generation for C picks.
+  *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [FEA-022: code generation](../features/FEA-022.md).
+  - **Current**: not met; blocked on that representation.
 - <a id="CAP-104"></a>**[CAP-104: typed values translated beyond C and SystemVerilog](CAP-104.md)** · proposed · Conversions and typed values translate to Python, MATLAB, Excel and LaTeX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
 - <a id="CAP-105"></a>**[CAP-105: Excel ranges and structured references](CAP-105.md)** · proposed · Excel's ranges (`A1:B3`) and structured references (`Table1[@age]`) are
