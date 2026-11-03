@@ -74,10 +74,10 @@ The doc spec organizes what humans and agents read and run, on four shelves.
 **What, why and how, each in one place.** The plan, the skills and the notebooks divide the labor, as the user decided
 (2026-11-03):
 
-- Plan items (FEA, CAP and so on) enumerate *what* the product can do: in a specific user situation, to solve a problem,
-  to define and achieve a goal, to realize and share value.
-- Skill files describe *why*, *when* and *how* to do the thing, in a mostly language-independent way.
-- Jupyter notebooks hold anchors to cells that describe *how* to do the thing in one language.
+- Jupyter notebooks contain anchors to cells that describe *how* to do "the thing" in a language.
+- Skill files describe *why*, *when*, *how* to do "the thing" in a mostly language-independent manner.
+- Plan items (FEA, CAP, etc.) enumerate "the things" the product can do in a specific user situation, to solve a
+  problem, define and achieve the specific goal, realize and share value.
 
 Each layer links the next: a skill links the items for *what*, and notebook anchors for *how*. A skill's *how* links its
 notebook case in each language, as `mbse:` links with `#Tnn.k` anchors:
