@@ -300,7 +300,7 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.20.0.
 - <a id="CAP-234"></a>**[CAP-234: an object no entry owns deleted](CAP-234.md)** · proposed · An object that no entry
-  owns can be deleted. *Implements*
+  owns is deleted, by counting the relation entries that link it. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md). *Relates to* [CAP-121: owned objects deleted in cascade](CAP-121.md).
   - **Current**: not met; not yet in priority scope.
 - <a id="CAP-123"></a>**[CAP-123: schema objects identified by path](CAP-123.md)** · proposed · A named schema object's
