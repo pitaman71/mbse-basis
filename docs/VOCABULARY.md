@@ -55,8 +55,8 @@ Repositories are at `https://github.com/pitaman71/<repository>`.
 ### mbse-schemas
 
 For usage, read what its tests run, which cannot drift from the code, not its prose design documents, which give the
-reasons: the API on a page per language, [python.md](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/references/python.md) and
-[typescript.md](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/references/typescript.md), each fenced program run by SKL-02;
+reasons: [its tutorials](https://github.com/pitaman71/mbse-schemas/blob/main/python3/tutorials/README.md), each step a case run in both languages, which
+its [skill](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/SKILL.md) links practice by practice;
 [Corpus.py](https://github.com/pitaman71/mbse-schemas/blob/main/python3/mbse/Schemas/Conformance/Corpus.py), one program building every kind of schema and data,
 whose output in [conformance/python3/](https://github.com/pitaman71/mbse-schemas/blob/main/conformance/python3) is the wire format, byte-identical in both languages;
 and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob/main/python3/tests) (TypeScript's notebooks have the same case IDs), `25_Builders`

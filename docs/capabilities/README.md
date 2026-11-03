@@ -145,7 +145,7 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   - **Current**: not met.
 - <a id="CAP-236"></a>**[CAP-236: `has` translated to C](CAP-236.md)** · proposed · A term asking whether a value holds a
   property translates to C, by whatever representation of an optional property code generation for C picks.
-  *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [FEA-022: code generation](../features/FEA-022.md).
+  *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [FEA-022: code generation](../features/README.md#FEA-022).
   - **Current**: not met; blocked on that representation.
 - <a id="CAP-104"></a>**[CAP-104: typed values translated beyond C and SystemVerilog](CAP-104.md)** · proposed · Conversions and typed values translate to Python, MATLAB, Excel and LaTeX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
