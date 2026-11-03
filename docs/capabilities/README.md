@@ -158,7 +158,8 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   - **Current**: not met.
 - <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
   expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met.
+  - **Current**: met (checked in mbse-expressions' main at 7d85127, unreleased until 0.8.0: PR #16, both gates at 100%
+    in both languages, DIA-19 and DIA-20 among them).
 - <a id="CAP-228"></a>**[CAP-228: the TypeScript5 expression dialect](CAP-228.md)** · proposed · `TypeScript5` covers every
   expression of TypeScript 5, with its types, patterns and JSX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: not met.
