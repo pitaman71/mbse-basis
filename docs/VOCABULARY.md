@@ -55,11 +55,11 @@ Repositories are at `https://github.com/pitaman71/<repository>`.
 ### mbse-schemas
 
 For usage, read what its tests run, which cannot drift from the code, not its prose design documents, which give the
-reasons: the API on a page per language, [python.md](../../mbse-schemas/skills/mbse-schemas/references/python.md) and
-[typescript.md](../../mbse-schemas/skills/mbse-schemas/references/typescript.md), each fenced program run by SKL-02;
-[Corpus.py](../../mbse-schemas/python3/mbse/Schemas/Conformance/Corpus.py), one program building every kind of schema and data,
-whose output in [conformance/python3/](../../mbse-schemas/conformance/python3) is the wire format, byte-identical in both languages;
-and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript's notebooks have the same case IDs), `25_Builders`
+reasons: the API on a page per language, [python.md](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/references/python.md) and
+[typescript.md](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/references/typescript.md), each fenced program run by SKL-02;
+[Corpus.py](https://github.com/pitaman71/mbse-schemas/blob/main/python3/mbse/Schemas/Conformance/Corpus.py), one program building every kind of schema and data,
+whose output in [conformance/python3/](https://github.com/pitaman71/mbse-schemas/blob/main/conformance/python3) is the wire format, byte-identical in both languages;
+and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob/main/python3/tests) (TypeScript's notebooks have the same case IDs), `25_Builders`
 (building in a store, the plain schemas of schemas, paths such as `store.Schemas.OfInt`), `28_Extensions`
 (`store.extend`), `27_Snapshots` (mutation logs, reading without an extension) and `22_Parametrics`.
 
@@ -77,10 +77,10 @@ and by topic, in [python3/tests/](../../mbse-schemas/python3/tests) (TypeScript'
   [CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects)
 - Cardinality, `unique`: [CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md)
 - Level (data, schema, plain schema of schemas, meta-schema):
-  [Store overhaul, Levels](../../mbse-schemas/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
+  [Store overhaul, Levels](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
   (`Schemas.OfObject`, level 2) is what an extension extends; a *meta-schema* (level 3) is static code describing it.
 - Module: [CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md)
-- Planned in the [Store overhaul](../../mbse-schemas/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [FEA-026: deterministic object identity](features/FEA-026.md));
+- Planned in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [FEA-026: deterministic object identity](features/FEA-026.md));
   `Parameters.Bind` and `Parameters.Apply` ([CAP-114: parameter bindings are substituted and checked](capabilities/CAP-114.md)).
 - Store, singleton: [CAP-161: isolated stores, with no global registry](capabilities/CAP-161.md).
   Each store holds its own schemas, built when it is made or through `store.extend`; no schema object is shared
