@@ -464,9 +464,9 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
 - <a id="CAP-247"></a>**CAP-247: mbse-codegen-python's skill linking its notebook cases** · proposed · mbse-codegen-python's skill links each practice's notebook case in Python and TypeScript, as the other repositories' skills do. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md).
   - **Current**: not met; waits on CAP-246.
 - <a id="CAP-248"></a>**CAP-248: skill gaps found automatically** · proposed · A check, beside SKL-03, flags a skill practice that teaches a how but links no notebook case, so that a gap, which is a bug, is caught by a test rather than by review. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-schemas, mbse-expressions and mbse-patterns (SKL-04, in both languages: mbse-schemas#22, mbse-expressions#22, mbse-patterns#8); mbse-programs and mbse-codegen-python follow with CAP-245 and CAP-247.
 - <a id="CAP-249"></a>**CAP-249: links labeled by title, not by path** · proposed · Every link's label is the item's ID and title or the document's title, never a path: the labels left from the retired path-label rule, such as "Index entry: [capabilities/README.md]", are relabeled. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md).
-  - **Current**: not met.
+  - **Current**: met in every repository but mbse-programs (`update_doc_titles.py`, mbse-basis#45, and each repository's pass); mbse-programs follows its overhaul, with CAP-244.
 - <a id="CAP-250"></a>**CAP-250: decision tags made readable** · proposed · A decision cited by the number it had in a drained log, such as "(object identity 100)", is made legible: a link to the item that holds it, or a statement of what the number refers to. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md).
   - **Current**: not met; not yet scheduled (the user, 2026-11-01: leave the decision tags for now).
 
