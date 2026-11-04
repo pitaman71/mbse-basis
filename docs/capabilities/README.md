@@ -849,6 +849,38 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-225"></a>**[CAP-225: the schema-driven UI on Vue](CAP-225.md)** · proposed · The schema-driven UI runs on Vue. *Implements* [FEA-055: a Vue UI stack](../features/FEA-055.md). *Relates to* [CAP-001: no-code index view](CAP-001.md).
   - **Current**: not met.
 
+### Diagrams
+
+Each is built in mbse-diagrams; the design is [FEA-056: incremental diagram layout](../features/FEA-056.md#design)'s.
+
+- <a id="CAP-237"></a>**CAP-237: logical layout schemas** · proposed · `Framework.Logical` models a diagram's logical
+  layout, in Python and TypeScript: points, vectors with their rotations, shapes with their origin, border and
+  extent points, and containment and adjacency between shapes. *Implements* [FEA-056: incremental diagram layout](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-238"></a>**CAP-238: container schemas and grid insertion** · proposed · `Framework.Container` models a
+  container's cells, their extents and the children in each, and a grid container places children without adjacency
+  specs each in its own cell in a predictable sequence, incrementally, in Python and TypeScript. *Implements* [FEA-056: incremental diagram layout](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-239"></a>**CAP-239: grid adjacency** · proposed · A grid container reorders a child when an adjacency
+  spec is added, reverts it to its original insertion position when the spec is removed, quantizes or rejects a
+  rotation it cannot represent, and gives children sharing a "from" shape and rotation a nested cell container, in
+  Python and TypeScript. *Implements* [FEA-056: incremental diagram layout](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-240"></a>**CAP-240: conflicting layout rules ignored and requeued** · proposed · Of two trivially
+  incompatible rules, the later is ignored and queued, and a mutation that lifts the conflict reapplies the queued
+  rules in order: in Python and TypeScript for container layout, in TypeScript for physical layout. *Implements* [FEA-056: incremental diagram layout](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-241"></a>**CAP-241: physical layout schemas** · proposed · `Framework.Physical` models a physical layout's
+  relative and absolute coordinates, annotating a logical layout, in Python and TypeScript. *Implements* [FEA-056: incremental diagram layout](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-242"></a>**CAP-242: incremental physical placement** · proposed · Physical layout, in TypeScript only,
+  resolves orientations to absolute directions, places points so that every vector's rotation holds, fits each child to
+  its cell by its extent points and enforces the minimum shape size, one mutation at a time. *Implements* [FEA-056: incremental diagram layout](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a logical
+  layout's mutation sequence to the layout engine and renders the result, in TypeScript. *Implements* [FEA-056: incremental diagram layout](../features/FEA-056.md).
+  - **Current**: not met.
+
 ## Not yet planned
 
 Capabilities without an ID are not in plan yet. Each planned feature's are at the end of its detail file in `../features/`:
