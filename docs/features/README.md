@@ -165,6 +165,10 @@ Features that serve an engineering persona: the framework's maintainers.
   framework's own code reads and writes its schemas and specs through the protocols and builders it offers every
   model, so that its maintainers keep one paradigm, not a special case beside it. *Confers*
   [QUA-007: one paradigm at every level of a system](../QUALITIES.md#QUA-007).
+- <a id="FEA-057"></a>**[FEA-057: documentation organized by semantic role](FEA-057.md)** · proposed · internal · Every
+  repository's documents, skills, notebooks and source comments each hold one kind of content, in one place, linked
+  rather than restated, so that people and agents find the one source of each thing. *Confers*
+  [QUA-010: every repository works alike](../QUALITIES.md#QUA-010), [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
 
 ## Earlier IDs
 
