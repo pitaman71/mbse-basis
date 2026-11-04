@@ -27,9 +27,9 @@ many-to-many, not as a tree.
 
 | Tier | Prefix | What it is | Index |
 |---|---|---|---|
-| 1. Quality | `QUA-` | How a persona, human or agent, instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | [QUALITIES.md](QUALITIES.md) |
-| 2. Feature | `FEA-` | A cohesive, focused category of utility a persona values: what problems the product solves for that persona, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [features/README.md](features/README.md) |
-| 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [capabilities/README.md](capabilities/README.md) |
+| 1. Quality | `QUA-` | How a persona, human or agent, instinctively assesses the product's value, against a rubric that seems natural to them: neither what the product does nor how | [Qualities](QUALITIES.md) |
+| 2. Feature | `FEA-` | A cohesive, focused category of utility a persona values: what problems the product solves for that persona, not how. Its capabilities may or may not progress linearly within it. Confers qualities | [Features](features/README.md) |
+| 3. Capability | `CAP-` | An increment of utility within a feature: how, in a coming release, the product solves a problem, circumscribing the part of the problem space it can solve. Implements features | [Capabilities](capabilities/README.md) |
 | 4. Task | | A unit of work toward a capability | not enumerated |
 
 **Every feature is external or internal.** An external feature serves a user persona; an internal feature serves an
@@ -51,8 +51,8 @@ Two kinds of item sit outside the tiers:
 
 | Kind | Prefix | What it is | Index |
 |---|---|---|---|
-| Principle | `PRI-` | A durable design or engineering decision that reinforces qualities when consistently applied across repositories, components, source code and the rest | [PRINCIPLES.md](PRINCIPLES.md) |
-| Vocabulary | `VOC-` | A borrowed, clarified or novel concept, and the one term that names it across code, documents, tutorials and skills, with a focus on the dimensions, domains, seams and gradients of the project's own engineering space | [VOCABULARY.md](VOCABULARY.md) |
+| Principle | `PRI-` | A durable design or engineering decision that reinforces qualities when consistently applied across repositories, components, source code and the rest | [Principles](PRINCIPLES.md) |
+| Vocabulary | `VOC-` | A borrowed, clarified or novel concept, and the one term that names it across code, documents, tutorials and skills, with a focus on the dimensions, domains, seams and gradients of the project's own engineering space | [Vocabulary](VOCABULARY.md) |
 
 **Conventions are not a kind of their own.** A convention, how the work is done (equivalent implementations, notebook
 tests, coverage, navigation), is either a principle, which serves a quality ([QUA-010: every repository works alike](QUALITIES.md#QUA-010) where it governs
