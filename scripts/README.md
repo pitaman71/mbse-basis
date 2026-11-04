@@ -3,17 +3,19 @@
 
 # Tools for every mbse repository
 
-Four tools live here, and every mbse repository runs them from here rather than keeping a copy:
+Five tools live here, and every mbse repository runs them from here rather than keeping a copy:
 
-- [`polyrepo.py`](polyrepo.py) keeps the repositories, which are separate git repositories checked out side by side,
+- `polyrepo.py` keeps the repositories, which are separate git repositories checked out side by side,
   working as one project.
-- [`update_doc_links.py`](update_doc_links.py) writes the navigation links at the top and bottom of each document.
-- [`update_item_titles.py`](update_item_titles.py) labels every link to an mbse-basis item with the item's ID and
+- `update_doc_links.py` writes the navigation links at the top and bottom of each document.
+- `update_item_titles.py` labels every link to an mbse-basis item with the item's ID and
   title.
-- [`update_link_forms.py`](update_link_forms.py) writes every link into another repository in the form its file calls
+- `update_link_forms.py` writes every link into another repository in the form its file calls
   for.
+- `update_doc_titles.py` labels every link to a document with the document's title, never
+  its path.
 
-All four use only the standard library, so they run before anything is installed. Run them from inside the repository
+All five use only the standard library, so they run before anything is installed. Run them from inside the repository
 they are for; the examples below assume its root, with mbse-basis beside it. Their tests are
 `python3 -m unittest discover -s scripts`, run from mbse-basis.
 
@@ -167,7 +169,7 @@ Link text is each document's title, never a path. A document without a `# ` titl
 
 A link to an mbse-basis item is labeled with the item's ID and title, `[CAP-013: an in-memory store journaled to
 DynamoDB](…)`, wherever it is: in a document or in a source comment, in any repository (the basis'
-[`docs/README.md`](../docs/README.md), "A link is a link"). The title is written once, in the head of the item's
+[The mbse basis](../docs/README.md), "A link is a link"). The title is written once, in the head of the item's
 index entry (`**CAP-013: an in-memory store journaled to DynamoDB**`), and this tool copies it into every label and
 into the heading of the item's detail file.
 
@@ -188,7 +190,7 @@ python3 ../mbse-basis/scripts/update_item_titles.py ../mbse-react ../mbse-dynamo
 ## update_link_forms.py
 
 A link that stays inside its repository is a relative path. A link into another repository takes the form its file
-calls for (the basis' [`docs/README.md`](../docs/README.md), "A link is a link"):
+calls for (the basis' [The mbse basis](../docs/README.md), "A link is a link"):
 
 | Where the link is | Its form |
 |---|---|
@@ -209,6 +211,28 @@ that file, and exits 1 if there are any:
 cd mbse-rest
 python3 ../mbse-basis/scripts/update_link_forms.py --check    # this repository: list what is wrong
 python3 ../mbse-basis/scripts/update_link_forms.py ../mbse-react ../mbse-dynamodb   # rewrite the ones named
+```
+
+## update_doc_titles.py
+
+A link's label is legible: an item's ID and title, or a document's title or a phrase naming it, never a path (the
+basis' [The mbse basis](../docs/README.md), "A link is a link"). The tool finds each link labeled by a path or file
+name, such as `[capabilities/README.md](README.md#CAP-108)` or ``[`MBSE.md`](MBSE.md)``, and when its target is a
+document (a markdown file or a notebook, here or in a sibling, in any of the three forms of a link), replaces the label
+with the document's title: its first `# ` heading, or a notebook's first in its markdown cells, without trailing
+punctuation. The anchor is kept, so the first example becomes `[Capabilities](README.md#CAP-108)`. A link labeled by
+an item's ID is left to `update_item_titles.py`. It reads only the markdown files and notebooks git tracks, edits only
+a notebook's markdown cells, keeping the notebook's JSON format, and leaves alone fenced code blocks, code spans and
+links to the placeholder `…`.
+
+A path label it cannot fix needs a human: one to a file that is not a document (documents don't link source files),
+to a file that does not exist, to a document without a title, or to another site. `--check` writes nothing, lists
+every path label left by kind, and exits 1 if there are any:
+
+```sh
+cd mbse-rest
+python3 ../mbse-basis/scripts/update_doc_titles.py --check    # this repository: list the path labels
+python3 ../mbse-basis/scripts/update_doc_titles.py ../mbse-react ../mbse-dynamodb   # relabel the ones named
 ```
 
 ---

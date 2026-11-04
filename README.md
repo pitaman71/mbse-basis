@@ -16,7 +16,7 @@ each document's navigation links, and `scripts/update_item_titles.py`, which lab
 ([how to use them](scripts/README.md)). Start with
 [the basis](docs/README.md).
 
-Why the mbse repositories exist, and each one's part: [MBSE.md](MBSE.md).
+[Why the mbse repositories exist](MBSE.md), and each one's part.
 
 ---
 
