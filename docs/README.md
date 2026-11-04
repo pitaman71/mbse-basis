@@ -185,7 +185,8 @@ it was checked (a branch, a version, a test), or says that it is blocked or to a
 
 ## Detail files
 
-An item's detail file (`features/FEA-003.md`, `capabilities/CAP-013.md`) holds what its one-sentence entry cannot, in
+An item's detail file (`features/FEA-003.md`, `capabilities/CAP-013.md`) holds what its one-sentence entry cannot. Its
+navigation line's "←" link goes back to the item's own entry in its index (`[← Capabilities](README.md#CAP-013)`). It holds
 these sections, each only where it has something to hold:
 
 - **As built**: how a repository built the item, and what it fixes where the item is silent. A repository's design
