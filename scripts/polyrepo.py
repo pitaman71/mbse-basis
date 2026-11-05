@@ -107,6 +107,14 @@ def git(sibling: Path, *args: str) -> str:
     return subprocess.run(["git", "-C", str(sibling), *args], capture_output=True, text=True).stdout.strip()
 
 
+def upstream_of(checkout: Path, branch: str) -> str:
+    """The upstream of `branch`, or "" when it has none or the remote does not have it yet, as in a clone of an empty
+    repository."""
+    if not git(checkout, "rev-parse", "--verify", "--quiet", f"{branch}@{{upstream}}"):
+        return ""
+    return git(checkout, "rev-parse", "--abbrev-ref", f"{branch}@{{upstream}}")
+
+
 def required(name: str) -> list[str]:
     """The version ranges pyproject.toml requires of `name`, with or without extras."""
     return re.findall(rf'"{re.escape(name)}(?:\[[^\]]*\])?([^"]*)"', PYPROJECT.read_text())
@@ -294,7 +302,7 @@ def land(directory: Path, push: bool) -> int:
         if git(checkout, "status", "--porcelain", "--untracked-files=no"):
             problems.append(f"{name}: the checkout {checkout} has uncommitted changes")
         head = git(tree, "rev-parse", "HEAD")
-        for base in (target, git(checkout, "rev-parse", "--abbrev-ref", "--quiet", f"{target}@{{upstream}}")):
+        for base in (target, upstream_of(checkout, target)):
             ancestor = ["git", "-C", str(checkout), "merge-base", "--is-ancestor", base, head]
             if base and subprocess.run(ancestor).returncode:
                 problems.append(f"{name}: {branches[name]} does not fast-forward {base}; merge {base} into it, retest"
@@ -339,7 +347,7 @@ def publish(checkouts: dict[str, Path]) -> int:
         if not branch:
             problems.append(f"{name}: the checkout {checkout} is not on a branch")
             continue
-        upstream = git(checkout, "rev-parse", "--abbrev-ref", "--quiet", f"{branch}@{{upstream}}")
+        upstream = upstream_of(checkout, branch)
         behind = upstream and git(checkout, "rev-list", "--count", f"{branch}..{upstream}") != "0"
         if behind:
             problems.append(f"{name}: {branch} is behind {upstream}; pull, retest and re-pin")

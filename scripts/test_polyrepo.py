@@ -178,6 +178,19 @@ class Workspaces(unittest.TestCase):
         self.assertIn("lower: pushed topic", self.output)
         self.assertEqual(run(self.repos / "lower", "rev-parse", "--abbrev-ref", "topic@{upstream}"), "origin/topic")
 
+    def test_push_a_branch_whose_upstream_the_remote_lacks(self) -> None:
+        run(self.repos / "lower", "switch", "--quiet", "--create", "topic")
+        run(self.repos / "lower", "config", "branch.topic.remote", "origin")  # as a clone of an empty repository has
+        run(self.repos / "lower", "config", "branch.topic.merge", "refs/heads/topic")
+        self.call(polyrepo.push)
+        self.assertIn("lower: pushed topic", self.output)
+        self.assertEqual(self.remote("lower", "topic"), run(self.repos / "lower", "rev-parse", "topic"))
+
+    def test_land_into_a_branch_whose_upstream_the_remote_lacks(self) -> None:
+        self.changed()
+        run(self.repos / "upper", "config", "branch.main.merge", "refs/heads/gone")
+        self.assertEqual(self.call(polyrepo.land, self.workspace, False), 0)
+
     def test_push_a_repository_without_siblings(self) -> None:
         run(self.repos / "lower", "switch", "--quiet", "--create", "topic")
         with contextlib.redirect_stdout(io.StringIO()) as out, self.at(self.repos / "lower"):
