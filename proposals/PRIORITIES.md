@@ -36,6 +36,7 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 
 - [CAP-248: skill gaps found automatically](../docs/capabilities/README.md#CAP-248): met
 - [CAP-249: links labeled by title, not by path](../docs/capabilities/README.md#CAP-249): met
+- [CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](../docs/capabilities/README.md#CAP-252): met
 - [CAP-244: mbse-programs' cross-repository links in the agreed forms](../docs/capabilities/README.md#CAP-244), and
   [CAP-245: mbse-programs' skill linking its notebook cases](../docs/capabilities/README.md#CAP-245): after mbse-programs' overhaul
 - [CAP-246: mbse-codegen-python's tutorials](../docs/capabilities/README.md#CAP-246), then
