@@ -178,6 +178,12 @@ class Workspaces(unittest.TestCase):
         self.assertIn("lower: pushed topic", self.output)
         self.assertEqual(run(self.repos / "lower", "rev-parse", "--abbrev-ref", "topic@{upstream}"), "origin/topic")
 
+    def test_push_a_repository_without_siblings(self) -> None:
+        run(self.repos / "lower", "switch", "--quiet", "--create", "topic")
+        with contextlib.redirect_stdout(io.StringIO()) as out, self.at(self.repos / "lower"):
+            self.assertEqual(polyrepo.push(), 0)
+        self.assertEqual(out.getvalue().splitlines(), ["lower: pushed topic"])
+
     def push_refused(self, *messages: str) -> None:
         before = {name: self.remote(name, "main") for name in NAMES}
         with self.assertRaises(SystemExit) as raised:
