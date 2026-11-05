@@ -890,7 +890,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   spec is added, reverts it to its original insertion position when the spec is removed, quantizes or rejects a
   rotation it cannot represent, and gives children sharing a "from" shape and rotation a nested cell container, in
   Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met.
+  - **Current**: met (checked in mbse-diagrams' main at 99c77f2: suites PKG, LOG, CNT and ADJ pass in both languages, at 100% coverage).
 - <a id="CAP-240"></a>**CAP-240: conflicting layout rules ignored and requeued** · proposed · Of two trivially
   incompatible rules, the later is ignored and queued, and a mutation that lifts the conflict reapplies the queued
   rules in order: in Python and TypeScript for container layout, in TypeScript for physical layout. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
