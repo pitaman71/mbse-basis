@@ -46,9 +46,29 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 
 ## INI-011 : object + relation + pattern framework
 
+Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/main/docs/proposals/rescope/README.md). Patterns over data ([FEA-023: patterns over data](../docs/features/FEA-023.md)), in mbse-patterns 0.10.0:
+
+- [CAP-072: distributions linked to patterns](../docs/capabilities/CAP-072.md): not met there yet
+- [CAP-042: data generated from constraints](../docs/capabilities/CAP-042.md): not met there yet; rejecting a draw by its `requires` is
+  blocked on [CAP-142: expressions evaluated in queries](../docs/capabilities/CAP-142.md#blocked)
+- [CAP-073: distributions fit from data](../docs/capabilities/CAP-073.md): not met
+
 ## INI-012 : domain + expression dialect framework
 
 ## INI-020 : code mutation framework
+
+Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md). Transforms ([FEA-021: every generation ambiguity a parameter](../docs/features/FEA-021.md)), in mbse-transforms:
+
+- [CAP-074: transforms applied step by step](../docs/capabilities/CAP-074.md),
+  [CAP-075: steps linked to what they matched and wrote](../docs/capabilities/CAP-075.md) and
+  [CAP-076: reruns reuse decisions](../docs/capabilities/CAP-076.md): in its first release; not met there yet
+- [CAP-077: changes explained across runs](../docs/capabilities/CAP-077.md): blocked on mbse-journals
+- [CAP-078: incremental rebuild](../docs/capabilities/CAP-078.md): not met
+- [CAP-079: steps undone](../docs/capabilities/CAP-079.md): not met
+- [CAP-080: invertible transforms](../docs/capabilities/CAP-080.md): not met
+- [CAP-081: transforms composed into pipelines](../docs/capabilities/CAP-081.md): not met
+- [CAP-082: completeness reported](../docs/capabilities/CAP-082.md): not met
+- [CAP-083: policies with guards and distributions](../docs/capabilities/CAP-083.md): not met
 
 ## INI-030 : no/low-code and apps framework
 

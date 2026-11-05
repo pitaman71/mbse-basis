@@ -95,7 +95,8 @@ and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob
   which any operation taking the function interprets, applying it lazily or through `Parameters.Apply`
   ([CAP-114: parameter bindings are substituted and checked](capabilities/CAP-114.md)).
 - Constraint: [CAP-166: constraints attached where they constrain](capabilities/CAP-166.md#open-questions). `requires` left mbse-schemas in 0.17.0, for
-  mbse-patterns (schema extension 5 to 7 in [FEA-024: expressions as data](features/FEA-024.md#decided)).
+  mbse-patterns (schema extension 5 to 7 in [FEA-024: expressions as data](features/FEA-024.md#decided)), superseded there on 2026-11-05: a
+  pattern's `requires` stays with mbse-schemas' `OfPattern`, evaluated by its executor.
 
 ### mbse-expressions
 
