@@ -43,6 +43,10 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   permits.
 - <a id="VOC-028"></a>**VOC-028: human and agent** · adopted · **Human** and **agent**: sibling categories of who reads, writes and
   operates. A **user** is one persona of humans, beside engineering personas. *Never*: "user" as a synonym for humans.
+- <a id="VOC-029"></a>**VOC-029: fungible** · adopted · **Fungible**: readily changeable to adapt to new situations;
+  flexible. The third sense in [Merriam-Webster](https://www.merriam-webster.com/dictionary/fungible), which the
+  project adopts uniformly, as the user decided (2026-11-05). Its first two senses, interchangeable or replaceable by an
+  equal part, are special cases of it.
 
 VOC-006, VOC-010 to VOC-019 and VOC-021 became modeling constructs, listed below; VOC-020 and VOC-022 to VOC-024 were withdrawn.
 Their IDs are not reused.
