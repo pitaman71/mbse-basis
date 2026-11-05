@@ -122,7 +122,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-082"></a>**[CAP-082: completeness reported](CAP-082.md)** · proposed · A session reports every element no transform has rewritten that some transform could match. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
-- <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · proposed · A policy's clauses are guarded by predicates over the match, and weigh a parameter's values by
+- <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · proposed · A policy's clauses are guarded by patterns over the match (mbse-schemas' `OfPattern`), and weigh a parameter's values by
   a distribution over its domain, written as data. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 
