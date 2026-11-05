@@ -184,18 +184,20 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met.
 - <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
   expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met (checked in mbse-expressions' main at 7d85127, unreleased until 0.8.0: PR #16, both gates at 100%
-    in both languages, DIA-19 and DIA-20 among them).
+  - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 7d85127: PR #16, both gates at 100% in both
+    languages, DIA-19 and DIA-20 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages).
 - <a id="CAP-228"></a>**[CAP-228: the TypeScript5 expression dialect](CAP-228.md)** · proposed · `TypeScript5` covers every
   expression of TypeScript 5, with its types, patterns and JSX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met (checked in mbse-expressions' main at 8804e1e, unreleased until 0.8.0: PR #18, both gates at 100%
-    in both languages, DIA-21 to DIA-23 among them).
+  - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 8804e1e: PR #18, both gates at 100% in both
+    languages, DIA-21 to DIA-23 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages).
 - <a id="CAP-229"></a>**[CAP-229: the C expression dialect](CAP-229.md)** · proposed · `C` covers every expression of C11
   to C23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
+    languages, DIA-11, DIA-12 and DIA-24 to DIA-26 among them).
 - <a id="CAP-230"></a>**[CAP-230: the C++ expression dialect](CAP-230.md)** · proposed · `Cpp` covers every expression of
   C++17 to C++23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
+    languages, DIA-24 to DIA-26 among them).
 - <a id="CAP-231"></a>**[CAP-231: the SystemVerilog expression dialect, complete](CAP-231.md)** · proposed ·
   `SystemVerilog` covers every expression of IEEE 1800-2023, Verilog its subset. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: not met.
