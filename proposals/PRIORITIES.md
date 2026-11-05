@@ -44,7 +44,7 @@ How?
 
 ## INI-040 : diagrams framework
 
-Proposal: [Diagrams](DIAGRAMS.md). Diagrams ([FEA-056: incremental diagram layout](../docs/features/FEA-056.md)), in build order:
+Proposal: [Diagrams](DIAGRAMS.md). Diagrams ([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md)), in build order:
 
 - [CAP-237: logical layout schemas](../docs/capabilities/README.md#CAP-237)
 - [CAP-238: container schemas and grid insertion](../docs/capabilities/README.md#CAP-238)

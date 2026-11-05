@@ -118,7 +118,7 @@ to that feature but orthogonal to it, as the user decided ([FEA-045: a Python, F
 
 Diagrams of schema-governed data, laid out by mbse-diagrams.
 
-- <a id="FEA-056"></a>**[FEA-056: incremental diagram layout](FEA-056.md)** · proposed · external · A diagram's layout is
+- <a id="FEA-056"></a>**[FEA-056: fungible diagramming keeps agents and humans in the loop](FEA-056.md)** · proposed · external · A diagram's layout is
   a deterministic function of its logical layout's mutation sequence, so that humans and agents can edit it at any
   step. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001), [QUA-006: the same in every language](../QUALITIES.md#QUA-006).
   *Relates to* [FEA-001: schema-driven UI](FEA-001.md).
