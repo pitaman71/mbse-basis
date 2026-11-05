@@ -370,7 +370,7 @@ def publish(checkouts: dict[str, Path]) -> int:
 
 
 def push() -> int:
-    return publish({**{name: ROOT.parent / name for name in json.loads(CONFIG.read_text())}, ROOT.name: ROOT})
+    return publish({**{name: ROOT.parent / name for name in pins(ROOT)}, ROOT.name: ROOT})
 
 
 def option(argv: list[str], name: str) -> list[str]:
