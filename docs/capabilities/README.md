@@ -858,7 +858,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
 - <a id="CAP-237"></a>**[CAP-237: logical layout schemas](CAP-237.md)** · proposed · `Framework.Logical` models a diagram's logical
   layout, in Python and TypeScript: points, vectors with their rotations, shapes with their origin, border and
   extent points, and containment and adjacency between shapes. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met.
+  - **Current**: met (checked in mbse-diagrams' main at 8bac082: suites PKG and LOG pass in both languages, at 100% coverage).
 - <a id="CAP-238"></a>**CAP-238: container schemas and grid insertion** · proposed · `Framework.Container` models a
   container's cells, their extents and the children in each, and a grid container places children without adjacency
   specs each in its own cell in a predictable sequence, incrementally, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
