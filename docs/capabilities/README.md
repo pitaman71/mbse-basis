@@ -99,7 +99,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-patterns 0.7 to 0.9.1 (the TRF suites), whose code mbse-patterns 0.10.0 removes; not met
     in mbse-transforms yet.
 - <a id="CAP-075"></a>**[CAP-075: steps linked to what they matched and wrote](CAP-075.md)** · proposed · Each step of a transform links the elements it matched and wrote, each in
-  a role, as relations that predicates query. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  a role, as relations that patterns query. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: met in mbse-patterns 0.9 to 0.9.1, whose code mbse-patterns 0.10.0 removes; not met in
     mbse-transforms yet.
 - <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · proposed · A rerun takes each earlier decision again where its key still occurs, reports the orphans, and diffs
