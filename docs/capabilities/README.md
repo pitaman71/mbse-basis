@@ -52,7 +52,7 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
 - <a id="CAP-167"></a>**[CAP-167: schemas refined by other schemas](CAP-167.md)** · proposed · An object or container schema refines another through `Schemas.Refines`, inheriting its members and narrowing them where validation confirms it. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-034: schemas specialized by classifier intersection and union](CAP-034.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.Refines`).
 - <a id="CAP-251"></a>**[CAP-251: values of a refinement held where what it refines is declared](CAP-251.md)** · proposed · A property, a container's element, a union's branch or a restricted value of any schema declaring a value object schema holds a value of any refinement of it, written with its own schema named (`$schema`) and read back as it, never guessed. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-167: schemas refined by other schemas](CAP-167.md), [CAP-153: unions and intersections of named branches and parts](CAP-153.md).
-  - **Current**: met in mbse-schemas 0.26.10 (checked in the code of both languages at 0.26.10: `Proxies._refines`, `Plain`'s `$schema`; SCH-27, SCH-28).
+  - **Current**: met in mbse-schemas 0.26.10 (checked in the code of both languages at 0.26.10: `Proxies._refines`, `Plain`'s `$schema`; SCH-27, SCH-28, ANY-08).
 ### Patterns over data
 
 - <a id="CAP-150"></a>**[CAP-150: predicates as data](CAP-150.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
