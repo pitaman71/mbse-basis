@@ -6,7 +6,7 @@
 Five tools live here, and every mbse repository runs them from here rather than keeping a copy:
 
 - `polyrepo.py` keeps the repositories, which are separate git repositories checked out side by side,
-  working as one project.
+  working as one project, and scaffolds a new one from the templates in `templates/repo/`.
 - `update_doc_links.py` writes the navigation links at the top and bottom of each document.
 - `update_item_titles.py` labels every link to an mbse-basis item with the item's ID and
   title.
@@ -69,6 +69,7 @@ tagged.
 | `land DIR [--push]` | `git merge --ff-only` in each repository, then `git worktree remove` and `git branch -d` | dependencies first; tags each new version; refuses, before changing anything, anything that would not fast-forward cleanly |
 | `push` | `git push` in each repository | dependencies first, with any new version tag; refuses, before pushing anything, a branch behind its upstream or a pin the sibling's branch does not contain |
 | `remove DIR [--force]` | `git worktree remove` for a workspace | keeps the branches |
+| `new DIR --package AREA[.NAME] [--npm NAME]` | `git init` of a new repository, its files staged | run from mbse-basis: the starting set, from the templates, beside mbse-basis; refuses a `DIR` that exists |
 | `help` | | prints the full reference |
 
 Each command acts for the repository it is run in and the siblings in its `siblings.json`. Run `push` or `workspace`
@@ -139,6 +140,43 @@ A release is a version bump, made alike in `python3/pyproject.toml` and `typescr
 and the tag `v<version>`. `land` creates the tag; a bump committed directly on a branch is not tagged until you tag it
 (`git tag -a v0.11.0 -m "Release 0.11.0"`), and `push` then pushes the tag with the branch. Below 1.0, a change that
 dependents must adapt to bumps the minor version.
+
+### A new repository
+
+A new mbse repository starts in the conventions rather than being reorganized into them later (the basis'
+[PRI-041: a new repository starts in the conventions](../docs/PRINCIPLES.md#PRI-041)). Run from mbse-basis:
+
+```sh
+cd mbse-basis
+python3 scripts/polyrepo.py new ../mbse-example --package Example     # mbse.Example and @mbse/example
+python3 scripts/polyrepo.py new ../mbse-rest --package Services.Rest --npm @mbse/rest
+```
+
+It makes the directory, which must not exist, beside mbse-basis, and fills the templates in `templates/repo/`. Each is
+named for the file it makes, its path included, with `.tmpl` added, so that no tool here reads a template as a
+document or a source file. Names are filled in by string replacement of `{{REPO}}`, `{{PACKAGE}}` (`Services.Rest`),
+`{{PACKAGE_PATH}}` (`Services/Rest`), `{{NPM}}` and `{{BASIS_COMMIT}}`; a placeholder it does not know stops it. The
+starting set:
+
+| Files | What they start as |
+|---|---|
+| `AGENTS.md`, `CLAUDE.md` | what the repository is, to fill; the start-here table; the reading list, the hidden-memory rule and the `mbse:` resolution rule, word for word as every repository has them; the commands; `CLAUDE.md` is `@AGENTS.md` |
+| `README.md`, `MBSE.md` | the README opening with why, to fill; `MBSE.md` pointing to mbse-basis', as mbse-diagrams has it |
+| `siblings.json` | mbse-basis alone, pinned at its commit; a sibling the package uses is added, then pinned with `pin` |
+| `python3/` | `pyproject.toml` for uv, `mbse/<Area>[/<Name>]/__init__.py`, `conftest.py`, `tests/` (PKG and SKL notebooks, the test plan) and `tutorials/README.md`, shaped as mbse-diagrams' |
+| `typescript5/` | `package.json`, `tsconfig.json`, `.c8rc.json`, `deno.json`, `src/index.ts`, `tests/` (the same notebooks, `run-notebooks.ts`, `support.ts`, the test plan) and `tutorials/README.md` |
+| `skills/<repo>/SKILL.md`, `skills/sync.sh` | the skill's one source, with a practice to fill that links PKG-01 in both languages and an opt-out on each section that teaches no how; `sync.sh` copies it into both packages, which the scaffold runs |
+| `docs/EQUIVALENCE.md` | coverage, deliberate differences (none yet) and "Cases in one language only" (none yet), which SKL-03 reads |
+
+Each passage a person writes is marked `TO FILL`. Then it writes the navigation lines with `update_doc_links.py`, runs
+`git init` and stages every file, without committing, and prints the next steps: fill each `TO FILL`, install and run
+both suites, add the siblings the package uses, run the link checks, and commit and push. The new repository passes
+`update_link_forms.py`, `update_item_titles.py` and `update_doc_titles.py --check`, and both suites, as it is.
+
+The templates are starting points, filled in once: the new repository owns its files from then on, and they are not
+copies kept in sync with the templates, so no guidance is written twice (the basis'
+[PRI-016: guidance written once](../docs/PRINCIPLES.md#PRI-016)). A template that a change to the conventions makes stale is updated here, for
+the repositories still to come; `test_scaffold.py` fails when one no longer passes the link checks.
 
 ## update_doc_links.py
 

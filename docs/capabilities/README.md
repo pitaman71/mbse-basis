@@ -494,6 +494,8 @@ and built after mbse-programs' port. Its precursor, mbse-patterns 0.9.1's `Trans
   - **Current**: met (`update_doc_titles.py`, mbse-basis#45, and each repository's pass).
 - <a id="CAP-250"></a>**CAP-250: decision tags made readable** · proposed · A decision cited by the number it had in a drained log, such as "(object identity 100)", is made legible: a link to the item that holds it, or a statement of what the number refers to. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md).
   - **Current**: not met; not yet scheduled (the user, 2026-11-01: leave the decision tags for now).
+- <a id="CAP-252"></a>**[CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](CAP-252.md)** · proposed · `polyrepo.py new <dir> --package <Area.Name> [--npm <name>]` creates a new repository beside the others, from templates kept in mbse-basis, its starting set already passing the link checks and its suites. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [PRI-041: a new repository starts in the conventions](../PRINCIPLES.md#PRI-041).
+  - **Current**: met (checked on mbse-basis' branch CAP-252: `scripts/test_scaffold.py`, and a scaffold of mbse-example).
 
 ### Program models
 

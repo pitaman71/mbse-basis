@@ -3,7 +3,8 @@
 mbse-basis states, once, what every mbse repository shares: qualities (QUA-), features (FEA-), capabilities (CAP-),
 principles (PRI-) and vocabulary (VOC-), each with a permanent ID. It holds no library code, only the tools every repository runs from here
 (`scripts/polyrepo.py`, `scripts/update_doc_links.py`, `scripts/update_item_titles.py`, `scripts/update_link_forms.py`, `scripts/update_doc_titles.py`; tests: `python3 -m unittest discover -s scripts`), standard
-library only and kept small. Other repositories are its siblings, checked out beside it (`../mbse-schemas`, ...),
+library only and kept small, and the templates a new repository starts from (`scripts/templates/repo/`, filled by
+`polyrepo.py new`). Other repositories are its siblings, checked out beside it (`../mbse-schemas`, ...),
 and cite its items by ID.
 
 ## Start here
