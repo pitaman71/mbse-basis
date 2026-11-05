@@ -34,7 +34,7 @@ principles serve them.
 - <a id="QUA-010"></a>**QUA-010: every repository works alike** · proposed · An engineering persona, a contributor human or
   agent, who knows how one mbse repository is worked in can work in any other without learning local customs, and
   work done in parallel does not collide. *Conferred by* no feature yet; *served by* the principles that govern the
-  work ([Principles](PRINCIPLES.md)): [PRI-011: the lowest repository that can own it](PRINCIPLES.md#PRI-011), [PRI-016: guidance written once](PRINCIPLES.md#PRI-016), [PRI-029: parallel work in polyrepo workspaces](PRINCIPLES.md#PRI-029), [PRI-031: the version is the contract](PRINCIPLES.md#PRI-031) to [PRI-033: work lands by branch and pull request](PRINCIPLES.md#PRI-033) and [PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages](PRINCIPLES.md#PRI-035).
+  work ([Principles](PRINCIPLES.md)): [PRI-011: the lowest repository that can own it](PRINCIPLES.md#PRI-011), [PRI-016: guidance written once](PRINCIPLES.md#PRI-016), [PRI-029: parallel work in polyrepo workspaces](PRINCIPLES.md#PRI-029), [PRI-031: the version is the contract](PRINCIPLES.md#PRI-031) to [PRI-033: work lands by branch and pull request](PRINCIPLES.md#PRI-033), [PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages](PRINCIPLES.md#PRI-035) and [PRI-041: a new repository starts in the conventions](PRINCIPLES.md#PRI-041).
 - <a id="QUA-011"></a>**QUA-011: fully responsive views** · proposed · Views are fully responsive balancing window
   resize, proportionate initial allocation of major display sections, value abbreviation, and font scaling.
   *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md).

@@ -1,0 +1,25 @@
+{
+  "name": "{{NPM}}",
+  "version": "0.1.0",
+  "description": "TO FILL: what the package does, in a sentence (TypeScript implementation)",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "postinstall": "python3 ../../mbse-basis/scripts/polyrepo.py check",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx tests/run-notebooks.ts --typecheck",
+    "coverage": "c8 --check-coverage --100 tsx tests/run-notebooks.ts --typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "c8": "^11.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

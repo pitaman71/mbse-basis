@@ -44,6 +44,14 @@ and never tagged.
                               commit that the sibling's branch does not contain. Rerunning it is safe
     remove DIR [--force]      removes a workspace's worktrees, refusing one with uncommitted changes unless --force;
                               branches are kept
+    new DIR --package AREA[.NAME] [--npm NAME]
+                              scaffolds a new repository in DIR, beside mbse-basis, in the conventions: fills the
+                              templates in mbse-basis' scripts/templates/repo/ with its names, by string replacement
+                              of {{placeholders}}; copies the skill into both packages (skills/sync.sh), writes the
+                              navigation lines (update_doc_links.py), runs git init and stages every file. The Python package is mbse.AREA[.NAME], the npm package NAME
+                              (@mbse/ and the repository's name without mbse-, by default). It pins mbse-basis alone;
+                              a sibling the package uses is added to siblings.json, then pinned. It refuses a DIR
+                              that exists. The templates are starting points, filled in once, not copies kept in sync
 
 Standard library only, so that it runs before anything is installed.
 """
@@ -381,6 +389,69 @@ def push() -> int:
     return publish({**{name: ROOT.parent / name for name in pins(ROOT)}, ROOT.name: ROOT})
 
 
+TEMPLATE_SUFFIX = ".tmpl"  # every template's, so that no tool reads a template as a document or a source file
+
+
+def new(directory: Path, package: str, npm: str | None, basis: Path = Path(__file__).resolve().parent.parent) -> int:
+    """A new repository at `directory`, beside `basis`, made from the templates in `basis`.
+
+    It applies [PRI-041: a new repository starts in the conventions](../docs/PRINCIPLES.md#PRI-041), and is
+    [CAP-252: new repositories scaffolded in the conventions](../docs/capabilities/CAP-252.md). The templates are
+    starting points, filled in once, not copies kept in sync.
+    """
+    name = directory.name
+    if directory.exists():
+        raise SystemExit(f"{directory} already exists: new makes a repository, and never reworks one")
+    if not re.fullmatch(r"mbse-[a-z0-9]+(?:-[a-z0-9]+)*", name):
+        raise SystemExit(f"{name}: a repository's name is mbse- and lowercase words joined by -, as mbse-diagrams")
+    if not re.fullmatch(r"[A-Z][A-Za-z0-9]*(?:\.[A-Z][A-Za-z0-9]*)?", package):
+        raise SystemExit(f"--package {package}: the area, or the area and name, capitalized: Diagrams for "
+                         "mbse.Diagrams, Services.Rest for mbse.Services.Rest")
+    if npm is not None and not re.fullmatch(r"@mbse/[a-z0-9]+(?:-[a-z0-9]+)*", npm):
+        raise SystemExit(f"--npm {npm}: an npm package is @mbse/ and the repository's name without mbse-")
+    if directory.parent != basis.parent:
+        raise SystemExit(f"{directory} must be beside mbse-basis, in {basis.parent}, so that ../mbse-basis resolves")
+    commit = git(basis, "rev-parse", "HEAD")
+    if not commit:
+        raise SystemExit(f"{basis}: not a git checkout, so there is no commit to pin")
+    values = {"{{REPO}}": name, "{{PACKAGE}}": package, "{{PACKAGE_PATH}}": package.replace(".", "/"),
+              "{{NPM}}": npm or f"@mbse/{name.removeprefix('mbse-')}", "{{BASIS_COMMIT}}": commit}
+
+    def fill(text: str, where: Path) -> str:
+        for placeholder, value in values.items():
+            text = text.replace(placeholder, value)
+        if "{{" in text:
+            raise SystemExit(f"{where}: a placeholder new does not know, in {text[text.index('{{'):][:40]!r}")
+        return text
+
+    templates = basis / "scripts" / "templates" / "repo"
+    for template in sorted(p for p in templates.rglob(f"*{TEMPLATE_SUFFIX}") if p.is_file()):
+        relative = fill(template.relative_to(templates).as_posix(), template).removesuffix(TEMPLATE_SUFFIX)
+        target = directory / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(fill(template.read_text(), template))
+    sync = directory / "skills" / "sync.sh"
+    sync.chmod(0o755)
+    subprocess.run(["sh", str(sync)], check=True)
+    import update_doc_links  # beside this file, as every tool run from mbse-basis is
+
+    update_doc_links.main([str(directory)])
+    subprocess.run(["git", "init", "--quiet", "--initial-branch=main", str(directory)], check=True)
+    subprocess.run(["git", "-C", str(directory), "add", "--all"], check=True)
+    print(f"""{directory}: a new repository, its files staged, mbse-basis pinned at {commit[:7]}. Next, in it:
+  1. Fill in each TO FILL (grep -rn "TO FILL" .): what the repository is (AGENTS.md), why it exists (README.md),
+     the skill's description and first practice, the packages' descriptions and the tutorials' introductions;
+     then sh skills/sync.sh.
+  2. (cd python3 && uv sync && uv run pytest) and (cd typescript5 && npm install && npm test), which write the
+     lock files to commit.
+  3. For each sibling the package uses: add it to siblings.json and to the dependencies of pyproject.toml and
+     package.json, as mbse-diagrams has mbse-schemas, then {COMMAND} pin.
+  4. python3 ../mbse-basis/scripts/update_link_forms.py --check, update_item_titles.py --check and
+     update_doc_titles.py --check.
+  5. Commit, create github.com/pitaman71/{name}, add it as the remote origin, and push.""")
+    return 0
+
+
 def option(argv: list[str], name: str) -> list[str]:
     """The values that follow `name` on the command line, up to the next option."""
     args = argv[1:]
@@ -411,6 +482,10 @@ def main(root: Path, argv: list[str]) -> int:
             return land(directory, "--push" in argv[2:])
         branch = option(argv, "--branch")
         return workspace(directory, branch[0] if branch else None, option(argv, "--edit"))
+    if command == "new" and len(argv) > 1 and not argv[1].startswith("--"):
+        package, npm = option(argv, "--package"), option(argv, "--npm")
+        if len(package) == 1 and len(npm) <= 1:
+            return new(Path(argv[1]).resolve(), package[0], npm[0] if npm else None)
     raise SystemExit(__doc__)
 
 
