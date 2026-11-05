@@ -261,7 +261,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
 - <a id="PRI-041"></a>**PRI-041: a new repository starts in the conventions** · proposed · A new mbse repository is
   created conforming to the basis' rules for every document, its doc spec and its link forms
   ([the basis](README.md#rules-for-every-document)), not reorganized into them later: its starting set comes from the
-  scaffold, `polyrepo.py new` ([CAP-252: new repositories scaffolded in the conventions](capabilities/CAP-252.md)). The scaffold's templates are starting points, filled in once,
+  scaffold, `polyrepo.py new` ([CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](capabilities/CAP-252.md)). The scaffold's templates are starting points, filled in once,
   not copies kept in sync, so they write no guidance twice ([PRI-016: guidance written once](#PRI-016)). *Governs* the work. *Serves*
   [QUA-010: every repository works alike](QUALITIES.md#QUA-010). *Relates to* [PRI-030: one package layout](#PRI-030).
 

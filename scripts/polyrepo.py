@@ -396,7 +396,7 @@ def new(directory: Path, package: str, npm: str | None, basis: Path = Path(__fil
     """A new repository at `directory`, beside `basis`, made from the templates in `basis`.
 
     It applies [PRI-041: a new repository starts in the conventions](../docs/PRINCIPLES.md#PRI-041), and is
-    [CAP-252: new repositories scaffolded in the conventions](../docs/capabilities/CAP-252.md). The templates are
+    [CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](../docs/capabilities/CAP-252.md). The templates are
     starting points, filled in once, not copies kept in sync.
     """
     name = directory.name
