@@ -76,8 +76,8 @@ their place ([CAP-150: predicates as data](CAP-150.md#decided)), and its transfo
   store's extents, tests of an adjacency's entries, and weighted alternatives. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
   - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.2; the ALG suites), whose predicates
     mbse-patterns 0.10.0 removes; in mbse-schemas' `OfPattern`, specs and executor, which take their place, to assess.
-- <a id="CAP-072"></a>**[CAP-072: distributions in predicates](CAP-072.md)** · proposed · A predicate's constraint says how its matches are distributed, by weighted alternatives and
-  distributions of values, so that one predicate is validated, queried, sampled and generated from alike. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
+- <a id="CAP-072"></a>**[CAP-072: distributions linked to patterns](CAP-072.md)** · proposed · Distributions linked to a pattern's variables say how its matches are distributed, by weighted alternatives and
+  distributions of values, so that one pattern is validated, queried, sampled and generated from alike. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.3, 0.4; the DST suites), whose code
     mbse-patterns 0.10.0 removes; not met there yet.
 - <a id="CAP-073"></a>**[CAP-073: distributions fit from data](CAP-073.md)** · proposed · A characterizer reads a stream of objects and fits a distribution to them, in one pass and bounded
@@ -91,7 +91,8 @@ decided (2026-11-05, "yes transforms goes in its own repo"; [its charter](https:
 and built after mbse-programs' port. Its precursor, mbse-patterns 0.9.1's `Transforms`, met [CAP-074: transforms applied step by step](CAP-074.md) to
 [CAP-076: reruns reuse decisions](CAP-076.md) and is its design input, not code to port: a rewrite is now a mutation expression of mbse-schemas, not code
 ([CAP-074: transforms applied step by step](CAP-074.md#decided)), and reruns are in its first release
-([CAP-076: reruns reuse decisions](CAP-076.md#decided)).
+([CAP-076: reruns reuse decisions](CAP-076.md#decided)). [CAP-077: changes explained across runs](CAP-077.md) to [CAP-083: policies with guards and distributions](CAP-083.md), which the precursor did not meet, are
+mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 - <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · proposed · A transform, a rewrite with a before and an after, is applied by a session one decision per
   step, a policy ranking the candidates, and the steps kept as a trace. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
@@ -107,23 +108,23 @@ and built after mbse-programs' port. Its precursor, mbse-patterns 0.9.1's `Trans
     mbse-transforms yet.
 - <a id="CAP-077"></a>**[CAP-077: changes explained across runs](CAP-077.md)** · proposed · A source diff names what changed in the model, and a target diff traces each change in the
   output to the model change or the answer that caused it. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: blocked: diffing stores in general is mbse-journals', which is planned.
+  - **Current**: not met in mbse-transforms yet; blocked: diffing stores in general is mbse-journals', which is planned.
 - <a id="CAP-078"></a>**[CAP-078: incremental rebuild](CAP-078.md)** · proposed · A rerun after a model change reuses the work of every step whose reads did not change, by recorded reads,
   fingerprints and invalidation, with the same result as a run from scratch. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: not met.
+  - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-079"></a>**[CAP-079: steps undone](CAP-079.md)** · proposed · A session takes back its last step exactly, every step's effect recorded as mutations with what they replaced. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: not met.
+  - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-080"></a>**[CAP-080: invertible transforms](CAP-080.md)** · proposed · A transform declares its inverse, so that a target and its trace give back the source, and an edit of
   the output is carried back to the model or named as one no inverse can carry. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: not met.
+  - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-081"></a>**[CAP-081: transforms composed into pipelines](CAP-081.md)** · proposed · Transforms compose as passes, one's after-symbols bound to the next one's before-symbols, a
   pipeline itself a transform. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: not met.
+  - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-082"></a>**[CAP-082: completeness reported](CAP-082.md)** · proposed · A session reports every element no transform has rewritten that some transform could match. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: not met.
+  - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · proposed · A policy's clauses are guarded by predicates over the match, and weigh a parameter's values by
   a distribution over its domain, written as data. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: not met.
+  - **Current**: not met in mbse-transforms yet.
 
 ### Expressions as data
 
@@ -310,7 +311,7 @@ and built after mbse-programs' port. Its precursor, mbse-patterns 0.9.1's `Trans
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
 
-- <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are bound and applied in mbse-expressions, bound by predicates in mbse-patterns and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
+- <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are bound and applied in mbse-expressions, bound by patterns (mbse-schemas' `OfPattern` and mbse-expressions' `Patterns` dialect) and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
   - **Current**: not met.
 - <a id="CAP-181"></a>**[CAP-181: parameters wherever literals may appear](CAP-181.md)** · proposed · Anywhere a
   literal may appear, a parameter may appear in its place. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
