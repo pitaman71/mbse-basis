@@ -58,7 +58,7 @@ Proposal: [Diagrams](DIAGRAMS.md). Diagrams ([FEA-056: fungible diagramming keep
 
 - [CAP-237: logical layout schemas](../docs/capabilities/CAP-237.md)
 - [CAP-238: container schemas and grid insertion](../docs/capabilities/CAP-238.md)
-- [CAP-239: grid adjacency](../docs/capabilities/README.md#CAP-239)
+- [CAP-239: grid adjacency](../docs/capabilities/CAP-239.md)
 - [CAP-240: conflicting layout rules ignored and requeued](../docs/capabilities/README.md#CAP-240)
 - [CAP-241: physical layout schemas](../docs/capabilities/README.md#CAP-241)
 - [CAP-242: incremental physical placement](../docs/capabilities/README.md#CAP-242)
