@@ -56,7 +56,7 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 
 Proposal: [Diagrams](DIAGRAMS.md). Diagrams ([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md)), in build order:
 
-- [CAP-237: logical layout schemas](../docs/capabilities/README.md#CAP-237)
+- [CAP-237: logical layout schemas](../docs/capabilities/CAP-237.md)
 - [CAP-238: container schemas and grid insertion](../docs/capabilities/README.md#CAP-238)
 - [CAP-239: grid adjacency](../docs/capabilities/README.md#CAP-239)
 - [CAP-240: conflicting layout rules ignored and requeued](../docs/capabilities/README.md#CAP-240)

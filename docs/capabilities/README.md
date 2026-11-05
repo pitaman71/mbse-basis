@@ -855,7 +855,7 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 
 Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md#design)'s.
 
-- <a id="CAP-237"></a>**CAP-237: logical layout schemas** · proposed · `Framework.Logical` models a diagram's logical
+- <a id="CAP-237"></a>**[CAP-237: logical layout schemas](CAP-237.md)** · proposed · `Framework.Logical` models a diagram's logical
   layout, in Python and TypeScript: points, vectors with their rotations, shapes with their origin, border and
   extent points, and containment and adjacency between shapes. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
