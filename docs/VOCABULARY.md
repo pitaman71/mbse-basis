@@ -108,18 +108,24 @@ and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob
 
 ### mbse-patterns
 
+These name mbse-patterns 0.9.1. From 0.10.0 it keeps distributions, sampling, generators and characterizers, and its
+predicates give way to mbse-schemas' `OfPattern` ([FEA-023: patterns over data](features/FEA-023.md)).
+
 - Predicate (`OfPredicate`), symbol, match: [Predicates](capabilities/CAP-150.md#predicates)
 - `Exists`, `Forall`, `Contains`: [The predicate algebra](capabilities/CAP-152.md#the-predicate-algebra)
 - Application of a predicate: [Parameters and application](capabilities/CAP-150.md#parameters-and-application)
 - Pattern, `Choices`, distributions of values: [Distributions](capabilities/CAP-072.md#distributions)
-- Transform, session, policy, trace: [The model](capabilities/CAP-074.md#the-model),
-  [Data](capabilities/CAP-074.md#data)
 
 ### mbse-programs
 
 - Syntax node, kind, category: [Trees](capabilities/CAP-084.md#trees)
 - Standard: [Standards](capabilities/CAP-085.md#standards)
 - Language, entity, scope, program, transpiler, bridge: [Layers](capabilities/CAP-084.md#layers)
+
+### mbse-transforms
+
+- Transform, session, policy, trace: [The model](capabilities/CAP-074.md#the-model),
+  [Data](capabilities/CAP-074.md#data), as built in its precursor, mbse-patterns 0.9.1's `Transforms`
 
 ### mbse-codegen-python
 

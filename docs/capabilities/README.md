@@ -42,10 +42,13 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: not met.
 - <a id="CAP-029"></a>**[CAP-029: three-valued constraint checking](CAP-029.md)** · proposed · Constraints are checked, three-valued. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020), [FEA-023: patterns over data](../features/FEA-023.md).
-  - **Current**: met: mbse-patterns' validators (0.1; the VAL suites).
+  - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (its validators; the VAL suites), whose code
+    mbse-patterns 0.10.0 removes; in their place, mbse-schemas' validation is blocked on [CAP-142: expressions evaluated in queries](CAP-142.md#blocked).
 - <a id="CAP-042"></a>**[CAP-042: data generated from constraints](CAP-042.md)** · proposed · Data is generated from constraints: sampled, and pseudorandom.
   *Implements* [FEA-020: refinable models](../features/README.md#FEA-020), [FEA-023: patterns over data](../features/FEA-023.md).
-  - **Current**: met: mbse-patterns' sampling and generators (0.3, 0.4; the GEN suites).
+  - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (sampling and generators, 0.3, 0.4; the GEN
+    suites), whose code mbse-patterns 0.10.0 removes; not met there yet, and rejecting a draw by its `requires` is
+    blocked on [CAP-142: expressions evaluated in queries](CAP-142.md#blocked).
 - <a id="CAP-043"></a>**[CAP-043: constraints resolved in any direction](CAP-043.md)** · proposed · Constraints are resolved in any direction. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: to assess.
 
@@ -53,33 +56,53 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.Refines`).
 ### Patterns over data
 
+mbse-patterns is started again from scratch at 0.10.0, as the user decided (2026-11-05, [its charter](https://github.com/pitaman71/mbse-patterns/blob/main/docs/proposals/rescope/README.md)):
+sampling carried over, and distributions, as its own schemas, generators and characterizers written anew. Its
+predicates, queries, constraints and validators are removed, mbse-schemas' `OfPattern`, specs and executor taking
+their place ([CAP-150: predicates as data](CAP-150.md#decided)), and its transforms move to mbse-transforms
+(Transforms, below). Release 0.9.1, which met the capabilities below, stays tagged.
+
 - <a id="CAP-150"></a>**[CAP-150: predicates as data](CAP-150.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
   data, applied by reference, and checked when asked. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
-  - **Current**: met (mbse-patterns 0.1, 0.5, 0.6; the CON suites).
+  - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.1, 0.5, 0.6; the CON suites), whose predicates
+    mbse-patterns 0.10.0 removes; in mbse-schemas' `OfPattern`, specs and executor, which take their place, to assess.
 - <a id="CAP-151"></a>**[CAP-151: constraint evaluation within query interpretation](CAP-151.md)** · proposed · A predicate is a query: its matches among a store's data stream lazily, planned from the constraint's
   shape, and a store that answers queries natively answers them. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
-  - **Current**: met (mbse-patterns 0.1; the QRY suites).
+  - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.1; the QRY suites), whose queries mbse-patterns
+    0.10.0 removes; in mbse-schemas' `OfPattern`, specs and executor, which take their place, to assess.
 - <a id="CAP-152"></a>**[CAP-152: relation constraint terms as mandatory, possible, or forbidden entry patterns](CAP-152.md)** · proposed · Whether a link is mandatory, possible or forbidden is a predicate: quantifiers over a
   store's extents, tests of an adjacency's entries, and weighted alternatives. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
-  - **Current**: met (mbse-patterns 0.2; the ALG suites).
+  - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.2; the ALG suites), whose predicates
+    mbse-patterns 0.10.0 removes; in mbse-schemas' `OfPattern`, specs and executor, which take their place, to assess.
 - <a id="CAP-072"></a>**[CAP-072: distributions in predicates](CAP-072.md)** · proposed · A predicate's constraint says how its matches are distributed, by weighted alternatives and
   distributions of values, so that one predicate is validated, queried, sampled and generated from alike. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
-  - **Current**: met (mbse-patterns 0.3, 0.4; the DST suites).
+  - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.3, 0.4; the DST suites), whose code
+    mbse-patterns 0.10.0 removes; not met there yet.
 - <a id="CAP-073"></a>**[CAP-073: distributions fit from data](CAP-073.md)** · proposed · A characterizer reads a stream of objects and fits a distribution to them, in one pass and bounded
   memory, round-tripping with the generators. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: not met.
 
 ### Transforms
 
+Transforms leave mbse-patterns for a repository of their own, [mbse-transforms](https://github.com/pitaman71/mbse-transforms), as the user
+decided (2026-11-05, "yes transforms goes in its own repo"; [its charter](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md)). It is new, at 0.1.0,
+and built after mbse-programs' port. Its precursor, mbse-patterns 0.9.1's `Transforms`, met [CAP-074: transforms applied step by step](CAP-074.md) to
+[CAP-076: reruns reuse decisions](CAP-076.md) and is its design input, not code to port: a rewrite is now a mutation expression of mbse-schemas, not code
+([CAP-074: transforms applied step by step](CAP-074.md#decided)), and reruns are in its first release
+([CAP-076: reruns reuse decisions](CAP-076.md#decided)).
+
 - <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · proposed · A transform, a rewrite with a before and an after, is applied by a session one decision per
   step, a policy ranking the candidates, and the steps kept as a trace. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: met (mbse-patterns 0.7; the TRF suites).
+  - **Current**: met in mbse-patterns 0.7 to 0.9.1 (the TRF suites), whose code mbse-patterns 0.10.0 removes; not met
+    in mbse-transforms yet.
 - <a id="CAP-075"></a>**[CAP-075: steps linked to what they matched and wrote](CAP-075.md)** · proposed · Each step of a transform links the elements it matched and wrote, each in
   a role, as relations that predicates query. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: met (mbse-patterns 0.9).
+  - **Current**: met in mbse-patterns 0.9 to 0.9.1, whose code mbse-patterns 0.10.0 removes; not met in
+    mbse-transforms yet.
 - <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · proposed · A rerun takes each earlier decision again where its key still occurs, reports the orphans, and diffs
   the traces. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: met (mbse-patterns 0.8; TRF-08).
+  - **Current**: met in mbse-patterns 0.8 to 0.9.1 (TRF-08), whose code mbse-patterns 0.10.0 removes; not met in
+    mbse-transforms yet.
 - <a id="CAP-077"></a>**[CAP-077: changes explained across runs](CAP-077.md)** · proposed · A source diff names what changed in the model, and a target diff traces each change in the
   output to the model change or the answer that caused it. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: blocked: diffing stores in general is mbse-journals', which is planned.
