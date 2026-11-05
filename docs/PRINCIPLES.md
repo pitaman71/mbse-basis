@@ -24,7 +24,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Applied in*: a schema's properties, adjacencies, branches, parts and parameters in declared order, in builders and
   in the plain schemas of schemas; a store's `names()` in registration order; a keyed list's items in insertion order;
   reachability and symbols in first-reference order (mbse-schemas `Reachable`, `Plain`); a transform session's
-  candidates in the order it first saw them (mbse-patterns).
+  candidates in the order it first saw them (mbse-patterns 0.9.1).
   *Exceptions*: a relation's entries are written sorted by the key it declares, where the key's values are ordered
   (mbse-schemas, PLN-16): an order by value, not by name.
 - <a id="PRI-002"></a>**PRI-002: preserve, don't lose** · adopted · Open world means preserving unstructured data: don't lose, preserve, validate and cleanse on
@@ -40,7 +40,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
 - <a id="PRI-003"></a>**PRI-003: everything is schema data** · proposed · Each kind of schema is a plain schema of schemas held by the store
   (`Schemas.OfObject`; mbse-schemas' store overhaul, Levels), and expressions, predicates, syntax trees, modules and
   traces serialize, reflect and compare like any other data. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001), [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005).
-  *Applied in*: the plain schemas of schemas (mbse-schemas); kinds (mbse-programs); traces (mbse-patterns).
+  *Applied in*: the plain schemas of schemas (mbse-schemas); kinds (mbse-programs); traces (mbse-patterns 0.9.1).
   *Not yet applied*: mbse-expressions ([PRI-018: no model needs code to read or write](#PRI-018)).
 - <a id="PRI-004"></a>**PRI-004: one visitor protocol per kind** · adopted · For kind X: `Visitors.OfX` is the one protocol through which code reads and writes a value of
   X, whether or not it knows the schema; `Proxies.OfX` defines `Spec`, `Builder` and `Data`, and both data instances
@@ -64,7 +64,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   `Bridges` (mbse-programs).
 - <a id="PRI-007"></a>**PRI-007: three-valued checking on request** · proposed · Checking is three-valued and on request: unknown is not false (treating it as false
   silently fails good records, and as true silently passes bad ones), an unset property reads as absent, validation runs only when asked, and partial evaluation gives a residual, not a value. *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002).
-  *Applied in*: `Validators` (mbse-schemas, mbse-patterns); Kleene evaluation and residuals (mbse-expressions).
+  *Applied in*: `Validators` (mbse-schemas; mbse-patterns 0.9.1); Kleene evaluation and residuals (mbse-expressions).
 - <a id="PRI-008"></a>**PRI-008: refuse, never silently lose** · superseded by [PRI-002: preserve, don't lose](#PRI-002) · Refuse, never silently lose. Refusal as a default conflicts with the open world;
   it remains only as [PRI-002: preserve, don't lose](#PRI-002)'s fallback where a step cannot preserve.
 - <a id="PRI-009"></a>**PRI-009: one error shape** · proposed · One `ValueError` subclass per layer, a one-line reason and a location (path,
@@ -75,7 +75,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Applied in*: adjacencies as members, unset as `None`, flat unions (mbse-schemas); bridges (mbse-codegen-python).
 - <a id="PRI-011"></a>**PRI-011: the lowest repository that can own it** · proposed · A capability lives in the lowest repository that can own it without gaining a dependency; a
   bridge between two lives in the repository that depends on both. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005), [QUA-003: no second-order inventions](QUALITIES.md#QUA-003), [QUA-010: every repository works alike](QUALITIES.md#QUA-010).
-  *Applied in*: constraints kept in mbse-patterns, not mbse-schemas; parsers and dialect bridges in mbse-programs, not
+  *Applied in*: constraints kept in mbse-patterns 0.9.1, not mbse-schemas; parsers and dialect bridges in mbse-programs, not
   mbse-expressions.
 - <a id="PRI-012"></a>**PRI-012: model published standards** · proposed · Model published standards rather than invent: datatypes, value domains, language versions and
   formats are the standards' own (`Ieee754`, `Ieee1164`, C++ and ECMAScript editions), with only the parameters a
@@ -86,7 +86,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Applied in*: PCG32 and `Generators` (mbse-schemas, mbse-patterns).
 - <a id="PRI-014"></a>**PRI-014: every ambiguity a decision** · proposed · Every ambiguity is a decision: a parameter of one step, taken by a person, an agent or a policy
   chosen up front, and kept in a trace. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001).
-  *Applied in*: `Transforms` (mbse-patterns); code generation (mbse-codegen-python).
+  *Applied in*: `Transforms` (mbse-patterns 0.9.1, moving to mbse-transforms); code generation (mbse-codegen-python).
 - <a id="PRI-015"></a>**PRI-015: concrete references are programmatic** · adopted · A *concrete reference* to a model object in code 
   is always by programmatic reference, not by string name. This is distinct
   from a *symbolic reference* which stands in place for a yet-to-be-bound
@@ -103,7 +103,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
   and 27 in [CAP-119: owned objects found by path](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
-  (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns).
+  (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns 0.9.1, mbse-transforms' precursor).
 - <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once: each repository has one source
   for its skill, `skills/<repo>/`, and the copies packaged with each implementation (`python3/<package>/skill/`,
   `typescript5/skill/`) are generated from it by `skills/sync.sh` and checked byte for byte by each suite's SKL-01.
@@ -265,9 +265,10 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
 - **[PRI-001: declaration order](#PRI-001)'s exception and a proposal against it.** Decide whether entries sorted by their relation's key are a
   deliberate exception (an order by value, for byte-identity) or a debt against [PRI-001: declaration order](#PRI-001). [CAP-033: undeclared properties preserved](capabilities/CAP-033.md#open-questions)
   also proposes writing preserved properties sorted by name, against [PRI-001: declaration order](#PRI-001).
-- **[PRI-004: one visitor protocol per kind](#PRI-004) beyond mbse-schemas.** mbse-expressions' writers, mbse-programs' `LANGUAGE.Builders.<Kind>()` and
-  mbse-patterns' predicate and transform builders do not follow it yet; each comes to, building its models through
-  mbse-schemas' builders ([PRI-018: no model needs code to read or write](#PRI-018), [PRI-019: fluent builder syntax](#PRI-019)), as it migrates to mbse-schemas 0.11.
+- **[PRI-004: one visitor protocol per kind](#PRI-004) beyond mbse-schemas.** mbse-expressions' writers and mbse-programs' `LANGUAGE.Builders.<Kind>()`
+  do not follow it yet; each comes to, building its models through mbse-schemas' builders ([PRI-018: no model needs code to read or write](#PRI-018),
+  [PRI-019: fluent builder syntax](#PRI-019)), as it migrates to mbse-schemas 0.11. Nor do mbse-patterns 0.9.1's predicate and transform builders,
+  which mbse-patterns 0.10.0 removes; mbse-transforms builds transforms anew.
 - **[PRI-016: guidance written once](#PRI-016) in mbse-patterns.** The 2026-11-02 pilot (option A, one skill per language) is
   being reverted to one source, `skills/mbse-patterns/`, language-independent, linking notebook cases for each how.
   The other repositories keep one source, but their skills still teach in programs: mbse-schemas, mbse-expressions and
