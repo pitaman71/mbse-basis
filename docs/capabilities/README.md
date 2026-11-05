@@ -885,7 +885,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
 - <a id="CAP-238"></a>**[CAP-238: container schemas and grid insertion](CAP-238.md)** · proposed · `Framework.Container` models a
   container's cells, their extents and the children in each, and a grid container places children without adjacency
   specs each in its own cell in a predictable sequence, incrementally, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met.
+  - **Current**: met (checked in mbse-diagrams' main at 7e021ea: suites PKG, LOG and CNT pass in both languages, at 100% coverage).
 - <a id="CAP-239"></a>**CAP-239: grid adjacency** · proposed · A grid container reorders a child when an adjacency
   spec is added, reverts it to its original insertion position when the spec is removed, quantizes or rejects a
   rotation it cannot represent, and gives children sharing a "from" shape and rotation a nested cell container, in
