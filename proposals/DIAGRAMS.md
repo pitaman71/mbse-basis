@@ -113,7 +113,8 @@ The diagram exposes properties that tune physical layout:
 - `scaling_factor : float` how "unit length" scales from container to child
   at each level of containment
 - `margin : float` number of units of collapsing margin between cells and
-  between a container and its parent
+  between a container and its parent. Margin is passed from parent to
+  child container without scaling.
 
 The diagram itself is dynamically sized, expanding as necessary when
 cells are added and shrinking when cells are removed from its implied
