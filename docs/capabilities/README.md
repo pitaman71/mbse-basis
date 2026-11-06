@@ -359,8 +359,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met.
 - <a id="CAP-253"></a>**[CAP-253: counted objects (serialization)](CAP-253.md)** · proposed · Counted objects, which have
   no reference, are serialized where today they are left out: the no-code views' records and streams, and the object
-  and relation browsers. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
-  - **Current**: not met; not yet in priority scope.
+  and relation browsers, so that they survive transit between backend and frontend. *Implements*
+  [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: not met.
 
 ### Transactions
 
