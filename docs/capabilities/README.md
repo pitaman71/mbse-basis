@@ -357,6 +357,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   durable reference to a counted object: the executor finds what an upsert made without one. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: not met.
+- <a id="CAP-253"></a>**[CAP-253: counted objects (serialization)](CAP-253.md)** · proposed · Counted objects, which have
+  no reference, are serialized where today they are left out: the no-code views' records and streams, and the object
+  and relation browsers. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+  - **Current**: not met; not yet in priority scope.
 
 ### Transactions
 
@@ -951,8 +955,6 @@ values ([FEA-007: property kinds](../features/FEA-007.md)).
   own.
 - **Tech debt in [CAP-251: values of a refinement held where what it refines is declared](CAP-251.md#decided-by-an-agent-for-review), type specificity.** In TypeScript, a value object's builder no longer holds its schema
   `readonly`: it takes the schema of a refinement's value given to it. It is to become a capability of a feature.
-- **Tech debt in the visualization capabilities.** Counted objects have no reference, so they are neither recorded nor
-  transmitted ([FEA-003: no-code logical views](../features/FEA-003.md)), and browsers leave them out ([CAP-010: object browser](CAP-010.md), [CAP-011: relation browser](CAP-011.md)). It is to become a capability of a feature.
 
 ---
 
