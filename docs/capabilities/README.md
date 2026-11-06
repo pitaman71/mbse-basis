@@ -900,7 +900,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   incompatible rules, the later is ignored and queued, and a mutation that lifts the conflict reapplies the queued
   rules in order: in Python and TypeScript for container layout, in TypeScript for physical layout. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
-- <a id="CAP-241"></a>**CAP-241: physical layout schemas** · proposed · `Framework.Physical` models a physical layout's
+- <a id="CAP-241"></a>**[CAP-241: physical layout schemas](CAP-241.md)** · proposed · `Framework.Physical` models a physical layout's
   relative and absolute coordinates, annotating a logical layout, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
 - <a id="CAP-242"></a>**CAP-242: incremental physical placement** · proposed · Physical layout, in TypeScript only,
