@@ -42,6 +42,10 @@ principles serve them.
   [FEA-001: schema-driven UI](features/FEA-001.md).
 - <a id="QUA-013"></a>**QUA-013: device-native gestures** · proposed · Views prefer device-native gestures (esp.
   pinch/scroll/pan/zoom). *Conferred by* [FEA-001: schema-driven UI](features/FEA-001.md).
+- <a id="QUA-014"></a>**QUA-014: precise typing for bespoke and generated source code** · proposed · Bespoke and
+  generated code make maximal effective use of types in statically and dynamically typed languages. Type hints in
+  generated code can be selectively enabled/disabled to the degree the language efficiently supports such controls.
+  *Conferred by* no feature yet; *served by* [PRI-015: concrete references are programmatic](PRINCIPLES.md#PRI-015) and [PRI-010: proxies and generated code read alike](PRINCIPLES.md#PRI-010).
 
 ## Earlier IDs
 
