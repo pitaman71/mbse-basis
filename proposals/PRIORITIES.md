@@ -104,4 +104,9 @@ Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
 
 ## Later
 
+- establishing reviews for leakage across document boundaries
+- conceptual terminology drift is still a problem
+- move historical notes out of markdown and into git comments
+- consolidate and enumerate "decided" clauses 
+- consolidate and enuerate tech debt
 - object properties as financial/scientific/engineering ([FEA-007: property kinds](../docs/features/FEA-007.md))
