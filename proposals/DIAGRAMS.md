@@ -6,7 +6,7 @@ Initiative: [INI-040: diagrams framework](PRIORITIES.md#ini-040--diagrams-framew
 representing schema-governed data. 
 
 `Framework.Logical` defines MBSE schemas for modeling a "logical layout"
-of a diagram in terms of points, vectors, shapes and layout 
+of a diagram in terms of points, vectors, segments, shapes and layout 
 relationships between shapes. Logical layout does not track coordinates
 or any relative/absolute placement information. 
 
@@ -21,13 +21,14 @@ inherits its orientation along its path to the root, and only a vector changes i
 - **A shape** in a container reaches its cell along its adjacency, which acts as a vector: a direction from the
   "from" shape, relative to the container's orientation, selects the cell. A shape added without an adjacency goes to
   the next cell in the container's insertion order. Either way, the shape and its origin take that cell's orientation.
-- **A container** takes the orientation of its parent shape. The root container, usually the rendering area, is "up".
+- **A container** takes the orientation of its parent shape. The root container, the diagram's own, is "up".
 
-Physical layout resolves orientations to absolute directions in the viewport.
+Physical layout resolves orientations to absolute directions in the diagram.
 
 A logical layout point becomes a point in the physical layout.
 
-A vector is a start point, an end point, and a rotation. Remember, in logical layout points are
+A vector is a start point, an end point, a rotation, and a `length : float` in terms of
+diagram units. Remember, in logical layout points are
 just names, not coordinates. It is the responsibility of physical layout
 to assign point coordinates.
 
@@ -39,12 +40,24 @@ is connected to the shape's origin via a vector. Border
 points are usually connected to one another in adjacent
 pairs via vectors.
 
+A segment is attached to two points and has no stated length: unlike a
+vector, it places neither point, and physical layout draws it between
+wherever its points are placed.
+
 Shapes have relationships:
 - containment : container/parent shape, contained/child shape
 - adjacency : within a container, from shape, to shape, via a direction
   relative to the container's orientation, acting as a vector
 
 An adjacency is a logical layout spec, it is not a connector.
+
+Containers are implicit constructs that contain shapes and participate
+in deciding how those shapes are arranged with respect to one another.
+The diagram is a rectangular root object which has an implied container
+for top-level shapes in the diagram. Every shape may have an implied
+container and must have a container if it has any children
+(the "children" of a shape are always delegated to its implied
+container).
 
 A container is a collection of cells that dynamically expand
 based on the children and their relationships. The shape and layout 
@@ -85,8 +98,29 @@ layouts as:
 (as point coordinates, primarily) which annotate a logical layout
 to which it is connected by annotation relations.
 
-Physical layout tracks placements as relative and absolute coordinates for 
-points, directions, shapes, etc.
+Physical layout is computed in terms of floating point "diagram units",
+and tracks placements as relative and absolute coordinates for
+points, directions, shapes, etc. in those units.
+Every shape, container, cell in the diagram gets its own `unit_length : float`
+computed from its container (and from its container all the way up
+to the diagram). `scaling_factor` is applied in this process
+between container and its children.
+
+The diagram exposes properties that tune physical layout:
+
+- `unit_length : float` how long a "unit length" vector is at the top level of
+  the diagram (1.0 is typical)
+- `scaling_factor : float` how "unit length" scales from container to child
+  at each level of containment
+- `margin : float` number of units of collapsing margin between cells and
+  between a container and its parent. Margin is passed from parent to
+  child container without scaling.
+
+The diagram itself is dynamically sized, expanding as necessary when
+cells are added and shrinking when cells are removed from its implied
+container. A UI component should have a fixed-size viewport, and should
+auto-scale to accommodate diagram resizing specifically when one of the
+viewport boundaries are crossed by the resizing.
 
 The layout algorithm (container and physical together) is fundamentally 
 *incremental*. Basically that means it processes mutations rather than 
@@ -125,6 +159,15 @@ deterministic replay rule.
 
 ## Rules
 
+- adding(removing) a shape to(from) the diagram or a child to(from) a shape
+  causes its container to add(remove) cells if necessary
+- adding(removing) cells to(from) a container causes the container to
+  expand(shrink) its physical size
+- expanding(shrinking) a container causes its parent (which may be a cell)
+  to expand(shrink) accordingly just enough to contain it
+- shape context (orientation, `unit_length`) is computed recursively starting
+  from the diagram
+- border points must be spaced from their shape's origin correctly
 - minimum shape size (maximum extent along any axis) is configurable
   and enforced by physical layout
 
