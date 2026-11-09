@@ -179,4 +179,5 @@ deterministic replay rule.
   along each axis), cell contents, and has no knowledge of coordinates of 
   any kind.
 - `mbse-diagrams` will provide physical layout components in
-  typescript5 only, a deliberate difference per [PRI-040: deliberate differences listed](../docs/PRINCIPLES.md#PRI-040)
+  python3 and typescript5, equivalent per [PRI-028: both implementations change together](../docs/PRINCIPLES.md#PRI-028), by an incremental
+  constraint solver, Kiwi, in each (decided 2026-11-09; first planned in typescript5 only)
