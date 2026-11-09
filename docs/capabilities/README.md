@@ -912,7 +912,8 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   resolves orientations to absolute directions, places points so that every vector's rotation and length hold, sizes
   each cell, container and the diagram just enough to hold what it contains, with a collapsing margin, and enforces the
   minimum shape size, one mutation at a time. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met.
+  - **Current**: met (checked in mbse-diagrams' main at 329f9cd: suite PLC passes in both languages, its values equal
+    across them, at 100% coverage).
 - <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a logical
   layout's mutation sequence to the layout engine and renders the result, in TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
