@@ -908,9 +908,10 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
 - <a id="CAP-241"></a>**[CAP-241: physical layout schemas](CAP-241.md)** · proposed · `Framework.Physical` models a physical layout's
   relative and absolute coordinates, annotating a logical layout, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 34aa685: suite PHY passes in both languages, at 100% coverage).
-- <a id="CAP-242"></a>**CAP-242: incremental physical placement** · proposed · Physical layout, in TypeScript only,
-  resolves orientations to absolute directions, places points so that every vector's rotation holds, fits each child to
-  its cell by its extent points and enforces the minimum shape size, one mutation at a time. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+- <a id="CAP-242"></a>**[CAP-242: incremental physical placement](CAP-242.md)** · proposed · Physical layout, in both languages,
+  resolves orientations to absolute directions, places points so that every vector's rotation and length hold, sizes
+  each cell, container and the diagram just enough to hold what it contains, with a collapsing margin, and enforces the
+  minimum shape size, one mutation at a time. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
 - <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a logical
   layout's mutation sequence to the layout engine and renders the result, in TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
