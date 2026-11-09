@@ -78,8 +78,10 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Applied in*: constraints kept in mbse-patterns 0.9.1, not mbse-schemas; parsers and dialect bridges in mbse-programs, not
   mbse-expressions.
 - <a id="PRI-012"></a>**PRI-012: model published standards** · proposed · Model published standards rather than invent: datatypes, value domains, language versions and
-  formats are the standards' own (`Ieee754`, `Ieee1164`, C++ and ECMAScript editions), with only the parameters a
-  standard defines. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003).
+  formats are the standards' own (`Ieee754`, `Ieee1164`, C++ and ECMAScript editions), named as the standard names
+  them. A model may add parameters a standard does not define (an integer's width, signedness or overflow rule):
+  "PRI-012 is overstated, adding extra parameters does not count as a "second order invention" IMO", as the user
+  decided (2026-11-09) of its first wording, "with only the parameters a standard defines". *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003).
   *Applied in*: value domains (mbse-expressions); standards (mbse-programs).
 - <a id="PRI-013"></a>**PRI-013: nondeterminism passed in** · proposed · Nondeterminism is passed in, never held: a random source is given to each draw, with its seed,
   and streams depend on the seed and key alone. *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002).
