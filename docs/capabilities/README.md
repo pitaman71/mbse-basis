@@ -681,12 +681,12 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-182"></a>**[CAP-182: modeling system structure as containers, axes and containment](CAP-182.md)** · proposed · A
   system's structure is modeled as containers that contain one another hard or soft, and axes that orient soft
   containers. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041).
-  - **Current**: not met.
+  - **Current**: met in mbse-sysarch 0.1.0, Python only (checked in the code at 0.1.0: `Structure`; the STR and CHK suites).
 - <a id="CAP-183"></a>**[CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md)** · proposed · A
   system's interactions are modeled as modules with interfaces and ports, implemented by instances of other modules
   cooperating over channels that carry messages of one schema. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to*
   [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041), [CAP-182: modeling system structure as containers, axes and containment](CAP-182.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-sysarch 0.1.0, Python only (checked in the code at 0.1.0: `Interactions`; the INT, CHK and SER suites).
 - <a id="CAP-204"></a>**[CAP-204: cost estimates of a declared work metric over patterns of system architecture activity](CAP-204.md)** · proposed · A system architecture declares a work metric, and cost estimates of it are associated with patterns of its activity. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-182: modeling system structure as containers, axes and containment](CAP-182.md), [CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md).
   - **Current**: not met.
 
