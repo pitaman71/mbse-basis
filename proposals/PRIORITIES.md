@@ -75,7 +75,7 @@ Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/mai
 
 ## INI-040 : diagrams framework
 
-Proposal: [Diagrams](DIAGRAMS.md). Diagrams ([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md)), in build order:
+Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a diagram is edited. Diagrams ([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md)), in build order:
 
 - [CAP-237: logical layout schemas](../docs/capabilities/CAP-237.md)
 - [CAP-238: container schemas and grid insertion](../docs/capabilities/CAP-238.md)
