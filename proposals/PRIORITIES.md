@@ -113,3 +113,4 @@ Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
 - consolidate and enumerate "decided" clauses 
 - consolidate and enuerate tech debt
 - object properties as financial/scientific/engineering ([FEA-007: property kinds](../docs/features/FEA-007.md))
+- [CAP-253: counted objects (serialization)](../docs/capabilities/CAP-253.md): counted objects are being deprecated
