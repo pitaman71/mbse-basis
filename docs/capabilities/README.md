@@ -982,7 +982,8 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   shape and a child, apart from both, so that a shape moved into or out of a container keeps its identity, its path and
   what it owns: its points, vectors and annotations. A shape with no container is at the diagram's top level, and
   removing a shape's containment entry deletes nothing: it moves the shape there, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met (a child shape is owned by its container, and removing it deletes it).
+  - **Current**: met (checked in mbse-diagrams' main at ef31ed5: suites LOG, CNT, PHY and PLC pass in both
+    languages, at 100% coverage).
 - <a id="CAP-261"></a>**CAP-261: layout driven by any journal entry** · proposed · The layout engine follows a journal
   entry it is given, any transaction expression: it anticipates what the entry removes, runs it, and calls the
   container layout and placement functions the entry implies, so that a diagram's layout is a function of its journal
