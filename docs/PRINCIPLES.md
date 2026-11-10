@@ -266,6 +266,11 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   scaffold, `polyrepo.py new` ([CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](capabilities/CAP-252.md)). The scaffold's templates are starting points, filled in once,
   not copies kept in sync, so they write no guidance twice ([PRI-016: guidance written once](#PRI-016)). *Governs* the work. *Serves*
   [QUA-010: every repository works alike](QUALITIES.md#QUA-010). *Relates to* [PRI-030: one package layout](#PRI-030).
+- <a id="PRI-042"></a>**PRI-042: optionality kept** · proposed · Between designs, prefer the one that keeps options
+  open now, then one that leaves them open to add later, and never one that closes them: "immediate optionality over
+  deferred optionality over sacrificing optionality", as the user decided (2026-11-10), choosing that a C or C++
+  expression's holder names its ABI, so that one store holds several, over one ABI per store. *Serves*
+  [QUA-002: open-world models](QUALITIES.md#QUA-002). *Applied in*: the ABI dialects (mbse-expressions, domains as data, stage 3).
 
 ## Open items
 
