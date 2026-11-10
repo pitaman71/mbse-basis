@@ -146,22 +146,27 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current** (main, v0.5.4): met.
 - <a id="CAP-097"></a>**[CAP-097: value domains of published standards](CAP-097.md)** · proposed · A value's domain names a published standard (IEEE 754, IEEE 1164, two's complement integers),
   with exact-then-rounded arithmetic, bitwise operations and explicit conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current** (main, v0.7.0): not met: domains are data and their semantics code, but no term has a domain until
-    [CAP-232: domains inferred for terms](CAP-232.md); its detail file says what is built.
+  - **Current**: not met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the
+    version bumped and the records drained: both gates at 100% in both languages): every dialect's domains but LaTeX's
+    are stored data, of the standards' own dialects' kinds or their language's, and no domain is code; but no Patterns
+    term has a domain, and its conversions are [CAP-232: domains inferred for terms](CAP-232.md)'s.
 - <a id="CAP-180"></a>**[CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md)** · proposed · The
   general-purpose datatypes of ISO/IEC 11404 replace the Basic expression dialect, their operations modeled, not
   coded. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current**: not met.
+  - **Current**: not met (checked at mbse-expressions' main c57882b): the ISO/IEC 11404 dialect holds 11404's kinds
+    and Basic's datatypes, but Patterns' terms and operations are not replaced, and 11404's operations not modeled.
 - <a id="CAP-203"></a>**[CAP-203: evaluators delegating to per-language libraries](CAP-203.md)** · proposed · An expression evaluator may delegate to a library of its language, perhaps in a sub-repository. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
 - <a id="CAP-098"></a>**[CAP-098: dialects over one framework](CAP-098.md)** · proposed · Expression languages are dialects of one framework, which validates, infers, evaluates and
   translates any of them from its kinds' roles, a dialect extending another. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current** (main, v0.5.4): met.
+  - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the
+    version bumped and the records drained: both gates at 100% in both languages).
 - <a id="CAP-099"></a>**[CAP-099: partial evaluation](CAP-099.md)** · proposed · An expression is reduced over the variables given, to a residual that agrees with it wherever it evaluates. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
 - <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
   dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current** (main, v0.5.4): met.
+  - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the
+    version bumped and the records drained: both gates at 100% in both languages).
 - <a id="CAP-101"></a>**[CAP-101: translation between dialects](CAP-101.md)** · proposed · Each pair of dialects translates both ways by declared rules, round-tripping what both can write, and
   agreeing with a translation through a third. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
@@ -187,33 +192,58 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-226"></a>**[CAP-226: complete expression dialects](CAP-226.md)** · proposed · A dialect per language and major
   version covers its language's whole expression syntax, mbse-programs' kinds in its own `Expression`, printed here and
   parsed by mbse-programs. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met.
+  - **Current**: not met (checked at mbse-expressions' main c57882b): stage 6, `SystemVerilog` complete, and the
+    retrofit come in 0.10.0.
 - <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
   expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 7d85127: PR #16, both gates at 100% in both
-    languages, DIA-19 and DIA-20 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages).
+    languages, DIA-19 and DIA-20 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in
+    0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped
+    and the records drained: both gates at 100% in both languages).
 - <a id="CAP-228"></a>**[CAP-228: the TypeScript5 expression dialect](CAP-228.md)** · proposed · `TypeScript5` covers every
   expression of TypeScript 5, with its types, patterns and JSX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 8804e1e: PR #18, both gates at 100% in both
-    languages, DIA-21 to DIA-23 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages).
+    languages, DIA-21 to DIA-23 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in
+    0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped
+    and the records drained: both gates at 100% in both languages).
 - <a id="CAP-229"></a>**[CAP-229: the C expression dialect](CAP-229.md)** · proposed · `C` covers every expression of C11
   to C23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
-    languages, DIA-11, DIA-12 and DIA-24 to DIA-26 among them).
+  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in
+    both languages, DIA-11, DIA-12 and DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch
+    `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped and the records drained: both gates at 100%
+    in both languages).
 - <a id="CAP-230"></a>**[CAP-230: the C++ expression dialect](CAP-230.md)** · proposed · `Cpp` covers every expression of
   C++17 to C++23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
-    languages, DIA-24 to DIA-26 among them).
+  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in
+    both languages, DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at
+    6b7fe2f, its main c57882b with the version bumped and the records drained: both gates at 100% in both languages).
 - <a id="CAP-231"></a>**[CAP-231: the SystemVerilog expression dialect, complete](CAP-231.md)** · proposed ·
   `SystemVerilog` covers every expression of IEEE 1800-2023, Verilog its subset. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met.
+  - **Current**: not met (checked at mbse-expressions' main c57882b): stage 6, in 0.10.0.
 - <a id="CAP-232"></a>**[CAP-232: domains inferred for terms](CAP-232.md)** · proposed · Each term's domain is inferred,
   so that evaluation and translation work in widths, formats, enums and conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Relates to* [CAP-097: value domains of published standards](CAP-097.md).
-  - **Current**: not met.
+  - **Current**: not met (checked at mbse-expressions' main c57882b): a term carries no domain; the domains it would
+    be inferred from are stored since 0.9.0.
 - <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · proposed · A literal holds any value its `OfAny`
   can, scalars, containers and value objects; what has no schema is a dialect's constant kind. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current**: not met.
+  - **Current**: not met (checked at mbse-expressions' main c57882b): `SystemVerilog`'s complete literals are stage
+    6's, in 0.10.0.
+- <a id="CAP-267"></a>**[CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md)** · proposed · A C
+  or C++ term reads the types its standard leaves to the implementation from the ABI dialect its holder names, each
+  psABI a dialect of its own holding those types as stored domains. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [CAP-230: the C++ expression dialect](CAP-230.md),
+  [PRI-042: optionality kept](../PRINCIPLES.md#PRI-042).
+  - **Current**: met in mbse-expressions 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its
+    main c57882b with the version bumped and the records drained: both gates at 100% in both languages, DOM-19 among
+    them).
+- <a id="CAP-268"></a>**[CAP-268: standards as tagged data](CAP-268.md)** · proposed · Each dialect covers the
+  editions of its standards as data, each found by its body's designation or a common name, and records the kinds each
+  has. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-226: complete expression dialects](CAP-226.md),
+  [PRI-012: model published standards](../PRINCIPLES.md#PRI-012).
+  - **Current**: met in mbse-expressions 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its
+    main c57882b with the version bumped and the records drained: both gates at 100% in both languages, FRM-13 among
+    them).
 - <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · proposed · A type checker
   catches a wrong kind, property or argument in code that installs, defines or writes expressions, as it does in other
   typed code: mbse-expressions' installs, defines, writers and conformance corpus are typed, through typed bindings for
