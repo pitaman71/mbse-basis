@@ -131,9 +131,10 @@ algorithm we can guarantee the final layout is a deterministic function
 of the mutation sequence.
 
 The layout algorithm does *not* process a logical layout directly.
-Instead, when a UI wishes to display a logical layout, that logical
-layout model is first snapshotted as mutations. Then the mutations 
-are streamed to the layout engine. Each mutation is processed individually. 
+The logical layout model is always stored in mutation form, so it is
+never snapshotted: when a UI wishes to display a logical layout, its
+stored mutations are streamed to the layout engine, and each change
+after that is one more. Each mutation is processed individually. 
 At each mutation, the layout algorithm will:
 
 - consider how objects, relation entries, and properties will change
