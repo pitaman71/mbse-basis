@@ -288,6 +288,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   defined in a module-scope `install(txn)`, a transaction that upserts it, so that installing again writes nothing, and
   the framework defines its own schemas the same way. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: met in mbse-schemas 0.23.0.
+- <a id="CAP-254"></a>**[CAP-254: an install's uid changed with its content](CAP-254.md)** · proposed · When an install's
+  content changes, what identifies it changes too, so that a store holding an earlier install is brought to the new
+  one, or refused, never silently left behind. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+  - **Current**: not met; tech debt, not yet in priority scope.
 - <a id="CAP-110"></a>**[CAP-110: a store's schemas read as one module](CAP-110.md)** · proposed · A store's schemas are
   read as one hierarchical root module, each by its module-qualified name, which resolves or is refused. *Implements*
   [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
