@@ -949,6 +949,14 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   minimum shape size, one mutation at a time. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 329f9cd: suite PLC passes in both languages, its values equal
     across them, at 100% coverage).
+- <a id="CAP-264"></a>**CAP-264: containment separate from ownership** · proposed · A shape's container is a role
+  relation alone, apart from what owns it, so that a shape moved into or out of a container keeps its identity, its
+  path and what it owns: its points, vectors and annotations, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  - **Current**: not met (a child shape is owned by its container).
+- <a id="CAP-265"></a>**CAP-265: a child inserted at a position** · proposed · A mutation inserts a container's child
+  at a position in its insertion order, an insertion event, which the container layout follows as it follows an
+  addition, the children after it moving along, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  - **Current**: not met (a child is inserted last).
 - <a id="CAP-261"></a>**CAP-261: layout driven by any journal entry** · proposed · The layout engine follows a journal
   entry it is given, any transaction expression: it anticipates what the entry removes, runs it, and calls the
   container layout and placement functions the entry implies, so that a diagram's layout is a function of its journal
