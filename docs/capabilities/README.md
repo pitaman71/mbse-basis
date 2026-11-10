@@ -949,8 +949,25 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   minimum shape size, one mutation at a time. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 329f9cd: suite PLC passes in both languages, its values equal
     across them, at 100% coverage).
-- <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a logical
-  layout's mutation sequence to the layout engine and renders the result, in TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+- <a id="CAP-261"></a>**CAP-261: layout driven by any journal entry** · proposed · The layout engine follows a journal
+  entry it is given, any transaction expression: it anticipates what the entry removes, runs it, and calls the
+  container layout and placement functions the entry implies, so that a diagram's layout is a function of its journal
+  alone, with no caller that knows the entry's kind, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  - **Current**: not met (the suites' bench does this for its own kinds of step).
+- <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a diagram's
+  journal, never a snapshot, through the layout engine (CAP-261) and renders its physical layout, frames, points and
+  segments, in a viewport of fixed size that rescales when the diagram crosses one of its edges, in TypeScript.
+  *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-262"></a>**CAP-262: a candidate mutation's layout previewed, never journalled** · proposed · The layout a
+  candidate mutation would leave is computed and then undone: the mutation and the container layout's adjustments run
+  in a transaction that is aborted, and placement's constraint changes are undone exactly, so that its layout returns
+  to the one it had, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-263"></a>**CAP-263: touch-first gestures, each one mutation** · proposed · A drag lifts a shape, selects one
+  intent from a finite set by drop zone and dwell, previews it (CAP-262), with siblings shifting and a landing pad, and
+  on drop inserts one mutation at the view's journal position; adjacency specs and rotations are edited by CAD
+  conventions, as [the interaction proposal](../../proposals/INTERACTION.md) states, in TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
 
 ## Not yet planned
