@@ -392,11 +392,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   durable reference to a counted object: the executor finds what an upsert made without one. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: not met.
-- <a id="CAP-253"></a>**[CAP-253: counted objects (serialization)](CAP-253.md)** · proposed · Counted objects, which have
-  no reference, are serialized where today they are left out: the no-code views' records and streams, and the object
-  and relation browsers, so that they survive transit between backend and frontend. *Implements*
-  [FEA-026: deterministic object identity](../features/FEA-026.md).
-  - **Current**: not met.
+- <a id="CAP-253"></a>**[CAP-253: counted objects (serialization)](CAP-253.md)** · superseded by
+  [INI-082: eliminate counted objects](../../proposals/PRIORITIES.md#ini-082--eliminate-counted-objects) · Counted objects, which have no reference, were to be serialized where they are left out, the no-code
+  views' records and streams and the object and relation browsers. Counted objects are deprecated instead.
 
 ### Transactions
 
