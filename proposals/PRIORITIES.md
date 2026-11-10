@@ -85,7 +85,11 @@ Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a 
 - [CAP-242: incremental physical placement](../docs/capabilities/README.md#CAP-242)
 - [CAP-253: counted objects (serialization)](../docs/capabilities/CAP-253.md), before CAP-243: counted objects do not
   survive transit between backend and frontend, so a diagram streamed to a frontend would lose them
+- [CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264)
+- [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261)
 - [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243)
+- [CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262)
+- [CAP-263: touch-first gestures, each one mutation](../docs/capabilities/README.md#CAP-263)
 
 ## INI-080 : stabilize mbse-schemas and mbse-expressions
 

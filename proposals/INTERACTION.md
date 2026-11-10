@@ -3,8 +3,9 @@
 Initiative: [INI-040: diagrams framework](PRIORITIES.md#ini-040--diagrams-framework).
 
 How a person edits a diagram that [the diagrams proposal](DIAGRAMS.md) lays out: the gestures, what each shows while it
-is under way, and the one mutation it makes when it ends. It is the interactive half of
-[CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243).
+is under way, and the one mutation it makes when it ends. Its capabilities:
+[CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264), [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261), [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243),
+[CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262) and [CAP-263: touch-first gestures, each one mutation](../docs/capabilities/README.md#CAP-263).
 
 ## Decided
 
@@ -23,6 +24,41 @@ The user's decisions (2026-11-10):
 - **A gesture inserts a mutation at the view's position in the journal**: "Gestures in this viewer cause mutations to
   be inserted at the current view position in the journal." Nothing is ever snapshotted: the model and its layouts
   are always stored, communicated and analyzed in journal form.
+- **One shape at a time**, at first: a selection of several shapes is not dragged as one intent ("initially no").
+- **CAP-243 split now** ("yes split now"): into the driver that takes any journal entry to the layout functions it
+  implies (CAP-261), the renderer and its viewport (CAP-243), previews (CAP-262) and gestures (CAP-263).
+- **A reorder that splits an adjacency is an insertion; one that splits none is an adjacency**: "if the reordering
+  splits any existing adjacency, then it is an insertion event. if no adjacencies are split, create an adjacency
+  relative to the most recently inserted neighbor". A position is written by adjacency, never as an index: "adjacency
+  does that". An insertion event inserts the dragged shape into the adjacency it splits: the spec from one neighbour to
+  the other is replaced, in one mutation, by a spec from the first to the dragged shape and one from the dragged shape
+  to the second, by the same rotation.
+- **Containment is separated from ownership**: "yes containment should be separated from ownership", so that a shape
+  moved into or out of a container keeps its identity ([CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264)).
+- **Thresholds**: "yes propose defaults"; the defaults are below, for review.
+
+## Decided by an agent, for review
+
+Where the user's decisions leave a choice open, each *proposed* until reviewed:
+
+- **Splitting an adjacency.** A drop between two siblings splits an adjacency where an adjacency spec holds the two
+  next to each other, on the side the drop is between. Then the dragged shape is inserted into it, an insertion event,
+  as decided above, and the container layout settles the two new specs as it settles any rule. Otherwise the spec made
+  places the dragged shape beside whichever of the two neighbours was inserted more recently, on the side of it the
+  drop was on.
+- **The owner of a shape.** With containment apart from ownership, every shape is owned by its diagram, its name
+  unique in the diagram, and its container is a role relation alone; its points, vectors and annotations are owned by
+  the shape, as now, and so stay with it wherever it moves.
+- **A shape's specs when it moves to another container.** An adjacency spec relates siblings, so the move removes, in
+  the same mutation, the specs between the shape and its old siblings.
+- **Thresholds**, in CSS pixels at a scale of 1:
+  - a drag starts after a press held 300 ms, or a press that moves 6 px;
+  - a sibling's edge zones are the outer quarter of its frame on each side, and at least 22 px deep, so that, with the
+    gap and its neighbour's zone, a drop target is at least 44 px across, the size touch guidelines ask of a target;
+    the rest of its frame is its centre zone;
+  - an intent changes only once the finger is 8 px past the edge of its zone;
+  - resting 600 ms over a container opens it;
+  - a finger 12 px beyond a container's frame is out of it.
 
 ## The journal is the timeline
 
@@ -50,11 +86,11 @@ there, as a parametric CAD tool's timeline is rolled back and a feature inserted
 
 | Intent | Where the finger is | The mutation |
 |---|---|---|
-| Beside a sibling | an edge zone of a sibling | an adjacency spec to it, its rotation the side's, which a grid quantizes to a quarter turn |
+| Between two siblings | the gap between them, with their edge zones | where it splits an adjacency spec, that spec replaced by two, through the dragged shape; otherwise an adjacency spec beside the more recently inserted of the two |
+| Beside a sibling | an outer edge zone of a sibling | an adjacency spec beside it, its rotation the side's, which a grid quantizes to a quarter turn |
 | In a sibling's cell | the centre of a sibling | an adjacency spec that shares its cell |
 | Back to its place | its own original slot | its specs removed, so that it reverts to its original insertion position |
-| Reorder | between two siblings | open: below |
-| Into, or out of, a container | a container's interior, after dwell; outside its container | open: below |
+| Into, or out of, a container | a container's interior, after dwell; outside its container | its container changed, keeping its identity, and its specs to its old siblings removed |
 | Turned | a rotation handle | its vector's rotation, or its container's cell rotation |
 
 ## Previews, never journalled
@@ -74,17 +110,3 @@ the finger moves.
 - An ignored rule is drawn in red, as an over-constrained sketch's are, and selecting it names the earlier rule it
   conflicts with.
 - A shape's rotation, and a container's cell rotation, have handles.
-
-## Open questions
-
-1. **Reorder.** Whether dropping between siblings makes a new mutation that changes a child's insertion order, or an
-   adjacency spec to the sibling it lands beside, and if a spec, to which sibling and by which side.
-2. **Into or out of a container.** A child shape is owned, through `Logical.Owns`, by its container, and its path runs
-   through it. Moving it to another container changes its owner, so its path, so its identity, and its points,
-   vectors, specs and annotations go with the old one unless the mutation makes them again under the new. Whether
-   containment and ownership should be separated, so that a move keeps a shape's identity, or a moved shape is a new
-   object.
-3. **Thresholds.** The sizes of the drop zones, the hysteresis, and how long a dwell opens a container.
-4. **Several shapes.** Whether a selection of several shapes can be dragged as one intent.
-5. **Capabilities.** Whether CAP-243 is split: the driver that takes any journal entry to the container and placement
-   functions it implies; the renderer, with its viewport; gesture inference; and previews.
