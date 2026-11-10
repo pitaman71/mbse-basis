@@ -56,9 +56,10 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.Refines`).
 - <a id="CAP-251"></a>**[CAP-251: values of a refinement held where what it refines is declared](CAP-251.md)** · proposed · A property, a container's element, a union's branch or a restricted value of any schema declaring a value object schema holds a value of any refinement of it, written with its own schema named (`$schema`) and read back as it, never guessed. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-167: schemas refined by other schemas](CAP-167.md), [CAP-153: unions and intersections of named branches and parts](CAP-153.md).
   - **Current**: met in mbse-schemas 0.26.10 (checked in the code of both languages at 0.26.10: `Proxies._refines`, `Plain`'s `$schema`; SCH-27, SCH-28, ANY-08).
-- <a id="CAP-256"></a>**[CAP-256: a value object's builder holding its schema `readonly`](CAP-256.md)** · proposed · In
-  TypeScript, a value object's builder holds its schema `readonly` again, a refinement's value given to it placed in
-  its owner rather than changing the builder's schema. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014),
+- <a id="CAP-256"></a>**[CAP-256: a value object builder's schema relied on by type checkers](CAP-256.md)** · proposed · In
+  TypeScript, code given a value object's builder can rely, as the type checker does, on the schema it builds never
+  changing: the builder holds its schema `readonly` again, a refinement's value given to it placed in its owner rather
+  than changing the builder's schema. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014),
   [CAP-251: values of a refinement held where what it refines is declared](CAP-251.md).
   - **Current**: not met; tech debt (checked in mbse-schemas' main at 21db1ee).
 ### Patterns over data
@@ -213,23 +214,25 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · proposed · A literal holds any value its `OfAny`
   can, scalars, containers and value objects; what has no schema is a dialect's constant kind. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
-- <a id="CAP-255"></a>**[CAP-255: mbse-expressions' installs, writers and corpus typed](CAP-255.md)** · proposed · mbse-expressions'
-  installs, defines, writers and conformance corpus are typed, through typed bindings for mbse-schemas' builder
-  proxies, rather than built through `any` callbacks and untyped transactions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
+- <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · proposed · A type checker
+  catches a wrong kind, property or argument in code that installs, defines or writes expressions, as it does in other
+  typed code: mbse-expressions' installs, defines, writers and conformance corpus are typed, through typed bindings for
+  mbse-schemas' builder proxies, rather than built through `any` callbacks and untyped transactions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
   [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [PRI-015: concrete references are programmatic](../PRINCIPLES.md#PRI-015).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
-- <a id="CAP-258"></a>**[CAP-258: a dialect's stored operations read once per validation](CAP-258.md)** · proposed · Validation
-  reads a dialect's stored operations, and their arities, once per store for one run, not again for every call node
-  it checks. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
+- <a id="CAP-258"></a>**[CAP-258: expressions validated in time proportional to their size](CAP-258.md)** · proposed · Validating
+  an expression takes time in proportion to its size, not to its size times its dialect's operations: validation reads
+  a dialect's stored operations, and their arities, once per store for one run, not again for every call node. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
-- <a id="CAP-259"></a>**[CAP-259: TypeScript's Patterns evaluators independent of domain inference](CAP-259.md)** · proposed ·
-  TypeScript's Patterns evaluator and partial evaluator check a native type of their own, as Python's do, rather than
-  calling inference's code, which [CAP-232: domains inferred for terms](CAP-232.md) replaces. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
+- <a id="CAP-259"></a>**[CAP-259: domain inference replaced without changing evaluation](CAP-259.md)** · proposed ·
+  Domain inference ([CAP-232: domains inferred for terms](CAP-232.md)) replaces today's code without changing how
+  TypeScript evaluates: its Patterns evaluator and partial evaluator check a native type of their own, as Python's do,
+  rather than calling inference's code. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
   [CAP-232: domains inferred for terms](CAP-232.md).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
-- <a id="CAP-260"></a>**[CAP-260: a dialect extending Patterns validated against its own operations](CAP-260.md)** · proposed · A
-  dialect extending Patterns is validated against the operations it defines, not Patterns', whose singleton validation
-  finds by a fixed path. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
+- <a id="CAP-260"></a>**[CAP-260: dialects extending Patterns checked by their own operations](CAP-260.md)** · proposed · A
+  dialect that extends Patterns has its calls checked against the operations it defines, not Patterns': validation
+  finds the calling dialect's singleton rather than Patterns' by a fixed path. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
 
 ### Serialization behavior conventions in schema
@@ -247,8 +250,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.OfAny.Value`, the refusal of another host type).
 - <a id="CAP-168"></a>**[CAP-168: containers by an index neither ordered nor hashable read back](CAP-168.md)** · proposed · A container whose index is neither ordered nor hashable is read back from a snapshot. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   - **Current**: not met (checked in the code: reading one is refused, "not read from snapshots yet").
-- <a id="CAP-257"></a>**[CAP-257: an object's reader typed by its schema in Python](CAP-257.md)** · proposed · In Python, an
-  object's reader, `Readers.OfObject`, gives each member the type its schema declares, not `Any`. *Implements*
+- <a id="CAP-257"></a>**[CAP-257: Python type checkers see an object's members as its schema types them](CAP-257.md)** · proposed · In Python, a
+  type checker sees each member read through an object's reader, `Readers.OfObject`, as the type its schema declares,
+  not `Any`, and catches its misuse. *Implements*
   [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [CAP-107: one visitor protocol reads and writes data](CAP-107.md).
   - **Current**: not met; tech debt (checked in mbse-schemas' main at 21db1ee).
 ### Clean modeling separation between value objects and reference objects
