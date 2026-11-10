@@ -94,6 +94,19 @@ Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a 
 
 ## INI-081 : stabilize Python codegen
 
+## INI-082 : eliminate counted objects
+
+Counted objects are deprecated, as the user decided (2026-11-10), "counted objects are now deprecated": a reference object is to be a singleton or owned,
+never counted ([CAP-118: singletons, owned and counted objects](../docs/capabilities/CAP-118.md)). Its capabilities are not yet designed. What
+counted objects reach today:
+
+- [CAP-118: singletons, owned and counted objects](../docs/capabilities/CAP-118.md): the counted mode of identity, and its decisions
+- [CAP-133: no durable references to counted objects](../docs/capabilities/CAP-133.md): not met
+- [CAP-138: mutation expressions over frame streams](../docs/capabilities/CAP-138.md): a transaction's terms are counted objects (object identity 93 and 94)
+- [CAP-010: object browser](../docs/capabilities/CAP-010.md), [CAP-011: relation browser](../docs/capabilities/CAP-011.md) and
+  [FEA-003: no-code logical views](../docs/features/FEA-003.md): counted objects, having no reference, are left out of what they
+  show and transmit
+
 
 ## INI-100 : formalize, parameterize, and visualize HW and LLM architectures
 
@@ -113,4 +126,3 @@ Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
 - consolidate and enumerate "decided" clauses 
 - consolidate and enuerate tech debt
 - object properties as financial/scientific/engineering ([FEA-007: property kinds](../docs/features/FEA-007.md))
-- [CAP-253: counted objects (serialization)](../docs/capabilities/CAP-253.md): counted objects are being deprecated
