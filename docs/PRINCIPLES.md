@@ -82,7 +82,10 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   them. A model may add parameters a standard does not define (an integer's width, signedness or overflow rule):
   "PRI-012 is overstated, adding extra parameters does not count as a "second order invention" IMO", as the user
   decided (2026-11-09) of its first wording, "with only the parameters a standard defines". *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003).
-  *Applied in*: value domains (mbse-expressions); standards (mbse-programs).
+  *Applied in*: value domains, the standards' own dialects' kinds and domains named as each standard names them
+  ([CAP-097: value domains of published standards](capabilities/CAP-097.md), mbse-expressions 0.9.0); standards as
+  editions by their bodies' designations ([CAP-268: standards as tagged data](capabilities/CAP-268.md)); standards
+  (mbse-programs).
 - <a id="PRI-013"></a>**PRI-013: nondeterminism passed in** · proposed · Nondeterminism is passed in, never held: a random source is given to each draw, with its seed,
   and streams depend on the seed and key alone. *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002).
   *Applied in*: PCG32 and `Generators` (mbse-schemas, mbse-patterns).
@@ -270,7 +273,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   open now, then one that leaves them open to add later, and never one that closes them: "immediate optionality over
   deferred optionality over sacrificing optionality", as the user decided (2026-11-10), choosing that a C or C++
   expression's holder names its ABI, so that one store holds several, over one ABI per store. *Serves*
-  [QUA-002: open-world models](QUALITIES.md#QUA-002). *Applied in*: the ABI dialects (mbse-expressions, domains as data, stage 3).
+  [QUA-002: open-world models](QUALITIES.md#QUA-002). *Applied in*: the ABI dialects, a holder naming its own ([CAP-267: C and C++ terms read under the ABI their holder names](capabilities/CAP-267.md#decided), mbse-expressions 0.9.0).
 
 ## Open items
 
