@@ -4,7 +4,7 @@ Initiative: [INI-040: diagrams framework](PRIORITIES.md#ini-040--diagrams-framew
 
 How a person edits a diagram that [the diagrams proposal](DIAGRAMS.md) lays out: the gestures, what each shows while it
 is under way, and the one mutation it makes when it ends. Its capabilities:
-[CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264), [CAP-265: a child inserted at a position](../docs/capabilities/README.md#CAP-265), [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261), [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243),
+[CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264), [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261), [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243),
 [CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262) and [CAP-263: touch-first gestures, each one mutation](../docs/capabilities/README.md#CAP-263).
 
 ## Decided
@@ -29,8 +29,10 @@ The user's decisions (2026-11-10):
   implies (CAP-261), the renderer and its viewport (CAP-243), previews (CAP-262) and gestures (CAP-263).
 - **A reorder that splits an adjacency is an insertion; one that splits none is an adjacency**: "if the reordering
   splits any existing adjacency, then it is an insertion event. if no adjacencies are split, create an adjacency
-  relative to the most recently inserted neighbor". An insertion event changes the dragged shape's insertion position
-  in its container ([CAP-265: a child inserted at a position](../docs/capabilities/README.md#CAP-265)).
+  relative to the most recently inserted neighbor". A position is written by adjacency, never as an index: "adjacency
+  does that". An insertion event inserts the dragged shape into the adjacency it splits: the spec from one neighbour to
+  the other is replaced, in one mutation, by a spec from the first to the dragged shape and one from the dragged shape
+  to the second, by the same rotation.
 - **Containment is separated from ownership**: "yes containment should be separated from ownership", so that a shape
   moved into or out of a container keeps its identity ([CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264)).
 - **Thresholds**: "yes propose defaults"; the defaults are below, for review.
@@ -40,8 +42,8 @@ The user's decisions (2026-11-10):
 Where the user's decisions leave a choice open, each *proposed* until reviewed:
 
 - **Splitting an adjacency.** A drop between two siblings splits an adjacency where an adjacency spec holds the two
-  next to each other, on the side the drop is between. Then the dragged shape is inserted there, an insertion event,
-  and the spec it splits is kept, for the container layout to settle as it settles any rule. Otherwise the spec made
+  next to each other, on the side the drop is between. Then the dragged shape is inserted into it, an insertion event,
+  as decided above, and the container layout settles the two new specs as it settles any rule. Otherwise the spec made
   places the dragged shape beside whichever of the two neighbours was inserted more recently, on the side of it the
   drop was on.
 - **The owner of a shape.** With containment apart from ownership, every shape is owned by its diagram, its name
@@ -84,7 +86,7 @@ there, as a parametric CAD tool's timeline is rolled back and a feature inserted
 
 | Intent | Where the finger is | The mutation |
 |---|---|---|
-| Between two siblings | the gap between them, with their edge zones | an insertion event where it splits an adjacency; otherwise an adjacency spec beside the more recently inserted of the two |
+| Between two siblings | the gap between them, with their edge zones | where it splits an adjacency spec, that spec replaced by two, through the dragged shape; otherwise an adjacency spec beside the more recently inserted of the two |
 | Beside a sibling | an outer edge zone of a sibling | an adjacency spec beside it, its rotation the side's, which a grid quantizes to a quarter turn |
 | In a sibling's cell | the centre of a sibling | an adjacency spec that shares its cell |
 | Back to its place | its own original slot | its specs removed, so that it reverts to its original insertion position |
@@ -108,9 +110,3 @@ the finger moves.
 - An ignored rule is drawn in red, as an over-constrained sketch's are, and selecting it names the earlier rule it
   conflicts with.
 - A shape's rotation, and a container's cell rotation, have handles.
-
-## Open questions
-
-- **An insertion event as a mutation.** A child's place in its container is its containment entry's order, today the
-  order entries were added in; how a mutation writes a position other than the last, for
-  [CAP-265: a child inserted at a position](../docs/capabilities/README.md#CAP-265) to settle.
