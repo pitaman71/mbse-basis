@@ -47,7 +47,8 @@ Where the user's decisions leave a choice open, each *proposed* until reviewed:
   places the dragged shape beside whichever of the two neighbours was inserted more recently, on the side of it the
   drop was on.
 - **The owner of a shape.** With containment apart from ownership, every shape is owned by its diagram, its name
-  unique in the diagram, and its container is a role relation alone; its points, vectors and annotations are owned by
+  unique in the diagram, and a member of it, contained or not, as the user decided ("we do not conflate containment
+  with diagram membership"), and its container is a role relation alone; its points, vectors and annotations are owned by
   the shape, as now, and so stay with it wherever it moves.
 - **A shape's specs when it moves to another container.** An adjacency spec relates siblings, so the move removes, in
   the same mutation, the specs between the shape and its old siblings.

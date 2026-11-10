@@ -90,6 +90,7 @@ Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a 
 - [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243)
 - [CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262)
 - [CAP-263: touch-first gestures, each one mutation](../docs/capabilities/README.md#CAP-263)
+- [CAP-266: shapes deleted](../docs/capabilities/README.md#CAP-266)
 
 ## INI-080 : stabilize mbse-schemas and mbse-expressions
 

@@ -949,10 +949,12 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   minimum shape size, one mutation at a time. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 329f9cd: suite PLC passes in both languages, its values equal
     across them, at 100% coverage).
-- <a id="CAP-264"></a>**CAP-264: containment separate from ownership** · proposed · A shape's container is a role
-  relation alone, apart from what owns it, so that a shape moved into or out of a container keeps its identity, its
-  path and what it owns: its points, vectors and annotations, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met (a child shape is owned by its container).
+- <a id="CAP-264"></a>**CAP-264: containment separate from ownership** · proposed · Every shape is a member of its
+  diagram, and owned by it, whether or not it is contained; containment is a relation of its own, between a container
+  shape and a child, apart from both, so that a shape moved into or out of a container keeps its identity, its path and
+  what it owns: its points, vectors and annotations. A shape with no container is at the diagram's top level, and
+  removing a shape's containment entry deletes nothing: it moves the shape there, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  - **Current**: not met (a child shape is owned by its container, and removing it deletes it).
 - <a id="CAP-261"></a>**CAP-261: layout driven by any journal entry** · proposed · The layout engine follows a journal
   entry it is given, any transaction expression: it anticipates what the entry removes, runs it, and calls the
   container layout and placement functions the entry implies, so that a diagram's layout is a function of its journal
@@ -972,6 +974,11 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   intent from a finite set by drop zone and dwell, previews it (CAP-262), with siblings shifting and a landing pad, and
   on drop inserts one mutation at the view's journal position; adjacency specs and rotations are edited by CAD
   conventions, as [the interaction proposal](../../proposals/INTERACTION.md) states, in TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  - **Current**: not met.
+- <a id="CAP-266"></a>**CAP-266: shapes deleted** · proposed · A mutation deletes a shape and what it owns, its
+  points, vectors, segments and adjacency specs, and the specs to it from its siblings, and the container layout and
+  placement follow it, in Python and TypeScript. No mutation deletes a shape before it: removing a shape from its
+  container moves it to the diagram's top level (CAP-264). *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
 
 ## Not yet planned
