@@ -450,18 +450,20 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-270"></a>**CAP-270: a transaction's changes observed at its commit** · proposed · What a transaction
   changed, the objects it created and deleted, the relation entries it inserted and removed and the properties it set
-  and cleared, in order, is given to whoever observes the store at its commit, so that a package other than
-  mbse-schemas can write it down, in Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  and cleared, is given to whoever observes the store at its commit, as its effect (CAP-269), in Python and
+  TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met (a transaction's proposals hold its changes until it commits, but nothing exposes them).
 - <a id="CAP-271"></a>**CAP-271: the journal language** · proposed · A journal entry is a transaction's symbols, each
   bound to an object by its reference or to a new object of a schema, then its mutations, in order: relation entries
   added and removed, and properties mutated by mbse-schemas' verbs, each value written by its property's schema.
-  Applying an entry is idempotent, and its symbols are its own, in mbse-journals, in Python and TypeScript, as
+  Applying an entry is idempotent, and its symbols are its own. It is a transaction expression of mbse-schemas' own
+  schemas, with no schema of its own, in mbse-schemas, in Python and TypeScript, as
   [the journals proposal](../../proposals/JOURNALS.md) states. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
 - <a id="CAP-269"></a>**CAP-269: transactions resolved into their effects** · proposed · A transaction's changes
   (CAP-270) are written as a journal entry (CAP-271), its effect, which a reader sections exactly, without evaluating
-  the expression again or reading the store it ran against, in mbse-journals, in Python and TypeScript. *Implements*
+  the expression again or reading the store it ran against; a counted object, immutable, is written by value where it
+  is linked, in mbse-schemas, in Python and TypeScript. *Implements*
   [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
 - <a id="CAP-272"></a>**CAP-272: surgical mutations of a property's value** · proposed · A journal entry mutates a part
