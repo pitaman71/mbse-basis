@@ -84,6 +84,7 @@ Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a 
 - [CAP-241: physical layout schemas](../docs/capabilities/CAP-241.md)
 - [CAP-242: incremental physical placement](../docs/capabilities/README.md#CAP-242)
 - [CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264)
+- [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269), in mbse-schemas
 - [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261)
 - [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243)
 - [CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262)
@@ -126,3 +127,4 @@ Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
 - consolidate and enumerate "decided" clauses 
 - consolidate and enuerate tech debt
 - object properties as financial/scientific/engineering ([FEA-007: property kinds](../docs/features/FEA-007.md))
+- re-partition mutations and queries
