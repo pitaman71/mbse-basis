@@ -446,12 +446,27 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-129"></a>**[CAP-129: journals replayed by execution](CAP-129.md)** · proposed · A journal is the list of
   transactions as submitted, replayed by executing each again. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-269"></a>**CAP-269: transactions resolved into their effects** · proposed · Executing a transaction also
-  yields its effect as concrete changes, in order: each object created or deleted, each relation entry inserted or
-  removed, each property set or cleared, each naming what it changed by reference. A reader sections the effect
-  exactly, without evaluating the expression again or reading the store it ran against; the effect is written and read
-  on the wire as values, and replayed by applying its changes, in Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+- <a id="CAP-270"></a>**CAP-270: a transaction's changes observed at its commit** · proposed · What a transaction
+  changed, the objects it created and deleted, the relation entries it inserted and removed and the properties it set
+  and cleared, in order, is given to whoever observes the store at its commit, so that a package other than
+  mbse-schemas can write it down, in Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met (a transaction's proposals hold its changes until it commits, but nothing exposes them).
+- <a id="CAP-271"></a>**CAP-271: the journal language** · proposed · A journal entry is a transaction's symbols, each
+  bound to an object by its reference or to a new object of a schema, then its mutations, in order: relation entries
+  added and removed, and properties mutated by mbse-schemas' verbs, each value written by its property's schema.
+  Applying an entry is idempotent, and its symbols are its own, in mbse-journals, in Python and TypeScript, as
+  [the journals proposal](../../proposals/JOURNALS.md) states. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  - **Current**: not met.
+- <a id="CAP-269"></a>**CAP-269: transactions resolved into their effects** · proposed · A transaction's changes
+  (CAP-270) are written as a journal entry (CAP-271), its effect, which a reader sections exactly, without evaluating
+  the expression again or reading the store it ran against, in mbse-journals, in Python and TypeScript. *Implements*
+  [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  - **Current**: not met.
+- <a id="CAP-272"></a>**CAP-272: surgical mutations of a property's value** · proposed · A journal entry mutates a part
+  of a property's value by the verbs of its schema kind, a container's items inserted before or after an item, first or
+  last, removed or cleared, a union's branch or an intersection's part, and clears any value, in mbse-journals, in
+  Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  - **Current**: not met.
 - <a id="CAP-134"></a>**[CAP-134: transactions recorded with provenance](CAP-134.md)** · proposed · Each transaction
   that writes is recorded with when and where it ran, its session and its identity, and linked to the objects it created
   or last modified, for the schemas an app chooses. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
@@ -833,7 +848,18 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   leaves nothing to undo; where a persistence stack journals, it commits once the journal accepts it. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
   [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
-- <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
+- <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received: its entries in order, each a transaction's effect (CAP-269), read from any position and inserted at one. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
+  - **Current**: not met.
+- <a id="CAP-273"></a>**CAP-273: journals in memory and in local files** · proposed · A journal is kept in memory, and
+  in a local file, in mbse-journals, in Python and TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  - **Current**: not met.
+- <a id="CAP-274"></a>**CAP-274: journals sent and received** · proposed · A journal's entries are sent from a store and
+  received into one, as a stream, through sender and receiver endpoints, in mbse-journals, in Python and TypeScript.
+  *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  - **Current**: not met.
+- <a id="CAP-275"></a>**CAP-275: two stores' difference as a journal entry** · proposed · The difference between two
+  stores is written as a journal entry that, applied to the first, makes it the second, in mbse-journals, in Python and
+  TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-077: changes explained across runs](CAP-077.md).
   - **Current**: not met.
 - <a id="CAP-200"></a>**[CAP-200: journals persisted to AWS S3](CAP-200.md)** · proposed · A journal is persisted in AWS S3, by a new repository mbse-s3. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: not met.
