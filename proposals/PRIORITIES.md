@@ -56,6 +56,19 @@ Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/
 
 ## INI-012 : domain + expression dialect framework
 
+## INI-013 : journals framework
+
+Proposal: [Journals](JOURNALS.md). Journals, in a new repository mbse-journals, in build order:
+
+- [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270), in mbse-schemas
+- [CAP-271: the journal language](../docs/capabilities/README.md#CAP-271)
+- [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269)
+- [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md)
+- [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272)
+- [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)
+- [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)
+- [CAP-275: two stores' difference as a journal entry](../docs/capabilities/README.md#CAP-275)
+
 ## INI-020 : code mutation framework
 
 Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md). Transforms ([FEA-021: every generation ambiguity a parameter](../docs/features/FEA-021.md)), in mbse-transforms:
@@ -84,7 +97,7 @@ Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a 
 - [CAP-241: physical layout schemas](../docs/capabilities/CAP-241.md)
 - [CAP-242: incremental physical placement](../docs/capabilities/README.md#CAP-242)
 - [CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264)
-- [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269), in mbse-schemas
+- [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269), from [INI-013: journals framework](#ini-013--journals-framework), with what it builds on
 - [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261)
 - [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243)
 - [CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262)
