@@ -58,11 +58,12 @@ Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/
 
 ## INI-013 : journals framework
 
-Proposal: [Journals](JOURNALS.md). Journals, in a new repository mbse-journals, in build order:
+Proposal: [Journals](JOURNALS.md). Journals, their language in mbse-schemas and the journal in a new repository
+mbse-journals, in build order:
 
 - [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270), in mbse-schemas
-- [CAP-271: the journal language](../docs/capabilities/README.md#CAP-271)
-- [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269)
+- [CAP-271: the journal language](../docs/capabilities/README.md#CAP-271), in mbse-schemas
+- [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269), in mbse-schemas
 - [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md)
 - [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272)
 - [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)

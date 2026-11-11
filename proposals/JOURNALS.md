@@ -3,8 +3,9 @@
 Initiative: [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework).
 
 A journal is a store's history as a sequence of transactions, each written in a journal language that states exactly
-what it changes. It is how a model is stored, communicated and analyzed: never as a snapshot. A new repository,
-`mbse-journals`, depending on mbse-schemas alone, builds it in Python and TypeScript; its outline is
+what it changes. It is how a model is stored, communicated and analyzed: never as a snapshot. The journal language is
+mbse-schemas' own, written in its schemas; the journal itself, its positions, files and streams, is a new repository's,
+`mbse-journals`, depending on mbse-schemas alone, in Python and TypeScript; its outline is
 [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md).
 
 A transaction expression, as mbse-schemas executes it, reads like a query: an upsert finds or creates, a map ranges
@@ -28,6 +29,13 @@ The user's decisions (2026-11-11):
   values, but also surgical mutations on subtrees of the property state using schema-appropriate mutation verbs. A
   container for example has clear, set, and get but also has insert (after/before/first/last) etc.", and "clear"
   applies to any property value.
+- **The language is mbse-schemas' own** ("(b) agreed"): an entry is a transaction expression of mbse-schemas' own
+  schemas, with no schema of its own, so that it is schema data, as
+  [PRI-003: everything is schema data](../docs/PRINCIPLES.md#PRI-003) and [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018) require, and lives in the lowest repository that can own
+  it, as [PRI-011: the lowest repository that can own it](../docs/PRINCIPLES.md#PRI-011) has it.
+- **A counted object is immutable**: "Any change to a counted object, which is immutable, results in copy-on-write". It
+  is written by value where it is linked, so that nothing is refused or dropped
+  ([PRI-002: preserve, don't lose](../docs/PRINCIPLES.md#PRI-002)).
 
 ## The journal language
 
@@ -35,7 +43,8 @@ A journal is a sequence of entries, one per transaction. An entry is its symbols
 
 - **A. An object exists.** Each symbol is bound, before anything uses it, either to an object that exists, by its
   reference, or to a new object of a schema. Nothing is matched: an entry says which. A new owned object takes its
-  identity from its ownership entry, added by the same entry's mutations.
+  identity from its ownership entry, added by the same entry's mutations. A counted object, immutable, is not bound: it
+  is defined by value where it is linked, and a change to one is a new one, copied on write.
 - **B. A relation entry is added or removed.** An entry of a relation, its links each a symbol, and its properties, such
   as an ownership entry's `name`. Removing an object's ownership entry deletes the object, as mbse-schemas does.
 - **C. A property is mutated.** On a symbol, a property and its mutation verbs, mbse-schemas' own: `set` and `clear`
@@ -46,6 +55,9 @@ Applying an entry makes what it states hold, and applying it again changes nothi
 is bound to it, an entry added that is held is left, an entry removed that is absent is left, a value set that holds is
 left. A symbol is the entry's own.
 
-The changes a transaction makes are observed at its commit, and written as an entry in this language: its effect. A
-reader sections an effect into the model's mutations exactly, as the diagrams framework's layout engine does
+An entry is a transaction expression: an upsert whose symbols are bound to references, or to schemas for the objects it
+makes, each found by its ownership entry, and whose spec inserts and removes relation entries and sets and clears
+properties, in mbse-schemas' verbs. The changes a transaction makes are observed at its commit, and written as an entry
+in this language: its effect. A reader sections an effect into the model's mutations exactly, as the diagrams
+framework's layout engine does
 ([CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261)).
