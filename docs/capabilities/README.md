@@ -446,6 +446,12 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-129"></a>**[CAP-129: journals replayed by execution](CAP-129.md)** · proposed · A journal is the list of
   transactions as submitted, replayed by executing each again. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-269"></a>**CAP-269: transactions resolved into their effects** · proposed · Executing a transaction also
+  yields its effect as concrete changes, in order: each object created or deleted, each relation entry inserted or
+  removed, each property set or cleared, each naming what it changed by reference. A reader sections the effect
+  exactly, without evaluating the expression again or reading the store it ran against; the effect is written and read
+  on the wire as values, and replayed by applying its changes, in Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  - **Current**: not met (a transaction's proposals hold its changes until it commits, but nothing exposes them).
 - <a id="CAP-134"></a>**[CAP-134: transactions recorded with provenance](CAP-134.md)** · proposed · Each transaction
   that writes is recorded with when and where it ran, its session and its identity, and linked to the objects it created
   or last modified, for the schemas an app chooses. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
@@ -985,8 +991,9 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   - **Current**: met (checked in mbse-diagrams' main at ef31ed5: suites LOG, CNT, PHY and PLC pass in both
     languages, at 100% coverage).
 - <a id="CAP-261"></a>**CAP-261: layout driven by any journal entry** · proposed · The layout engine follows a journal
-  entry it is given, any transaction expression: it anticipates what the entry removes, runs it, and calls the
-  container layout and placement functions the entry implies, so that a diagram's layout is a function of its journal
+  entry it is given, any transaction, by its resolved effect (CAP-269): it sections the effect into the model's
+  mutations, anticipates what they remove, applies them, and calls the container layout and placement functions they
+  imply, so that a diagram's layout is a function of its journal
   alone, with no caller that knows the entry's kind, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met (the suites' bench does this for its own kinds of step).
 - <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a diagram's
