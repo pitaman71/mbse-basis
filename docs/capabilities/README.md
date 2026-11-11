@@ -219,7 +219,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     6b7fe2f, its main c57882b with the version bumped and the records drained: both gates at 100% in both languages).
 - <a id="CAP-231"></a>**[CAP-231: the SystemVerilog expression dialect, complete](CAP-231.md)** · proposed ·
   `SystemVerilog` covers every expression of IEEE 1800-2023, Verilog its subset. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met (checked at mbse-expressions' main c57882b): stage 6, in 0.10.0.
+  - **Current**: met in mbse-expressions' branch stage6-systemverilog (checked at 40da048: both gates at 100% in both
+    languages, TypeScript on Node 22, 24 and 26; DIA-29 complete against slang's 533 syntax kinds; SVP, SVA, SVC and
+    SVD), to be released in 0.10.0.
 - <a id="CAP-232"></a>**[CAP-232: domains inferred for terms](CAP-232.md)** · proposed · Each term's domain is inferred,
   so that evaluation and translation work in widths, formats, enums and conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Relates to* [CAP-097: value domains of published standards](CAP-097.md).
@@ -227,8 +229,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     be inferred from are stored since 0.9.0.
 - <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · proposed · A literal holds any value its `OfAny`
   can, scalars, containers and value objects; what has no schema is a dialect's constant kind. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current**: not met (checked at mbse-expressions' main c57882b): `SystemVerilog`'s complete literals are stage
-    6's, in 0.10.0.
+  - **Current**: met in mbse-expressions' branch stage6-systemverilog (checked at 40da048: SystemVerilog's literals
+    and constants as built, DIA-27; both gates at 100% in both languages), to be released in 0.10.0.
 - <a id="CAP-267"></a>**[CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md)** · proposed · A C
   or C++ term reads the types its standard leaves to the implementation from the ABI dialect its holder names, each
   psABI a dialect of its own holding those types as stored domains. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
