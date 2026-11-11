@@ -192,7 +192,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-226"></a>**[CAP-226: complete expression dialects](CAP-226.md)** · proposed · A dialect per language and major
   version covers its language's whole expression syntax, mbse-programs' kinds in its own `Expression`, printed here and
   parsed by mbse-programs. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met (checked on mbse-expressions' branch `retrofit` at XXXSHA): stage 6, `SystemVerilog` complete,
+  - **Current**: not met (checked on mbse-expressions' branch `retrofit` at 0c5033c): stage 6, `SystemVerilog` complete,
     and the retrofit are built, for 0.10.0, but for the regular expression dialects and JSX, open with the user.
 - <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
   expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
@@ -250,26 +250,26 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   type annotations, type parameters and `match` patterns are expressions of dialects of their own, `Python Types` and
   `Python Patterns`, each validated, stored, printed and read with Python3's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
   [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-227: the Python3 expression dialect](CAP-227.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at XXXSHA: both gates at 100% in both languages,
+  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
     TypeScript on Node 22, 24 and 26, PYT, PYP and DIA-20 among them), to be released in 0.10.0.
 - <a id="CAP-277"></a>**[CAP-277: TypeScript's types and destructuring patterns as data](CAP-277.md)** · proposed ·
   TypeScript's types and destructuring patterns are expressions of dialects of their own, `TypeScript Types` and
   `TypeScript Patterns`, each validated, stored, printed and read with TypeScript5's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
   [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-228: the TypeScript5 expression dialect](CAP-228.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at XXXSHA: both gates at 100% in both languages,
+  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
     TypeScript on Node 22, 24 and 26, TST, TSP and DIA-21 to DIA-23 among them), to be released in 0.10.0.
 - <a id="CAP-278"></a>**[CAP-278: C's and C++'s type names and preprocessor directives as data](CAP-278.md)** · proposed ·
   C's and C++'s type names, an enumeration's enumerators among them, and their preprocessing directives are expressions
   of dialects of their own, `C Types`, `Cpp Types` and `C Preprocessor`, each validated, stored, printed and read with
   C's and C++'s. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [CAP-230: the C++ expression dialect](CAP-230.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at XXXSHA: both gates at 100% in both languages,
+  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
     TypeScript on Node 22, 24 and 26, CTY, XTY, CPD and DIA-26 among them), to be released in 0.10.0.
 - <a id="CAP-279"></a>**[CAP-279: names an expression binds found alike in every language](CAP-279.md)** · proposed · Every
   kind of expression that binds names, in every dialect, is a variation of `let`, so that what it binds, from what and
   where is read alike in every language. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
   [CAP-098: dialects over one framework](CAP-098.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at XXXSHA: both gates at 100% in both languages,
+  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
     TypeScript on Node 22, 24 and 26, DIA-30 among them), to be released in 0.10.0.
 - <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · proposed · A type checker
   catches a wrong kind, property or argument in code that installs, defines or writes expressions, as it does in other
