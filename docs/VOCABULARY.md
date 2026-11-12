@@ -30,6 +30,18 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
 - <a id="VOC-007"></a>**VOC-007: property** · adopted · **Property**, never "field", which means only the host language's member that holds one.
 - <a id="VOC-008"></a>**VOC-008: term** · adopted · **Term**: an element of an expression's tree. *Never*: a bare "node".
 - <a id="VOC-009"></a>**VOC-009: syntax node** · adopted · **Syntax node**: an element of a program's tree. *Never*: a bare "node".
+- <a id="VOC-030"></a>**VOC-030: subterm** · adopted · **Subterm**: a term that is a child of a term or a statement, held by
+  one of its properties (`a` and `b` of `a + b`; a let's `value` and `body`; a cast's type). *Never*: "slot",
+  "position". As the user decided (2026-11-12): "I would refer to a child that is a statement as a "clause" and a child
+  that is an expression term as a "subterm"", then "substatement" for the former.
+- <a id="VOC-031"></a>**VOC-031: substatement** · adopted · **Substatement**: a statement that is a child of a statement or a
+  term (an `if` statement's branches, a loop's body, an arrow function's block), as ISO/IEC 14882 uses the word. As
+  the user asked (2026-11-12): "Is "substatement" cleaner than "clause"".
+- <a id="VOC-032"></a>**VOC-032: clause** · adopted · **Clause**: a child that is a subterm ([VOC-030: subterm](#VOC-030)) or a
+  substatement ([VOC-031: substatement](#VOC-031)), named by the property that holds it (`left`, `body`, `else`); not a
+  helper (a value object that is neither, such as a declarator) nor a scalar property. As the user decided (2026-11-12):
+  "Maybe "clause" can refer to the union of all children : substatements and subterms." Qualified where it meets an
+  mbse-transforms policy's clauses, or a grammar's own `…Clause` syntax nodes.
 - <a id="VOC-026"></a>**VOC-026: schema** · adopted · **Schema**: what describes a value, a property's, a symbol's, a branch's or a part's, and what
   a value of any schema is of. *Never*: "type", which "has no meaning in mbse-*", as the user decided; a host
   language's own type (Python's `int`, TypeScript's `BigInt`) is qualified as the host's.
