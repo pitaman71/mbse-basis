@@ -280,12 +280,12 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   deployment, so that what an implementation does is chosen when it runs rather than written into the code that uses
   it. *Serves* [QUA-016: opinionated about how, inclusive about with what](QUALITIES.md#QUA-016), [QUA-017: distributed or local, decided at runtime](QUALITIES.md#QUA-017), [QUA-018: lazy or eager, decided at runtime](QUALITIES.md#QUA-018).
   *Applied in*: the store's protocol ([FEA-028: one Store interface, lazy by default](features/FEA-028.md)).
-- <a id="PRI-044"></a>**PRI-044: generated, else private, never bespoke and exposed** · adopted · For a structure that
-  is not mbse's own schema data, as the user ranked them (2026-11-12): "generated only > bespoke + local + private
-  optimization >> bespoke + public / exposed / resused". A structure is generated where it can be; a bespoke one is
-  tolerated only as a local, private optimization; one exposed or reused is far worse. *Serves*
-  [QUA-003: no second-order inventions](QUALITIES.md#QUA-003), [QUA-014: precise typing for bespoke and generated source code](QUALITIES.md#QUA-014). *Relates to* [PRI-018: no model needs code to read or write](#PRI-018), which forbids bespoke classes for
-  models outright.
+- <a id="PRI-044"></a>**PRI-044: schema-governed data, else private bespoke structures** · adopted · As the user
+  stated it (2026-11-12): "MBSE programs strongly prefer schema-governed data (via proxy or generated data structures) >
+  bespoke data structures that may be useful in privately scoped optimization >> bespoke data structures that are
+  durable and public". A bespoke structure is tolerated only as a privately scoped optimization; one that is durable
+  or public is far worse. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003), [QUA-014: precise typing for bespoke and generated source code](QUALITIES.md#QUA-014). *Relates to*
+  [PRI-018: no model needs code to read or write](#PRI-018), which forbids bespoke classes for models outright, and [PRI-003: everything is schema data](#PRI-003).
 - <a id="PRI-045"></a>**PRI-045: vigilant against semantic drift** · adopted · "Be vigilant against semantic drift", as
   the user stated it (2026-11-12): "align with internal terminology ([Vocabulary](VOCABULARY.md)) over borrowing or coining terms";
   "align with internal organization of enumerated plan items (priorities, initiatives, proposals, qualities,
