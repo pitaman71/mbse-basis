@@ -1046,7 +1046,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   grid and a child (CAP-280), apart from both, so that a shape moved into or out of a container keeps its identity, its path and
   what it owns: its points, vectors and annotations. A shape with no container is at the diagram's top level, and
   removing a shape's containment entry deletes nothing: it moves the shape there, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: met (checked in mbse-diagrams' main at ef31ed5: suites LOG, CNT, PHY and PLC pass in both
+  - **Current**: met (checked in mbse-diagrams' main at 909c7a1: suites LOG, CNT, PHY and PLC pass in both
     languages, at 100% coverage).
 - <a id="CAP-280"></a>**[CAP-280: the grid in the logical layout](CAP-280.md)** · proposed · A container, a shape or the
   diagram, owns at most one grid, through `Logical.Owns` as `grid`, and containment links a child to that grid, so that
@@ -1054,7 +1054,8 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   holds. A grid's span, axis and cell rotation are its own
   properties, written by mutations; the container layout takes them, rearranges a grid's cells when they change, and
   owns each cell through `HasCells`, keyed by its row and column, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met.
+  - **Current**: met (checked in mbse-diagrams' main at 909c7a1: suites LOG, CNT, ADJ, CNF, PHY and PLC pass in both
+    languages, at 100% coverage).
 - <a id="CAP-261"></a>**CAP-261: layout driven by any journal entry** · proposed · The layout engine follows a journal
   entry it is given, any transaction, by its resolved effect (CAP-269): it sections the effect into the model's
   mutations, anticipates what they remove, applies them, and calls the container layout and placement functions they
