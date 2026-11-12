@@ -27,18 +27,22 @@ accepted is decided by mbse-schemas alike in every recipient, by the constraints
 judges nothing: it never reads an entry's meaning, and needs a transaction only to order entries. It must give, for
 each journal:
 
-1. **An ordered, atomic append.** An entry is appended at the next position, and the append fails where another took
-   that position first, so that two writers never interleave: optimistic concurrency, the one transaction a backend
-   needs.
-2. **Reads and subscriptions from any position.** A subscriber catches up from any position, the first included,
-   since there is no snapshot to start from, and then follows live, with no entry missed or given twice.
+1. **Each journal transaction within a database transaction.** A journal's order is its relations
+   ([the journals proposal](JOURNALS.md#the-journal-a-sequenced-container)), and a backend applies each journal transaction, an append or an insertion, within a
+   database transaction, so that the database is responsible for the order they are serialized in, as the user decided:
+   "Backend bindings should use a database transaction around the journal transaction. This makes the db more or less
+   responsible for serialization order." Two writers appending after one last are told apart by a unique clause
+   ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)).
+2. **Reads and subscriptions from any entry.** A position is an entry. A subscriber catches up from any entry, the
+   first included, since there is no snapshot to start from, and then follows live, with no entry missed or given
+   twice.
 3. **Entries as schema-free documents.** An entry is the plain form mbse-schemas writes, JSON, stored as it is.
 
 ## The interface, and how a backend is held to it
 
 The interface is mbse-journals': part of [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md), in Python and TypeScript, the three
 above as operations, with no type from any database in it. A conformance suite, in mbse-journals, states each
-operation's behaviour as cases, among them two writers racing for one position and a subscriber that falls behind and
+operation's behaviour as cases, among them two writers racing to append after one last entry and a subscriber that falls behind and
 catches up; it runs against the journal kept in memory ([CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)), the
 interface's test double, which also lets a front end and a back end each be unit-tested alone, and every backend passes
 it unchanged, much as
@@ -53,10 +57,10 @@ Each backend is a repository of its own, depending on mbse-journals alone, as mb
 the interface could quietly come to depend on, their transactions, how they give changes, where they run and on which
 side of the open-source and paid line they fall.
 
-| Backend | Append | Subscriptions | Why |
+| Backend | Transaction | Subscriptions | Why |
 |---|---|---|---|
-| **DynamoDB** | A conditional put on journal and position | A stream, kept a day, ordered within a partition; older entries caught up by reading the table | Managed and proprietary; the backend the user has run before; mbse-dynamodb exists |
-| **MongoDB** | A unique index on journal and position; multi-document transactions | Change streams, resumed by token as far back as the oplog; older entries caught up by reading the collection | Self-hosted, Community edition under the source-available SSPL, or managed on any of the three large clouds (Atlas) |
+| **DynamoDB** | `TransactWriteItems` around each journal transaction | A stream, kept a day, ordered within a partition; older entries caught up by reading the table | Managed and proprietary; the backend the user has run before; mbse-dynamodb exists |
+| **MongoDB** | A multi-document transaction around each journal transaction | Change streams, resumed by token as far back as the oplog; older entries caught up by reading the collection | Self-hosted, Community edition under the source-available SSPL, or managed on any of the three large clouds (Atlas) |
 
 **Build-out**, each widening what the interface is proven against:
 
