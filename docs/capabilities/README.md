@@ -1056,7 +1056,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   owns each cell through `HasCells`, keyed by its row and column, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 909c7a1: suites LOG, CNT, ADJ, CNF, PHY and PLC pass in both
     languages, at 100% coverage).
-- <a id="CAP-261"></a>**CAP-261: layout driven by any journal entry** · proposed · The layout engine follows a journal
+- <a id="CAP-261"></a>**[CAP-261: layout driven by any journal entry](CAP-261.md)** · proposed · The layout engine follows a journal
   entry it is given, any transaction, by its resolved effect (CAP-269): it sections the effect into the model's
   mutations, anticipates what they remove, applies them, and calls the container layout and placement functions they
   imply, so that a diagram's layout is a function of its journal
