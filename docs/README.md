@@ -167,6 +167,13 @@ An ID is a prefix of three capitals and a number, `XYZ-123`, relative to the doc
 that defines items lists them as definitions, each with an ID, a name, a title and a description, and each with an
 anchor of its own, so that a link reaches the definition itself.
 
+**A new ID is the next above the highest present.** Each new item of a prefix takes the number immediately above the
+highest that prefix has on `main`, never a gap below it, since a number that looks unused may have been used and lost.
+Parallel pull requests may take the same numbers: as the user decided (2026-11-12), "whichever PR gets merged first wins
+the contest to claim the next IDs immediately above the maximum ID present", and every other renumbers its new items
+above the new highest before it merges. An ID is claimed, and permanent (Rules for writing items, "IDs are permanent"),
+once it is on `main`.
+
 Items written before this scheme keep their IDs (`F-`, `P-`, `C-`, `V-`, and the prefixes of each repository's
 documents) until they move into it. Moving an item records its old ID beside its new one, so that every citation still
 resolves; where two documents gave the same ID to different items, or different IDs to the same item, the move
