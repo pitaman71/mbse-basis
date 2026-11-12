@@ -157,9 +157,11 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
 - <a id="FEA-027"></a>**[FEA-027: mutations as queries](FEA-027.md)** · proposed · external · A store is queried and
   changed in one language: patterns over its data, whose frames stream through terms that match, update and upsert, in
   one transaction. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
-- <a id="FEA-028"></a>**[FEA-028: one API surface for all data access](FEA-028.md)** · proposed · external · Every
-  access to data goes through one clean surface, the store's protocol `Visitors.OfStore`, so that any store serves any
-  code alike. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
+- <a id="FEA-028"></a>**[FEA-028: one Store interface, lazy by default](FEA-028.md)** · adopted · external · Every
+  access to data goes through one store interface, the store's protocol `Visitors.OfStore`, lazy by default: a store
+  gives what it is asked for, when it is asked, so that any store serves any code alike, and whether it is distributed
+  or local, lazy or eager, is decided when it runs. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008),
+  [QUA-017: distributed or local, decided at runtime](../QUALITIES.md#QUA-017), [QUA-018: lazy or eager, decided at runtime](../QUALITIES.md#QUA-018).
 - <a id="FEA-029"></a>**[FEA-029: excluding imperative visitor expressions](FEA-029.md)** · proposed · external · A
   build is declared, not sequenced: whether it creates, updates or clones, and what it builds is identified by, follow
   from its schema, and a spec cannot read in order to write. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008).
@@ -177,7 +179,8 @@ Features that serve an engineering persona: the framework's maintainers.
 - <a id="FEA-057"></a>**[FEA-057: documentation organized by semantic role](FEA-057.md)** · proposed · internal · Every
   repository's documents, skills, notebooks and source comments each hold one kind of content, in one place, linked
   rather than restated, so that people and agents find the one source of each thing. *Confers*
-  [QUA-010: every repository works alike](../QUALITIES.md#QUA-010), [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+  [QUA-010: every repository works alike](../QUALITIES.md#QUA-010), [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001),
+  [QUA-015: docs organized semantically, without drift](../QUALITIES.md#QUA-015), [QUA-019: docs point clearly to the source of truth](../QUALITIES.md#QUA-019), [QUA-020: docs without problematic repetition](../QUALITIES.md#QUA-020).
 
 ## Earlier IDs
 

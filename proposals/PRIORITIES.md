@@ -134,12 +134,22 @@ Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
 
 ## INI-103 : Tensor Parallelism with distributed K-V cache
 
+## INI-104 : gaps plan category
+
+- log bugs + tech debt in a "gaps" plan category
+- consolidate and enuerate tech debt (from Later, below)
+
+## INI-105 : nope plan category
+
+- log boundaries around things we will not build in a "nope" plan category
+- first entries: snapshots ([CAP-127: snapshots made of transactions](../docs/capabilities/CAP-127.md)), and
+  [CAP-282: no model needs code to read or write](../docs/capabilities/README.md#CAP-282), absorbed as a capability until then
+
 ## Later
 
 - establishing reviews for leakage across document boundaries
 - conceptual terminology drift is still a problem
 - move historical notes out of markdown and into git comments
 - consolidate and enumerate "decided" clauses 
-- consolidate and enuerate tech debt
 - object properties as financial/scientific/engineering ([FEA-007: property kinds](../docs/features/FEA-007.md))
 - re-partition mutations and queries

@@ -133,7 +133,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
     package by `skills/sync.sh`.
 - <a id="PRI-017"></a>**PRI-017: transforms, models, dialects, schemas** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* [PRI-014: every ambiguity a decision](#PRI-014), [PRI-018: no model needs code to read or write](#PRI-018).
-- <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "No model should need code to read or write. Ever." All model data is governed by a schema,
+- <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · superseded by [CAP-282: no model needs code to read or write](capabilities/README.md#CAP-282), absorbed as a capability "until we start logging no-builds as their own category", as the user decided (2026-11-12) · "No model should need code to read or write. Ever." All model data is governed by a schema,
   and all builder/visitor/reader/write functionality comes from either proxies in mbse-schemas or generated
   dataclasses. No bespoke class implementations are allowed for models. *Relates to* [PRI-003: everything is schema data](#PRI-003), [PRI-004: one visitor protocol per kind](#PRI-004), [PRI-010: proxies and generated code read alike](#PRI-010), [PRI-017: transforms, models, dialects, schemas](#PRI-017).
   *Not yet applied* in mbse-expressions ([CAP-098: dialects over one framework](capabilities/CAP-098.md#open-questions), Open questions).
@@ -274,9 +274,42 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   deferred optionality over sacrificing optionality", as the user decided (2026-11-10), choosing that a C or C++
   expression's holder names its ABI, so that one store holds several, over one ABI per store. *Serves*
   [QUA-002: open-world models](QUALITIES.md#QUA-002). *Applied in*: the ABI dialects, a holder naming its own ([CAP-267: C and C++ terms read under the ABI their holder names](capabilities/CAP-267.md#decided), mbse-expressions 0.9.0).
+- <a id="PRI-043"></a>**PRI-043: framework interfaces authoritative and versatile** · adopted · "MBSE framework
+  interfaces expose interfaces that are authoritative and versatile", as the user stated it (2026-11-12): one
+  interface for each thing, which every implementation meets in full and none stands beside, and which serves every
+  deployment, so that what an implementation does is chosen when it runs rather than written into the code that uses
+  it. *Serves* [QUA-016: opinionated about how, inclusive about with what](QUALITIES.md#QUA-016), [QUA-017: distributed or local, decided at runtime](QUALITIES.md#QUA-017), [QUA-018: lazy or eager, decided at runtime](QUALITIES.md#QUA-018).
+  *Applied in*: the store's protocol ([FEA-028: one Store interface, lazy by default](features/FEA-028.md)).
+- <a id="PRI-044"></a>**PRI-044: schema-governed data, else private bespoke structures** · adopted · As the user
+  stated it (2026-11-12): "MBSE programs strongly prefer schema-governed data (via proxy or generated data structures) >
+  bespoke data structures that may be useful in privately scoped optimization >> bespoke data structures that are
+  durable and public". A bespoke structure is tolerated only as a privately scoped optimization; one that is durable
+  or public is far worse. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003), [QUA-014: precise typing for bespoke and generated source code](QUALITIES.md#QUA-014). *Relates to*
+  [CAP-282: no model needs code to read or write](capabilities/README.md#CAP-282), which forbids bespoke classes for models outright, and [PRI-003: everything is schema data](#PRI-003).
+- <a id="PRI-045"></a>**PRI-045: docs optimized for efficient representation and selective consumption** · adopted · As
+  the user stated it (2026-11-12): "Docs optimize for efficient representation and selective consumption striking a
+  balance of partitioning + linking + bridging across plan items and plan categories": "know your plan categories and
+  the semantic boundaries between them: (priorities, initiatives, proposals, qualities, principles, features,
+  capabilities)"; "align with internal terminology ([Vocabulary](VOCABULARY.md)) over borrowing or coining terms";
+  "align with internal organization of enumerated plan items over reorganizing or creating duplicates or
+  quasi-duplicates"; "align with how information is partitioned across plan items and how links with bridge language
+  conserve tokens as a document is being consumed"; and "expect that keeping each item at the right level of abstraction
+  and in the right container may necessitate refactoring from time to time which of course is a user discussion".
+  Priorities, initiatives and proposals are one plan category, initiatives ([the basis](README.md#other-documents)).
+  *Serves* [QUA-015: docs organized semantically, without drift](QUALITIES.md#QUA-015), [QUA-019: docs point clearly to the source of truth](QUALITIES.md#QUA-019), [QUA-020: docs without problematic repetition](QUALITIES.md#QUA-020). *Relates
+  to* [PRI-016: guidance written once](#PRI-016), [FEA-057: documentation organized by semantic role](features/FEA-057.md), [the basis](README.md#rules-for-writing-items).
 
 ## Open items
 
+- **Gaps and nopes, plan categories to come.** As the user decided (2026-11-12): "log bugs + tech debt in a "gaps" plan
+  category" and "log boundaries around things we will not build in a "nope" plan category", each its own initiative,
+  [INI-104](../proposals/PRIORITIES.md#ini-104--gaps-plan-category) and
+  [INI-105](../proposals/PRIORITIES.md#ini-105--nope-plan-category), not tackled yet. Until then tech debt is a
+  capability of an internal feature ([the basis](README.md#other-documents)), and [PRI-018: no model needs code to read or write](#PRI-018) is absorbed as
+  [CAP-282: no model needs code to read or write](capabilities/README.md#CAP-282).
+- **Snapshots, the first nope.** [CAP-127: snapshots made of transactions](capabilities/CAP-127.md) is met in mbse-schemas, and mbse-rest, mbse-dynamodb and
+  the conformance corpora of three repositories use snapshots; under [FEA-028: one Store interface, lazy by default](features/FEA-028.md), each is to be superseded
+  or replaced, as [the stacked stores proposal](../proposals/STACKED-STORES.md) proposes.
 - **[PRI-015: concrete references are programmatic](#PRI-015) and [PRI-017: transforms, models, dialects, schemas](#PRI-017) to [PRI-019: fluent builder syntax](#PRI-019): what they serve.** Which qualities each serves is still to state.
 - **[PRI-001: declaration order](#PRI-001)'s exception and a proposal against it.** Decide whether entries sorted by their relation's key are a
   deliberate exception (an order by value, for byte-identity) or a debt against [PRI-001: declaration order](#PRI-001). [CAP-033: undeclared properties preserved](capabilities/CAP-033.md#open-questions)
