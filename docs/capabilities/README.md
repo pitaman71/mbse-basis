@@ -481,13 +481,15 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 ### Transactions
 
 - <a id="CAP-293"></a>**CAP-293: an entry inserted against a unique clause refuses its transaction** · proposed · A
-  transaction that inserts a relation entry which, with the entries held, breaks a unique clause its relation declares
-  is refused at its commit, alike in every store that applies it; an entry inserted again that is held already breaks
-  nothing. It refuses the append that collides: a writer appending `b` to a container whose last was `a` removes
-  `Last(container, a)` and inserts `Last(container, b)` in one transaction, and where another has appended first, the
-  removal changes nothing and the insertion breaks the clause that keeps one last, as the user put it (2026-11-12). In
-  mbse-schemas, in Python and TypeScript, with no dependency on constraints, which are still being built.
-  *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  transaction that removed nothing by a removal from a relation, and inserts an entry of it which, with the entries
+  held, breaks a unique clause the relation declares, is refused at its commit, alike in every store that applies it;
+  an entry inserted again that is held already breaks nothing. It refuses the append that collides: a writer appending
+  `b` to a container whose last was `a` removes `Last(container, a)` and inserts `Last(container, b)` in one
+  transaction, and where another has appended first, "if - Last(container,a) is ignored because it has no effect then
+  applying +Last(container,b) violates the unique clause", as the user put it (2026-11-12). Checking is otherwise on
+  request ([PRI-007: three-valued checking on request](../PRINCIPLES.md#PRI-007)): data that breaks a clause with no removal that removed nothing is
+  written, and reported when checked. In mbse-schemas, in Python and TypeScript, with no dependency on constraints,
+  which are still being built. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
 - <a id="CAP-124"></a>**[CAP-124: writes all-or-nothing in transactions](CAP-124.md)** · proposed · Every write to a
   store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
