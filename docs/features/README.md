@@ -179,7 +179,8 @@ Features that serve an engineering persona: the framework's maintainers.
 - <a id="FEA-057"></a>**[FEA-057: documentation organized by semantic role](FEA-057.md)** · proposed · internal · Every
   repository's documents, skills, notebooks and source comments each hold one kind of content, in one place, linked
   rather than restated, so that people and agents find the one source of each thing. *Confers*
-  [QUA-010: every repository works alike](../QUALITIES.md#QUA-010), [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001).
+  [QUA-010: every repository works alike](../QUALITIES.md#QUA-010), [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001),
+  [QUA-015: docs organized semantically, without drift](../QUALITIES.md#QUA-015), [QUA-019: docs point clearly to the source of truth](../QUALITIES.md#QUA-019), [QUA-020: docs without problematic repetition](../QUALITIES.md#QUA-020).
 
 ## Earlier IDs
 

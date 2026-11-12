@@ -47,12 +47,13 @@ that it is blocked or to assess.
 
 **Tasks are not enumerated.** Their tracking is latent in git history; there is no need to surface them yet.
 
-Two kinds of item sit outside the tiers:
+Three kinds of item sit outside the tiers:
 
 | Kind | Prefix | What it is | Index |
 |---|---|---|---|
 | Principle | `PRI-` | A durable design or engineering decision that reinforces qualities when consistently applied across repositories, components, source code and the rest | [Principles](PRINCIPLES.md) |
 | Vocabulary | `VOC-` | A borrowed, clarified or novel concept, and the one term that names it across code, documents, tutorials and skills, with a focus on the dimensions, domains, seams and gradients of the project's own engineering space | [Vocabulary](VOCABULARY.md) |
+| Initiative | `INI-` | An investment of effort toward an external demo or product goal, in terms of the capabilities it must complete (or has), and the one plan category for what were once proposals and priorities; its proposals are its design documents | [Initiatives](../proposals/PRIORITIES.md) |
 
 **Conventions are not a kind of their own.** A convention, how the work is done (equivalent implementations, notebook
 tests, coverage, navigation), is either a principle, which serves a quality ([QUA-010: every repository works alike](QUALITIES.md#QUA-010) where it governs
@@ -127,11 +128,15 @@ principles run and check ([PRI-036: every program in a skill is complete and run
 
 ## Other documents
 
-**Proposals.** A proposal is a document proposing a cohesive group of changes, typically spanning capabilities and
-sometimes features or qualities. A proposal almost always adds capabilities, sometimes adds features, occasionally
-refines a feature (a new ID, with links showing what it replaces), and very occasionally adds a quality. A
-repository's design documents are proposals. A completed proposal is drained: its content moves into the items it
-adds or refines, and into the shelves, and what remains cites them.
+**Initiatives.** An initiative is the one plan category for what were proposals, initiatives and priorities, as the user
+decided (2026-11-12): "Proposals, initiatives, and priorities are already in use but they should be merged into a single
+plan category." Each is an investment of effort toward an external demo or product goal, in terms of the capabilities it
+must complete, enumerated as `INI-` in [Initiatives](../proposals/PRIORITIES.md). Its design documents are its
+proposals, each headed by its initiative: a proposal proposes a cohesive group of changes, typically spanning
+capabilities and sometimes features or qualities. It almost always adds capabilities, sometimes adds features,
+occasionally refines a feature (a new ID, with links showing what it replaces), and very occasionally adds a quality. A
+repository's design documents are proposals. A completed proposal is drained: its content moves into the items it adds
+or refines, and into the shelves, and what remains cites them.
 
 **Decisions, tech debt and TODOs are not kept as logs.** Each such log is drained and removed:
 

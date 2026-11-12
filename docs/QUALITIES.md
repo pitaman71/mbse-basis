@@ -48,7 +48,7 @@ principles serve them.
   *Conferred by* no feature yet; *served by* [PRI-015: concrete references are programmatic](PRINCIPLES.md#PRI-015) and [PRI-010: proxies and generated code read alike](PRINCIPLES.md#PRI-010).
 - <a id="QUA-015"></a>**QUA-015: docs organized semantically, without drift** · adopted · "Docs maintain an efficient
   semantic organization and avoid semantic drift", as the user stated it (2026-11-12). *Conferred by*
-  [FEA-057: documentation organized by semantic role](features/FEA-057.md); *served by* [PRI-045: vigilant against semantic drift](PRINCIPLES.md#PRI-045) and [PRI-016: guidance written once](PRINCIPLES.md#PRI-016).
+  [FEA-057: documentation organized by semantic role](features/FEA-057.md); *served by* [PRI-045: docs optimized for efficient representation and selective consumption](PRINCIPLES.md#PRI-045) and [PRI-016: guidance written once](PRINCIPLES.md#PRI-016).
 - <a id="QUA-016"></a>**QUA-016: opinionated about how, inclusive about with what** · adopted · "MBSE frameworks are
   opinionated about how they integrate but inclusive about with what they integrate", as the user stated it
   (2026-11-12): one way of integrating, with any database, service, language or licence. *Relates to*
@@ -59,6 +59,14 @@ principles serve them.
 - <a id="QUA-018"></a>**QUA-018: lazy or eager, decided at runtime** · adopted · "Degrees of lazy and eager operation is
   a runtime decision that is mostly opaque to program code", as the user stated it (2026-11-12). *Conferred by*
   [FEA-028: one Store interface, lazy by default](features/FEA-028.md); *served by* [PRI-043: framework interfaces authoritative and versatile](PRINCIPLES.md#PRI-043).
+- <a id="QUA-019"></a>**QUA-019: docs point clearly to the source of truth** · adopted · "Docs representations prefer
+  clear arrow towards source of truth > durable + comprehensive + precise > efficient for selective consumption by
+  humans and agents > strictly orthogonal/hierarchical", as the user stated it (2026-11-12). *Conferred by*
+  [FEA-057: documentation organized by semantic role](features/FEA-057.md); *served by* [PRI-045: docs optimized for efficient representation and selective consumption](PRINCIPLES.md#PRI-045) and [PRI-016: guidance written once](PRINCIPLES.md#PRI-016).
+- <a id="QUA-020"></a>**QUA-020: docs without problematic repetition** · adopted · "Docs minimize problematic
+  proliferation of repetition", as the user stated it (2026-11-12). *Relates to* [QUA-019: docs point clearly to the source of truth](#QUA-019), which ranks a
+  clear arrow to the source of truth above it. *Conferred by* [FEA-057: documentation organized by semantic role](features/FEA-057.md); *served by*
+  [PRI-045: docs optimized for efficient representation and selective consumption](PRINCIPLES.md#PRI-045) and [PRI-016: guidance written once](PRINCIPLES.md#PRI-016).
 
 ## Earlier IDs
 

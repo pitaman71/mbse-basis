@@ -320,6 +320,15 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   not `Any`, and catches its misuse. *Implements*
   [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [CAP-107: one visitor protocol reads and writes data](CAP-107.md).
   - **Current**: not met; tech debt (checked in mbse-schemas' main at 21db1ee).
+- <a id="CAP-282"></a>**CAP-282: no model needs code to read or write** · adopted · "No model should need code to read
+  or write. Ever." All model data is governed by a schema, and every builder, visitor, reader and writer of it comes
+  from mbse-schemas' proxies or from generated dataclasses, never a bespoke class: a judgement on how serialization
+  abides, as the user put it (2026-11-12). *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Replaces*
+  [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018), absorbed here until no-builds are a plan category of their own. *Relates to*
+  [PRI-044: schema-governed data, else private bespoke structures](../PRINCIPLES.md#PRI-044).
+  - **Current**: to assess; not applied in mbse-expressions when PRI-018 was superseded
+    ([CAP-098: dialects over one framework](CAP-098.md#open-questions), Open questions).
+
 ### Clean modeling separation between value objects and reference objects
 
 - <a id="CAP-108"></a>**[CAP-108: relations as scalable containers](CAP-108.md)** · proposed · Values, value objects among
