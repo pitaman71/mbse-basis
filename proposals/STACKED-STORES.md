@@ -64,8 +64,8 @@ and TypeScript:
    user decided: the schemas give the ownership paths from the singletons that can reach `name`, and the extent is
    those paths' ownership relations closed, following only them. A lazy store fetches nothing eagerly to do so: the
    closure gives the extent's objects by reference, each a proxy that loads only when it is read, and no owner along
-   the way is loaded. The closure of ownership may be a store method, which the store below answers in one call. A counted object, owned by nothing, is on no path: the
-   counted mode of identity is being deprecated.
+   the way is loaded. The closure of ownership may be a store method, which the store below answers in one call. A
+   counted object, owned by nothing, is on no path: the counted mode of identity is being deprecated.
 
 Steps 1 and 2 are mbse-schemas'; 3 joins what [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270) and mbse-journals'
 subscriptions already give. Together, about three capabilities, each at least CAP-270's size; step 2's identity map is
