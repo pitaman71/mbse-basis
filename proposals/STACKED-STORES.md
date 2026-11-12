@@ -62,9 +62,9 @@ and TypeScript:
    cache applies each effect the store below observes to what it has loaded.
 4. **Extent, through ownership.** `extent(name)`, the objects of a schema or of a schema refining it, is found as the
    user decided: the schemas give the ownership paths from the singletons that can reach `name`, and the extent is
-   those paths' ownership relations closed, following only them, so that a lazy store loads the owners along them and
-   nothing else. The closure of ownership, one level of owned objects at a time, may be a store method, which a store
-   below answers in one call rather than one read per object. A counted object, owned by nothing, is on no path: the
+   those paths' ownership relations closed, following only them. A lazy store fetches nothing eagerly to do so: the
+   closure gives the extent's objects by reference, each a proxy that loads only when it is read, and no owner along
+   the way is loaded. The closure of ownership may be a store method, which the store below answers in one call. A counted object, owned by nothing, is on no path: the
    counted mode of identity is being deprecated.
 
 Steps 1 and 2 are mbse-schemas'; 3 joins what [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270) and mbse-journals'
