@@ -1061,7 +1061,8 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   mutations, anticipates what they remove, applies them, and calls the container layout and placement functions they
   imply, so that a diagram's layout is a function of its journal
   alone, with no caller that knows the entry's kind, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met (the suites' bench does this for its own kinds of step).
+  - **Current**: met (checked in mbse-diagrams' main at 31088fb: suite DRV and every bench suite, through the driver,
+    pass in both languages, at 100% coverage).
 - <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a diagram's
   journal, never a snapshot, through the layout engine (CAP-261) and renders its physical layout, frames, points and
   segments, in a viewport of fixed size that rescales when the diagram crosses one of its edges, in TypeScript.
