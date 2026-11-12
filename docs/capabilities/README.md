@@ -520,7 +520,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   added and removed, and properties mutated by mbse-schemas' verbs, each value written by its property's schema.
   Applying an entry is idempotent, and its symbols are its own. It is a transaction expression of mbse-schemas' own
   schemas, with no schema of its own, in mbse-schemas, in Python and TypeScript, as
-  [the journals proposal](../../proposals/JOURNALS.md) states. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  [the journals proposal](../../proposals/JOURNALS.md) states: the form a store reports its changes in, for now, which a journal records as data of its
+  own, since mutation-transaction streams and change journals "are not the same language - yet", as the user decided
+  (2026-11-12). *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.26.11 (checked in its main at 7224b17: suite CHG passes in both languages, at
     100% coverage).
 - <a id="CAP-269"></a>**CAP-269: transactions resolved into their effects** · proposed · A transaction's changes
@@ -952,10 +954,11 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   stores is written as a journal entry that, applied to the first, makes it the second, in mbse-journals, in Python and
   TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-077: changes explained across runs](CAP-077.md).
   - **Current**: not met.
-- <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · Every backend a journal is kept in meets
-  one interface, in mbse-journals: each journal transaction applied within a database transaction, which orders them,
-  and reads and subscriptions from any entry, of schema-free entries; a conformance suite every backend passes, run against the
-  journal kept in memory, in Python and TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+- <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · A journal is kept in any store through
+  the store interface ([FEA-028: one Store interface, lazy by default](../features/FEA-028.md)): a backend is a store over its database, which interprets each
+  transaction within a database transaction, which orders them, and reports its changes to each follower; a
+  conformance suite, in mbse-journals, run against the store kept in memory, which every backend passes, in Python and
+  TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: not met.
 - <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the
   journal storage interface (CAP-288), with an index of each object's values and entries kept current from it, from
