@@ -42,9 +42,9 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   [CAP-231: the SystemVerilog expression dialect, complete](capabilities/CAP-231.md); sublanguages in [CAP-276: Python's
   type expressions and match patterns as data](capabilities/CAP-276.md), [CAP-277: TypeScript's types and destructuring
   patterns as data](capabilities/CAP-277.md), [CAP-278: C's and C++'s type names and preprocessor directives as
-  data](capabilities/CAP-278.md) and [CAP-281: Python's, ECMAScript's and C++'s regular expressions as
-  data](capabilities/CAP-281.md); standards' and ABIs' in [CAP-097: value domains of published
-  standards](capabilities/CAP-097.md) and [CAP-267: C and C++ terms read under the ABI their holder
+  data](capabilities/CAP-278.md), [CAP-281: Python's, ECMAScript's and C++'s regular expressions as
+  data](capabilities/CAP-281.md) and [CAP-294: POSIX's regular expressions as data](capabilities/CAP-294.md); standards' and ABIs' in [CAP-097: value domains
+  of published standards](capabilities/CAP-097.md) and [CAP-267: C and C++ terms read under the ABI their holder
   names](capabilities/CAP-267.md); translated between by [CAP-101: translation between
   dialects](capabilities/CAP-101.md). The children of its terms and statements: [VOC-030: subterm](#VOC-030), [VOC-031:
   substatement](#VOC-031), [VOC-032: clause](#VOC-032).
