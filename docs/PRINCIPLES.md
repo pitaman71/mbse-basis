@@ -274,14 +274,12 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   deferred optionality over sacrificing optionality", as the user decided (2026-11-10), choosing that a C or C++
   expression's holder names its ABI, so that one store holds several, over one ABI per store. *Serves*
   [QUA-002: open-world models](QUALITIES.md#QUA-002). *Applied in*: the ABI dialects, a holder naming its own ([CAP-267: C and C++ terms read under the ABI their holder names](capabilities/CAP-267.md#decided), mbse-expressions 0.9.0).
-- <a id="PRI-043"></a>**PRI-043: one Store interface, lazy by default** · adopted · "There is one Store interface that is
-  lazy by default": a store gives what it is asked for, when it is asked. As the user stated it (2026-11-12): "store
-  implementations primarily deal in schemas, constraints, mutations, changes, and frames"; "remote APIs like mbse-rest
-  must implement all methods of Store interface" and "may reject modes offered by the Store interface"; and they offer
-  "mutation streams and dynamically tunable cache views over snapshots": "the 'snapshot' data structure violated this
-  rule". *Serves* [QUA-007: one paradigm at every level of a system](QUALITIES.md#QUA-007), [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005). *Relates to* [PRI-010: proxies and generated code read alike](#PRI-010),
-  [CAP-149: data accessed through the store protocol](capabilities/CAP-149.md). *Not yet applied*: mbse-schemas' `Builders.Store`, which holds everything it has, and
-  its snapshots ([CAP-127: snapshots made of transactions](capabilities/CAP-127.md)); mbse-rest's persistence, by snapshot.
+- <a id="PRI-043"></a>**PRI-043: framework interfaces authoritative and versatile** · adopted · "MBSE framework
+  interfaces expose interfaces that are authoritative and versatile", as the user stated it (2026-11-12): one
+  interface for each thing, which every implementation meets in full and none stands beside, and which serves every
+  deployment, so that what an implementation does is chosen when it runs rather than written into the code that uses
+  it. *Serves* [QUA-016: opinionated about how, inclusive about with what](QUALITIES.md#QUA-016), [QUA-017: distributed or local, decided at runtime](QUALITIES.md#QUA-017), [QUA-018: lazy or eager, decided at runtime](QUALITIES.md#QUA-018).
+  *Applied in*: the store's protocol ([FEA-028: one Store interface, lazy by default](features/FEA-028.md)).
 - <a id="PRI-044"></a>**PRI-044: generated, else private, never bespoke and exposed** · adopted · For a structure that
   is not mbse's own schema data, as the user ranked them (2026-11-12): "generated only > bespoke + local + private
   optimization >> bespoke + public / exposed / resused". A structure is generated where it can be; a bespoke one is
@@ -294,8 +292,8 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   principles, features, capabilities) over reorganizing or creating duplicates or quasi-duplicates"; and "align with how
   information is partitioned across plan items and how links with bridge language conserve tokens as a document is
   being consumed". Two kinds of plan item it names: "gap : bugs + tech debt", and "no-build : boundaries around things
-  we will not build at any time in the future (snapshots)". *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001),
-  [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005). *Relates to* [PRI-016: guidance written once](#PRI-016), [the basis](README.md#rules-for-writing-items).
+  we will not build at any time in the future (snapshots)". *Serves* [QUA-015: docs organized semantically, without drift](QUALITIES.md#QUA-015). *Relates to* [PRI-016: guidance written once](#PRI-016),
+  [FEA-057: documentation organized by semantic role](features/FEA-057.md), [the basis](README.md#rules-for-writing-items).
 
 ## Open items
 
@@ -304,7 +302,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   ([the basis](README.md#other-documents)); a no-build, a boundary around what will never be built, has no home yet. Whether each is a
   kind of item of its own, with an ID, or a status of a capability, is open.
 - **Snapshots, the first no-build.** [CAP-127: snapshots made of transactions](capabilities/CAP-127.md) is met in mbse-schemas, and mbse-rest, mbse-dynamodb and
-  the conformance corpora of three repositories use snapshots; under [PRI-043: one Store interface, lazy by default](#PRI-043), each is to be superseded
+  the conformance corpora of three repositories use snapshots; under [FEA-028: one Store interface, lazy by default](features/FEA-028.md), each is to be superseded
   or replaced, as [the stacked stores proposal](../proposals/STACKED-STORES.md) proposes.
 - **[PRI-015: concrete references are programmatic](#PRI-015) and [PRI-017: transforms, models, dialects, schemas](#PRI-017) to [PRI-019: fluent builder syntax](#PRI-019): what they serve.** Which qualities each serves is still to state.
 - **[PRI-001: declaration order](#PRI-001)'s exception and a proposal against it.** Decide whether entries sorted by their relation's key are a
