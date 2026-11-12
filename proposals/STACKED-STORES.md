@@ -21,6 +21,8 @@ The user's decisions (2026-11-12):
   REST interface with both endpoints provided, verified, and battle-tested for any possible deployment."
 - **Loaded on demand**: "I'd rather use caching that loads on demand than a toy in-memory store that pulls everything
   up-front."
+- **An extent is found through ownership**: "A store client can compute this by introspecting schemas. Then closing
+  ownership relations. The latter may be exposed as a store method if it is useful."
 
 ## The stack
 
@@ -58,8 +60,12 @@ and TypeScript:
    prototype first.
 3. **Writes through, and others' writes in.** A commit sends its effect to the store below, as a journal entry; the
    cache applies each effect the store below observes to what it has loaded.
-4. **Extent.** Reaching everything from the singletons loads everything, so a lazy store's `extent` is answered by
-   the store below, or narrowed.
+4. **Extent, through ownership.** `extent(name)`, the objects of a schema or of a schema refining it, is found as the
+   user decided: the schemas give the ownership paths from the singletons that can reach `name`, and the extent is
+   those paths' ownership relations closed, following only them, so that a lazy store loads the owners along them and
+   nothing else. The closure of ownership, one level of owned objects at a time, may be a store method, which a store
+   below answers in one call rather than one read per object. A counted object, owned by nothing, is on no path: the
+   counted mode of identity is being retired.
 
 Steps 1 and 2 are mbse-schemas'; 3 joins what [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270) and mbse-journals'
 subscriptions already give. Together, about three capabilities, each at least CAP-270's size; step 2's identity map is
@@ -82,7 +88,6 @@ where the estimate may grow.
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
   write as well as what they hold; it touches the corpora of three repositories.
-- **Extent's contract** for a lazy store: answered by the store below, or narrowed to what is loaded.
 - **Reads over REST, one object at a time**, are many requests: whether mbse-rest's service answers a read of several
   objects, or of what one reaches, at once.
 - **Where this is built in order**: after the journal and its storage interface in mbse-journals, or beside them, since
