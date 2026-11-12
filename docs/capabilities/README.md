@@ -1050,7 +1050,8 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
     languages, at 100% coverage).
 - <a id="CAP-280"></a>**[CAP-280: the grid in the logical layout](CAP-280.md)** · proposed · A container, a shape or the
   diagram, owns at most one grid, through `Logical.Owns` as `grid`, and containment links a child to that grid, so that
-  a child is contained only by a grid and a container has only one. A grid's span, axis and cell rotation are its own
+  a child is contained only by a grid and a container has only one; the diagram's grid holds every shape no other grid
+  holds. A grid's span, axis and cell rotation are its own
   properties, written by mutations; the container layout takes them, rearranges a grid's cells when they change, and
   owns each cell through `HasCells`, keyed by its row and column, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
