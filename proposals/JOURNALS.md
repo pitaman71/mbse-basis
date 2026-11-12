@@ -46,7 +46,9 @@ A journal is a sequence of entries, one per transaction. An entry is its symbols
   identity from its ownership entry, added by the same entry's mutations. A counted object, immutable, is not bound: it
   is defined by value where it is linked, and a change to one is a new one, copied on write.
 - **B. A relation entry is added or removed.** An entry of a relation, its links each a symbol, and its properties, such
-  as an ownership entry's `name`. Removing an object's ownership entry deletes the object, as mbse-schemas does.
+  as an ownership entry's `name`. Removing an object's ownership entry deletes the object, as mbse-schemas does, and
+  in cascade every entry linking it and what it owns. An entry never names an object it deletes: it removes the
+  ownership entry by its owner's key for it, and what goes with it follows, in every store that applies it.
 - **C. A property is mutated.** On a symbol, a property and its mutation verbs, mbse-schemas' own: `set` and `clear`
   on any value, and, nested, the verbs of the value's schema kind on a part of it, a container's items or a union's
   branch.
