@@ -320,6 +320,15 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   not `Any`, and catches its misuse. *Implements*
   [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [CAP-107: one visitor protocol reads and writes data](CAP-107.md).
   - **Current**: not met; tech debt (checked in mbse-schemas' main at 21db1ee).
+- <a id="CAP-282"></a>**CAP-282: no model needs code to read or write** · adopted · "No model should need code to read
+  or write. Ever." All model data is governed by a schema, and every builder, visitor, reader and writer of it comes
+  from mbse-schemas' proxies or from generated dataclasses, never a bespoke class: a judgement on how serialization
+  abides, as the user put it (2026-11-12). *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Replaces*
+  [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018), absorbed here until no-builds are a plan category of their own. *Relates to*
+  [PRI-044: schema-governed data, else private bespoke structures](../PRINCIPLES.md#PRI-044).
+  - **Current**: to assess; not applied in mbse-expressions when PRI-018 was superseded
+    ([CAP-098: dialects over one framework](CAP-098.md#open-questions), Open questions).
+
 ### Clean modeling separation between value objects and reference objects
 
 - <a id="CAP-108"></a>**[CAP-108: relations as scalable containers](CAP-108.md)** · proposed · Values, value objects among
@@ -578,10 +587,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
-  which a transaction's `Proposals` implements. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
+  which a transaction's `Proposals` implements. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.22.0.
 
-- <a id="CAP-161"></a>**[CAP-161: isolated stores, with no global registry](CAP-161.md)** · proposed · Code reaches schemas, builders and objects only through a store; stores are isolated, and a store's data is what its singletons reach. *Implements* [FEA-028: one API surface for all data access](../features/FEA-028.md).
+- <a id="CAP-161"></a>**[CAP-161: isolated stores, with no global registry](CAP-161.md)** · proposed · Code reaches schemas, builders and objects only through a store; stores are isolated, and a store's data is what its singletons reach. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: "the object belongs to another store").
 ### Excluding imperative visitor expressions
 
@@ -1069,7 +1078,8 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   mutations, anticipates what they remove, applies them, and calls the container layout and placement functions they
   imply, so that a diagram's layout is a function of its journal
   alone, with no caller that knows the entry's kind, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
-  - **Current**: not met (the suites' bench does this for its own kinds of step).
+  - **Current**: met (checked in mbse-diagrams' main at 31088fb: suite DRV and every bench suite, through the driver,
+    pass in both languages, at 100% coverage).
 - <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a diagram's
   journal, never a snapshot, through the layout engine (CAP-261) and renders its physical layout, frames, points and
   segments, in a viewport of fixed size that rescales when the diagram crosses one of its edges, in TypeScript.
