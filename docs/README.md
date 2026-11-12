@@ -81,14 +81,17 @@ The doc spec organizes what humans and agents read and run, on four shelves.
   problem, define and achieve the specific goal, realize and share value.
 
 Each layer links the next: a skill links the items for *what*, and notebook anchors for *how*. A skill's *how* links its
-notebook case in each language, as `mbse:` links with `#Tnn.k` anchors:
-`[T01.2: checking data](mbse:<repo>/python3/tutorials/<file>.ipynb#T01.2)`, and the same in `typescript5/`. A tutorial
-step's markdown cell starts with `<a id="Tnn.k"></a>`, where `nn.k` is the case ID of its `## nn.k · title` heading; a
-test notebook's case cell starts with its own case ID, `<a id="PAT-03"></a>`; twins in the two languages carry
-identical anchors. Notebooks stay one per tutorial; they are not split per case. **A gap is a bug**: a *how* that a skill
-teaches without a notebook case is untested, as the user put it (2026-11-03): "a gap is a bug, per the new definition
-because it means the examples are untested!" Surfacing such gaps, and writing the notebook cases that close them, is a
-short-term goal.
+notebook case in each language, as `mbse:` links with `#Tnn.k` anchors: `[T01.2: checking
+data](mbse:<repo>/python3/tutorials/<file>.ipynb#T01.2)`, and the same in `typescript5/`. A tutorial step's markdown
+cell starts with `<a id="Tnn.k"></a>`, where `nn.k` is the case ID of its `## nn.k · title` heading; a test notebook's
+case cell starts with its own case ID, `<a id="PAT-03"></a>`; twins in the two languages carry identical anchors.
+Notebooks stay one per tutorial; they are not split per case. A tutorial may lead to pages of its own, one notebook
+each, as the user asked of mbse-expressions' tutorial 8 (2026-11-12): "it should lead to at least one tutorial page per
+dialect". The tutorial is `nn_00_<Name>`, its anchors `Tnn.k`; a page is `nn_mm_<Name>`, mm from 01, titled `n.mm ·
+<name>`, its anchors `Tnn.mm.k` with headings `## nn.mm.k · title`. A case ID is used by one tutorial or page only. **A
+gap is a bug**: a *how* that a skill teaches without a notebook case is untested, as the user put it (2026-11-03): "a
+gap is a bug, per the new definition because it means the examples are untested!" Surfacing such gaps, and writing the
+notebook cases that close them, is a short-term goal.
 
 How each shelf is kept is a principle: tutorials run as tests ([PRI-034: tutorials run as tests, committed with their outputs](PRINCIPLES.md#PRI-034)), tests are notebooks ([PRI-035: tests are notebooks: one suite each, the same case IDs in the same order in both languages](PRINCIPLES.md#PRI-035)),
 the same cases, and every anchor a skill links, are in both languages ([PRI-038: the same cases in both languages](PRINCIPLES.md#PRI-038)), and guidance is written once
