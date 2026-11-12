@@ -30,14 +30,29 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
 - <a id="VOC-007"></a>**VOC-007: property** · adopted · **Property**, never "field", which means only the host language's member that holds one.
 - <a id="VOC-008"></a>**VOC-008: term** · adopted · **Term**: an element of an expression's tree. *Never*: a bare "node".
 - <a id="VOC-009"></a>**VOC-009: syntax node** · adopted · **Syntax node**: an element of a program's tree. *Never*: a bare "node".
-- <a id="VOC-030"></a>**VOC-030: subterm** · adopted · **Subterm**: a term that is a child of a term or a statement, held by
-  one of its properties (`a` and `b` of `a + b`; a let's `value` and `body`; a cast's type). *Never*: "slot",
-  "position". As the user decided (2026-11-12): "I would refer to a child that is a statement as a "clause" and a child
-  that is an expression term as a "subterm"", then "substatement" for the former.
-- <a id="VOC-031"></a>**VOC-031: substatement** · adopted · **Substatement**: a statement that is a child of a statement or a
-  term (an `if` statement's branches, a loop's body, an arrow function's block), as ISO/IEC 14882 uses the word. As
-  the user asked (2026-11-12): "Is "substatement" cleaner than "clause"".
-- <a id="VOC-032"></a>**VOC-032: clause** · adopted · **Clause**: a child that is a subterm ([VOC-030: subterm](#VOC-030)) or a
+- <a id="VOC-033"></a>**VOC-033: dialect** · adopted · **Dialect**: a language modeled as data, the kinds of term and
+  statement of one expression or statement language, of a sublanguage its standard defines (type expressions, patterns,
+  regular expressions, a preprocessor's directives), or of a published standard's or an ABI's datatypes; complete to its
+  standard, and named `Expressions.<Family>.<Dialect>`, its family as its standard names it. Implemented by [CAP-098:
+  dialects over one framework](capabilities/CAP-098.md) (the framework every dialect implements) and [CAP-226: complete
+  expression dialects](capabilities/CAP-226.md); languages' dialects in [CAP-100: six languages' expression
+  dialects](capabilities/CAP-100.md) and CAP-227 to CAP-231; sublanguages in CAP-276 to CAP-278 and [CAP-281: Python's,
+  ECMAScript's and C++'s regular expressions as data](capabilities/CAP-281.md); standards' and ABIs' in [CAP-097: value
+  domains of published standards](capabilities/CAP-097.md) and [CAP-267: C and C++ terms read under the ABI their holder
+  names](capabilities/CAP-267.md); translated between by [CAP-101: translation between
+  dialects](capabilities/CAP-101.md). The children of its terms and statements: [VOC-030: subterm](#VOC-030), [VOC-031:
+  substatement](#VOC-031), [VOC-032: clause](#VOC-032).
+- <a id="VOC-030"></a>**VOC-030: subterm** · adopted · **Subterm**: Expression and statement languages are part of what
+  dialects ([VOC-033: dialect](#VOC-033)) model. A term that is a child of a term or a statement, held by one of its
+  properties (`a` and `b` of `a + b`; a let's `value` and `body`; a cast's type). *Never*: "slot", "position". As the
+  user decided (2026-11-12): "I would refer to a child that is a statement as a "clause" and a child that is an
+  expression term as a "subterm"", then "substatement" for the former.
+- <a id="VOC-031"></a>**VOC-031: substatement** · adopted · **Substatement**: Expression and statement languages are
+  part of what dialects ([VOC-033: dialect](#VOC-033)) model. A statement that is a child of a statement or a term (an
+  `if` statement's branches, a loop's body, an arrow function's block), as ISO/IEC 14882 uses the word. As the user
+  asked (2026-11-12): "Is "substatement" cleaner than "clause"".
+- <a id="VOC-032"></a>**VOC-032: clause** · adopted · **Clause**: Expression and statement languages are part of what
+  dialects ([VOC-033: dialect](#VOC-033)) model. A child that is a subterm ([VOC-030: subterm](#VOC-030)) or a
   substatement ([VOC-031: substatement](#VOC-031)), named by the property that holds it (`left`, `body`, `else`); not a
   helper (a value object that is neither, such as a declarator) nor a scalar property. As the user decided (2026-11-12):
   "Maybe "clause" can refer to the union of all children : substatements and subterms." Qualified where it meets an
@@ -114,8 +129,8 @@ and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob
 
 - Expression (`Expressions.Framework.Expression`), term (`Expressions.Framework.Term`: `literal`, `call`, `variable`,
   `let`, Basic's `quantifier`): [Terms and the core vocabulary](capabilities/CAP-095.md#terms-and-the-core-vocabulary)
-- Dialect (`Terms.Dialect`): [The framework](capabilities/CAP-098.md#the-framework),
-  [Dialects](capabilities/CAP-100.md#dialects)
+- Dialect (`Terms.Dialect`), the construct that implements [VOC-033: dialect](#VOC-033): [The
+  framework](capabilities/CAP-098.md#the-framework), [Dialects](capabilities/CAP-100.md#dialects)
 - Translator: [Translators](capabilities/CAP-101.md#translators)
 - Value domain: [Value domains](capabilities/CAP-097.md#value-domains)
 
