@@ -65,7 +65,7 @@ and TypeScript:
    those paths' ownership relations closed, following only them, so that a lazy store loads the owners along them and
    nothing else. The closure of ownership, one level of owned objects at a time, may be a store method, which a store
    below answers in one call rather than one read per object. A counted object, owned by nothing, is on no path: the
-   counted mode of identity is being retired.
+   counted mode of identity is being deprecated.
 
 Steps 1 and 2 are mbse-schemas'; 3 joins what [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270) and mbse-journals'
 subscriptions already give. Together, about three capabilities, each at least CAP-270's size; step 2's identity map is
