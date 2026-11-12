@@ -78,6 +78,13 @@ Steps 1, 2, 4 and 5 are mbse-schemas'; 3 joins what [CAP-270: a transaction's ch
 subscriptions already give. Together, about three or four capabilities, each at least CAP-270's size; step 2's
 identity map is where the estimate may grow.
 
+## Capabilities
+
+In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework): the five steps above are
+[CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283), [CAP-284: objects loaded on demand](../docs/capabilities/README.md#CAP-284), [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285),
+[CAP-286: an extent through ownership](../docs/capabilities/README.md#CAP-286) and [CAP-287: lazy or eager, tuned when it runs](../docs/capabilities/README.md#CAP-287), in mbse-schemas; mbse-rest's part is
+[CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
+
 ## Snapshots today, and what replaces each
 
 `Plain.ToPlain(store).Snapshot()` writes a store as two transactions, its schemas and then its data

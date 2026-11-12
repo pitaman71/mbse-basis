@@ -583,8 +583,31 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [CAP-140: entries removed through a spec](CAP-140.md).
   - **Current**: not met (the store overhaul's 4j finding, open; mbse-schemas 0.26.4).
 
-### One API surface for all data access
+### One Store interface, lazy by default
 
+- <a id="CAP-283"></a>**CAP-283: a store given a store below** · proposed · `Builders.Store` is given the store below
+  it, or none, and reads its committed data through it; given none, it holds what is written to it, in memory, as it
+  does today, the test double for a front end or a back end alone, in mbse-schemas, in Python and TypeScript, as
+  [the stacked stores proposal](../../proposals/STACKED-STORES.md) states. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
+- <a id="CAP-284"></a>**CAP-284: objects loaded on demand** · proposed · A store given a store below loads an object's
+  values and entries when they are first read, and keeps them; an object an entry links that is not yet loaded is a
+  proxy whose identity is kept by its reference, its singletons and ownership keys resolved on demand, in mbse-schemas,
+  in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
+- <a id="CAP-285"></a>**CAP-285: writes through, others' writes in** · proposed · A store given a store below sends each
+  transaction it commits to it as its effect ([CAP-270: a transaction's changes observed at its commit](README.md#CAP-270)), and applies each effect the store below
+  observes to what it has loaded, in mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
+- <a id="CAP-286"></a>**CAP-286: an extent through ownership** · proposed · A store's extent of a schema is found from
+  the ownership paths its schemas give from the singletons, by closing the ownership relations along them, loading
+  nothing ahead; closing ownership is a store method, which a store below may answer in one call, in mbse-schemas, in
+  Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
+- <a id="CAP-287"></a>**CAP-287: lazy or eager, tuned when it runs** · proposed · What a store loads ahead, and what it
+  keeps or lets go, are settings given when it runs, lazy by default, never code that uses it, in mbse-schemas, in
+  Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
@@ -909,6 +932,24 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-275"></a>**CAP-275: two stores' difference as a journal entry** · proposed · The difference between two
   stores is written as a journal entry that, applied to the first, makes it the second, in mbse-journals, in Python and
   TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-077: changes explained across runs](CAP-077.md).
+  - **Current**: not met.
+- <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · Every backend a journal is kept in meets
+  one interface, in mbse-journals: an ordered, atomic append that fails where another took the position, and reads and
+  subscriptions from any position, of schema-free entries; a conformance suite every backend passes, run against the
+  journal kept in memory, in Python and TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  - **Current**: not met.
+- <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the
+  journal storage interface (CAP-288), with an index of each object's values and entries kept current from it, from
+  which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  - **Current**: not met.
+- <a id="CAP-290"></a>**CAP-290: a service's store stacked, with no snapshot** · proposed · mbse-rest's service serves a
+  store given a store below, a database's, and persists by its journal alone: no snapshot is taken or read, and a
+  client is sent a store's schemas as the install transactions that made them; its client implements every method of
+  the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  - **Current**: not met.
+- <a id="CAP-291"></a>**CAP-291: journals kept in MongoDB** · proposed · A journal is kept in MongoDB, self-hosted or
+  managed, meeting the journal storage interface (CAP-288), with an index of each object's values and entries, in a new
+  repository mbse-mongodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-220: persistence in other NoSQL stores](CAP-220.md).
   - **Current**: not met.
 - <a id="CAP-200"></a>**[CAP-200: journals persisted to AWS S3](CAP-200.md)** · proposed · A journal is persisted in AWS S3, by a new repository mbse-s3. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: not met.

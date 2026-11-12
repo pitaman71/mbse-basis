@@ -72,21 +72,18 @@ side of the open-source and paid line they fall.
 Each backend's limits, prices and licence are checked when it is planned: those above are as they stood when this was
 written.
 
-## Capabilities, proposed
+## Capabilities
 
-Each to be given an ID when it is planned, in this order, in INI-013 after CAP-199:
+In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework), after CAP-199:
 
-- The journal storage interface and its conformance suite, in mbse-journals, run against the journal in memory.
-- Journals kept in DynamoDB, in mbse-dynamodb, refining [CAP-013: an in-memory store journaled to DynamoDB](../docs/capabilities/CAP-013.md).
-- Journals kept in MongoDB, in a new mbse-mongodb.
+- [CAP-288: the journal storage interface](../docs/capabilities/README.md#CAP-288), in mbse-journals, run against the journal in memory.
+- [CAP-289: journals kept in DynamoDB](../docs/capabilities/README.md#CAP-289), in mbse-dynamodb, refining [CAP-013: an in-memory store journaled to DynamoDB](../docs/capabilities/CAP-013.md).
+- [CAP-291: journals kept in MongoDB](../docs/capabilities/README.md#CAP-291), in a new mbse-mongodb.
 - Then one for each build-out backend, in the order above, refining
-  [CAP-220: persistence in other NoSQL stores](../docs/capabilities/CAP-220.md), whose scope these name.
+  [CAP-220: persistence in other NoSQL stores](../docs/capabilities/CAP-220.md), whose scope these name: each given an ID when it is planned.
 
 ## Open questions
 
-- **CAP-013's snapshots.** mbse-dynamodb journals each committed transaction "with occasional snapshots", and its
-  startup reads the latest snapshot. A journal is never snapshotted; whether its startup replays the whole journal,
-  or keeps a store in memory as a cache that is never stored or sent, is open.
 - **Subscribers in browsers.** A browser holds no database's credentials, so it subscribes through mbse-journals'
   sender and receiver ([CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)) rather than to a backend directly; Firestore's own
   subscriptions to browsers would then be a choice an app makes, not the framework's.
