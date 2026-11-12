@@ -36,9 +36,15 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   standard, and named `Expressions.<Family>.<Dialect>`, its family as its standard names it. Implemented by [CAP-098:
   dialects over one framework](capabilities/CAP-098.md) (the framework every dialect implements) and [CAP-226: complete
   expression dialects](capabilities/CAP-226.md); languages' dialects in [CAP-100: six languages' expression
-  dialects](capabilities/CAP-100.md) and CAP-227 to CAP-231; sublanguages in CAP-276 to CAP-278 and [CAP-281: Python's,
-  ECMAScript's and C++'s regular expressions as data](capabilities/CAP-281.md); standards' and ABIs' in [CAP-097: value
-  domains of published standards](capabilities/CAP-097.md) and [CAP-267: C and C++ terms read under the ABI their holder
+  dialects](capabilities/CAP-100.md) and its languages' own, [CAP-227: the Python3 expression
+  dialect](capabilities/CAP-227.md), [CAP-228: the TypeScript5 expression dialect](capabilities/CAP-228.md), [CAP-229:
+  the C expression dialect](capabilities/CAP-229.md), [CAP-230: the C++ expression dialect](capabilities/CAP-230.md),
+  [CAP-231: the SystemVerilog expression dialect, complete](capabilities/CAP-231.md); sublanguages in [CAP-276: Python's
+  type expressions and match patterns as data](capabilities/CAP-276.md), [CAP-277: TypeScript's types and destructuring
+  patterns as data](capabilities/CAP-277.md), [CAP-278: C's and C++'s type names and preprocessor directives as
+  data](capabilities/CAP-278.md) and [CAP-281: Python's, ECMAScript's and C++'s regular expressions as
+  data](capabilities/CAP-281.md); standards' and ABIs' in [CAP-097: value domains of published
+  standards](capabilities/CAP-097.md) and [CAP-267: C and C++ terms read under the ABI their holder
   names](capabilities/CAP-267.md); translated between by [CAP-101: translation between
   dialects](capabilities/CAP-101.md). The children of its terms and statements: [VOC-030: subterm](#VOC-030), [VOC-031:
   substatement](#VOC-031), [VOC-032: clause](#VOC-032).
