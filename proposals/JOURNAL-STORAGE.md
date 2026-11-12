@@ -15,8 +15,10 @@ The user's decisions (2026-11-12):
   to marry the framework to a particular service or to one side of the open-source/paid line."
 - **NoSQL by preference**: "I like noSQL's adaptable schemas as they better align with the kind of 'stability via
   semantic normalization' mbse-schemas strives to create." DynamoDB has kept journals before: "It worked."
-- **Real backends are cloud and multi-user**: a journal kept in memory, or by a store meant for one browser, is
-  "primarily useful for demos and testing", not a backend an app is deployed on.
+- **The journal in memory is for unit tests; a full-stack demo needs a real backend**: "I think the in-memory reference
+  we have is good for unit testing front end and backend separately, and it's at least partially already built. It's
+  just that we need DynamoDB or something better to demo full stack." A journal kept in memory, or by a store meant for
+  one browser, is "primarily useful for demos and testing", not a cloud or multi-user backend.
 
 ## What a backend must do
 
@@ -38,7 +40,8 @@ The interface is mbse-journals': part of [CAP-199: journals as queryable stores 
 above as operations, with no type from any database in it. A conformance suite, in mbse-journals, states each
 operation's behaviour as cases, among them two writers racing for one position and a subscriber that falls behind and
 catches up; it runs against the journal kept in memory ([CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)), the
-interface's test double, and every backend passes it unchanged, much as
+interface's test double, which also lets a front end and a back end each be unit-tested alone, and every backend passes
+it unchanged, much as
 [PRI-037: the same conformance corpora](../docs/PRINCIPLES.md#PRI-037) holds every repository's implementations to the same corpora.
 
 Each backend is a repository of its own, depending on mbse-journals alone, as mbse-dynamodb already is and as
@@ -46,8 +49,9 @@ Each backend is a repository of its own, depending on mbse-journals alone, as mb
 
 ## Which backends, in order
 
-**First**, two that differ in every way the interface could quietly come to depend on: their transactions, how they
-give changes, where they run and on which side of the open-source and paid line they fall.
+**First**, DynamoDB, so that the framework can be demonstrated full stack, then MongoDB: two that differ in every way
+the interface could quietly come to depend on, their transactions, how they give changes, where they run and on which
+side of the open-source and paid line they fall.
 
 | Backend | Append | Subscriptions | Why |
 |---|---|---|---|
