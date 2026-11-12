@@ -407,6 +407,14 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met since mbse-schemas 0.18.0 (checked in the code at 0.26.4: "a store builds no scalar schema").
 - <a id="CAP-158"></a>**[CAP-158: values written as plain data, JSON and YAML](CAP-158.md)** · proposed · Any value is written as plain data, strict JSON or YAML 1.2, through a store that names its schemas, and read back, byte-identical in every implementation. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Plain`, `JSON`, `YAML` in both languages).
+### Parametric schema templates
+
+- <a id="CAP-292"></a>**CAP-292: a sequenced container declared by one template** · proposed · One schema declaration
+  gives a model a sequenced container: its `Contains`, `Before`/`After`, `Precedes`/`Follows` and `First`/`Last`
+  relations, cooperating, with the unique clauses that keep one first, one last and one immediate neighbour each way,
+  in mbse-schemas, in Python and TypeScript. *Implements* [FEA-058: parametric schema templates](../features/FEA-058.md).
+  - **Current**: not met.
+
 ### Model parameters
 
 - <a id="CAP-112"></a>**[CAP-112: parameters modeled as schema data](CAP-112.md)** · proposed · A definition's
@@ -472,6 +480,15 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 ### Transactions
 
+- <a id="CAP-293"></a>**CAP-293: an entry inserted against a unique clause refuses its transaction** · proposed · A
+  transaction that inserts a relation entry which, with the entries held, breaks a unique clause its relation declares
+  is refused at its commit, alike in every store that applies it; an entry inserted again that is held already breaks
+  nothing. It refuses the append that collides: a writer appending `b` to a container whose last was `a` removes
+  `Last(container, a)` and inserts `Last(container, b)` in one transaction, and where another has appended first, the
+  removal changes nothing and the insertion breaks the clause that keeps one last, as the user put it (2026-11-12). In
+  mbse-schemas, in Python and TypeScript, with no dependency on constraints, which are still being built.
+  *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  - **Current**: not met.
 - <a id="CAP-124"></a>**[CAP-124: writes all-or-nothing in transactions](CAP-124.md)** · proposed · Every write to a
   store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
   apart from another's. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
@@ -934,8 +951,8 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-077: changes explained across runs](CAP-077.md).
   - **Current**: not met.
 - <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · Every backend a journal is kept in meets
-  one interface, in mbse-journals: an ordered, atomic append that fails where another took the position, and reads and
-  subscriptions from any position, of schema-free entries; a conformance suite every backend passes, run against the
+  one interface, in mbse-journals: each journal transaction applied within a database transaction, which orders them,
+  and reads and subscriptions from any entry, of schema-free entries; a conformance suite every backend passes, run against the
   journal kept in memory, in Python and TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: not met.
 - <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the

@@ -65,6 +65,7 @@ mbse-journals, in build order:
 - [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270), in mbse-schemas
 - [CAP-271: the journal language](../docs/capabilities/README.md#CAP-271), in mbse-schemas
 - [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269), in mbse-schemas
+- [CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293), in mbse-schemas
 - [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md)
 - [CAP-288: the journal storage interface](../docs/capabilities/README.md#CAP-288), with the journal kept in memory, from
   [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)

@@ -33,9 +33,34 @@ The user's decisions (2026-11-11):
   schemas, with no schema of its own, so that it is schema data, as
   [PRI-003: everything is schema data](../docs/PRINCIPLES.md#PRI-003) and [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018) require, and lives in the lowest repository that can own
   it, as [PRI-011: the lowest repository that can own it](../docs/PRINCIPLES.md#PRI-011) has it.
+- **A journal's order is relations, never an order of entries** (2026-11-12): relation entries have no order,
+  permanently, and ordering them would be a second-order invention; a sequenced container is relations that cooperate,
+  as [FEA-058: parametric schema templates](../docs/features/FEA-058.md#decided) records.
+- **An append that collides is refused by a unique clause** (2026-11-12): "a correct client will send - Last(container,a)
+  + Last(container,b) in the same transaction", and where another appended first, "if - Last(container,a) is ignored
+  because it has no effect then applying +Last(container,b) violates the unique clause"; "constraints are still under
+  construction so it would be preferable not to rely on them for urgent functionality"
+  ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)).
+- **`Precedes` and `Follows` are held, as alternatives or complements** (2026-11-12): "They are stored as expressive
+  alternatives or complements to After/Before. it is not necessary to infer the complete relation for any reason."
+- **A database transaction around each journal transaction** (2026-11-12): "Backend bindings should use a database
+  transaction around the journal transaction. This makes the db more or less responsible for serialization order."
 - **A counted object is immutable**: "Any change to a counted object, which is immutable, results in copy-on-write". It
   is written by value where it is linked, so that nothing is refused or dropped
   ([PRI-002: preserve, don't lose](../docs/PRINCIPLES.md#PRI-002)).
+
+## The journal, a sequenced container
+
+A journal is a container of its entries, in mbse-journals' own schemas, its order the relations that cooperate to make
+a sequenced container ([FEA-058: parametric schema templates](../docs/features/FEA-058.md#decided)), declared there until a template declares them in one
+([CAP-292: a sequenced container declared by one template](../docs/capabilities/README.md#CAP-292)): each entry `Contains`, the `First` and the `Last`, each entry's
+immediate neighbours, `Before` and `After`, and, held where they say what is known, `Precedes` and `Follows`, never
+inferred from the others. A position is an entry, never a number: a reader reads, or subscribes,
+from an entry, following `After`. An entry appended after the last removes `Last(journal, a)` and inserts
+`Last(journal, b)` and `After(journal, a, b)` in one transaction, which a unique clause refuses where another appended
+first; an entry inserted at a view's position, between `a` and `b`, removes `After(journal, a, b)` and inserts
+`After(journal, a, x)` and `After(journal, x, b)`. A backend applies each journal transaction within a database
+transaction, so that the database orders them.
 
 ## The journal language
 
