@@ -58,7 +58,8 @@ Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/
 
 ## INI-013 : journals framework
 
-Proposals: [Journals](JOURNALS.md), and [Journal storage](JOURNAL-STORAGE.md) for where a journal is kept. Journals, their language in mbse-schemas and the journal in a new repository
+Proposals: [Journals](JOURNALS.md), [Journal storage](JOURNAL-STORAGE.md) for where a journal is kept, and
+[Stacked stores](STACKED-STORES.md) for the stores stacked over it, a cache loading on demand among them. Journals, their language in mbse-schemas and the journal in a new repository
 mbse-journals, in build order:
 
 - [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270), in mbse-schemas
