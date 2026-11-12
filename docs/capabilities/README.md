@@ -192,8 +192,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-226"></a>**[CAP-226: complete expression dialects](CAP-226.md)** · proposed · A dialect per language and major
   version covers its language's whole expression syntax, mbse-programs' kinds in its own `Expression`, printed here and
   parsed by mbse-programs. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met (checked on mbse-expressions' branch `retrofit` at 0c5033c): stage 6, `SystemVerilog` complete,
-    and the retrofit are built, for 0.10.0, but for the regular expression dialects and JSX, open with the user.
+  - **Current**: met (checked on mbse-expressions' branch `regexp` at 97476ff: both gates at 100% in both languages,
+    TypeScript on Node 22, 24 and 26): stage 6, `SystemVerilog` complete, and the retrofit, the regular expression
+    dialects among it, are built, for 0.10.0; JSX stays `TypeScript5`'s, as the user decided.
 - <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
   expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 7d85127: PR #16, both gates at 100% in both
@@ -271,6 +272,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [CAP-098: dialects over one framework](CAP-098.md).
   - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
     TypeScript on Node 22, 24 and 26, DIA-30 among them), to be released in 0.10.0.
+- <a id="CAP-281"></a>**[CAP-281: Python's, ECMAScript's and C++'s regular expressions as data](CAP-281.md)** · proposed ·
+  The regular expressions each language's standard defines, Python's `re`, ECMA-262's and the six grammars of C++'s
+  `std::regex`, are expressions of dialects of their own, `Python RegExp`, `TypeScript RegExp` and `Cpp RegExp`, each
+  validated, stored, printed and read with its family's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
+  [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-226: complete expression dialects](CAP-226.md).
+  - **Current**: met (checked on mbse-expressions' branch `regexp` at 97476ff: both gates at 100% in both languages,
+    TypeScript on Node 22, 24 and 26, PYR, TSR, XRX and FRM-01 among them), to be released in 0.10.0.
 - <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · proposed · A type checker
   catches a wrong kind, property or argument in code that installs, defines or writes expressions, as it does in other
   typed code: mbse-expressions' installs, defines, writers and conformance corpus are typed, through typed bindings for
