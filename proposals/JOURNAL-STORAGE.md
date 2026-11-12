@@ -40,15 +40,17 @@ each journal:
 
 ## The interface, and how a backend is held to it
 
-The interface is mbse-journals': part of [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md), in Python and TypeScript, the three
-above as operations, with no type from any database in it. A conformance suite, in mbse-journals, states each
-operation's behaviour as cases, among them two writers racing to append after one last entry and a subscriber that falls behind and
-catches up; it runs against the journal kept in memory ([CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)), the
-interface's test double, which also lets a front end and a back end each be unit-tested alone, and every backend passes
-it unchanged, much as
-[PRI-037: the same conformance corpora](../docs/PRINCIPLES.md#PRI-037) holds every repository's implementations to the same corpora.
+The interface is the store interface itself, as the user decided ("exactly"): a journal is data in a store
+([FEA-028: one Store interface, lazy by default](../docs/features/FEA-028.md)), so that a backend is a store over its database, which interprets the mutation-transaction
+streams it is given, each within a database transaction, and reports to each follower only the changes, its change
+feed giving what `Changes.observe` gives for a store kept in memory ([the journals proposal](JOURNALS.md#decided)). Nothing
+in it is a database's. A conformance suite, in mbse-journals, states what a journal kept in a store does as cases,
+among them two writers appending after one last, each from what it last saw, and a follower that catches up; it runs
+against the store kept in memory, the test double, which also lets a front end and a back end each be unit-tested
+alone, and every backend passes it unchanged, much as [PRI-037: the same conformance corpora](../docs/PRINCIPLES.md#PRI-037) holds every repository's
+implementations to the same corpora.
 
-Each backend is a repository of its own, depending on mbse-journals alone, as mbse-dynamodb already is and as
+Each backend is a repository of its own, as mbse-dynamodb already is and as
 [CAP-200: journals persisted to AWS S3](../docs/capabilities/CAP-200.md) and [CAP-202: journals persisted to MySQL](../docs/capabilities/CAP-202.md) plan theirs, so that an app takes only the backends it uses.
 
 ## Which backends, in order
