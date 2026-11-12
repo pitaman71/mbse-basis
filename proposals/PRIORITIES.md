@@ -58,15 +58,26 @@ Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/
 
 ## INI-013 : journals framework
 
-Proposals: [Journals](JOURNALS.md), and [Journal storage](JOURNAL-STORAGE.md) for where a journal is kept. Journals, their language in mbse-schemas and the journal in a new repository
+Proposals: [Journals](JOURNALS.md), [Journal storage](JOURNAL-STORAGE.md) for where a journal is kept, and
+[Stacked stores](STACKED-STORES.md) for the stores stacked over it, each lazy by default. Journals, their language in mbse-schemas and the journal in a new repository
 mbse-journals, in build order:
 
 - [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270), in mbse-schemas
 - [CAP-271: the journal language](../docs/capabilities/README.md#CAP-271), in mbse-schemas
 - [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269), in mbse-schemas
 - [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md)
+- [CAP-288: the journal storage interface](../docs/capabilities/README.md#CAP-288), with the journal kept in memory, from
+  [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)
+- [CAP-289: journals kept in DynamoDB](../docs/capabilities/README.md#CAP-289), by an agent of its own once CAP-288 is
+  released, beside the five below
+- [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283), in mbse-schemas
+- [CAP-284: objects loaded on demand](../docs/capabilities/README.md#CAP-284), in mbse-schemas
+- [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285), in mbse-schemas
+- [CAP-286: an extent through ownership](../docs/capabilities/README.md#CAP-286), in mbse-schemas
+- [CAP-287: lazy or eager, tuned when it runs](../docs/capabilities/README.md#CAP-287), in mbse-schemas
+- [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290), in mbse-rest
+- [CAP-291: journals kept in MongoDB](../docs/capabilities/README.md#CAP-291)
 - [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272)
-- [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273)
 - [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)
 - [CAP-275: two stores' difference as a journal entry](../docs/capabilities/README.md#CAP-275)
 
