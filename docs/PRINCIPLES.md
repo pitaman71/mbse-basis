@@ -298,6 +298,15 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   Priorities, initiatives and proposals are one plan category, initiatives ([the basis](README.md#other-documents)).
   *Serves* [QUA-015: docs organized semantically, without drift](QUALITIES.md#QUA-015), [QUA-019: docs point clearly to the source of truth](QUALITIES.md#QUA-019), [QUA-020: docs without problematic repetition](QUALITIES.md#QUA-020). *Relates
   to* [PRI-016: guidance written once](#PRI-016), [FEA-057: documentation organized by semantic role](features/FEA-057.md), [the basis](README.md#rules-for-writing-items).
+- <a id="PRI-046"></a>**PRI-046: simplification, not evaluation** · adopted · As the user decided it (2026-11-13):
+  "dialects implement a simplification procedure"; "dialects do not implement a simplification procedure", read as an
+  evaluation procedure (for the user to confirm, since the two lines as written contradict); "as expressions are value
+  objects, and value objects are immutable, simplification is immplemented as recursive substitution"; and "if
+  simplification returns a literal as the simplified root, that is equivalent to successful evaluation". A dialect
+  simplifies by its own language's semantics; what cannot be simplified stays in the residual, never refused. *Serves*
+  [QUA-002: open-world models](QUALITIES.md#QUA-002), [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [PRI-002: preserve, don't lose](#PRI-002),
+  [PRI-007: three-valued checking on request](#PRI-007). *Applied in*: [CAP-295: simplification of single-dialect expressions with literal leaves](capabilities/README.md#CAP-295) to
+  [CAP-302: simplification of expressions with statements](capabilities/README.md#CAP-302).
 
 ## Open items
 

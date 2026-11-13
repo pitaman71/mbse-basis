@@ -163,6 +163,45 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     version bumped and the records drained: both gates at 100% in both languages).
 - <a id="CAP-099"></a>**[CAP-099: partial evaluation](CAP-099.md)** · proposed · An expression is reduced over the variables given, to a residual that agrees with it wherever it evaluates. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
+- <a id="CAP-295"></a>**[CAP-295: simplification of single-dialect expressions with literal leaves](README.md#CAP-295)**
+  · proposed · An expression of one dialect whose leaf terms are all literals is simplified by its dialect, by its
+  language's own semantics, to a literal: its evaluation. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
+  [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
+  - **Current**: not met; in plan, as the user decided (2026-11-13).
+- <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](README.md#CAP-296)** ·
+  proposed · An expression of one dialect whose leaf terms mix literals, arguments or variables, and parameters is
+  simplified by its dialect, each known leaf substituted and each closed subterm folded. *Implements*
+  [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md),
+  [CAP-181: parameters wherever literals may appear](CAP-181.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
+  - **Current**: not met; in plan, as the user decided (2026-11-13).
+- <a id="CAP-297"></a>**[CAP-297: simplification in every binding state](README.md#CAP-297)** · proposed · An expression
+  of one dialect is simplified fully bound (to a literal), partially bound (to a residual of the same dialect) and fully
+  unbound (to itself, or simpler), alike. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
+  [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
+  - **Current**: not met; in plan, as the user decided (2026-11-13).
+- <a id="CAP-298"></a>**[CAP-298: simplification over type parameters](README.md#CAP-298)** · proposed · An expression
+  that involves type parameters, but no type algebra, is simplified, a bound type parameter substituted as any parameter
+  is. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
+  [CAP-114: parameter bindings are substituted and checked](CAP-114.md), [CAP-181: parameters wherever literals may appear](CAP-181.md).
+  - **Current**: not met; in plan, as the user decided (2026-11-13).
+- <a id="CAP-299"></a>**[CAP-299: simplification across a sub-dialect](README.md#CAP-299)** · proposed · An expression
+  that involves a sub-dialect (a host reading its sublanguage's terms: a cast's type, a `randomize() with` constraint, a
+  preprocessor condition) is simplified, each part by its own dialect. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
+  - **Current**: not met; in plan, as the user decided (2026-11-13).
+- <a id="CAP-300"></a>**[CAP-300: simplification over type algebra](README.md#CAP-300)** · proposed · An expression that
+  involves type algebra (types computed from types) is simplified. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
+  *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-298: simplification over type parameters](#CAP-298).
+  - **Current**: not met; deferred, as the user decided (2026-11-13).
+- <a id="CAP-301"></a>**[CAP-301: simplification delegated to a surrogate dialect](README.md#CAP-301)** · proposed · An
+  expression containing terms whose evaluation delegates to a surrogate dialect (a lowering into the standard dialects,
+  or a language's own runtime) is simplified through it. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
+  [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-203: evaluators delegating to per-language libraries](CAP-203.md), [CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md).
+  - **Current**: not met; deferred, as the user decided (2026-11-13).
+- <a id="CAP-302"></a>**[CAP-302: simplification of expressions with statements](README.md#CAP-302)** · proposed · An
+  expression that involves statements (a function's or a lambda's block, a statement expression) is simplified.
+  *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046).
+  - **Current**: not met; deferred, as the user decided (2026-11-13).
 - <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
   dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the
