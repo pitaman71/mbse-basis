@@ -490,7 +490,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   request ([PRI-007: three-valued checking on request](../PRINCIPLES.md#PRI-007)): data that breaks a clause with no removal that removed nothing is
   written, and reported when checked. In mbse-schemas, in Python and TypeScript, with no dependency on constraints,
   which are still being built. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-schemas 0.26.14 (checked in its main at 1bbd199: TXN-16 and TXN-17 pass in both
+    languages, at 100% coverage).
 - <a id="CAP-124"></a>**[CAP-124: writes all-or-nothing in transactions](CAP-124.md)** · proposed · Every write to a
   store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
   apart from another's. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
@@ -942,7 +943,8 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
 - <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received: its entries in order, each a transaction's effect (CAP-269), read from any position and inserted at one. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-journals 0.2.0 (checked in its main at 58c34b9: suite JRN passes in both languages, at
+    100% coverage).
 - <a id="CAP-273"></a>**CAP-273: journals in memory and in local files** · proposed · A journal is kept in memory, and
   in a local file, in mbse-journals, in Python and TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: not met.
@@ -959,7 +961,8 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   transaction within a database transaction, which orders them, and reports its changes to each follower; a
   conformance suite, in mbse-journals, run against the store kept in memory, which every backend passes, in Python and
   TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-journals 0.2.0 (checked in its main at 58c34b9: suite JRN passes in both languages, at
+    100% coverage, against the store kept in memory).
 - <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the
   journal storage interface (CAP-288), with an index of each object's values and entries kept current from it, from
   which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
