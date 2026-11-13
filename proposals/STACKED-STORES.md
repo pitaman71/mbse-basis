@@ -23,6 +23,9 @@ The user's decisions (2026-11-12):
   REST interface with both endpoints provided, verified, and battle-tested for any possible deployment."
 - **Loaded on demand**: "I'd rather use caching that loads on demand than a toy in-memory store that pulls everything
   up-front."
+- **An object is present or it is not**: "A path either is or is not present in the builder, and the builder should
+  not create the object silently." An object is present in a store, made in it or loaded into it, or it is not; and
+  where it is not, the store asks the store below.
 - **An extent is found through ownership**: "A store client can compute this by introspecting schemas. Then closing
   ownership relations. The latter may be exposed as a store method if it is useful."
 
@@ -106,18 +109,20 @@ labeled with the repository and number it was decided under.
   path as a one-transaction document ([CAP-128: graphs sent as one-transaction documents](../docs/capabilities/CAP-128.md)), its properties and its entries, each
   object they link by its path; None where it holds none. It is a mutation-transaction stream, the language stores
   already speak, so that a database's store and mbse-rest's client answer it alike, with no new form.
-- **(mbse-schemas 30)** **Identity by path.** An object of the store below's is one proxy in the store above, kept by
-  its path in an identity map, the same each time it is named. A path is found among those the store holds, then
-  through its owner's entries, keys compared first, so that an object the store made itself is found, and only then
-  held as the store below's: a path loads the owners it passes through and no other, and an object reached through an
-  entry loads alone.
-- **(mbse-schemas 30)** **A schema known once loaded.** An object linked but not loaded has no schema yet; reading it
-  loads it. Whether it is counted, or owned through an entry, is answered without loading it: an object with a path is
-  never counted, and a link that owns through a relation owns whatever it links.
+- **(mbse-schemas 30)** **Identity by path.** An object loaded from the store below is one proxy, kept by its path, the
+  same each time it is named. A path resolves to an object present, through its owner's entries where it was made
+  above, else to the store below's, loaded, else to none: one read, of the object named, and no owner loaded.
+- **(mbse-schemas 30)** **A link to an object not present holds its path.** An entry the store below gives that links
+  an object not present holds that object's path, and is held by the objects present it links; reading the link loads
+  the object, which every entry waiting on its path then links, re-keyed. Nothing is made that is not present. Whether
+  a link owns what it links is known from the relation, without the object: a relation that owns through a link owns
+  whatever it links.
+- **(mbse-schemas 30)** **Changes reported name what the store holds.** Removing the owning entry of an object not
+  present deletes it, and is reported by its owner's key, as any deletion is; anything else the reported changes name
+  is loaded first.
 - **(mbse-schemas 30)** **Loading is no transaction of the store's.** An object's document is applied as the store's
   committed data, outside any transaction open, observed by no follower, recorded by no provenance and checked by
-  nothing; an entry it writes to an object not yet loaded loads nothing more, and is matched by its key when that one
-  loads.
+  nothing.
 
 ## Open questions
 
