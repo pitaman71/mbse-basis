@@ -159,8 +159,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met.
 - <a id="CAP-098"></a>**[CAP-098: dialects over one framework](CAP-098.md)** · proposed · Expression languages are dialects of one framework, which validates, infers, evaluates and
   translates any of them from its kinds' roles, a dialect extending another. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the
-    version bumped and the records drained: both gates at 100% in both languages).
+  - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version
+    bumped and the records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions'
+    branch `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on
+    Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-099"></a>**[CAP-099: partial evaluation](CAP-099.md)** · proposed · An expression is reduced over the variables given, to a residual that agrees with it wherever it evaluates. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
 - <a id="CAP-295"></a>**[CAP-295: simplification of single-dialect expressions with literal leaves](README.md#CAP-295)**
@@ -204,8 +206,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met; deferred, as the user decided (2026-11-13).
 - <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
   dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the
-    version bumped and the records drained: both gates at 100% in both languages).
+  - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version
+    bumped and the records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions'
+    branch `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on
+    Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-101"></a>**[CAP-101: translation between dialects](CAP-101.md)** · proposed · Each pair of dialects translates both ways by declared rules, round-tripping what both can write, and
   agreeing with a translation through a third. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
@@ -231,37 +235,46 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-226"></a>**[CAP-226: complete expression dialects](CAP-226.md)** · proposed · A dialect per language and major
   version covers its language's whole expression syntax, mbse-programs' kinds in its own `Expression`, printed here and
   parsed by mbse-programs. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met (checked on mbse-expressions' branch `regexp` at 97476ff: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26): stage 6, `SystemVerilog` complete, and the retrofit, the regular expression
-    dialects among it, are built, for 0.10.0; JSX stays `TypeScript5`'s, as the user decided.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
   expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 7d85127: PR #16, both gates at 100% in both
-    languages, DIA-19 and DIA-20 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in
-    0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped
-    and the records drained: both gates at 100% in both languages).
+    languages, DIA-19 and DIA-20 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in 0.9.0
+    (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped and the
+    records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions' branch
+    `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22,
+    24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-228"></a>**[CAP-228: the TypeScript5 expression dialect](CAP-228.md)** · proposed · `TypeScript5` covers every
   expression of TypeScript 5, with its types, patterns and JSX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 8804e1e: PR #18, both gates at 100% in both
-    languages, DIA-21 to DIA-23 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in
-    0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped
-    and the records drained: both gates at 100% in both languages).
+    languages, DIA-21 to DIA-23 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in 0.9.0
+    (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped and the
+    records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions' branch
+    `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22,
+    24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-229"></a>**[CAP-229: the C expression dialect](CAP-229.md)** · proposed · `C` covers every expression of C11
   to C23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in
-    both languages, DIA-11, DIA-12 and DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch
-    `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped and the records drained: both gates at 100%
-    in both languages).
+  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
+    languages, DIA-11, DIA-12 and DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch
+    `release-0.9.0` at 6b7fe2f, its main c57882b with the version bumped and the records drained: both gates at 100% in
+    both languages); and in 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on mbse-schemas
+    0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora byte-identical; every
+    tutorial re-executed, its outputs identical).
 - <a id="CAP-230"></a>**[CAP-230: the C++ expression dialect](CAP-230.md)** · proposed · `Cpp` covers every expression of
   C++17 to C++23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in
-    both languages, DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at
-    6b7fe2f, its main c57882b with the version bumped and the records drained: both gates at 100% in both languages).
+  - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
+    languages, DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at
+    6b7fe2f, its main c57882b with the version bumped and the records drained: both gates at 100% in both languages);
+    and in 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates
+    at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed,
+    its outputs identical).
 - <a id="CAP-231"></a>**[CAP-231: the SystemVerilog expression dialect, complete](CAP-231.md)** · proposed ·
   `SystemVerilog` covers every expression of IEEE 1800-2023, Verilog its subset. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: met in mbse-expressions' branch stage6-systemverilog (checked at 40da048: both gates at 100% in both
-    languages, TypeScript on Node 22, 24 and 26; DIA-29 complete against slang's 533 syntax kinds; SVP, SVA, SVC and
-    SVD), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-232"></a>**[CAP-232: domains inferred for terms](CAP-232.md)** · proposed · Each term's domain is inferred,
   so that evaluation and translation work in widths, formats, enums and conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Relates to* [CAP-097: value domains of published standards](CAP-097.md).
@@ -269,62 +282,73 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     be inferred from are stored since 0.9.0.
 - <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · proposed · A literal holds any value its `OfAny`
   can, scalars, containers and value objects; what has no schema is a dialect's constant kind. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
-  - **Current**: met in mbse-expressions' branch stage6-systemverilog (checked at 40da048: SystemVerilog's literals
-    and constants as built, DIA-27; both gates at 100% in both languages), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-267"></a>**[CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md)** · proposed · A C
   or C++ term reads the types its standard leaves to the implementation from the ABI dialect its holder names, each
   psABI a dialect of its own holding those types as stored domains. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [CAP-230: the C++ expression dialect](CAP-230.md),
   [PRI-042: optionality kept](../PRINCIPLES.md#PRI-042).
-  - **Current**: met in mbse-expressions 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its
-    main c57882b with the version bumped and the records drained: both gates at 100% in both languages, DOM-19 among
-    them).
+  - **Current**: met in mbse-expressions 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main
+    c57882b with the version bumped and the records drained: both gates at 100% in both languages, DOM-19 among them);
+    and in 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates
+    at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed,
+    its outputs identical).
 - <a id="CAP-268"></a>**[CAP-268: standards as tagged data](CAP-268.md)** · proposed · Each dialect covers the
   editions of its standards as data, each found by its body's designation or a common name, and records the kinds each
   has. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-226: complete expression dialects](CAP-226.md),
   [PRI-012: model published standards](../PRINCIPLES.md#PRI-012).
-  - **Current**: met in mbse-expressions 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its
-    main c57882b with the version bumped and the records drained: both gates at 100% in both languages, FRM-13 among
-    them).
+  - **Current**: met in mbse-expressions 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main
+    c57882b with the version bumped and the records drained: both gates at 100% in both languages, FRM-13 among them);
+    and in 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates
+    at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed,
+    its outputs identical).
 - <a id="CAP-276"></a>**[CAP-276: Python's type expressions and match patterns as data](CAP-276.md)** · proposed · Python's
   type annotations, type parameters and `match` patterns are expressions of dialects of their own, `Python Types` and
   `Python Patterns`, each validated, stored, printed and read with Python3's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
   [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-227: the Python3 expression dialect](CAP-227.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26, PYT, PYP and DIA-20 among them), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-277"></a>**[CAP-277: TypeScript's types and destructuring patterns as data](CAP-277.md)** · proposed ·
   TypeScript's types and destructuring patterns are expressions of dialects of their own, `TypeScript Types` and
   `TypeScript Patterns`, each validated, stored, printed and read with TypeScript5's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
   [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-228: the TypeScript5 expression dialect](CAP-228.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26, TST, TSP and DIA-21 to DIA-23 among them), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-278"></a>**[CAP-278: C's and C++'s type names and preprocessor directives as data](CAP-278.md)** · proposed ·
   C's and C++'s type names, an enumeration's enumerators among them, and their preprocessing directives are expressions
   of dialects of their own, `C Types`, `Cpp Types` and `C Preprocessor`, each validated, stored, printed and read with
   C's and C++'s. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [CAP-230: the C++ expression dialect](CAP-230.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26, CTY, XTY, CPD and DIA-26 among them), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-279"></a>**[CAP-279: names an expression binds found alike in every language](CAP-279.md)** · proposed · Every
   kind of expression that binds names, in every dialect, is a variation of `let`, so that what it binds, from what and
   where is read alike in every language. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
   [CAP-098: dialects over one framework](CAP-098.md).
-  - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26, DIA-30 among them), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-281"></a>**[CAP-281: Python's, ECMAScript's and C++'s regular expressions as data](CAP-281.md)** · proposed ·
   The regular expressions each language's standard defines, Python's `re`, ECMA-262's and C++'s `std::regex`
   ECMAScript grammar, are expressions of dialects of their own, `Python RegExp`, `TypeScript RegExp` and `Cpp RegExp`, each
   validated, stored, printed and read with its family's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
   [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-226: complete expression dialects](CAP-226.md).
-  - **Current**: met (checked on mbse-expressions' branch `regexp` at 97476ff: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26, PYR, TSR, XRX and FRM-01 among them), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-294"></a>**[CAP-294: POSIX's regular expressions as data](CAP-294.md)** · proposed · POSIX's basic and extended regular expressions (IEEE Std
   1003.1, XBD 9) are expressions of dialects of their own, `POSIX BRE` and `POSIX ERE`, each with grep's list of
   patterns and awk's EREs printed with its escapes, validated, stored, printed, and read by a C++ regex whose flags name
   a POSIX grammar. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md). *Relates to*
   [CAP-281: Python's, ECMAScript's and C++'s regular expressions as data](CAP-281.md), [CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md), [CAP-268: standards as tagged data](CAP-268.md), [CAP-226: complete expression dialects](CAP-226.md).
-  - **Current**: met (checked on mbse-expressions' branch `posix-regexp` at 71da369: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26; BRE, ERE, XRX, FRM-01, FRM-02 and FRM-13 among them), to be released in 0.10.0.
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · proposed · A type checker
   catches a wrong kind, property or argument in code that installs, defines or writes expressions, as it does in other
   typed code: mbse-expressions' installs, defines, writers and conformance corpus are typed, through typed bindings for
@@ -728,6 +752,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met; not yet scheduled (the user, 2026-11-01: leave the decision tags for now).
 - <a id="CAP-252"></a>**[CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](CAP-252.md)** · proposed · `polyrepo.py new <dir> --package <Area.Name> [--npm <name>]` creates a new repository beside the others, from templates kept in mbse-basis, its starting set already passing the link checks and its suites. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [PRI-041: a new repository starts in the conventions](../PRINCIPLES.md#PRI-041).
   - **Current**: met (checked on mbse-basis' branch CAP-252: `scripts/test_scaffold.py`, and a scaffold of mbse-example).
+- <a id="CAP-303"></a>**[CAP-303: mbse-expressions' tutorials, from domains and trivial expressions up](CAP-303.md)** · proposed ·
+  mbse-expressions' tutorials, in Python and TypeScript, teach how values, their domains and each language's
+  expressions are modeled, from one literal up, before constraints, each step a case run in both languages.
+  *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
+    mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
+    byte-identical; every tutorial re-executed, its outputs identical).
 
 ### Program models
 
