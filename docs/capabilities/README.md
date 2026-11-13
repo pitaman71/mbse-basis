@@ -273,12 +273,19 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met (checked on mbse-expressions' branch `retrofit` at 0c5033c: both gates at 100% in both languages,
     TypeScript on Node 22, 24 and 26, DIA-30 among them), to be released in 0.10.0.
 - <a id="CAP-281"></a>**[CAP-281: Python's, ECMAScript's and C++'s regular expressions as data](CAP-281.md)** · proposed ·
-  The regular expressions each language's standard defines, Python's `re`, ECMA-262's and the six grammars of C++'s
-  `std::regex`, are expressions of dialects of their own, `Python RegExp`, `TypeScript RegExp` and `Cpp RegExp`, each
+  The regular expressions each language's standard defines, Python's `re`, ECMA-262's and C++'s `std::regex`
+  ECMAScript grammar, are expressions of dialects of their own, `Python RegExp`, `TypeScript RegExp` and `Cpp RegExp`, each
   validated, stored, printed and read with its family's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
   [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-226: complete expression dialects](CAP-226.md).
   - **Current**: met (checked on mbse-expressions' branch `regexp` at 97476ff: both gates at 100% in both languages,
     TypeScript on Node 22, 24 and 26, PYR, TSR, XRX and FRM-01 among them), to be released in 0.10.0.
+- <a id="CAP-294"></a>**[CAP-294: POSIX's regular expressions as data](CAP-294.md)** · proposed · POSIX's basic and extended regular expressions (IEEE Std
+  1003.1, XBD 9) are expressions of dialects of their own, `POSIX BRE` and `POSIX ERE`, each with grep's list of
+  patterns and awk's EREs printed with its escapes, validated, stored, printed, and read by a C++ regex whose flags name
+  a POSIX grammar. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md). *Relates to*
+  [CAP-281: Python's, ECMAScript's and C++'s regular expressions as data](CAP-281.md), [CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md), [CAP-268: standards as tagged data](CAP-268.md), [CAP-226: complete expression dialects](CAP-226.md).
+  - **Current**: met (checked on mbse-expressions' branch `posix-regexp` at 71da369: both gates at 100% in both languages,
+    TypeScript on Node 22, 24 and 26; BRE, ERE, XRX, FRM-01, FRM-02 and FRM-13 among them), to be released in 0.10.0.
 - <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · proposed · A type checker
   catches a wrong kind, property or argument in code that installs, defines or writes expressions, as it does in other
   typed code: mbse-expressions' installs, defines, writers and conformance corpus are typed, through typed bindings for
