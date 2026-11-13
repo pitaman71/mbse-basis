@@ -728,6 +728,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met; not yet scheduled (the user, 2026-11-01: leave the decision tags for now).
 - <a id="CAP-252"></a>**[CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](CAP-252.md)** · proposed · `polyrepo.py new <dir> --package <Area.Name> [--npm <name>]` creates a new repository beside the others, from templates kept in mbse-basis, its starting set already passing the link checks and its suites. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [PRI-041: a new repository starts in the conventions](../PRINCIPLES.md#PRI-041).
   - **Current**: met (checked on mbse-basis' branch CAP-252: `scripts/test_scaffold.py`, and a scaffold of mbse-example).
+- <a id="CAP-303"></a>**[CAP-303: mbse-expressions' tutorials, from domains and trivial expressions up](CAP-303.md)** · proposed ·
+  mbse-expressions' tutorials, in Python and TypeScript, teach how values, their domains and each language's
+  expressions are modeled, from one literal up, before constraints, each step a case run in both languages.
+  *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [FEA-024: expressions as data](../features/FEA-024.md).
+  - **Current**: met in mbse-expressions 0.10.0 (CHECKED-REL).
 
 ### Program models
 
