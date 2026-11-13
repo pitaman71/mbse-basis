@@ -107,8 +107,10 @@ labeled with the repository and number it was decided under.
   object they link by its path; None where it holds none. It is a mutation-transaction stream, the language stores
   already speak, so that a database's store and mbse-rest's client answer it alike, with no new form.
 - **(mbse-schemas 30)** **Identity by path.** An object of the store below's is one proxy in the store above, kept by
-  its path in an identity map, the same each time it is named, made where it is first named; in a store with a store
-  below, a path resolves to it without walking owners.
+  its path in an identity map, the same each time it is named. A path is found among those the store holds, then
+  through its owner's entries, keys compared first, so that an object the store made itself is found, and only then
+  held as the store below's: a path loads the owners it passes through and no other, and an object reached through an
+  entry loads alone.
 - **(mbse-schemas 30)** **A schema known once loaded.** An object linked but not loaded has no schema yet; reading it
   loads it. Whether it is counted, or owned through an entry, is answered without loading it: an object with a path is
   never counted, and a link that owns through a relation owns whatever it links.
