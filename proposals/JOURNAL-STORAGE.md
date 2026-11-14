@@ -88,6 +88,29 @@ In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework), aft
 - Then one for each build-out backend, in the order above, refining
   [CAP-220: persistence in other NoSQL stores](../docs/capabilities/CAP-220.md), whose scope these name: each given an ID when it is planned.
 
+## Decided by an agent, for review
+
+Where the user's decisions were silent, the simplest default consistent with them, each *proposed* until reviewed,
+labeled with the repository and number it was decided under.
+
+- **(mbse-dynamodb 15)** **DynamoDB orders a journal by an item holding its length.** Each journal transaction is
+  committed in one `TransactWriteItems` with an item holding the number of the journal's last entry, on condition that
+  it holds the number the committing process last caught up to, so that of two processes committing at once one is
+  refused. The refused one catches up and interprets its transaction again, which what the other committed may now
+  refuse ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)); a transaction written imperatively, which the store cannot run again,
+  is refused, to be run again by its writer.
+- **(mbse-dynamodb 15)** **The index in DynamoDB.** By a hash of each object's path: an item of its schema and property
+  values, and an item for each entry linking it, under every object the entry links, so that a deletion finds each
+  entry linking what it deletes, loaded or not, and what that owns, in cascade. Equal entries of a relation that keeps
+  them are one item, with their count. The index items a transaction changes are written in the same
+  `TransactWriteItems` as its journal entry where DynamoDB's limits on one allow (100 items, 4 MB); else the journal
+  entry is committed with them kept beside it, and they are written out before any process reads the store, by the
+  writer or by whichever process reads next. A transaction is committed once its journal entry is.
+- **(mbse-dynamodb 15)** **Subscriptions read the table, in order.** A process catches up by reading the journal's
+  entries after the last it gave its followers, in order, before each of its transactions and when polled, rather than
+  from DynamoDB Streams: a stream orders records per item and keeps them a day, while the journal's numbers are its
+  commit order, kept as long as the table. A stream may later wake a process to poll, and no more.
+
 ## Open questions
 
 - **Subscribers in browsers.** A browser holds no database's credentials, so it subscribes through mbse-journals'
