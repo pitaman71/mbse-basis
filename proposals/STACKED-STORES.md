@@ -23,6 +23,9 @@ The user's decisions (2026-11-12):
   REST interface with both endpoints provided, verified, and battle-tested for any possible deployment."
 - **Loaded on demand**: "I'd rather use caching that loads on demand than a toy in-memory store that pulls everything
   up-front."
+- **An object is present or it is not**: "A path either is or is not present in the builder, and the builder should
+  not create the object silently." An object is present in a store, made in it or loaded into it, or it is not; and
+  where it is not, the store asks the store below.
 - **An extent is found through ownership**: "A store client can compute this by introspecting schemas. Then closing
   ownership relations. The latter may be exposed as a store method if it is useful."
 
@@ -78,6 +81,22 @@ Steps 1, 2, 4 and 5 are mbse-schemas'; 3 joins what [CAP-270: a transaction's ch
 subscriptions already give. Together, about three or four capabilities, each at least CAP-270's size; step 2's
 identity map is where the estimate may grow.
 
+## Writing through, and others' writes in
+
+[CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285) joins a store above to the store below in both directions, as the user
+decided (2026-11-13):
+
+1. **The store below commits first** ("of course"). A store above sends a transaction's changes down before its own
+   commit, within it, and commits only where the store below accepts them; a refusal there, such as a colliding append
+   ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)), refuses the transaction above. The changes are written as plain data before
+   the commit.
+2. **Others' writes apply to present objects alone** ("agreed - broadcast updates apply only to present objects"). The
+   store below reports each transaction it commits; the store above applies each to the objects present in it and to
+   no other, an object not present staying so, linked by its path where an object present links it; its own come back
+   changing nothing; and its followers are told of what changed above.
+3. **In the order the store below committed them** ("right"): synchronously from a store in memory, and from a store
+   over a database or over REST as its change feed delivers them, each applied as it arrives.
+
 ## Capabilities
 
 In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework): the five steps above are
@@ -97,11 +116,39 @@ In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework): the
 | The conformance corpora of mbse-schemas, mbse-expressions and mbse-patterns | Each case's store written as a snapshot, compared across the two languages | Open: see below |
 | mbse-schemas' examples | A store copied into another | A journal replayed into the other |
 
+## Decided by an agent, for review
+
+Where the user's decisions were silent, the simplest default consistent with them, each *proposed* until reviewed,
+labeled with the repository and number it was decided under.
+
+- **(mbse-schemas 30)** **What a store below answers: an object's document.** `document(path)` gives the object at a
+  path as a one-transaction document ([CAP-128: graphs sent as one-transaction documents](../docs/capabilities/CAP-128.md)), its properties and its entries, each
+  object they link by its path; None where it holds none. It is a mutation-transaction stream, the language stores
+  already speak, so that a database's store and mbse-rest's client answer it alike, with no new form.
+- **(mbse-schemas 30)** **Identity by path.** An object loaded from the store below is one proxy, kept by its path, the
+  same each time it is named. A path resolves to an object present, through its owner's entries where it was made
+  above, else to the store below's, loaded, else to none: one read, of the object named, and no owner loaded.
+- **(mbse-schemas 30)** **A link to an object not present holds its path.** An entry the store below gives that links
+  an object not present holds that object's path, and is held by the objects present it links; reading the link loads
+  the object, which every entry waiting on its path then links, re-keyed. Nothing is made that is not present. Whether
+  a link owns what it links is known from the relation, without the object: a relation that owns through a link owns
+  whatever it links.
+- **(mbse-schemas 30)** **Changes reported name what the store holds.** Removing the owning entry of an object not
+  present deletes it, and is reported by its owner's key, as any deletion is; anything else the reported changes name
+  is loaded first.
+- **(mbse-schemas 30)** **Loading is no transaction of the store's.** An object's document is applied as the store's
+  committed data, outside any transaction open, observed by no follower, recorded by no provenance and checked by
+  nothing.
+
 ## Open questions
 
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
   write as well as what they hold; it touches the corpora of three repositories.
+- **Changes reported for entries kept by identity.** A builder's update of an object rewrites its entries of a relation
+  with no unique clause, kept by identity, and the store reports each as removed and inserted, though nothing changed:
+  found building [CAP-284: objects loaded on demand](../docs/capabilities/README.md#CAP-284), and as true of a store with no store below. A gap in
+  [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270), to log where [INI-104: gaps plan category](PRIORITIES.md#ini-104--gaps-plan-category) logs gaps.
 - **Reads over REST, one object at a time**, are many requests: whether mbse-rest's service answers a read of several
   objects, or of what one reaches, at once.
 - **Where this is built in order**: after the journal and its storage interface in mbse-journals, or beside them, since
