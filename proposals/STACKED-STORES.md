@@ -92,8 +92,8 @@ decided (2026-11-13):
    the commit.
 2. **Others' writes apply to present objects alone** ("agreed - broadcast updates apply only to present objects"). The
    store below reports each transaction it commits; the store above applies each to the objects present in it and to
-   no other, an object not present staying so, linked by its path where an object present links it; its own come back
-   changing nothing; and its followers are told of what changed above.
+   no other, an object not present staying so, linked by its path where an object present links it; and its followers
+   are told of what changed above.
 3. **In the order the store below committed them** ("right"): synchronously from a store in memory, and from a store
    over a database or over REST as its change feed delivers them, each applied as it arrives.
 
@@ -136,6 +136,22 @@ labeled with the repository and number it was decided under.
 - **(mbse-schemas 30)** **Changes reported name what the store holds.** Removing the owning entry of an object not
   present deletes it, and is reported by its owner's key, as any deletion is; anything else the reported changes name
   is loaded first.
+- **(mbse-schemas 31)** **A store's own transactions come back, and are applied again.** What the store below reports
+  while a transaction above is open, the store above applies once it ends, in the order the store below committed it,
+  its own transaction among them, rather than skipping its own: so that where another wrote below between what the
+  store above read and its own commit, the two stores end alike. Applied again with nothing between, its own changes
+  nothing, and its followers are told nothing more; this is also how a change feed delivers a store's own transactions.
+- **(mbse-schemas 31)** **Applying is a transaction of the store above's that loads, checks and sends nothing.**
+  Others' changes, already checked and committed below, are not checked again above, nor sent back down; its followers
+  are told what changed, as of any transaction.
+- **(mbse-schemas 31)** **An entry is applied from an object present it links.** An effect writes each entry on the
+  adjacency of one object it links; where that object is not present above, the store above writes it from one that
+  is, through that object's adjacency by name. One that links no object present is left out. One whose objects present
+  have no adjacency to it by name is refused where it is applied, as an effect is refused where no object it links has
+  one ("name one").
+- **(mbse-schemas 31)** **Deleting an object not present deletes, among those present, what reached it.** Removing
+  the owning entry of an object not present removes every entry that links it, or anything it owns, and so deletes
+  each object present it owns; these follow from the removal, which alone is reported, as a deletion's cascade is.
 - **(mbse-schemas 30)** **Loading is no transaction of the store's.** An object's document is applied as the store's
   committed data, outside any transaction open, observed by no follower, recorded by no provenance and checked by
   nothing.
@@ -145,10 +161,13 @@ labeled with the repository and number it was decided under.
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
   write as well as what they hold; it touches the corpora of three repositories.
-- **Changes reported for entries kept by identity.** A builder's update of an object rewrites its entries of a relation
-  with no unique clause, kept by identity, and the store reports each as removed and inserted, though nothing changed:
-  found building [CAP-284: objects loaded on demand](../docs/capabilities/README.md#CAP-284), and as true of a store with no store below. A gap in
-  [CAP-270: a transaction's changes observed at its commit](../docs/capabilities/README.md#CAP-270), to log where [INI-104: gaps plan category](PRIORITIES.md#ini-104--gaps-plan-category) logs gaps.
+- **A transaction applied above, refused there.** A store above that cannot apply what the store below committed, an
+  entry it has no adjacency by name to write, raises within the store below's report of its commit: the writer below,
+  whose transaction has committed, is given the error, and the store below's later followers are not told. Whether a
+  store above should instead hold such a transaction aside, and report it, is open.
+- **Identity by path, where an ownership key changes.** A store keeps each object it loaded by its path; an object whose
+  owning entry is rewritten with other keys is at a new path, and a store above that loaded it by its old one holds it
+  there still.
 - **Reads over REST, one object at a time**, are many requests: whether mbse-rest's service answers a read of several
   objects, or of what one reaches, at once.
 - **Where this is built in order**: after the journal and its storage interface in mbse-journals, or beside them, since
