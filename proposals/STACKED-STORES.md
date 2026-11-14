@@ -155,6 +155,23 @@ labeled with the repository and number it was decided under.
 - **(mbse-schemas 30)** **Loading is no transaction of the store's.** An object's document is applied as the store's
   committed data, outside any transaction open, observed by no follower, recorded by no provenance and checked by
   nothing.
+- **(mbse-dynamodb 15)** **A store kept in a database is a `Builders.Store`, over its own index.** The lowest store
+  interprets each transaction it is given with mbse-schemas' own interpreter, in a `Builders.Store` of its own whose
+  store below is its index, so that it refuses what every store refuses and holds its schemas as any store does; its
+  objects load from the index on demand, as a store above's do, and what other processes commit is applied to them as
+  a store above applies the store below's. It needs no change to mbse-schemas.
+- **(mbse-dynamodb 15)** **A store below is given its schemas apart.** A transaction that writes only schemas reports
+  no changes, so that a store above sends no install below and none is journaled: each process gives the store kept in
+  a database its installs, as an app gives its own store its installs. Whether a journal also begins with them is open
+  (below).
+- **(mbse-dynamodb 15)** **A read is of one entry of the journal.** An object's document is read from its index items
+  as they stood after one journal entry; where another process commits while they are read, they are read again.
+- **(mbse-dynamodb 15)** **A counted object is kept by its value.** It has no path, so that an entry linking it is kept
+  under the objects it links that have one, with the counted object's schema and values; a document of one of them is
+  refused, as a store in memory refuses it.
+- **(mbse-dynamodb 15)** **mbse-dynamodb's persistence plugin is kept until CAP-290.** The plugin, which snapshots, is
+  superseded by the store kept in DynamoDB, and kept unchanged while mbse-rest's service persists through it; it goes
+  with [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
 
 ## Open questions
 
@@ -170,5 +187,9 @@ labeled with the repository and number it was decided under.
   there still.
 - **Reads over REST, one object at a time**, are many requests: whether mbse-rest's service answers a read of several
   objects, or of what one reaches, at once.
+- **A journal headed by its installs.** A store kept in a database is given its schemas by each process that opens it,
+  and journals no install. Journaling the installs, at the journal's head, would let a process open a store knowing
+  none of its schemas, and is what replaces mbse-rest's `GET /schemas` above; it asks a store to report an install as
+  it reports a transaction's changes.
 - **Where this is built in order**: after the journal and its storage interface in mbse-journals, or beside them, since
   steps 1 and 2 are mbse-schemas' alone.
