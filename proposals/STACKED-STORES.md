@@ -81,25 +81,21 @@ Steps 1, 2, 4 and 5 are mbse-schemas'; 3 joins what [CAP-270: a transaction's ch
 subscriptions already give. Together, about three or four capabilities, each at least CAP-270's size; step 2's
 identity map is where the estimate may grow.
 
-## Writing through, and others' writes in: what CAP-285 must decide
+## Writing through, and others' writes in
 
-[CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285) joins a store above to the store below in both directions. Building it raises
-three questions, each with the agent's recommendation, for the user to decide:
+[CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285) joins a store above to the store below in both directions, as the user
+decided (2026-11-13):
 
-1. **Which commits first.** The store below may refuse a transaction, alike in every store that considers it (a
-   colliding append, [CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)), so that the store above must not have committed it
-   where it does. *Recommended:* the store above sends a transaction's changes down before its own commit, within it,
-   and commits only where the store below accepts them; a refusal there refuses the transaction above. This needs the
-   changes written as plain data before the commit, which mbse-schemas writes now only after it, since writing them as
-   a transaction expression writes to the store.
-2. **What another writer's changes do above.** The store below reports each transaction it commits, its own and
-   others' alike. *Recommended:* the store above applies each to the objects it holds and to no other, an object not
-   present staying so, as a link to one not present is held by its path; its own come back changing nothing, since
-   applying changes again changes nothing; and its followers are told of what changed above, as of any transaction of
-   its own.
-3. **When.** *Recommended:* synchronously, as a store in memory below gives them; a store over a database or over REST
-   gives them as its change feed delivers them, and the store above applies them in the order given, each as it
-   arrives, so that the order the store below committed them in is the order above.
+1. **The store below commits first** ("of course"). A store above sends a transaction's changes down before its own
+   commit, within it, and commits only where the store below accepts them; a refusal there, such as a colliding append
+   ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)), refuses the transaction above. The changes are written as plain data before
+   the commit.
+2. **Others' writes apply to present objects alone** ("agreed - broadcast updates apply only to present objects"). The
+   store below reports each transaction it commits; the store above applies each to the objects present in it and to
+   no other, an object not present staying so, linked by its path where an object present links it; its own come back
+   changing nothing; and its followers are told of what changed above.
+3. **In the order the store below committed them** ("right"): synchronously from a store in memory, and from a store
+   over a database or over REST as its change feed delivers them, each applied as it arrives.
 
 ## Capabilities
 
