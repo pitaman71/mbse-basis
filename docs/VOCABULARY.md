@@ -63,6 +63,18 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   helper (a value object that is neither, such as a declarator) nor a scalar property. As the user decided (2026-11-12):
   "Maybe "clause" can refer to the union of all children : substatements and subterms." Qualified where it meets an
   mbse-transforms policy's clauses, or a grammar's own `…Clause` syntax nodes.
+- <a id="VOC-034"></a>**VOC-034: closed constructor expression** · adopted · **Closed constructor expression**:
+  Expression languages are part of what dialects ([VOC-033: dialect](#VOC-033)) model. A closed constructor expression
+  is an expression that constructs a value from literals through the dialect's constructors and that refers to no free
+  name. A literal is the simplest closed constructor expression. Displays and casts of literals are others, such as
+  Python's `{1, 2}`, C's `(short)3` and `(int[]){1, 2}`, and SystemVerilog's `int'(5)`. Almost every value in a
+  dialect's domains has a closed constructor expression in that dialect. Three kinds of value are the exceptions. A
+  value that has identity (an object, a closure, a list that two places share) can be rebuilt only as an equal value,
+  not as the same value. A value from outside the dialect, such as a host object or a data object, has no constructor
+  in the dialect's language. A value in an intermediate state, such as a partly consumed generator, has no
+  constructor for that state. The user adopted the term on 2026-11-15: "Yes I like "closed constructor expression"".
+  *Never*: "a value that has no literal", where the text means a value that a closed constructor expression could
+  construct.
 - <a id="VOC-026"></a>**VOC-026: schema** · adopted · **Schema**: what describes a value, a property's, a symbol's, a branch's or a part's, and what
   a value of any schema is of. *Never*: "type", which "has no meaning in mbse-*", as the user decided; a host
   language's own type (Python's `int`, TypeScript's `BigInt`) is qualified as the host's.
