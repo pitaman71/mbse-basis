@@ -163,7 +163,7 @@ Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
 
 - establishing reviews for leakage across document boundaries
 - conceptual terminology drift is still a problem
-- move historical notes out of markdown and into git comments
+- drain historical notes from the documents written before the rule "State what is true now" ([the basis](../docs/README.md#rules-for-writing-items)) into git history
 - consolidate and enumerate "decided" clauses 
 - object properties as financial/scientific/engineering ([FEA-007: property kinds](../docs/features/FEA-007.md))
 - re-partition mutations and queries
