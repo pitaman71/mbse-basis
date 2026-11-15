@@ -169,28 +169,32 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   · proposed · An expression of one dialect whose leaf terms are all literals is simplified by its dialect, by its
   language's own semantics, to a literal: its evaluation. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
-  - **Current**: not met (checked on mbse-expressions' main at 1c4be74, #54: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical):
-    Python3, TypeScript5, C, C++ and SystemVerilog fold every kind the evaluation inventory gives class (a), as
-    Patterns, MATLAB and Excel did; C Preprocessor's `defined`, SystemVerilog Constraints' 7 kinds and 13 shapes within
-    folded kinds stay ([As built](CAP-295.md#as-built-mbse-expressions)).
+  - **Current**: The capability is not met. The check ran on mbse-expressions' main branch at commit 1c4be74, after #54
+    merged. Both coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The
+    conformance corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. Python3,
+    TypeScript5, C, C++ and SystemVerilog now fold every kind that the evaluation inventory gives class (a), as
+    Patterns, MATLAB and Excel already did. C Preprocessor's `defined`, SystemVerilog Constraints' seven kinds and
+    thirteen shapes within folded kinds still stay in the residual ([As built](CAP-295.md#as-built-mbse-expressions)).
 - <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](README.md#CAP-296)** ·
   proposed · An expression of one dialect whose leaf terms mix literals, arguments or variables, and parameters is
   simplified by its dialect, each known leaf substituted and each closed subterm folded. *Implements*
   [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md),
   [CAP-181: parameters wherever literals may appear](CAP-181.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
-  - **Current**: not met (checked on mbse-expressions' main at 1c4be74, #54: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical):
-    literals and variables as [CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md)
-    folds them; parameters wait on [CAP-181: parameters wherever literals may appear](CAP-181.md), not yet modeled.
+  - **Current**: The capability is not met. The check ran on mbse-expressions' main branch at commit 1c4be74, after #54
+    merged. Both coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The
+    conformance corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. Simplification
+    substitutes and folds literals and variables, as [CAP-295: simplification of single-dialect expressions with literal
+    leaves](CAP-295.md) records. Parameters cannot be simplified yet, because they wait on [CAP-181: parameters wherever
+    literals may appear](CAP-181.md), which is not yet modeled.
 - <a id="CAP-297"></a>**[CAP-297: simplification in every binding state](CAP-297.md)** · proposed · An expression
   of one dialect is simplified fully bound (to a literal), partially bound (to a residual of the same dialect) and fully
   unbound (to itself, or simpler), alike. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
-  - **Current**: met (checked on mbse-expressions' main at 1c4be74, #54: both gates at 100% in both languages,
-    TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical;
-    suites PAR, PYS, TSS, CCS and SVS), a subterm its language may never evaluate staying in the residual since #54 ([As
-    built](CAP-297.md#as-built-mbse-expressions)).
+  - **Current**: The capability is met. The check ran on mbse-expressions' main branch at commit 1c4be74, after #54
+    merged. Both coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The
+    conformance corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. The suites
+    PAR, PYS, TSS, CCS and SVS test the three binding states. Since #54, a subterm that the language may never evaluate
+    stays in the residual instead of raising an error ([As built](CAP-297.md#as-built-mbse-expressions)).
 - <a id="CAP-298"></a>**[CAP-298: simplification over type parameters](README.md#CAP-298)** · proposed · An expression
   that involves type parameters, but no type algebra, is simplified, a bound type parameter substituted as any parameter
   is. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
@@ -215,12 +219,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046).
   - **Current**: not met; deferred, as the user decided (2026-11-13).
 - <a id="CAP-305"></a>**[CAP-305: simplification's options, chosen up front](CAP-305.md)** · proposed · Where a
-  dialect's simplification has two defensible behaviors (a value with no literal written as a cast or left, a refused
-  format raising or left, a platform's result folded or left), its caller chooses one up front, as a parameter of the
-  scope, today's behavior the default. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
+  dialect's simplification could follow either of two defensible behaviors, the caller chooses one before simplifying,
+  as a parameter of the scope, and the behavior that version 0.11.0 built is the default. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014), [PRI-042: optionality kept](../PRINCIPLES.md#PRI-042), [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
   [CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md).
-  - **Current**: not met; proposed, as the user decided (2026-11-15).
+  - **Current**: The capability is not met. The user decided on 2026-11-15 to propose it.
 - <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
   dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version
