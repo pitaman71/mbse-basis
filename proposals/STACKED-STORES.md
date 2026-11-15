@@ -147,9 +147,13 @@ labeled with the repository and number it was decided under.
   the object, which every entry waiting on its path then links, re-keyed. Nothing is made that is not present. Whether
   a link owns what it links is known from the relation, without the object: a relation that owns through a link owns
   whatever it links.
-- **(mbse-schemas 30)** **Changes reported name what the store holds.** Removing the owning entry of an object not
-  present deletes it, and is reported by its owner's key, as any deletion is; anything else the reported changes name
-  is loaded first.
+- **(mbse-schemas 30, 35)** **Changes reported load nothing.** Removing the owning entry of an object not present
+  deletes it, and is reported by its owner's key, as any deletion is; anything else not present the reported changes
+  name, they name by its path, the schema it is written by the one its path implies.
+- **(mbse-schemas 35)** **Each store of a stack commits a write as one transaction, as the lowest did.** While a store
+  sends a transaction below, what the store below reports it committed, what it added among it, as its record, is
+  taken into the transaction before it commits, and is the effect the store's followers are given of it: one effect
+  per write, the same in every store of the stack.
 - **(mbse-schemas 31)** **A store's own transactions come back, and are applied again.** What the store below reports
   while a transaction above is open, the store above applies once it ends, in the order the store below committed it,
   its own transaction among them, rather than skipping its own: so that where another wrote below between what the
@@ -204,8 +208,8 @@ labeled with the repository and number it was decided under.
   commits, or a time passes. A read by position, rather than a stream held open, is what a synchronous transport can
   make (below), passes any proxy, and is plain polling where it is not held open. The positions are the service's own,
   under a name of the feed's; it keeps the latest 10 000; a position before them, or another feed's, as after a
-  restart, is refused (410), and the client's store is made again. A write gives two transactions: the service
-  store's own, then the record the store below made of it (`Provenance`), applied as the store below's writes are.
+  restart, is refused (410), and the client's store is made again. A write is one transaction of the feed's, its
+  record (`Provenance`) among it, as the store below committed it.
 - **(mbse-rest 19)** **A client's followers are given each transaction from the change feed, its own among them.** At
   its own commit they are given nothing; it reads the feed after each of its transactions, before each, and when
   polled, and gives them each in the order the service committed it, once.
