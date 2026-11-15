@@ -40,7 +40,7 @@ The user's decisions (2026-11-14):
 The user's decisions (2026-11-15):
 
 - **What a store asks of the store below it is a public interface**, a capability of its own ("yes"):
-  [CAP-305: a public store-below interface](../docs/capabilities/README.md#CAP-305), so that a store below depends on no
+  [CAP-306: a public store-below interface](../docs/capabilities/README.md#CAP-306), so that a store below depends on no
   private part of mbse-schemas ([PRI-043: framework interfaces authoritative and versatile](../docs/PRINCIPLES.md#PRI-043)).
 
 ## The stack
