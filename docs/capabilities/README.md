@@ -703,6 +703,12 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   keeps or lets go, are settings given when it runs, lazy by default, never code that uses it, in mbse-schemas, in
   Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
+- <a id="CAP-304"></a>**CAP-304: a store below that answers later** · proposed · A store below may give an object's
+  document, and commit or refuse a transaction's changes, later, as a promise, so that a store over a network, such as
+  mbse-rest's client in a browser, blocks nothing while it waits; building a transaction's expression loads nothing,
+  a symbol's schema being the object's where it is present, else the one its path implies; in mbse-schemas, in
+  TypeScript, and in Python where the interface is shared. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
