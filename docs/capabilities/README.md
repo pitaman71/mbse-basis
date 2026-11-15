@@ -167,14 +167,17 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current** (main, v0.5.4): met.
 - <a id="CAP-295"></a>**[CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md)**
   · proposed · An expression of one dialect whose leaf terms are all literals is simplified by its dialect, by its
-  language's own semantics, to a literal: its evaluation. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
+  language's own semantics, to a closed constructor expression at the root
+  ([VOC-034: closed constructor expression](../VOCABULARY.md#VOC-034)), which is its evaluation. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
   - **Current**: The capability is not met. The check ran on mbse-expressions' main branch at commit 1c4be74, after #54
     merged. Both coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The
     conformance corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. Python3,
     TypeScript5, C, C++ and SystemVerilog now fold every kind that the evaluation inventory gives class (a), as
     Patterns, MATLAB and Excel already did. C Preprocessor's `defined`, SystemVerilog Constraints' seven kinds and
-    thirteen shapes within folded kinds still stay in the residual ([As built](CAP-295.md#as-built-mbse-expressions)).
+    thirteen shapes within folded kinds still stay in the residual. The simplifier's test of success is still a literal
+    at the root, and the simplifier does not yet write every closed constructor expression, such as C's `(short)3` or
+    Python's set display ([As built](CAP-295.md#as-built-mbse-expressions)).
 - <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](README.md#CAP-296)** ·
   proposed · An expression of one dialect whose leaf terms mix literals, arguments or variables, and parameters is
   simplified by its dialect, each known leaf substituted and each closed subterm folded. *Implements*
