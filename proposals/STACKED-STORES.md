@@ -172,6 +172,46 @@ labeled with the repository and number it was decided under.
 - **(mbse-dynamodb 15)** **mbse-dynamodb's persistence plugin is kept until CAP-290.** The plugin, which snapshots, is
   superseded by the store kept in DynamoDB, and kept unchanged while mbse-rest's service persists through it; it goes
   with [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
+- **(mbse-rest 19)** **The service makes its store over the store below it is given.** It is given a store below, a
+  database's or one in memory, and makes its own store, a `Builders.Store` over it; each install runs in both, the
+  store below given its schemas apart, and an app's seed runs in its own store where the store below is new: one that
+  keeps a journal holding no entry, or one in memory. A seed is not run again over what it wrote, which may have been
+  edited since.
+- **(mbse-rest 19)** **mbse-rest's client is a `Builders.Store` whose store below is the service**, as a store kept in
+  a database is one whose store below is its index, in Python and TypeScript alike: a store above gives the store below
+  plain data read with that store's own schemas, and observes it through mbse-schemas' `Changes.observe`, so that it
+  needs no change to mbse-schemas. Made, it executes the install transactions the service gives.
+- **(mbse-rest 19)** **The endpoints a store below needs.** An object's document by its path (`POST /documents`), or
+  none; a transaction's changes, committed or refused, the refusal named by the kind of error the store raised
+  (`ValueError`, `TypeError`, `LookupError`), which the client raises; the change feed (`GET /changes`); the install
+  transactions that made the schemas (`GET /schemas`), and an install given (`POST /schemas`).
+- **(mbse-rest 19)** **The change feed is read by position, its reads long-polled.** Each transaction the service's
+  store commits is numbered from 1 in commit order, and a client reads those after the last it was given, so that it is
+  given each once, none missed, from any position the feed keeps; a read that finds none new is held open until one
+  commits, or a time passes. A read by position, rather than a stream held open, is what a synchronous transport can
+  make (below), passes any proxy, and is plain polling where it is not held open. The positions are the service's own,
+  under a name of the feed's; it keeps the latest 10 000; a position before them, or another feed's, as after a
+  restart, is refused (410), and the client's store is made again.
+- **(mbse-rest 19)** **A client's followers are given each transaction from the change feed, its own among them.** At
+  its own commit they are given nothing; it reads the feed after each of its transactions, before each, and when
+  polled, and gives them each in the order the service committed it, once.
+- **(mbse-rest 19)** **An install a client is given is sent to the service**, which runs it in its store and the store
+  below, and serves it after the installs it holds, once: a client is given its schemas as any store is, and gives
+  them to the store it stands for. The installs served are those the service was given, not read from a journal.
+- **(mbse-rest 19)** **A transaction written through carries its record's data below.** Where its expression gives
+  them, its `uid`, `when`, `session` and `where` go below with its changes, so that a store below with `Provenance`
+  installed finds the record the store above made, by its `uid`, rather than making one of its own, which the store
+  above, given it back, could not apply.
+- **(mbse-rest 19)** **The client's transport is synchronous**, as mbse-schemas' store interface is: in Node, a request
+  waits on a worker thread that fetches; in a browser, it is a synchronous `XMLHttpRequest`, best made from a worker.
+- **(mbse-rest 19)** **A view that writes is refused before it runs where its frames cannot bind the view's symbols**,
+  since what the store below has committed is not undone.
+- **(mbse-rest 19)** **The service polls a store below that is followed by polling**, as a store kept in a database is
+  (`poll()`), before each request and while a read of the change feed is held open, so that what other processes
+  committed reaches its clients.
+- **(mbse-rest 19)** **The service over a store kept in DynamoDB is tested in mbse-dynamodb**, which has mbse-rest as a
+  test dependency, so that neither repository depends on the other at run time, nor each on the other.
+
 
 ## Open questions
 
@@ -191,5 +231,11 @@ labeled with the repository and number it was decided under.
   and journals no install. Journaling the installs, at the journal's head, would let a process open a store knowing
   none of its schemas, and is what replaces mbse-rest's `GET /schemas` above; it asks a store to report an install as
   it reports a transaction's changes.
+- **A synchronous store interface over a network.** A store reads an object's document, and sends a transaction's
+  changes, within a call that returns them; over REST, a browser's client makes that call with a synchronous
+  `XMLHttpRequest`, which blocks the page while the service answers unless it is made from a worker. Whether
+  mbse-schemas' store interface should let a store below answer later, as a promise, is open.
+- **One change feed for many instances of a service.** Each instance numbers its own feed, so that a client keeps to
+  one; reading the store below's journal by its own positions, where it keeps one, would let a client read from any.
 - **Where this is built in order**: after the journal and its storage interface in mbse-journals, or beside them, since
   steps 1 and 2 are mbse-schemas' alone.
