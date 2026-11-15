@@ -210,9 +210,11 @@ labeled with the repository and number it was decided under.
   under a name of the feed's; it keeps the latest 10 000; a position before them, or another feed's, as after a
   restart, is refused (410), and the client's store is made again. A write is one transaction of the feed's, its
   record (`Provenance`) among it, as the store below committed it.
-- **(mbse-rest 19)** **A client's followers are given each transaction from the change feed, its own among them.** At
-  its own commit they are given nothing; it reads the feed after each of its transactions, before each, and when
-  polled, and gives them each in the order the service committed it, once.
+- **(mbse-rest 19)** **A client commits its own transaction as the service committed it, and applies the change feed
+  as any store applies the store below's reports.** The service answers a transaction with what its store committed of
+  it, its record among it; the client takes that into its own commit, and its followers are given it then, once. Each
+  transaction it reads from the feed, its own among them, is applied to the objects present in it, its followers told
+  what changed there; its own, applied again, changes nothing.
 - **(mbse-rest 19)** **An install a client is given is sent to the service**, which runs it in its store and the store
   below, and serves it after the installs it holds, once: a client is given its schemas as any store is, and gives
   them to the store it stands for. The installs served are those the service was given, not read from a journal.
