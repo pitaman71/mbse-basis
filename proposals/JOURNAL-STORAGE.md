@@ -110,6 +110,14 @@ labeled with the repository and number it was decided under.
   entries after the last it gave its followers, in order, before each of its transactions and when polled, rather than
   from DynamoDB Streams: a stream orders records per item and keeps them a day, while the journal's numbers are its
   commit order, kept as long as the table. A stream may later wake a process to poll, and no more.
+- **(mbse-dynamodb 1)** **One table, keyed by store and record**: one thing to make and configure, which several
+  stores (demos, tests) share, each under its own partition key.
+- **(mbse-dynamodb 3)** **Parts of 350 000 bytes** of UTF-8 JSON, uncompressed, so that a journal entry reads back as
+  text in the console; compression (zlib) would cut cost and parts roughly tenfold.
+- **(mbse-dynamodb 7)** **The table is made when absent by default** (`create=True`, on-demand capacity), for demos;
+  production sets `MBSE_DYNAMODB_CREATE=0` and makes the table with its own tooling.
+- **(mbse-dynamodb 10)** **Settings from `MBSE_DYNAMODB_*`**, read by `Store()` with no arguments, as mbse-rest's
+  service makes the store below it by name, each overridden by an argument; the region falls back to boto3's own.
 
 ## Open questions
 

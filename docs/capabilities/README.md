@@ -966,7 +966,9 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   - **Current**: not met.
 - <a id="CAP-002"></a>**[CAP-002: named schema list](CAP-002.md)** · adopted · An endpoint returns
   every named schema. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
-  - **Current**: met, by the store's schema snapshot, which holds every named schema ([As built](CAP-002.md#as-built)).
+  - **Current**: met in mbse-rest's main, by a snapshot's schemas transaction, which holds every named schema; under
+    [CAP-290: a service's store stacked, with no snapshot](CAP-290.md), by the install transactions that made them
+    ([As built](CAP-002.md#as-built)).
 - <a id="CAP-003"></a>**[CAP-003: schema inspector](CAP-003.md)** · adopted · Given a schema's name,
   the UI obtains its full detail, unnamed schemas defined inline and named ones referenced. *Implements* [FEA-003: no-code logical views](../features/FEA-003.md).
   - **Current**: blocked: mbse-schemas cannot yet write one schema object as a document.
@@ -1020,13 +1022,14 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   - **Current**: not met.
 - <a id="CAP-210"></a>**[CAP-210: relation entries created, edited and removed in the relation inspector](CAP-210.md)** · proposed · Relation entries are created, edited and removed in the relation inspector. *Implements* [FEA-005: inspector views](../features/FEA-005.md). *Relates to* [CAP-023: relation inspector, read-only](CAP-023.md).
   - **Current**: not met.
-- <a id="CAP-013"></a>**[CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md)** · adopted · An in-memory store journaled to DynamoDB,
-  with occasional snapshots, replayed at startup. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
-  - **Current**: to assess.
+- <a id="CAP-013"></a>**[CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md)** · superseded by
+  [CAP-289: journals kept in DynamoDB](#CAP-289) · An in-memory store journaled to DynamoDB, with occasional snapshots,
+  replayed at startup. It is refined by a journal kept in DynamoDB, with no snapshot, below the service's store
+  ([CAP-290: a service's store stacked, with no snapshot](CAP-290.md)). *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
 - <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until committed](CAP-176.md)** · proposed · A
   transaction's changes are held in builders and mutation frames until it commits, so that one refused or failed
   leaves nothing to undo; where a persistence stack journals, it commits once the journal accepts it. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
-  [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  [CAP-290: a service's store stacked, with no snapshot](CAP-290.md).
   - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
 - <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received: its entries in order, each a transaction's effect (CAP-269), read from any position and inserted at one. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
   - **Current**: met in mbse-journals 0.2.0 (checked in its main at 58c34b9: suite JRN passes in both languages, at
@@ -1051,26 +1054,26 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
     100% coverage, against the store kept in memory).
 - <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the
   journal storage interface (CAP-288), with an index of each object's values and entries kept current from it, from
-  which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: met in mbse-dynamodb 0.1.0 (checked in its main at 7981bc8: mbse-journals' JRN-01..08 pass with each
     journal kept in DynamoDB, as mbse-schemas' BLW-01..13 do over it, at 100% coverage, against moto; its DynamoDB Local
     cases not yet run).
-- <a id="CAP-290"></a>**CAP-290: a service's store stacked, with no snapshot** · proposed · mbse-rest's service serves a
+- <a id="CAP-290"></a>**[CAP-290: a service's store stacked, with no snapshot](CAP-290.md)** · proposed · mbse-rest's service serves a
   store given a store below, a database's, and persists by its journal alone: no snapshot is taken or read, and a
   client is sent a store's schemas as the install transactions that made them; its client implements every method of
-  the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md).
-  - **Current**: not met.
+  the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
+  - **Current**: not met (built on mbse-rest's branch `CAP-290`, not merged: [Design](CAP-290.md#design)).
 - <a id="CAP-291"></a>**CAP-291: journals kept in MongoDB** · proposed · A journal is kept in MongoDB, self-hosted or
   managed, meeting the journal storage interface (CAP-288), with an index of each object's values and entries, in a new
   repository mbse-mongodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-220: persistence in other NoSQL stores](CAP-220.md).
   - **Current**: not met.
-- <a id="CAP-200"></a>**[CAP-200: journals persisted to AWS S3](CAP-200.md)** · proposed · A journal is persisted in AWS S3, by a new repository mbse-s3. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+- <a id="CAP-200"></a>**[CAP-200: journals persisted to AWS S3](CAP-200.md)** · proposed · A journal is persisted in AWS S3, by a new repository mbse-s3. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-289: journals kept in DynamoDB](#CAP-289).
   - **Current**: not met.
-- <a id="CAP-202"></a>**[CAP-202: journals persisted to MySQL](CAP-202.md)** · proposed · A journal is persisted in MySQL, by a new repository mbse-mysql. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+- <a id="CAP-202"></a>**[CAP-202: journals persisted to MySQL](CAP-202.md)** · proposed · A journal is persisted in MySQL, by a new repository mbse-mysql. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md), [CAP-289: journals kept in DynamoDB](#CAP-289).
   - **Current**: not met.
 - <a id="CAP-208"></a>**[CAP-208: a store initialized from its app's schemas](CAP-208.md)** · proposed · An app's store, and the database it persists to, is initialized from the app's schemas. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: not met.
-- <a id="CAP-220"></a>**[CAP-220: persistence in other NoSQL stores](CAP-220.md)** · proposed · A store persists in NoSQL stores besides DynamoDB. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-202: journals persisted to MySQL](CAP-202.md), [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+- <a id="CAP-220"></a>**[CAP-220: persistence in other NoSQL stores](CAP-220.md)** · proposed · A store persists in NoSQL stores besides DynamoDB. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-202: journals persisted to MySQL](CAP-202.md), [CAP-289: journals kept in DynamoDB](#CAP-289).
   - **Current**: not met.
 - <a id="CAP-014"></a>**[CAP-014: properties as markdown](CAP-014.md)** · adopted · Object properties as markdown, viewed and
   edited in the inspector. *Implements* [FEA-007: property kinds](../features/FEA-007.md).

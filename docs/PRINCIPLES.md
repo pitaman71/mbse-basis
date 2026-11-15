@@ -162,7 +162,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   types. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003). *Relates to* [PRI-012: model published standards](#PRI-012).
   *Applied in*: mbse-rest's wire format ([CAP-012: logical view endpoints](capabilities/CAP-012.md)); mbse-dynamodb's
   table, which keeps JSON rather than DynamoDB maps, whose numbers would lose `1` against `1.0`
-  ([CAP-013: an in-memory store journaled to DynamoDB](capabilities/CAP-013.md)).
+  ([CAP-289: journals kept in DynamoDB](capabilities/README.md#CAP-289)).
 - <a id="PRI-025"></a>**PRI-025: never guess the schema** · adopted · "Never guess the schema": what a value is, is never inferred from
   the shape of its data. A reader tracks the expected schema as context while traversing wire data, and the wire
   names a value's schema wherever that context leaves it open. *Relates to* [PRI-026: serialization through the
@@ -316,9 +316,11 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   [INI-105](../proposals/PRIORITIES.md#ini-105--nope-plan-category), not tackled yet. Until then tech debt is a
   capability of an internal feature ([the basis](README.md#other-documents)), and [PRI-018: no model needs code to read or write](#PRI-018) is absorbed as
   [CAP-282: no model needs code to read or write](capabilities/README.md#CAP-282).
-- **Snapshots, the first nope.** [CAP-127: snapshots made of transactions](capabilities/CAP-127.md) is met in mbse-schemas, and mbse-rest, mbse-dynamodb and
-  the conformance corpora of three repositories use snapshots; under [FEA-028: one Store interface, lazy by default](features/FEA-028.md), each is to be superseded
-  or replaced, as [the stacked stores proposal](../proposals/STACKED-STORES.md) proposes.
+- **Snapshots, the first nope.** [CAP-127: snapshots made of transactions](capabilities/CAP-127.md) is met in mbse-schemas, and mbse-rest's service and the
+  conformance corpora of three repositories use snapshots; under [FEA-028: one Store interface, lazy by default](features/FEA-028.md), each is to be superseded
+  or replaced, as [the stacked stores proposal](../proposals/STACKED-STORES.md) proposes: mbse-rest's service by
+  [CAP-290: a service's store stacked, with no snapshot](capabilities/CAP-290.md), over a journal kept with no snapshot
+  ([CAP-289: journals kept in DynamoDB](capabilities/README.md#CAP-289)); the corpora are open.
 - **[PRI-015: concrete references are programmatic](#PRI-015) and [PRI-017: transforms, models, dialects, schemas](#PRI-017) to [PRI-019: fluent builder syntax](#PRI-019): what they serve.** Which qualities each serves is still to state.
 - **[PRI-001: declaration order](#PRI-001)'s exception and a proposal against it.** Decide whether entries sorted by their relation's key are a
   deliberate exception (an order by value, for byte-identity) or a debt against [PRI-001: declaration order](#PRI-001). [CAP-033: undeclared properties preserved](capabilities/CAP-033.md#open-questions)
