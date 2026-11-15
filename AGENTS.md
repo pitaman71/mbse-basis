@@ -29,3 +29,7 @@ These may be read selectively, on demand: [Vocabulary](docs/VOCABULARY.md) and [
   language directory (`python3/` or `typescript5/`), under the installed package's root (Python: the `site-packages`
   directory that holds `mbse/`; npm: the package's directory), where the package ships that file; otherwise
   `https://github.com/pitaman71/<repo>/blob/main/<path>`.
+- When a pull request merges, the agent that opened it deletes its branch on the remote and locally, and removes the
+  worktree or workspace that held it, without asking. The agent also removes any clone, link or scratch checkout that
+  it made for the work, once that work is merged. A checkout with uncommitted changes is kept until its owner, or the
+  user, says that the changes may be discarded.
