@@ -692,7 +692,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-285"></a>**CAP-285: writes through, others' writes in** · proposed · A store given a store below sends each
   transaction it commits to it as its effect ([CAP-270: a transaction's changes observed at its commit](README.md#CAP-270)), and applies each effect the store below
   observes to what it has loaded, in mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-schemas 0.26.16 (checked in its main at 21da28d: BLW-01..13 pass in both languages, at
+    100% coverage).
 - <a id="CAP-286"></a>**CAP-286: an extent through ownership** · proposed · A store's extent of a schema is found from
   the ownership paths its schemas give from the singletons, by closing the ownership relations along them, loading
   nothing ahead; closing ownership is a store method, which a store below may answer in one call, in mbse-schemas, in
