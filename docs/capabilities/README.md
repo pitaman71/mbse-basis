@@ -729,6 +729,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   a symbol's schema being the object's where it is present, else the one its path implies; in mbse-schemas, in
   TypeScript, and in Python where the interface is shared. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
+- <a id="CAP-306"></a>**CAP-306: a public store-below interface** · proposed · What a store asks of the store below it is
+  a public interface of mbse-schemas, which a store below implements without being a `Builders.Store` nor overriding
+  any of its private methods: an object's document by its path, a transaction's changes given as plain data and
+  committed or refused, what it committed of them given back, each committed transaction reported to its followers in
+  order, and whether it records transactions (`Provenance`); mbse-dynamodb's store and mbse-rest's client and service are written against it alone, in
+  mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [PRI-043: framework interfaces authoritative and versatile](../PRINCIPLES.md#PRI-043).
+  - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
