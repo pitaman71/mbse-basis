@@ -37,6 +37,12 @@ The user's decisions (2026-11-14):
 - **A store below that answers later is a capability of its own** ("agreed - make it a separate CAP"):
   [CAP-304: a store below that answers later](../docs/capabilities/README.md#CAP-304).
 
+The user's decisions (2026-11-15):
+
+- **What a store asks of the store below it is a public interface**, a capability of its own ("yes"):
+  [CAP-305: a public store-below interface](../docs/capabilities/README.md#CAP-305), so that a store below depends on no
+  private part of mbse-schemas ([PRI-043: framework interfaces authoritative and versatile](../docs/PRINCIPLES.md#PRI-043)).
+
 ## The stack
 
 Each layer implements the store interface, and each but the lowest is given the store below it:
