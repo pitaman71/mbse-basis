@@ -170,14 +170,12 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   language's own semantics, to a closed constructor expression at the root
   ([VOC-034: closed constructor expression](../VOCABULARY.md#VOC-034)), which is its evaluation. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
-  - **Current**: The capability is not met. The check ran on mbse-expressions' main branch at commit 1c4be74, after #54
-    merged. Both coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The
-    conformance corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. Python3,
-    TypeScript5, C, C++ and SystemVerilog now fold every kind that the evaluation inventory gives class (a), as
-    Patterns, MATLAB and Excel already did. C Preprocessor's `defined`, SystemVerilog Constraints' seven kinds and
-    thirteen shapes within folded kinds still stay in the residual. The simplifier's test of success is still a literal
-    at the root, and the simplifier does not yet write every closed constructor expression, such as C's `(short)3` or
-    Python's set display ([As built](CAP-295.md#as-built-mbse-expressions)).
+  - **Current**: The capability is not met. The check ran on mbse-expressions' main branch at commit 1c4be74. Both
+    coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The conformance
+    corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. Python3, TypeScript5, C,
+    C++ and SystemVerilog fold every kind that the evaluation inventory gives class (a), as Patterns, MATLAB and Excel
+    do. Five class (a) shapes within folded kinds stay in the residual. The simplifier's test of success is a literal at
+    the root, and the simplifier does not write every closed constructor expression ([Design](CAP-295.md#design)).
 - <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](README.md#CAP-296)** ·
   proposed · An expression of one dialect whose leaf terms mix literals, arguments or variables, and parameters is
   simplified by its dialect, each known leaf substituted and each closed subterm folded. *Implements*
@@ -203,7 +201,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   is. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
   [CAP-114: parameter bindings are substituted and checked](CAP-114.md), [CAP-181: parameters wherever literals may appear](CAP-181.md).
   - **Current**: not met; in plan, as the user decided (2026-11-13).
-- <a id="CAP-299"></a>**[CAP-299: simplification across a sub-dialect](README.md#CAP-299)** · proposed · An expression
+- <a id="CAP-299"></a>**[CAP-299: simplification across a sub-dialect](CAP-299.md)** · proposed · An expression
   that involves a sub-dialect (a host reading its sublanguage's terms: a cast's type, a `randomize() with` constraint, a
   preprocessor condition) is simplified, each part by its own dialect. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
@@ -318,6 +316,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     and in 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates
     at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed,
     its outputs identical).
+- <a id="CAP-307"></a>**CAP-307: layouts of bit-precise integers and `nullptr_t` stored by the ABI dialects** · proposed ·
+  Each ABI dialect stores the size and the alignment of C's `_BitInt(N)` and of `nullptr_t`, as its psABI lays them
+  out, so that `sizeof` and `alignof` of those types fold. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
+  [CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md), [CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md).
+  - **Current**: The capability is not met.
 - <a id="CAP-268"></a>**[CAP-268: standards as tagged data](CAP-268.md)** · proposed · Each dialect covers the
   editions of its standards as data, each found by its body's designation or a common name, and records the kinds each
   has. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-226: complete expression dialects](CAP-226.md),
