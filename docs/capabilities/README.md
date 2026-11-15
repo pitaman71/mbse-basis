@@ -1092,7 +1092,9 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   store given a store below, a database's, and persists by its journal alone: no snapshot is taken or read, and a
   client is sent a store's schemas as the install transactions that made them; its client implements every method of
   the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
-  - **Current**: not met (built on mbse-rest's branch `CAP-290`, not merged: [Design](CAP-290.md#design)).
+  - **Current**: met in mbse-rest 0.2.0 (checked in its main at 6e5816c: mbse-schemas' BLW-01..16 and mbse-journals'
+    JRN-01..08 pass through its client in Python and TypeScript; the service over a store kept in DynamoDB, under moto,
+    in mbse-dynamodb's main at dab7f35).
 - <a id="CAP-291"></a>**CAP-291: journals kept in MongoDB** · proposed · A journal is kept in MongoDB, self-hosted or
   managed, meeting the journal storage interface (CAP-288), with an index of each object's values and entries, in a new
   repository mbse-mongodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-220: persistence in other NoSQL stores](CAP-220.md).
