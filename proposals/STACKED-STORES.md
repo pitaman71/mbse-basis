@@ -161,8 +161,7 @@ labeled with the repository and number it was decided under.
 - **(mbse-schemas 31)** **An entry is applied from an object present it links.** An effect writes each entry on the
   adjacency of one object it links; where that object is not present above, the store above writes it from one that
   is, through that object's adjacency by name. One that links no object present is left out. One whose objects present
-  have no adjacency to it by name is refused where it is applied, as an effect is refused where no object it links has
-  one ("name one").
+  have no adjacency to it by name is applied directly, as the (mbse-schemas 34) decision below states.
 - **(mbse-schemas 31)** **Deleting an object not present deletes, among those present, what reached it.** Removing
   the owning entry of an object not present removes every entry that links it, or anything it owns, and so deletes
   each object present it owns; these follow from the removal, which alone is reported, as a deletion's cascade is.
@@ -205,7 +204,8 @@ labeled with the repository and number it was decided under.
   commits, or a time passes. A read by position, rather than a stream held open, is what a synchronous transport can
   make (below), passes any proxy, and is plain polling where it is not held open. The positions are the service's own,
   under a name of the feed's; it keeps the latest 10 000; a position before them, or another feed's, as after a
-  restart, is refused (410), and the client's store is made again.
+  restart, is refused (410), and the client's store is made again. A write gives two transactions: the service
+  store's own, then the record the store below made of it (`Provenance`), applied as the store below's writes are.
 - **(mbse-rest 19)** **A client's followers are given each transaction from the change feed, its own among them.** At
   its own commit they are given nothing; it reads the feed after each of its transactions, before each, and when
   polled, and gives them each in the order the service committed it, once.
