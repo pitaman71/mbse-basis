@@ -29,6 +29,14 @@ The user's decisions (2026-11-12):
 - **An extent is found through ownership**: "A store client can compute this by introspecting schemas. Then closing
   ownership relations. The latter may be exposed as a store method if it is useful."
 
+The user's decisions (2026-11-14):
+
+- **A transaction is recorded once, in the lowest store** ("yes, the lowest store"): a store above records none
+  (`Provenance`), and sends the transaction's `uid`, `when`, `session` and `where` below with its changes; the record the
+  lowest store makes reaches the stores above as the store below's writes do.
+- **A store below that answers later is a capability of its own** ("agreed - make it a separate CAP"):
+  [CAP-304: a store below that answers later](../docs/capabilities/README.md#CAP-304).
+
 ## The stack
 
 Each layer implements the store interface, and each but the lowest is given the store below it:
@@ -101,7 +109,7 @@ decided (2026-11-13):
 
 In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework): the five steps above are
 [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283), [CAP-284: objects loaded on demand](../docs/capabilities/README.md#CAP-284), [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285),
-[CAP-286: an extent through ownership](../docs/capabilities/README.md#CAP-286) and [CAP-287: lazy or eager, tuned when it runs](../docs/capabilities/README.md#CAP-287), in mbse-schemas; mbse-rest's part is
+[CAP-286: an extent through ownership](../docs/capabilities/README.md#CAP-286) and [CAP-287: lazy or eager, tuned when it runs](../docs/capabilities/README.md#CAP-287), in mbse-schemas, with [CAP-304: a store below that answers later](../docs/capabilities/README.md#CAP-304); mbse-rest's part is
 [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
 
 ## Snapshots today, and what replaces each
@@ -198,10 +206,14 @@ labeled with the repository and number it was decided under.
 - **(mbse-rest 19)** **An install a client is given is sent to the service**, which runs it in its store and the store
   below, and serves it after the installs it holds, once: a client is given its schemas as any store is, and gives
   them to the store it stands for. The installs served are those the service was given, not read from a journal.
-- **(mbse-rest 19)** **A transaction written through carries its record's data below.** Where its expression gives
-  them, its `uid`, `when`, `session` and `where` go below with its changes, so that a store below with `Provenance`
-  installed finds the record the store above made, by its `uid`, rather than making one of its own, which the store
-  above, given it back, could not apply.
+- **(mbse-schemas 34)** **The lowest store is the one whose store below records nothing.** A store records each
+  transaction it commits where the store below it does not (`Store.records`): one with no store below, or one over a
+  store below that does not record, such as a database store's own index, records; one over another store does not.
+- **(mbse-schemas 34)** **An entry no object present has an adjacency to by name is applied directly.** Applying the
+  store below's transaction, an entry that no object present it links has an adjacency to by name, as Provenance's
+  `CreatedBy` and `ModifiedBy` on an object extended by an anonymous adjacency, is written to the tables of the
+  objects present it links, the others linked by their paths, rather than refused; applied again, it changes nothing.
+  Only such an entry linking a counted object, which has no path, is refused.
 - **(mbse-rest 19)** **The client's transport is synchronous**, as mbse-schemas' store interface is: in Node, a request
   waits on a worker thread that fetches; in a browser, it is a synchronous `XMLHttpRequest`, best made from a worker.
 - **(mbse-rest 19)** **A view that writes is refused before it runs where its frames cannot bind the view's symbols**,
@@ -219,9 +231,10 @@ labeled with the repository and number it was decided under.
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
   write as well as what they hold; it touches the corpora of three repositories.
 - **A transaction applied above, refused there.** A store above that cannot apply what the store below committed, an
-  entry it has no adjacency by name to write, raises within the store below's report of its commit: the writer below,
-  whose transaction has committed, is given the error, and the store below's later followers are not told. Whether a
-  store above should instead hold such a transaction aside, and report it, is open.
+  entry linking a counted object that no object present has an adjacency to by name, raises within the store below's
+  report of its commit: the writer below, whose transaction has committed, is given the error, and the store below's
+  later followers are not told. Whether a store above should instead hold such a transaction aside, and report it, is
+  open.
 - **Identity by path, where an ownership key changes.** A store keeps each object it loaded by its path; an object whose
   owning entry is rewritten with other keys is at a new path, and a store above that loaded it by its old one holds it
   there still.
@@ -231,10 +244,6 @@ labeled with the repository and number it was decided under.
   and journals no install. Journaling the installs, at the journal's head, would let a process open a store knowing
   none of its schemas, and is what replaces mbse-rest's `GET /schemas` above; it asks a store to report an install as
   it reports a transaction's changes.
-- **A synchronous store interface over a network.** A store reads an object's document, and sends a transaction's
-  changes, within a call that returns them; over REST, a browser's client makes that call with a synchronous
-  `XMLHttpRequest`, which blocks the page while the service answers unless it is made from a worker. Whether
-  mbse-schemas' store interface should let a store below answer later, as a promise, is open.
 - **One change feed for many instances of a service.** Each instance numbers its own feed, so that a client keeps to
   one; reading the store below's journal by its own positions, where it keeps one, would let a client read from any.
 - **Where this is built in order**: after the journal and its storage interface in mbse-journals, or beside them, since
