@@ -305,7 +305,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   simplification returns a literal as the simplified root, that is equivalent to successful evaluation". A dialect
   simplifies by its own language's semantics; what cannot be simplified stays in the residual, never refused. *Serves*
   [QUA-002: open-world models](QUALITIES.md#QUA-002), [QUA-006: the same in every language](QUALITIES.md#QUA-006). *Relates to* [PRI-002: preserve, don't lose](#PRI-002),
-  [PRI-007: three-valued checking on request](#PRI-007). *Applied in*: [CAP-295: simplification of single-dialect expressions with literal leaves](capabilities/README.md#CAP-295) to
+  [PRI-007: three-valued checking on request](#PRI-007). *Applied in*: [CAP-295: simplification of single-dialect expressions with literal leaves](capabilities/CAP-295.md) to
   [CAP-302: simplification of expressions with statements](capabilities/README.md#CAP-302).
 
 ## Open items

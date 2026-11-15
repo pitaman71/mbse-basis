@@ -165,22 +165,32 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical).
 - <a id="CAP-099"></a>**[CAP-099: partial evaluation](CAP-099.md)** · proposed · An expression is reduced over the variables given, to a residual that agrees with it wherever it evaluates. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
-- <a id="CAP-295"></a>**[CAP-295: simplification of single-dialect expressions with literal leaves](README.md#CAP-295)**
+- <a id="CAP-295"></a>**[CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md)**
   · proposed · An expression of one dialect whose leaf terms are all literals is simplified by its dialect, by its
   language's own semantics, to a literal: its evaluation. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
-  - **Current**: not met; in plan, as the user decided (2026-11-13).
+  - **Current**: not met (checked on mbse-expressions' main at 1c4be74, #54: both gates at 100% in both languages,
+    TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical):
+    Python3, TypeScript5, C, C++ and SystemVerilog fold every kind the evaluation inventory gives class (a), as
+    Patterns, MATLAB and Excel did; C Preprocessor's `defined`, SystemVerilog Constraints' 7 kinds and 13 shapes within
+    folded kinds stay ([As built](CAP-295.md#as-built-mbse-expressions)).
 - <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](README.md#CAP-296)** ·
   proposed · An expression of one dialect whose leaf terms mix literals, arguments or variables, and parameters is
   simplified by its dialect, each known leaf substituted and each closed subterm folded. *Implements*
   [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md),
   [CAP-181: parameters wherever literals may appear](CAP-181.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
-  - **Current**: not met; in plan, as the user decided (2026-11-13).
-- <a id="CAP-297"></a>**[CAP-297: simplification in every binding state](README.md#CAP-297)** · proposed · An expression
+  - **Current**: not met (checked on mbse-expressions' main at 1c4be74, #54: both gates at 100% in both languages,
+    TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical):
+    literals and variables as [CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md)
+    folds them; parameters wait on [CAP-181: parameters wherever literals may appear](CAP-181.md), not yet modeled.
+- <a id="CAP-297"></a>**[CAP-297: simplification in every binding state](CAP-297.md)** · proposed · An expression
   of one dialect is simplified fully bound (to a literal), partially bound (to a residual of the same dialect) and fully
   unbound (to itself, or simpler), alike. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
-  - **Current**: not met; in plan, as the user decided (2026-11-13).
+  - **Current**: met (checked on mbse-expressions' main at 1c4be74, #54: both gates at 100% in both languages,
+    TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical;
+    suites PAR, PYS, TSS, CCS and SVS), a subterm its language may never evaluate staying in the residual since #54 ([As
+    built](CAP-297.md#as-built-mbse-expressions)).
 - <a id="CAP-298"></a>**[CAP-298: simplification over type parameters](README.md#CAP-298)** · proposed · An expression
   that involves type parameters, but no type algebra, is simplified, a bound type parameter substituted as any parameter
   is. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
