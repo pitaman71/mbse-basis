@@ -209,7 +209,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   involves type algebra (types computed from types) is simplified. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-298: simplification over type parameters](#CAP-298).
   - **Current**: not met; deferred, as the user decided (2026-11-13).
-- <a id="CAP-301"></a>**[CAP-301: simplification delegated to a surrogate dialect](README.md#CAP-301)** · proposed · An
+- <a id="CAP-301"></a>**[CAP-301: simplification delegated to a surrogate dialect](CAP-301.md)** · proposed · An
   expression containing terms whose evaluation delegates to a surrogate dialect (a lowering into the standard dialects,
   or a language's own runtime) is simplified through it. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-203: evaluators delegating to per-language libraries](CAP-203.md), [CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md).
@@ -728,6 +728,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   mbse-rest's client in a browser, blocks nothing while it waits; building a transaction's expression loads nothing,
   a symbol's schema being the object's where it is present, else the one its path implies; in mbse-schemas, in
   TypeScript, and in Python where the interface is shared. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
+- <a id="CAP-306"></a>**CAP-306: a public store-below interface** · proposed · What a store asks of the store below it is
+  a public interface of mbse-schemas, which a store below implements without being a `Builders.Store` nor overriding
+  any of its private methods: an object's document by its path, a transaction's changes given as plain data and
+  committed or refused, what it committed of them given back, each committed transaction reported to its followers in
+  order, and whether it records transactions (`Provenance`); mbse-dynamodb's store and mbse-rest's client and service are written against it alone, in
+  mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [PRI-043: framework interfaces authoritative and versatile](../PRINCIPLES.md#PRI-043).
   - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
