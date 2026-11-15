@@ -209,7 +209,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   involves type algebra (types computed from types) is simplified. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-298: simplification over type parameters](#CAP-298).
   - **Current**: not met; deferred, as the user decided (2026-11-13).
-- <a id="CAP-301"></a>**[CAP-301: simplification delegated to a surrogate dialect](README.md#CAP-301)** · proposed · An
+- <a id="CAP-301"></a>**[CAP-301: simplification delegated to a surrogate dialect](CAP-301.md)** · proposed · An
   expression containing terms whose evaluation delegates to a surrogate dialect (a lowering into the standard dialects,
   or a language's own runtime) is simplified through it. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-203: evaluators delegating to per-language libraries](CAP-203.md), [CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md).
