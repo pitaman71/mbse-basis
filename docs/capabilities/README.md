@@ -1046,7 +1046,9 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 - <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the
   journal storage interface (CAP-288), with an index of each object's values and entries kept current from it, from
   which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-dynamodb 0.1.0 (checked in its main at 7981bc8: mbse-journals' JRN-01..08 pass with each
+    journal kept in DynamoDB, as mbse-schemas' BLW-01..13 do over it, at 100% coverage, against moto; its DynamoDB Local
+    cases not yet run).
 - <a id="CAP-290"></a>**CAP-290: a service's store stacked, with no snapshot** · proposed · mbse-rest's service serves a
   store given a store below, a database's, and persists by its journal alone: no snapshot is taken or read, and a
   client is sent a store's schemas as the install transactions that made them; its client implements every method of
