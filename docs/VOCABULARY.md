@@ -72,7 +72,7 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   value that has identity (an object, a closure, a list that two places share) can be rebuilt only as an equal value,
   not as the same value. A value from outside the dialect, such as a host object or a data object, has no constructor
   in the dialect's language. A value in an intermediate state, such as a partly consumed generator, has no
-  constructor for that state. The user adopted the term on 2026-11-15: "Yes I like "closed constructor expression"".
+  constructor for that state.
   *Never*: "a value that has no literal", where the text means a value that a closed constructor expression could
   construct.
 - <a id="VOC-026"></a>**VOC-026: schema** · adopted · **Schema**: what describes a value, a property's, a symbol's, a branch's or a part's, and what

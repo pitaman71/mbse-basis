@@ -223,10 +223,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met; deferred, as the user decided (2026-11-13).
 - <a id="CAP-305"></a>**[CAP-305: simplification's options, chosen up front](CAP-305.md)** · proposed · Where a
   dialect's simplification could follow either of two defensible behaviors, the caller chooses one before simplifying,
-  as a parameter of the scope, and the behavior that version 0.11.0 built is the default. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
+  as a parameter of the scope, with a default for each. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014), [PRI-042: optionality kept](../PRINCIPLES.md#PRI-042), [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
   [CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md).
-  - **Current**: The capability is not met. The user decided on 2026-11-15 to propose it.
+  - **Current**: The capability is not met.
 - <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
   dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version
