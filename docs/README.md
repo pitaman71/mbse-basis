@@ -225,7 +225,7 @@ and cites the entry rather than describe the decision again.
 - **IDs are permanent.** Never renumber or reuse one; supersede instead. Moving an item into the `XYZ-123` scheme keeps
   its old ID as an alias.
 - **One entry per item in its index**: ID, status, one sentence, relations, and for a feature, external or internal.
-  Rationale, examples and history go in an optional detail file, `features/FEA-005.md`, `principles/PRI-002.md`,
+  Rationale and examples go in an optional detail file, `features/FEA-005.md`, `principles/PRI-002.md`,
   linked from the entry and read only when needed.
 - **Bridge, don't duplicate.** A statement has one source of truth. Every other mention links to it, introduced by
   bridge language: just enough to tie the current text to the target that a reader can keep reading without following
@@ -262,6 +262,10 @@ and cites the entry rather than describe the decision again.
   conditions. Brevity never justifies dropping a verb, a subject or a referent: a document stays short by partitioning
   and linking its content ([PRI-045: docs optimized for efficient representation and selective consumption](PRINCIPLES.md#PRI-045)), not by
   compressing its sentences.
+- **State what is true now.** The user set this direction on 2026-11-15. A document states what is true now. How a
+  statement came to be, such as an earlier name, an earlier behavior or the date on which a statement moved, is
+  recorded in the message of the commit that changed it, not in the document. A decision that the user took is still
+  recorded, with its date and its quotation, in its item's Decided section, because the decision itself is current.
 
 ---
 
