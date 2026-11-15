@@ -123,9 +123,29 @@ def upstream_of(checkout: Path, branch: str) -> str:
     return git(checkout, "rev-parse", "--abbrev-ref", f"{branch}@{{upstream}}")
 
 
+def dependency_arrays(text: str) -> list[tuple[int, int]]:
+    """Where pyproject.toml's `text` lists requirements: [project] dependencies, and each array of
+    [project.optional-dependencies] and [dependency-groups]; no other string there is a requirement."""
+    spans, table = [], ""
+    for match in re.finditer(r'^\[+([^\]\n]+)\]|^([\w-]+)\s*=\s*(\[(?:\s|,|"[^"]*"|\{[^}]*\}|#.*)*\])', text, re.M):
+        if match[1]:
+            table = match[1].strip()
+        elif (table, match[2]) == ("project", "dependencies") or table in ("project.optional-dependencies",
+                                                                             "dependency-groups"):
+            spans.append(match.span(3))
+    return spans
+
+
+def requirements(text: str, name: str) -> list[re.Match[str]]:
+    """The requirements of `name`, with or without extras, in pyproject.toml's `text`: each match's group 2 is its
+    range, between the name and its markers; strings and comments that are not requirements of `name` are skipped."""
+    pattern = re.compile(rf'"({re.escape(name)}(?:\[[^\]]*\])?)(?![\w.-])([^";]*)[^"]*"|"[^"]*"|#.*')
+    return [m for start, end in dependency_arrays(text) for m in pattern.finditer(text, start, end) if m[1]]
+
+
 def required(name: str) -> list[str]:
     """The version ranges pyproject.toml requires of `name`, with or without extras."""
-    return re.findall(rf'"{re.escape(name)}(?:\[[^\]]*\])?([^"]*)"', PYPROJECT.read_text())
+    return [m[2] for m in requirements(PYPROJECT.read_text(), name)]
 
 
 def check(strict: bool) -> int:
@@ -191,7 +211,8 @@ def pin() -> int:
         if version is not None:
             entry["version"] = version
         if version is not None and text is not None and has_python(sibling):
-            text = re.sub(rf'"({re.escape(name)}(?:\[[^\]]*\])?)[^"]*"', rf'"\g<1>{requirement(version)}"', text)
+            for match in reversed(requirements(text, name)):
+                text = text[:match.start(2)] + requirement(version) + text[match.end(2):]
         entry["commit"] = git(sibling, "rev-parse", "HEAD")
         print(f"{name}: pinned {version or 'by commit'} at {entry['commit'][:7]}")
         if not git(sibling, "branch", "--remotes", "--contains", entry["commit"]):

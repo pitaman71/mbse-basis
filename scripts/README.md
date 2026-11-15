@@ -54,7 +54,8 @@ that you edit, commit and branch as usual, side by side instead of nested. The l
 A repository has a Python package, a TypeScript one, or both, which carry its version alike. The version is the
 compatibility contract: a sibling is compatible when it has the same major version (below 1.0, the same minor) and is no
 older. Where both this repository and the sibling have Python packages, `python3/pyproject.toml` requires exactly that
-range; a TypeScript `file:` dependency has no range, so `check` alone holds it to the contract. A release is the tag
+range, in `[project] dependencies`, `[project.optional-dependencies]` and `[dependency-groups]`, the only strings `pin`
+rewrites; a TypeScript `file:` dependency has no range, so `check` alone holds it to the contract. A release is the tag
 `v<version>`. A sibling without packages, such as mbse-basis, has no version: it is pinned by commit alone and never
 tagged.
 
