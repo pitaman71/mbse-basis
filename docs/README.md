@@ -256,6 +256,12 @@ and cites the entry rather than describe the decision again.
   their conjunction is the objective. Overlapping items are not duplicates; never merge them to remove the overlap.
 - **Keep each index short, about 10 KB**: a guideline, which is ranked well below keeping the documents
   organized.
+- **Write complete sentences.** The user decided this rule on 2026-11-15. Every statement is a complete sentence,
+  with an explicit subject and a finite verb, and each sentence makes one claim. "A pronoun is used only when its
+  antecedent is unambiguous within the same paragraph." A decision states who decides what, and under which
+  conditions. Brevity never justifies dropping a verb, a subject or a referent: a document stays short by partitioning
+  and linking its content ([PRI-045: docs optimized for efficient representation and selective consumption](PRINCIPLES.md#PRI-045)), not by
+  compressing its sentences.
 
 ---
 
