@@ -219,7 +219,9 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   default branch: it is done on a branch, the same name in each repository it changes, pushed after every commit with
   `polyrepo.py push` (which pushes the siblings first, and refuses a branch behind its remote or a pin of a commit the
   sibling lacks), and proposed in one pull request per repository, listing the decisions taken for review
-  ([the basis](README.md#detail-files), Decided by an agent, for review). *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010).
+  ([the basis](README.md#detail-files), Decided by an agent, for review). When a pull request merges, the agent that
+  opened it deletes the merged branch on the remote and locally, and removes the workspace that held it, without
+  asking, as the user decided. The agent also removes any clone or link that it made for the work. *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010).
 - <a id="PRI-034"></a>**PRI-034: tutorials run as tests, committed with their outputs** · proposed · Each tutorial
   ([the basis](README.md#the-doc-spec), Tutorials) is run by the repository's test suite, `tutorials/` beside `tests/`; the languages tell the same case
   studies with the same outputs; and a tutorial is committed with its outputs, re-executed after any change that
