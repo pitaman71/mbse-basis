@@ -407,6 +407,34 @@ class Workspaces(unittest.TestCase):
             polyrepo.version_of(web)
         self.assertIn("web: its packages must each have the version, alike; they have [None]", str(raised.exception))
 
+    def test_pin_rewrites_only_requirements(self) -> None:
+        """pin and check read and rewrite only the dependency arrays, and only the strings naming a sibling exactly."""
+        upper = self.repos / "upper"
+        pyproject = upper / "python3" / "pyproject.toml"
+        pyproject.write_text('[project]\nversion = "0.1.0"\ndescription = "middle, for lower"\n'
+                             'keywords = ["lower", "middle>=0.0.1"]\n'
+                             'dependencies = [\n    "lower>=0.0.1",  # "middle" in a comment\n'
+                             '    "middle[extra] >=0.0.1",\n    "lower-tools>=1.0",\n]\n\n'
+                             '[project.optional-dependencies]\nall = ["middle>=0.0.1; python_version >= \'3.11\'"]\n\n'
+                             '[dependency-groups]\ndev = [{include-group = "test"}, "lower>=0.0.1"]\n'
+                             'test = ["middle"]\n\n'
+                             '[tool.notes]\ndependencies = ["lower is not a requirement here"]\n')
+        self.pin(upper)
+        self.assertEqual(pyproject.read_text(),
+                         '[project]\nversion = "0.1.0"\ndescription = "middle, for lower"\n'
+                         'keywords = ["lower", "middle>=0.0.1"]\n'
+                         'dependencies = [\n    "lower>=0.1.0,<0.2",  # "middle" in a comment\n'
+                         '    "middle[extra]>=0.1.0,<0.2",\n    "lower-tools>=1.0",\n]\n\n'
+                         '[project.optional-dependencies]\nall = ["middle>=0.1.0,<0.2; python_version >= \'3.11\'"]\n\n'
+                         '[dependency-groups]\ndev = [{include-group = "test"}, "lower>=0.1.0,<0.2"]\n'
+                         'test = ["middle>=0.1.0,<0.2"]\n\n'
+                         '[tool.notes]\ndependencies = ["lower is not a requirement here"]\n')
+        with self.at(upper):
+            self.assertEqual(polyrepo.required("lower"), [">=0.1.0,<0.2", ">=0.1.0,<0.2"])
+            self.assertEqual(polyrepo.required("middle"), [">=0.1.0,<0.2"] * 3)
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(polyrepo.main(upper, ["check", "--strict"]), 0)
+
     def test_root_is_the_checkout_of_the_current_directory(self) -> None:
         (self.repos / "upper" / "python3").mkdir(exist_ok=True)
         self.assertEqual(polyrepo.root_of(self.repos / "upper" / "python3"), self.repos / "upper")

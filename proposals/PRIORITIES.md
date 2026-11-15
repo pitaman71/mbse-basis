@@ -76,6 +76,7 @@ mbse-journals, in build order:
 - [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285), in mbse-schemas
 - [CAP-286: an extent through ownership](../docs/capabilities/README.md#CAP-286), in mbse-schemas
 - [CAP-287: lazy or eager, tuned when it runs](../docs/capabilities/README.md#CAP-287), in mbse-schemas
+- [CAP-304: a store below that answers later](../docs/capabilities/README.md#CAP-304), in mbse-schemas
 - [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/CAP-290.md), in mbse-rest
 - [CAP-291: journals kept in MongoDB](../docs/capabilities/README.md#CAP-291)
 - [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272)

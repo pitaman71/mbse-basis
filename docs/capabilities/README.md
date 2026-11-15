@@ -703,6 +703,12 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   keeps or lets go, are settings given when it runs, lazy by default, never code that uses it, in mbse-schemas, in
   Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
+- <a id="CAP-304"></a>**CAP-304: a store below that answers later** · proposed · A store below may give an object's
+  document, and commit or refuse a transaction's changes, later, as a promise, so that a store over a network, such as
+  mbse-rest's client in a browser, blocks nothing while it waits; building a transaction's expression loads nothing,
+  a symbol's schema being the object's where it is present, else the one its path implies; in mbse-schemas, in
+  TypeScript, and in Python where the interface is shared. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
@@ -1048,14 +1054,14 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
     100% coverage, against the store kept in memory).
 - <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the
   journal storage interface (CAP-288), with an index of each object's values and entries kept current from it, from
-  which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
+  which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
   - **Current**: met in mbse-dynamodb 0.1.0 (checked in its main at 7981bc8: mbse-journals' JRN-01..08 pass with each
     journal kept in DynamoDB, as mbse-schemas' BLW-01..13 do over it, at 100% coverage, against moto; its DynamoDB Local
     cases not yet run).
 - <a id="CAP-290"></a>**[CAP-290: a service's store stacked, with no snapshot](CAP-290.md)** · proposed · mbse-rest's service serves a
   store given a store below, a database's, and persists by its journal alone: no snapshot is taken or read, and a
   client is sent a store's schemas as the install transactions that made them; its client implements every method of
-  the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
   - **Current**: not met (built on mbse-rest's branch `CAP-290`, not merged: [Design](CAP-290.md#design)).
 - <a id="CAP-291"></a>**CAP-291: journals kept in MongoDB** · proposed · A journal is kept in MongoDB, self-hosted or
   managed, meeting the journal storage interface (CAP-288), with an index of each object's values and entries, in a new
