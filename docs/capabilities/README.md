@@ -617,6 +617,12 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
   apart from another's. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
+- <a id="CAP-315"></a>**[CAP-315: every read within a transaction](CAP-315.md)** · proposed · Every read of a store,
+  of a data object's values and entries or a reference resolved, happens within a transaction open on that store, as
+  every write does; a read with no transaction open is refused. *Implements*
+  [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to* [CAP-124: writes all-or-nothing in transactions](CAP-124.md),
+  [CAP-311: references stabilized](#CAP-311).
+  - **Current**: The capability is not met.
 - <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · proposed · Code that calls builders
   writes within a transaction's imperative scope, all or nothing, as an expression's terms do. *Implements*
   [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).

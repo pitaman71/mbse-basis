@@ -141,6 +141,9 @@ cases (BLW-01 to BLW-20) and the suites of mbse-rest and mbse-dynamodb depend on
 gives the schema that the reference implies, and the caller decides what an unresolved reference means: validation
 reports it, and simplification leaves it in the residual.
 
+Every resolution of a reference happens within a transaction open on the store, and a resolution with none open is
+refused, as every read is ([CAP-315: every read within a transaction](../docs/capabilities/CAP-315.md)).
+
 ### The wire form
 
 A reference is written in the plain form as any value object is. Where the schema that the reader expects at a node
@@ -160,8 +163,10 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
 1. [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311), in mbse-schemas: `References.OfParameter`;
    an object reference's canonical identity; a resolution that never loads, and a public function for the schema a
    reference implies; and one wire form for references. It adds the resolution that never loads beside the existing
-   resolution, which it leaves as it is. It changes no behavior that a caller sees but the written form of a reference,
-   and it lands first, so that the stacked stores' work continues on a stable `References`.
+   resolution, which it leaves as it is. It changes two behaviors that a caller sees: the written form of a reference,
+   and a resolution with no transaction open, which it refuses, as the first stage of [CAP-315: every read within a
+   transaction](../docs/capabilities/CAP-315.md) requires. It lands first, so that the stacked stores' work continues on
+   a stable `References`.
 2. [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
 3. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may bind
