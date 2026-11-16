@@ -45,6 +45,12 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 
 ## INI-010 : schemas framework
 
+Design: [parameter references, and references as first-class values](PARAMETER-REFERENCES.md).
+
+- [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311): not met
+- [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312): not met
+- [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313): not met
+
 ## INI-011 : object + relation + pattern framework
 
 Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/main/docs/proposals/rescope/README.md). Patterns over data ([FEA-023: patterns over data](../docs/features/FEA-023.md)), in mbse-patterns 0.10.0:
