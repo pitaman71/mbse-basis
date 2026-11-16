@@ -42,6 +42,10 @@ The user's decisions (2026-11-15):
 - **What a store asks of the store below it is a public interface**, a capability of its own ("yes"):
   [CAP-306: a public store-below interface](../docs/capabilities/README.md#CAP-306), so that a store below depends on no
   private part of mbse-schemas ([PRI-043: framework interfaces authoritative and versatile](../docs/PRINCIPLES.md#PRI-043)).
+- **An install reaches the store below by a member of its own**: of an `install(plain)` beside `commit` and `follow`,
+  or installs sent through `commit` and reported by `follow`, the user chose the first ("1."). `commit` and `follow` carry
+  data changes alone; a store runs each install the store below first, so that a store below given no schemas of its
+  own holds those of the stores above it. Whether a journal is headed by its installs stays open.
 
 ## The stack
 
