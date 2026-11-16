@@ -90,6 +90,16 @@ each transaction itself, loading each object it reads by a request of its own, a
   >
   > This also implies that clients must be capable of receiving a frame with identical bindings more than once,
   > treating each subsequent arrival as a re-evaluation or replacement for the previous arrival.
+- **Frames are those already implemented**: a frame comes back up the stack as `References.OfFrame`, each symbol bound
+  to an object by its reference and each variable to its value ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)); the user asked, of what a
+  frame carries, "frames are already implemented - where?".
+- **No read of an object a store does not hold, outside a transaction**: a proxy's `.get()` of an object a cache layer
+  does not hold "should not be possible"; nothing but the loading these capabilities replace uses it.
+- **Others' writes reach a cache layer by a follow**: "continuous synchronization requires a `follow`", the store
+  below reporting each transaction it commits, as `Changes.observe` and mbse-journals' `follow` do; they apply to the
+  objects present alone, as [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285)'s second decision has it.
+- **An install keeps a method of its own, where that is simpler**: "I do not object to the separate `Store.install`
+  method, if preserving it avoids noticably increased net complexity."
 
 ## Stacking by mutation transactions
 
@@ -325,24 +335,8 @@ labeled with the repository and number it was decided under.
 - **Stacking by mutation transactions: what is open.** Each to be decided as
   [CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308) to [CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310) are planned:
   - the "minor adjustments to the vocabulary of mutations" the layers need to cooperate;
-  - what a frame carries back up, so that a cache layer holds what it was given: the bound objects' values and
-    entries, or their paths alone;
-  - a read outside any transaction, as a proxy's `.get()` of an object a cache layer does not hold: a transaction of
-    its own, or no read at all of what no transaction brought up;
-  - how others' writes reach a cache layer ([CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285)'s second decision), in streaming terms;
-  - an install, a transaction that writes schemas, as any transaction is, in place of `install(plain)`;
   - what of [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283) to [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285), met as built, these capabilities supersede, and what
     of mbse-rest and mbse-dynamodb is rewritten.
-
-- **A transaction down the stack and back up, in one round trip.** The user (2026-11-15): "The Store interface supports
-  stacking by passing mutation transactions down the stack and back up - all of it in a single round trip." As built,
-  a store above interprets a transaction itself, over what it holds, and loads each object it reads that it does not
-  hold, a `.get()` among them, by a read of its own from the store below (`document(path)`), applied above by a
-  transaction of its own, before it sends what it changed below (`commit`); and a transaction that writes schemas and
-  data is sent below as two (`install`, then `commit`). So one transaction above is many requests below. To be taken up
-  again: whether a store above passes each transaction below whole, the lowest store executing it and what it committed
-  and read coming back up in one answer, reads being transactions too, so that `document` and loading object by object
-  go.
 
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
