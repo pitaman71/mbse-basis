@@ -730,18 +730,41 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   keeps or lets go, are settings given when it runs, lazy by default, never code that uses it, in mbse-schemas, in
   Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
-- <a id="CAP-304"></a>**CAP-304: a store below that answers later** · proposed · A store below may give an object's
+- <a id="CAP-304"></a>**CAP-304: a store below that answers later** · superseded by [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · A store below may give an object's
   document, and commit or refuse a transaction's changes, later, as a promise, so that a store over a network, such as
   mbse-rest's client in a browser, blocks nothing while it waits; building a transaction's expression loads nothing,
   a symbol's schema being the object's where it is present, else the one its path implies; in mbse-schemas, in
   TypeScript, and in Python where the interface is shared. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
-- <a id="CAP-306"></a>**CAP-306: a public store-below interface** · proposed · What a store asks of the store below it is
+- <a id="CAP-306"></a>**CAP-306: a public store-below interface** · superseded by [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · What a store asks of the store below it is
   a public interface of mbse-schemas, which a store below implements without being a `Builders.Store` nor overriding
   any of its private methods: an object's document by its path, a transaction's changes given as plain data and
   committed or refused, what it committed of them given back, an install, a transaction that writes schemas, run,
   each committed transaction reported to its followers in order, and whether it records transactions (`Provenance`); mbse-dynamodb's store and mbse-rest's client and service are written against it alone, in
   mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [PRI-043: framework interfaces authoritative and versatile](../PRINCIPLES.md#PRI-043).
+  - **Current**: built in mbse-schemas 0.26.24 (`Stores.Below`), mbse-rest and mbse-dynamodb written against it; to be
+    removed as CAP-308 replaces it.
+- <a id="CAP-308"></a>**CAP-308: stacking by mutation transactions, in one round trip** · proposed · A stack of stores
+  has one interface, the Store interface's own: a client sends a mutation transaction, whose embedded queries mix
+  reads, computations and writes of paths, properties and adjacencies, and receives a stream of frames; each layer
+  passes the transaction to the layer below and streams frames back, so that it goes down the stack and comes back up
+  in one round trip, always processed as a stream, the lowest layer executing it within its database's transaction; a
+  client receives a frame with the same bindings more than once, each later arrival replacing the one before; the
+  vocabulary of mutations adjusted where the layers need it; in mbse-schemas, in Python and TypeScript, with mbse-rest
+  and mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md), [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: not met.
+- <a id="CAP-309"></a>**CAP-309: errors annotated on frames** · proposed · An error that occurs while a mutation
+  transaction is processed is annotated on the frames it concerns; an unresolvable error partway through interpreting
+  the expression gives a partially bound frame, preferred to none; in mbse-schemas, in Python and TypeScript.
+  *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
+  - **Current**: not met.
+- <a id="CAP-310"></a>**CAP-310: a cache layer's partial-aware interpretation** · proposed · A cache layer, a store over
+  another, forwards a mutation transaction to the layer below and at once interprets it recursively over what it
+  holds, given the original expression, a handle to the subterm it evaluates, and, for each symbol that should be bound
+  there, a stream of candidates; a frame it binds fully it streams to the client at once; where the layer below streams
+  back a frame with the same bindings that conflicts with one given, as in a property's value, the cache takes the layer
+  below's and gives the client that frame, which replaces the one given before; in mbse-schemas, in Python and
+  TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
