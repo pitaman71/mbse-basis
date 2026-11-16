@@ -518,7 +518,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   parameters are declared through `Parametrics`, a module installed before use, which validates them. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: met in mbse-schemas 0.24.0.
-- <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · proposed · A definition binds
+- <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · superseded by [CAP-314: parameters bound by the data objects their schema governs](#CAP-314) · A definition binds
   each of its parameters to a value or an object, through `Parametrics`' bindings. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
@@ -549,6 +549,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   where an enclosing definition declares and binds its parameter to a value of the schema that the reference stands
   for, and validation reports it as invalid otherwise. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
   [CAP-312: a reference in place of any value](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
+  [the parametrics proposal](../../proposals/PARAMETRICS.md).
+  - **Current**: The capability is not met.
+- <a id="CAP-314"></a>**CAP-314: parameters bound by the data objects their schema governs** · proposed · A schema may
+  declare parameters, and a data object that the schema governs may bind any of them; a parameter that the object leaves
+  unbound stays unbound. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-313: parameter references bound and validated](#CAP-313),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 ### Deterministic object identity
