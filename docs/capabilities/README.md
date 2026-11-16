@@ -538,18 +538,18 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   canonical form; resolving a reference never loads from a store below, and a public function gives the schema a
   reference implies; and the plain form writes every reference in one form. *Implements* [FEA-033: model parameters](../features/FEA-033.md),
   [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [CAP-130: references to objects, entries and frames](CAP-130.md),
-  [the parameter references proposal](../../proposals/PARAMETER-REFERENCES.md).
+  [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 - <a id="CAP-312"></a>**CAP-312: a reference in place of any value** · proposed · Wherever mbse-schemas expects a
   value of a schema, a reference may stand in its place, valid where it resolves to something of that schema; the
   proxies, validation and the plain form apply that one rule, in both languages. *Implements* [FEA-033: model parameters](../features/FEA-033.md).
-  *Relates to* [CAP-311: references stabilized](#CAP-311), [the parameter references proposal](../../proposals/PARAMETER-REFERENCES.md).
+  *Relates to* [CAP-311: references stabilized](#CAP-311), [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 - <a id="CAP-313"></a>**CAP-313: parameter references bound and validated** · proposed · A parameter reference is valid
   where an enclosing definition declares and binds its parameter to a value of the schema that the reference stands
   for, and validation reports it as invalid otherwise. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
   [CAP-312: a reference in place of any value](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
-  [the parameter references proposal](../../proposals/PARAMETER-REFERENCES.md).
+  [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 ### Deterministic object identity
 
