@@ -239,9 +239,30 @@ labeled with the repository and number it was decided under.
   committed reaches its clients.
 - **(mbse-rest 19)** **The service over a store kept in DynamoDB is tested in mbse-dynamodb**, which has mbse-rest as a
   test dependency, so that neither repository depends on the other at run time, nor each on the other.
-
+- **(mbse-rest 20)** **mbse-rest's client is a store over a remote that implements `Stores.Below`.** `Remote`
+  implements the interface over the service's endpoints (`install` by `POST /schemas`), and a client store is a plain
+  `Builders.Store` over it. It reads the change feed when polled and after each commit, a store over the interface
+  having no hook where a transaction begins: its followers may hear its own write before another's committed earlier
+  and not yet read, the data alike once both are applied. The service's own installs, which a client store is given
+  when it is made, are not sent back to it.
+- **(mbse-dynamodb 17)** **A store kept in DynamoDB implements `Stores.Below`, interpreting each transaction in a store
+  of its own.** It holds a `Builders.Store` over an index that implements the interface itself and records nothing, so
+  that its store records each transaction; the index's `commit`, within that store's transaction, writes the journal
+  entry and the index items in one DynamoDB transaction, a conflict or a failure there rolling the transaction back,
+  which is interpreted again once caught up, up to a bound, as a transaction written in a block is too. Each object's
+  document is kept as that store's `document(path)` gives it, with the objects linking it; reading one needs no install.
 
 ## Open questions
+
+- **A transaction down the stack and back up, in one round trip.** The user (2026-11-15): "The Store interface supports
+  stacking by passing mutation transactions down the stack and back up - all of it in a single round trip." As built,
+  a store above interprets a transaction itself, over what it holds, and loads each object it reads that it does not
+  hold, a `.get()` among them, by a read of its own from the store below (`document(path)`), applied above by a
+  transaction of its own, before it sends what it changed below (`commit`); and a transaction that writes schemas and
+  data is sent below as two (`install`, then `commit`). So one transaction above is many requests below. To be taken up
+  again: whether a store above passes each transaction below whole, the lowest store executing it and what it committed
+  and read coming back up in one answer, reads being transactions too, so that `document` and loading object by object
+  go.
 
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
