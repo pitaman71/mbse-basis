@@ -781,7 +781,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   transaction is processed is annotated on the frames it concerns; an unresolvable error partway through interpreting
   the expression gives a partially bound frame, preferred to none; in mbse-schemas, in Python and TypeScript.
   *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
-  - **Current**: not met.
+  - **Current**: met in mbse-schemas 0.26.26 (checked in its main at 40c408c: TXN-18 to TXN-20 and REF-10 pass in both
+    languages, at 100% coverage); a layer of a stack streaming the annotated frames is CAP-308's.
 - <a id="CAP-310"></a>**CAP-310: a cache layer's partial-aware interpretation** · proposed · A cache layer, a store over
   another, forwards a mutation transaction to the layer below and at once interprets it recursively over what it
   holds, given the original expression, a handle to the subterm it evaluates, and, for each symbol that should be bound
