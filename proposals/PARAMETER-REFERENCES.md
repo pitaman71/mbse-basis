@@ -100,8 +100,9 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
 
 1. [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311), in mbse-schemas: `References.OfParameter`;
    an object reference's canonical identity; a resolution that never loads, and a public function for the schema a
-   reference implies; and one wire form for references. It changes no behavior that a caller sees but the written
-   form of a reference, and it lands first, so that the stacked stores' work continues on a stable `References`.
+   reference implies; and one wire form for references. It adds the resolution that never loads beside the existing
+   resolution, which it leaves as it is. It changes no behavior that a caller sees but the written form of a reference,
+   and it lands first, so that the stacked stores' work continues on a stable `References`.
 2. [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
 3. [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
