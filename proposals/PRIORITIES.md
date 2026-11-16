@@ -49,6 +49,7 @@ Design: [parametrics](PARAMETRICS.md), in its order of work.
 
 - [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311): not met
 - [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312): not met
+- [CAP-117: extension adjacencies to any relation](../docs/capabilities/CAP-117.md): not met
 - [CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md): not met
 - [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313): not met
 - [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): not met

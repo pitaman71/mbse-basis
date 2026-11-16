@@ -40,6 +40,10 @@ The user decided these rules:
 - **Two kinds of binding**: "bindings" names two different things, as the user decided. A frame binds symbols to objects
   or to parameters, and it assigns values to variables; frames stay in mbse-schemas. An expression root that declares
   parameters may also bind one or more of them; those bindings go in mbse-expressions.
+- **A schema definition keeps its own bindings**: a schema definition binds its own parameters, through mbse-schemas'
+  `Parametrics.BindsValue` and `BindsObject`, as the user decided. The extension mechanism's limit on adjacencies to
+  such relations is a limitation of the builder code, not a rule, and [CAP-117: extension adjacencies to any
+  relation](../docs/capabilities/CAP-117.md) lifts it.
 - **A parameter is a named reference**: the user chose that a parameter, in an expression, is written as a name, and
   that simplification takes a parameter's value from the scope first, and from the bindings stored in a model later.
 
@@ -63,14 +67,15 @@ object schema (`Parametrics.ForObject`), exactly one. A definition holds its par
 
 ### Bound
 
-Two kinds of binding exist, in two repositories. In mbse-schemas, a frame binds its symbols to objects or to parameters,
-and it assigns values to its variables. In mbse-expressions, an expression root that declares parameters may bind one or
-more of them, and an application binds the parameters of the definition it applies, by name, and partially where it
-binds some parameters alone. A parameter given no argument stays unbound. The scope in which a parameter reference is
-resolved is the chain of frames, expression roots and applications that enclose the reference, innermost first. In
-mbse-expressions' simplification, the scope that the caller gives is also such a scope. Whether a schema definition also
-binds its own parameters, through mbse-schemas' `Parametrics.BindsValue` and `BindsObject` ([CAP-113: parameters bound
-at their definitions](../docs/capabilities/CAP-113.md)), is an open question below.
+Three kinds of binding exist, in two repositories. In mbse-schemas, a frame binds its symbols to objects or to
+parameters, and it assigns values to its variables. In mbse-expressions, an expression root that declares parameters may
+bind one or more of them, and an application binds the parameters of the definition it applies, by name, and partially
+where it binds some parameters alone. A parameter given no argument stays unbound. The scope in which a parameter
+reference is resolved is the chain of frames, expression roots and applications that enclose the reference, innermost
+first. In mbse-expressions' simplification, the scope that the caller gives is also such a scope. A schema definition
+also binds its own parameters, through mbse-schemas' `Parametrics.BindsValue`, its value an entry property, and
+`Parametrics.BindsObject`, its object a third link ([CAP-113: parameters bound at their
+definitions](../docs/capabilities/CAP-113.md)). Which adjacency holds those bindings is an open question below.
 
 ### Referenced
 
@@ -153,33 +158,36 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
    and it lands first, so that the stacked stores' work continues on a stable `References`.
 2. [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
-3. [CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md), in mbse-schemas: a definition and
-   an application bind parameters.
-4. [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
+3. [CAP-117: extension adjacencies to any relation](../docs/capabilities/CAP-117.md), in mbse-schemas: an extension's
+   adjacency may be to a relation with properties or with more than two links. Whether the bindings need it depends on
+   the open question of which adjacency holds them.
+4. [CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md), in mbse-schemas: a schema
+   definition binds its own parameters.
+5. [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
    parameter reference is valid where its scope binds it to a value of the right schema, and invalid otherwise. It
    supersedes [CAP-181: parameters wherever literals may appear](../docs/capabilities/CAP-181.md), which asked for the
    same of literals alone.
-5. [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): applying a definition
+6. [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): applying a definition
    substitutes its bindings, and checks each binding against its parameter's schema.
-6. [CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296) and
+7. [CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296) and
    [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298), in mbse-expressions: the
    simplifier's rule for a parameter reference, and the scope's bindings. These two need only CAP-311 and CAP-312,
-   because the caller's scope binds the parameters, so they may proceed beside steps 3 to 5.
-7. [CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md), in the
+   because the caller's scope binds the parameters, so they may proceed beside steps 3 to 6.
+8. [CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md), in the
    code generators and mbse-programs.
 
 ## Open questions
 
-- **A schema definition's own bindings.** mbse-schemas' `Parametrics.BindsValue` and `BindsObject` let a schema
-  definition bind its own parameters (a `Matrix` schema binding `rows` to 3). This binding is neither a frame's nor an
-  expression root's. The question is whether it is a frame's kind of binding and stays in mbse-schemas, or whether it
-  goes, because an expression root binds parameters instead. The choice is the user's.
-- **How a schema definition holds its bindings.** This question remains only if a schema definition keeps its own
-  bindings. mbse-schemas' extension mechanism, as built, gives a meta-schema only an adjacency to a relation of two
-  links and no properties (schema extension 18, which the user accepted as a compromise in schema extension 22), and
-  `BindsValue` has an entry property and `BindsObject` three links ([CAP-113: parameters bound at their
-  definitions](../docs/capabilities/CAP-113.md#open-questions) lists three ways: extend the mechanism, make bindings
-  objects, or leave them unbuilt).
+- **Which adjacency holds a schema definition's bindings.** The user decided that a kind's one extension adjacency is
+  `parameters`, and that the adjacencies `values` and `objects` are no longer needed since `Parametrics.OfParameters`
+  was introduced ([CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md#open-questions)). A
+  schema definition's bindings then reach it through its `Parametrics.OfParameters`, or through an adjacency that
+  [CAP-117: extension adjacencies to any relation](../docs/capabilities/CAP-117.md) makes possible. The choice is the
+  user's.
+- **Formals.** Function formals are objects, because the extension mechanism held only an adjacency to a relation of two
+  links and no properties, a workaround that the user accepted as a compromise (schema extension 22 in [FEA-024:
+  expressions as data](../docs/features/FEA-024.md#decided)). Once [CAP-117: extension adjacencies to any
+  relation](../docs/capabilities/CAP-117.md) lifts that limit, whether formals stay objects is a question for the user.
 - **The marker.** Which marker names a reference's schema where the reader could not tell it from a value. The plain
   form marks a refinement of a value object with `$schema`, and a reserved key, such as `$schema` naming
   `References.OfParameter`, would serve.
