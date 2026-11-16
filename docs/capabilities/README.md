@@ -633,7 +633,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   transaction that made it, and a frame holds references and values. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to*
   [CAP-124: writes all-or-nothing in transactions](CAP-124.md), [CAP-308: stacking by mutation transactions, in one round trip](#CAP-308).
   - **Current**: not met. Its first stage is met in mbse-schemas 0.26.28: no function resolves a reference from
-    outside a transaction, and a map whose symbol is given a reference resolves it.
+    outside a transaction, and a map whose symbol is given a reference resolves it. Its second stage is met in
+    mbse-schemas 0.27.0 (checked in its main at c64cb18, PR #47: every suite passes in both languages, at 100%
+    coverage): a visitor is refused after its transaction, and a frame holds references and assignments. The
+    repositories that depend on it are not yet migrated: mbse-journals, mbse-rest, mbse-dynamodb, mbse-diagrams,
+    mbse-expressions and mbse-demo-apps.
 - <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · proposed · Code that calls builders
   writes within a transaction's imperative scope, all or nothing, as an expression's terms do. *Implements*
   [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
