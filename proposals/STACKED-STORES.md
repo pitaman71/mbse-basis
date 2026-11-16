@@ -254,6 +254,16 @@ labeled with the repository and number it was decided under.
 
 ## Open questions
 
+- **A transaction down the stack and back up, in one round trip.** The user (2026-11-15): "The Store interface supports
+  stacking by passing mutation transactions down the stack and back up - all of it in a single round trip." As built,
+  a store above interprets a transaction itself, over what it holds, and loads each object it reads that it does not
+  hold, a `.get()` among them, by a read of its own from the store below (`document(path)`), applied above by a
+  transaction of its own, before it sends what it changed below (`commit`); and a transaction that writes schemas and
+  data is sent below as two (`install`, then `commit`). So one transaction above is many requests below. To be taken up
+  again: whether a store above passes each transaction below whole, the lowest store executing it and what it committed
+  and read coming back up in one answer, reads being transactions too, so that `document` and loading object by object
+  go.
+
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
   write as well as what they hold; it touches the corpora of three repositories.
