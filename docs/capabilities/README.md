@@ -547,17 +547,19 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   replaces `$ref`, and a link's `ref` is named `reference`. A schema object's reference is a reference by its path, from
   the singleton `"."`. The conformance corpora of mbse-schemas, mbse-rest, mbse-expressions and mbse-programs, the only
   data written in the forms it replaces, are regenerated. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
-  [CAP-311: references stabilized](#CAP-311), [CAP-312: a reference in place of any value](#CAP-312), [the parametrics proposal](../../proposals/PARAMETRICS.md#the-wire-form).
+  [CAP-311: references stabilized](#CAP-311), [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [the parametrics proposal](../../proposals/PARAMETRICS.md#the-wire-form).
   - **Current**: The capability is not met.
-- <a id="CAP-312"></a>**CAP-312: a reference in place of any value** · proposed · Wherever mbse-schemas expects a
-  value of a schema, a reference may stand in its place, valid where it resolves to something of that schema; the
-  proxies, validation and the plain form apply that one rule, in both languages. *Implements* [FEA-033: model parameters](../features/FEA-033.md).
-  *Relates to* [CAP-311: references stabilized](#CAP-311), [the parametrics proposal](../../proposals/PARAMETRICS.md).
+- <a id="CAP-312"></a>**[CAP-312: a parameter reference in place of anything with a schema](CAP-312.md)** · proposed ·
+  Wherever mbse-schemas expects something of a schema, a parameter reference may stand in its place, the expected schema
+  given by the context; it is read through `Visitors.OfAny.as_parameter()`, written marked, and a parameter bound to the
+  wrong kind of thing is a validation error. The proxies, validation and the plain form apply that one rule, in both
+  languages. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-311: references stabilized](#CAP-311),
+  [CAP-313: parameter references bound and validated](#CAP-313), [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 - <a id="CAP-313"></a>**CAP-313: parameter references bound and validated** · proposed · A parameter reference is valid
   where an enclosing definition declares and binds its parameter to a value of the schema that the reference stands
   for, and validation reports it as invalid otherwise. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
-  [CAP-312: a reference in place of any value](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
+  [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 - <a id="CAP-314"></a>**CAP-314: parameters bound by the data objects their schema governs** · proposed · A schema may
