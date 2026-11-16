@@ -771,7 +771,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   vocabulary of mutations adjusted where the layers need it; in mbse-schemas, in Python and TypeScript, with mbse-rest
   and mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md), [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
-- <a id="CAP-309"></a>**CAP-309: errors annotated on frames** · proposed · An error that occurs while a mutation
+- <a id="CAP-309"></a>**[CAP-309: errors annotated on frames](CAP-309.md)** · proposed · An error that occurs while a mutation
   transaction is processed is annotated on the frames it concerns; an unresolvable error partway through interpreting
   the expression gives a partially bound frame, preferred to none; in mbse-schemas, in Python and TypeScript.
   *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
