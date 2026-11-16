@@ -20,6 +20,14 @@ The user's decisions (2026-11-12):
   just that we need DynamoDB or something better to demo full stack." A journal kept in memory, or by a store meant for
   one browser, is "primarily useful for demos and testing", not a cloud or multi-user backend.
 
+The user's decisions (2026-11-15):
+
+- **A store's layout in its database is a mapping, utterly parametric**: told that a table mbse-dynamodb 0.2.0 wrote
+  has an index the store rewritten on `Stores.Below` cannot read, the user answered "okay for now. this is a very good
+  reason for the mapping from mbse-schema to dynamodb-schema to be utterly parametric": how a backend lays a store's
+  objects and journal out in its database is a mapping given as parameters, so that a layout changes, or two are read,
+  without a backend rewritten.
+
 ## What a backend must do
 
 A journal is never snapshotted ([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md#decided)), and whether an entry is
@@ -120,6 +128,11 @@ labeled with the repository and number it was decided under.
   service makes the store below it by name, each overridden by an argument; the region falls back to boto3's own.
 
 ## Open questions
+
+- **A write's cost, where an object holds many entries.** mbse-dynamodb keeps each object's document whole, so that a
+  write rewrites it, entries and all, its cost growing with the object. A write of part of a property's value is
+  [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272); a document kept in parts by entry, as the layout above may
+  give, would bound the cost of a write to an object's entries too.
 
 - **Subscribers in browsers.** A browser holds no database's credentials, so it subscribes through mbse-journals'
   sender and receiver ([CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)) rather than to a backend directly; Firestore's own
