@@ -239,7 +239,18 @@ labeled with the repository and number it was decided under.
   committed reaches its clients.
 - **(mbse-rest 19)** **The service over a store kept in DynamoDB is tested in mbse-dynamodb**, which has mbse-rest as a
   test dependency, so that neither repository depends on the other at run time, nor each on the other.
-
+- **(mbse-rest 20)** **mbse-rest's client is a store over a remote that implements `Stores.Below`.** `Remote`
+  implements the interface over the service's endpoints (`install` by `POST /schemas`), and a client store is a plain
+  `Builders.Store` over it. It reads the change feed when polled and after each commit, a store over the interface
+  having no hook where a transaction begins: its followers may hear its own write before another's committed earlier
+  and not yet read, the data alike once both are applied. The service's own installs, which a client store is given
+  when it is made, are not sent back to it.
+- **(mbse-dynamodb 17)** **A store kept in DynamoDB implements `Stores.Below`, interpreting each transaction in a store
+  of its own.** It holds a `Builders.Store` over an index that implements the interface itself and records nothing, so
+  that its store records each transaction; the index's `commit`, within that store's transaction, writes the journal
+  entry and the index items in one DynamoDB transaction, a conflict or a failure there rolling the transaction back,
+  which is interpreted again once caught up, up to a bound, as a transaction written in a block is too. Each object's
+  document is kept as that store's `document(path)` gives it, with the objects linking it; reading one needs no install.
 
 ## Open questions
 
