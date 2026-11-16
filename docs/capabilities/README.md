@@ -621,7 +621,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   follow, whose follower reads what the follow delivers; a read with no transaction open is refused, and a reference
   is resolved by a transaction whose symbol is given it. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to*
   [CAP-124: writes all-or-nothing in transactions](CAP-124.md), [CAP-308: stacking by mutation transactions, in one round trip](#CAP-308).
-  - **Current**: The capability is not met.
+  - **Current**: not met. Its first stage is met in mbse-schemas 0.26.28: no function resolves a reference from
+    outside a transaction, and a map whose symbol is given a reference resolves it.
 - <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · proposed · Code that calls builders
   writes within a transaction's imperative scope, all or nothing, as an expression's terms do. *Implements*
   [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
