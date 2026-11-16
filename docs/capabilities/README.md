@@ -535,9 +535,20 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met.
 - <a id="CAP-311"></a>**CAP-311: references stabilized** · proposed · mbse-schemas' `References` defines
   `References.OfParameter` beside its other references; an object reference has one canonical identity, its path in one
-  canonical form; and the plain form writes every reference in one form. *Implements* [FEA-033: model parameters](../features/FEA-033.md),
+  canonical form. *Implements* [FEA-033: model parameters](../features/FEA-033.md),
   [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [CAP-130: references to objects, entries and frames](CAP-130.md),
-  [the parametrics proposal](../../proposals/PARAMETRICS.md).
+  [CAP-316: one written form for references](#CAP-316), [the parametrics proposal](../../proposals/PARAMETRICS.md).
+  - **Current**: met in mbse-schemas 0.26.27 (checked in its main at 2c520f4: REF-11 and BLW-21 pass in both
+    languages, at 100% coverage).
+- <a id="CAP-316"></a>**CAP-316: one written form for references** · proposed · The plain form writes every reference
+  in one form, in place of the forms it uses now: `{"reference": ...}` in effects, `{"ref": ...}` in documents' specs,
+  and `$ref` in the nested expression form. Where the schema that the reader expects at a node already says that the
+  node holds a reference, the reference is written bare; where the reader could take the node for a value of the
+  expected schema, it carries a reference to its schema. A reference to a schema object, whose path starts at the
+  singleton `"."`, is kept apart from a reference to data, because the two resolve differently. The conformance corpora
+  of mbse-schemas and mbse-rest, the only data written in the forms it replaces, are regenerated in both languages.
+  *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-311: references stabilized](#CAP-311),
+  [CAP-312: a reference in place of any value](#CAP-312), [the parametrics proposal](../../proposals/PARAMETRICS.md#the-wire-form).
   - **Current**: The capability is not met.
 - <a id="CAP-312"></a>**CAP-312: a reference in place of any value** · proposed · Wherever mbse-schemas expects a
   value of a schema, a reference may stand in its place, valid where it resolves to something of that schema; the

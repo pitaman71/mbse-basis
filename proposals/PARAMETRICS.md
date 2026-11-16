@@ -149,33 +149,35 @@ form for references, in place of the forms it uses today (`{"reference": ...}` i
 specs, and `$ref` in the nested expression form). The written form keeps a reference to a schema object, whose path
 starts at the singleton `"."`, apart from a reference to data, because the two resolve differently: a schema path
 through the store's schemas, and a data path through its objects. Changing the written form changes the conformance
-corpora of mbse-schemas and mbse-rest, which the same change regenerates in both languages.
+corpora of mbse-schemas and mbse-rest, the only data written in the forms it replaces, which the same change
+regenerates in both languages ([CAP-316: one written form for references](../docs/capabilities/README.md#CAP-316)).
 
 ## Capabilities
 
 Each capability is one increment of [FEA-033: model parameters](../docs/features/FEA-033.md) or of
 [FEA-028: one Store interface, lazy by default](../docs/features/FEA-028.md), in the order of work:
 
-1. [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311), in mbse-schemas: `References.OfParameter`;
-   an object reference's canonical identity; and one wire form for references. It changes no behavior that a caller
-   sees but the written form of a reference, and it lands first, so that the stacked stores' work continues on a stable
-   `References`.
-2. [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
+1. [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311), in mbse-schemas: `References.OfParameter`
+   and an object reference's canonical identity. It landed first, so that the stacked stores' work continues on a
+   stable `References`.
+2. [CAP-316: one written form for references](../docs/capabilities/README.md#CAP-316), in mbse-schemas: the plain form
+   writes every reference in one form. It changes no behavior that a caller sees but the written form of a reference.
+3. [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
-3. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may bind
+4. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may bind
    the parameters that its schema declares. It supersedes [CAP-113: parameters bound at their
    definitions](../docs/capabilities/CAP-113.md), which bound a parameter at its schema.
-4. [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
+5. [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
    parameter reference is valid where its scope binds it to a value of the right schema, and invalid otherwise. It
    supersedes [CAP-181: parameters wherever literals may appear](../docs/capabilities/CAP-181.md), which asked for the
    same of literals alone.
-5. [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): applying a definition
+6. [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): applying a definition
    substitutes its bindings, and checks each binding against its parameter's schema.
-6. [CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296) and
+7. [CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296) and
    [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298), in mbse-expressions: the
    simplifier's rule for a parameter reference, and the scope's bindings. These two need only CAP-311 and CAP-312,
-   because the caller's scope binds the parameters, so they may proceed beside steps 3 to 5.
-7. [CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md), in the
+   because the caller's scope binds the parameters, so they may proceed beside steps 4 to 6.
+8. [CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md), in the
    code generators and mbse-programs.
 
 ## Open questions
