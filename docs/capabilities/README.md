@@ -535,8 +535,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met.
 - <a id="CAP-311"></a>**CAP-311: references stabilized** · proposed · mbse-schemas' `References` defines
   `References.OfParameter` beside its other references; an object reference has one canonical identity, its path in one
-  canonical form; resolving a reference never loads from a store below, and a public function gives the schema a
-  reference implies; and the plain form writes every reference in one form. *Implements* [FEA-033: model parameters](../features/FEA-033.md),
+  canonical form; and the plain form writes every reference in one form. *Implements* [FEA-033: model parameters](../features/FEA-033.md),
   [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [CAP-130: references to objects, entries and frames](CAP-130.md),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
@@ -617,11 +616,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
   apart from another's. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-315"></a>**[CAP-315: every read within a transaction](CAP-315.md)** · proposed · Every read of a store,
-  of a data object's values and entries or a reference resolved, happens within a transaction open on that store, as
-  every write does; a read with no transaction open is refused. *Implements*
-  [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to* [CAP-124: writes all-or-nothing in transactions](CAP-124.md),
-  [CAP-311: references stabilized](#CAP-311).
+- <a id="CAP-315"></a>**[CAP-315: every read within a transaction or through a follow](CAP-315.md)** · proposed · Every
+  read of a store happens within a transaction that the store's layer interprets, as every write does, or through a
+  follow, whose follower reads what the follow delivers; a read with no transaction open is refused, and a reference
+  is resolved by a transaction whose symbol is given it. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to*
+  [CAP-124: writes all-or-nothing in transactions](CAP-124.md), [CAP-308: stacking by mutation transactions, in one round trip](#CAP-308).
   - **Current**: The capability is not met.
 - <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · proposed · Code that calls builders
   writes within a transaction's imperative scope, all or nothing, as an expression's terms do. *Implements*

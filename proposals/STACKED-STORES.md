@@ -101,6 +101,17 @@ each transaction itself, loading each object it reads by a request of its own, a
 - **An install keeps a method of its own, where that is simpler**: "I do not object to the separate `Store.install`
   method, if preserving it avoids noticably increased net complexity."
 
+Later, as the user decided:
+
+- **Each layer has its own transaction interpreter**: "each layer of the stack gets its own transaction interpreter
+  (not executor) instance. This instance is of a class that is internally coupled with the stack layer on which it
+  operators. It does not need to use the `Store` interface to access its own stack layer. It is acceptable for there to
+  be a base class, perhaps one that encapsulates consistent interpretation. But then it must provide hooks that the
+  various kinds of stores can expose to the interpreter."
+- **A follow is coupled with its layer**: "A follower reads what the follow delivers, and Follower subscriptions are
+  layer-coupled as well." A follow is the one alternative to a transaction for reading a store
+  ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md#decided)).
+
 ## Stacking by mutation transactions
 
 As the user decided (2026-11-16), a stack of stores has one interface, the Store interface's own: a mutation
@@ -109,6 +120,14 @@ mix reads, computations and writes of paths, properties and adjacencies, and rec
 stream; errors are annotated on frames, and an unresolvable error partway through gives a partially bound frame
 ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309)). Each layer takes the same transaction and streams frames back, so that a transaction goes down the stack and
 its frames come back up in one round trip.
+
+Each layer interprets a transaction with an interpreter of its own: an instance of a class coupled with the layer,
+which reads and writes the layer directly, not through the Store interface. A base class holds what every layer
+interprets alike, so that each refuses what every layer refuses: binding symbols, frames, unique clauses and errors
+annotated on frames. Each kind of store gives the base class hooks for what only that kind knows: the object at a path
+among what it holds, the entries of a relation that link an object, the schema that a path implies, and what it does
+where it holds no such object. A store in memory finds none there. A cache layer forwards the transaction to the layer
+below. A follow that a layer gives is coupled with the layer too, and its follower reads only what it delivers.
 
 A cache layer, a store over another, does two things with a transaction at once: it forwards the transaction to the
 layer below, and it interprets it itself, partially, over what it holds ([CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310)). Where its own interpretation binds a
@@ -254,11 +273,6 @@ labeled with the repository and number it was decided under.
 - **(mbse-schemas 30)** **Loading is no transaction of the store's.** An object's document is applied as the store's
   committed data, outside any transaction open, observed by no follower, recorded by no provenance and checked by
   nothing.
-- **(mbse-dynamodb 15)** **A store kept in a database is a `Builders.Store`, over its own index.** The lowest store
-  interprets each transaction it is given with mbse-schemas' own interpreter, in a `Builders.Store` of its own whose
-  store below is its index, so that it refuses what every store refuses and holds its schemas as any store does; its
-  objects load from the index on demand, as a store above's do, and what other processes commit is applied to them as
-  a store above applies the store below's. It needs no change to mbse-schemas.
 - **(mbse-dynamodb 15)** **A store below is given its schemas apart.** A transaction that writes only schemas reports
   no changes, so that a store above sends no install below and none is journaled: each process gives the store kept in
   a database its installs, as an app gives its own store its installs. Whether a journal also begins with them is open
