@@ -37,6 +37,9 @@ The user decided these rules:
   [PRI-026: serialization through the visitor protocol](../docs/PRINCIPLES.md#PRI-026), applied to references.
 - **Stacked stores in parallel**: "We should plan the work to stabilize references so that the stacked stores work can
   resume in paralell asap."
+- **Two kinds of binding**: "bindings" names two different things, as the user decided. A frame binds symbols to objects
+  or to parameters, and it assigns values to variables; frames stay in mbse-schemas. An expression root that declares
+  parameters may also bind one or more of them; those bindings go in mbse-expressions.
 - **A parameter is a named reference**: the user chose that a parameter, in an expression, is written as a name, and
   that simplification takes a parameter's value from the scope first, and from the bindings stored in a model later.
 
@@ -60,13 +63,14 @@ object schema (`Parametrics.ForObject`), exactly one. A definition holds its par
 
 ### Bound
 
-A definition binds its own parameters, and an application binds the parameters of the definition it applies
-([CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md)). A binding is
-`Parametrics.BindsValue`, its value an entry property, or `Parametrics.BindsObject`, its object a third link. A
-parameter given no argument stays unbound, and an application binds by name, partially where it binds some parameters
-alone. The scope in which a parameter reference is resolved is the chain of definitions and applications that enclose
-the reference, innermost first. In mbse-expressions' simplification, the scope that the caller gives is also such a
-scope.
+Two kinds of binding exist, in two repositories. In mbse-schemas, a frame binds its symbols to objects or to parameters,
+and it assigns values to its variables. In mbse-expressions, an expression root that declares parameters may bind one or
+more of them, and an application binds the parameters of the definition it applies, by name, and partially where it
+binds some parameters alone. A parameter given no argument stays unbound. The scope in which a parameter reference is
+resolved is the chain of frames, expression roots and applications that enclose the reference, innermost first. In
+mbse-expressions' simplification, the scope that the caller gives is also such a scope. Whether a schema definition also
+binds its own parameters, through mbse-schemas' `Parametrics.BindsValue` and `BindsObject` ([CAP-113: parameters bound
+at their definitions](../docs/capabilities/CAP-113.md)), is an open question below.
 
 ### Referenced
 
@@ -166,16 +170,16 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
 
 ## Open questions
 
-- **Where bindings live.** The user decided that "parameters that denote domains are moved to mbse-expressions
-  entirely" and that "all bindings will need to move into mbse-expressions"
-  ([CAP-112: parameters modeled as schema data](../docs/capabilities/CAP-112.md#decided)). This proposal puts the
-  parameter reference, and its validation, in mbse-schemas, where any data may hold one. The question is whether
-  bindings, and the value parameters they bind, stay in mbse-schemas' `Parametrics` with the reference, or move to
-  mbse-expressions as decided before. The choice is the user's.
-- **How a definition holds its bindings.** mbse-schemas' extension mechanism refuses an adjacency to a relation with
-  properties or with three links, so no kind can hold `BindsValue` or `BindsObject` today
-  ([CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md#open-questions) lists three ways:
-  extend the mechanism, make bindings objects, or leave them unbuilt until something binds).
+- **A schema definition's own bindings.** mbse-schemas' `Parametrics.BindsValue` and `BindsObject` let a schema
+  definition bind its own parameters (a `Matrix` schema binding `rows` to 3). This binding is neither a frame's nor an
+  expression root's. The question is whether it is a frame's kind of binding and stays in mbse-schemas, or whether it
+  goes, because an expression root binds parameters instead. The choice is the user's.
+- **How a schema definition holds its bindings.** This question remains only if a schema definition keeps its own
+  bindings. mbse-schemas' extension mechanism, as built, gives a meta-schema only an adjacency to a relation of two
+  links and no properties (schema extension 18, which the user accepted as a compromise in schema extension 22), and
+  `BindsValue` has an entry property and `BindsObject` three links ([CAP-113: parameters bound at their
+  definitions](../docs/capabilities/CAP-113.md#open-questions) lists three ways: extend the mechanism, make bindings
+  objects, or leave them unbuilt).
 - **The marker.** Which marker names a reference's schema where the reader could not tell it from a value. The plain
   form marks a refinement of a value object with `$schema`, and a reserved key, such as `$schema` naming
   `References.OfParameter`, would serve.
