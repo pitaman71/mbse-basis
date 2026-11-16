@@ -170,12 +170,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   language's own semantics, to a closed constructor expression at the root
   ([VOC-034: closed constructor expression](../VOCABULARY.md#VOC-034)), which is its evaluation. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md), [CAP-106: expressions evaluated three-valued](CAP-106.md).
-  - **Current**: The capability is not met. The check ran on mbse-expressions' main branch at commit 1c4be74. Both
-    coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The conformance
-    corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. Python3, TypeScript5, C,
-    C++ and SystemVerilog fold every kind that the evaluation inventory gives class (a), as Patterns, MATLAB and Excel
-    do. Five class (a) shapes within folded kinds stay in the residual. The simplifier's test of success is a literal at
-    the root, and the simplifier does not write every closed constructor expression ([Design](CAP-295.md#design)).
+  - **Current**: The capability is met. The check ran on mbse-expressions' branch `cap295` at commit 179d0c0, whose code
+    mbse-expressions' main holds at commit eb8516d. Both coverage gates reached 100% in both languages, and TypeScript's
+    gate passed on Node 22, 24 and 26. The conformance corpora were byte-identical, and every tutorial, re-executed,
+    gave its committed outputs ([As built](CAP-295.md#as-built-mbse-expressions)).
 - <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](README.md#CAP-296)** ·
   proposed · An expression of one dialect whose leaf terms mix literals, arguments or variables, and parameters is
   simplified by its dialect, each known leaf substituted and each closed subterm folded. *Implements*
@@ -224,7 +222,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   as a parameter of the scope, with a default for each. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014), [PRI-042: optionality kept](../PRINCIPLES.md#PRI-042), [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
   [CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md).
-  - **Current**: The capability is not met.
+  - **Current**: The capability is not met. The simplifier behaves as the first option's default, writing a C or C++
+    value whose type has no literal of its own as a cast of a literal, but no option is a parameter of the scope.
 - <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
   dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version
