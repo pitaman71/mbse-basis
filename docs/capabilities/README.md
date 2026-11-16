@@ -617,7 +617,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   apart from another's. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-315"></a>**[CAP-315: every read within a transaction or through a follow](CAP-315.md)** · proposed · Every
-  read of a store happens within a transaction that the store's layer interprets, as every write does, or through a
+  read of a store's data happens within a transaction that the store's layer interprets, as every write does, or through a
   follow, whose follower reads what the follow delivers; a read with no transaction open is refused, and a reference
   is resolved by a transaction whose symbol is given it. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to*
   [CAP-124: writes all-or-nothing in transactions](CAP-124.md), [CAP-308: stacking by mutation transactions, in one round trip](#CAP-308).
