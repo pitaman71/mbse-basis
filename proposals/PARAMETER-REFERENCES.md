@@ -63,7 +63,10 @@ definition that declares the parameter (`Parametrics.HasParameters`) and binds i
 `Parametrics.BindsObject`). In mbse-expressions' simplification, the enclosing scope is also the scope that the caller
 gives. An object reference resolves through a store, against what the store holds or what a transaction brought back.
 Resolution never fetches from a store below on its own, because a transaction goes down a stack of stores whole and
-comes back up in one round trip. A resolution that finds nothing gives the schema that the reference implies, and the
+comes back up in one round trip. That resolution is added beside the existing one, which loads an object from a store
+below when a link to it is read; the existing resolution stays as it is until the stacked stores' revised design
+replaces it, because mbse-schemas' store-below cases (BLW-01 to BLW-20) and the suites of mbse-rest and mbse-dynamodb
+depend on it. A resolution that finds nothing gives the schema that the reference implies, and the
 caller decides what an unresolved reference means: validation reports it, and simplification leaves it in the
 residual.
 
@@ -78,7 +81,10 @@ A reference is written in the plain form as any value object is. Where the schem
 already says that the node holds a reference, the reference is written bare. Where the reader could take the node for
 a value of the expected schema, the reference carries a marker that names its schema. The plain form uses one written
 form for references, in place of the forms it uses today (`{"reference": ...}` in effects, `{"ref": ...}` in documents'
-specs, and `$ref` in the nested expression form).
+specs, and `$ref` in the nested expression form). The written form keeps a reference to a schema object, whose path
+starts at the singleton `"."`, apart from a reference to data, because the two resolve differently: a schema path
+through the store's schemas, and a data path through its objects. Changing the written form changes the conformance
+corpora of mbse-schemas and mbse-rest, which the same change regenerates in both languages.
 
 ### Simplification and code generation
 
