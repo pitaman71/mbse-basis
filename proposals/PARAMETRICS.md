@@ -126,20 +126,19 @@ a value before generating ([CAP-163: parameters bound, applied and generated bey
 An object reference's identity is its path, written in one canonical form, so that two equal paths give one identity
 whatever the order of their keys. A link's key, and so the key of every relation entry, is built from that identity.
 
-### Resolution never loads
+### Resolution
 
-A parameter reference resolves through a binding in its scope. An object reference resolves through a store, against
-what the store holds or what a transaction brought back. That resolution never fetches from a store below on its own,
-because a transaction goes down a stack of stores whole and comes back up in one round trip. The stacked stores' design
-rules out reading an object that a store does not hold outside a transaction, and brings frames back up the stack as
-`References.OfFrame`, each object by its reference ([the stacked stores proposal](STACKED-STORES.md#decided)).
-mbse-schemas' private placeholder for an object of the store below, `Proxies._Unresolved`, therefore becomes a
-`References.OfObject`. The resolution that never loads is added beside the existing one, which loads an object from a
-store below when a link to it is read; the existing resolution stays as it is until [CAP-308: stacking by mutation
-transactions, in one round trip](../docs/capabilities/README.md#CAP-308) replaces it, because mbse-schemas' store-below
-cases (BLW-01 to BLW-20) and the suites of mbse-rest and mbse-dynamodb depend on it. A resolution that finds nothing
-gives the schema that the reference implies, and the caller decides what an unresolved reference means: validation
-reports it, and simplification leaves it in the residual.
+A parameter reference resolves through a binding in its scope. An object reference resolves within a transaction, as
+every read does: a symbol given the reference binds what it designates
+([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md)). Each layer of a stack resolves it with its own transaction
+interpreter, through hooks the layer provides, and no function resolves a reference over the Store interface from
+outside a layer ([the stacked stores proposal](STACKED-STORES.md#decided)). A layer that does not hold the object
+forwards the transaction down the stack whole, so that resolution never fetches one object at a time; frames come back
+up the stack as `References.OfFrame`, each object by its reference. mbse-schemas' private placeholder for an object of
+the store below, `Proxies._Unresolved`, therefore becomes a `References.OfObject`
+([CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308)). A reference that a transaction does not resolve has the schema that its path implies,
+which the interpreter's hooks give through the layer's schemas alone, and the caller decides what an unresolved
+reference means: validation reports it, and simplification leaves it in the residual.
 
 ### The wire form
 
@@ -158,10 +157,9 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
 [FEA-028: one Store interface, lazy by default](../docs/features/FEA-028.md), in the order of work:
 
 1. [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311), in mbse-schemas: `References.OfParameter`;
-   an object reference's canonical identity; a resolution that never loads, and a public function for the schema a
-   reference implies; and one wire form for references. It adds the resolution that never loads beside the existing
-   resolution, which it leaves as it is. It changes no behavior that a caller sees but the written form of a reference,
-   and it lands first, so that the stacked stores' work continues on a stable `References`.
+   an object reference's canonical identity; and one wire form for references. It changes no behavior that a caller
+   sees but the written form of a reference, and it lands first, so that the stacked stores' work continues on a stable
+   `References`.
 2. [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
 3. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may bind
