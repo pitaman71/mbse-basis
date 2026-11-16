@@ -162,7 +162,7 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
    stable `References`.
 2. [CAP-316: one written form for references](../docs/capabilities/README.md#CAP-316), in mbse-schemas: the plain form
    writes every reference in one form. It changes no behavior that a caller sees but the written form of a reference.
-3. [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
+3. [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
 4. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may bind
    the parameters that its schema declares. It supersedes [CAP-113: parameters bound at their

@@ -48,7 +48,7 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 Design: [parametrics](PARAMETRICS.md), in its order of work.
 
 - [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311): not met
-- [CAP-312: a reference in place of any value](../docs/capabilities/README.md#CAP-312): not met
+- [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312): not met
 - [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314): not met
 - [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313): not met
 - [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): not met
