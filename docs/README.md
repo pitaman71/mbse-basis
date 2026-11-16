@@ -258,9 +258,10 @@ and cites the entry rather than describe the decision again.
   organized.
 - **Write complete sentences.** Every statement is a complete sentence, with an explicit subject and a finite verb, and
   each sentence makes one claim. "A pronoun is used only when its antecedent is unambiguous within the same paragraph."
-  A decision states who decides what, and under which conditions. Brevity never justifies dropping a verb, a subject or
-  a referent: a document stays short by partitioning and linking its content ([PRI-045: docs optimized for efficient
-  representation and selective consumption](PRINCIPLES.md#PRI-045)), not by compressing its sentences.
+  The subject names what acts: a dialect's simplifier, printer or parser acts, and the language that the dialect models
+  does not. A decision states who decides what, and under which conditions. Brevity never justifies dropping a verb, a
+  subject or a referent: a document stays short by partitioning and linking its content ([PRI-045: docs optimized for
+  efficient representation and selective consumption](PRINCIPLES.md#PRI-045)), not by compressing its sentences.
 - **State what is true now.** A document states what is true now. How a statement came to be, such as an earlier
   name, an earlier behavior, or the date and the order of decisions and changes, is recorded in the message of the
   commit that changed it, not in the document. A decision that the user took is recorded in its item's Decided section
