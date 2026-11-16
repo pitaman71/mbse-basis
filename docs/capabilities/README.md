@@ -552,8 +552,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 - <a id="CAP-314"></a>**CAP-314: parameters bound by the data objects their schema governs** · proposed · A schema may
-  declare parameters, and a data object that the schema governs may bind any of them; a parameter that the object leaves
-  unbound stays unbound. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-313: parameter references bound and validated](#CAP-313),
+  declare parameters, and a data object that the schema governs may bind any of them, through `Parametrics.BindsValue`
+  and `BindsObject`, which link the data object and the parameter; a parameter that the object leaves unbound stays
+  unbound. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-313: parameter references bound and validated](#CAP-313),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 ### Deterministic object identity

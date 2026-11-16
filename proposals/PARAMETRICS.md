@@ -42,8 +42,11 @@ The user decided these rules:
   parameters may also bind one or more of them; those bindings go in mbse-expressions.
 - **A schema declares, its data binds**: "Schemas may hold parameter declarations. Parameter bindings should be held by
   the data object governed by that schema."
+- **Bindings link the data object**: `Parametrics.BindsValue` and `BindsObject` link the data object that binds a
+  parameter, not its schema, as the user decided.
 - **A parameter is a named reference**: the user chose that a parameter, in an expression, is written as a name, and
-  that simplification takes a parameter's value from the scope first, and from the bindings stored in a model later.
+  that simplification takes a parameter's value from the scope first, and from the bindings stored in a model later. A
+  parameter reference holds its parameter's name and nothing else.
 
 The capabilities' detail files hold the user's earlier decisions about parameters, which this proposal builds on:
 [CAP-112: parameters modeled as schema data](../docs/capabilities/CAP-112.md#decided) (a parameter is for a value or for
@@ -65,18 +68,20 @@ object schema (`Parametrics.ForObject`), exactly one. A definition holds its par
 
 ### Bound
 
-Three kinds of binding exist, in two repositories. In mbse-schemas, a data object may bind the parameters that its schema
-declares, and a frame binds its symbols to objects or to parameters and assigns values to its variables. In
+Three kinds of binding exist, in two repositories. In mbse-schemas, a data object may bind the parameters that its
+schema declares, and a frame binds its symbols to objects or to parameters and assigns values to its variables. In
 mbse-expressions, an expression root that declares parameters may bind one or more of them, and an application binds the
 parameters of the definition it applies, by name, and partially where it binds some parameters alone. A parameter given
 no argument stays unbound. The scope in which a parameter reference is resolved is the chain of data objects, frames,
 expression roots and applications that enclose the reference, innermost first; a data object encloses its own values. In
-mbse-expressions' simplification, the scope that the caller gives is also such a scope. A data object's bindings are
-[CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314)'s.
+mbse-expressions' simplification, the scope that the caller gives is also such a scope. A data object binds a parameter
+through `Parametrics.BindsValue`, its value an entry property, or `Parametrics.BindsObject`, its object a third link,
+each linking the data object and the parameter. A data object's bindings are [CAP-314: parameters bound by the data
+objects their schema governs](../docs/capabilities/README.md#CAP-314)'s.
 
 ### Referenced
 
-A parameter reference, `References.OfParameter`, designates a parameter by its name. It is a value object, beside
+A parameter reference, `References.OfParameter`, designates a parameter by its name, and holds nothing else. It is a value object, beside
 mbse-schemas' other references: `References.OfObject`, `OfEntry`, `OfProperties` and `OfFrame`. One rule makes it
 universal. Wherever a value of a schema S is expected, a reference may stand in its place, valid where it resolves to
 something of S, and invalid where it resolves to something else. The rule is one predicate, which every place that
@@ -125,18 +130,22 @@ whatever the order of their keys. A link's key, and so the key of every relation
 
 A parameter reference resolves through a binding in its scope. An object reference resolves through a store, against
 what the store holds or what a transaction brought back. That resolution never fetches from a store below on its own,
-because a transaction goes down a stack of stores whole and comes back up in one round trip. It is added beside the
-existing resolution, which loads an object from a store below when a link to it is read; the existing resolution stays
-as it is until the stacked stores' revised design replaces it, because mbse-schemas' store-below cases (BLW-01 to
-BLW-20) and the suites of mbse-rest and mbse-dynamodb depend on it. A resolution that finds nothing gives the schema
-that the reference implies, and the caller decides what an unresolved reference means: validation reports it, and
-simplification leaves it in the residual.
+because a transaction goes down a stack of stores whole and comes back up in one round trip. The stacked stores' design
+rules out reading an object that a store does not hold outside a transaction, and brings frames back up the stack as
+`References.OfFrame`, each object by its reference ([the stacked stores proposal](STACKED-STORES.md#decided)).
+mbse-schemas' private placeholder for an object of the store below, `Proxies._Unresolved`, therefore becomes a
+`References.OfObject`. The resolution that never loads is added beside the existing one, which loads an object from a
+store below when a link to it is read; the existing resolution stays as it is until [CAP-308: stacking by mutation
+transactions, in one round trip](../docs/capabilities/README.md#CAP-308) replaces it, because mbse-schemas' store-below
+cases (BLW-01 to BLW-20) and the suites of mbse-rest and mbse-dynamodb depend on it. A resolution that finds nothing
+gives the schema that the reference implies, and the caller decides what an unresolved reference means: validation
+reports it, and simplification leaves it in the residual.
 
 ### The wire form
 
 A reference is written in the plain form as any value object is. Where the schema that the reader expects at a node
 already says that the node holds a reference, the reference is written bare. Where the reader could take the node for
-a value of the expected schema, the reference carries a marker that names its schema. The plain form uses one written
+a value of the expected schema, the reference carries a reference to its schema, as the user's wire rule requires. The plain form uses one written
 form for references, in place of the forms it uses today (`{"reference": ...}` in effects, `{"ref": ...}` in documents'
 specs, and `$ref` in the nested expression form). The written form keeps a reference to a schema object, whose path
 starts at the singleton `"."`, apart from a reference to data, because the two resolve differently: a schema path
@@ -173,18 +182,9 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
 
 ## Open questions
 
-- **How a data object holds its bindings.** mbse-schemas' `Parametrics.BindsValue` and `BindsObject` link a definition
-  to a parameter. Under the user's rule, a data object may bind its schema's parameters, so the question is whether those
-  relations link the data object instead of its schema, or whether a data object holds its bindings another way.
-- **The marker.** Which marker names a reference's schema where the reader could not tell it from a value. The plain
-  form marks a refinement of a value object with `$schema`, and a reserved key, such as `$schema` naming
-  `References.OfParameter`, would serve.
-- **The stacked stores' placeholder.** Whether mbse-schemas' private placeholder for an object of the store below
-  (`Proxies._Unresolved`) becomes a `References.OfObject`. The stacked stores' design is under revision, so this
-  question waits for it.
-- **A parameter reference's fields.** Whether a parameter reference holds its parameter's name alone, or also the path
-  of the definition that declares the parameter.
-- **Shapes bound to parameters.** How a parameter is bound into a constraint on the shape of a relation's key, to give a
-  tensor's shape ([CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md#open-questions)).
-- **Equal applications.** Whether two applications that substitute alike (`Matrix(n, n)` and `Square(n)`) are equal
-  ([CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md#open-questions)).
+- **Shapes bound to parameters.** How is a parameter bound into a constraint on the shape of a relation's key, to give a
+  tensor's shape ([CAP-114: parameter bindings are substituted and
+  checked](../docs/capabilities/CAP-114.md#open-questions))?
+- **Equal applications.** Are two applications that substitute alike, such as `Matrix(n, n)` and `Square(n)`, equal
+  ([CAP-163: parameters bound, applied and generated beyond
+  mbse-schemas](../docs/capabilities/CAP-163.md#open-questions))?
