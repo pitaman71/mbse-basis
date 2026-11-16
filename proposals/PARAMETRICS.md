@@ -149,8 +149,8 @@ form for references, in place of the forms it uses today (`{"reference": ...}` i
 specs, and `$ref` in the nested expression form). The written form keeps a reference to a schema object, whose path
 starts at the singleton `"."`, apart from a reference to data, because the two resolve differently: a schema path
 through the store's schemas, and a data path through its objects. Changing the written form changes the conformance
-corpora of mbse-schemas and mbse-rest, the only data written in the forms it replaces, which the same change
-regenerates in both languages ([CAP-316: one written form for references](../docs/capabilities/README.md#CAP-316)).
+corpora of mbse-schemas, mbse-rest, mbse-expressions and mbse-programs, the only data written in the forms it
+replaces, which are regenerated ([CAP-316: one written form for references](../docs/capabilities/CAP-316.md)).
 
 ## Capabilities
 
