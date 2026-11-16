@@ -47,6 +47,84 @@ The user's decisions (2026-11-15):
   data changes alone; a store runs each install the store below first, so that a store below given no schemas of its
   own holds those of the stores above it. Whether a journal is headed by its installs stays open.
 
+The user's decisions (2026-11-16), on the stack as CAP-283 to CAP-285 and CAP-306 built it, a store above interpreting
+each transaction itself, loading each object it reads by a request of its own, and sending what it changed below:
+
+- **One Store interface**: "we also invented a second store interface when a single interface was required by the
+  design". `Stores.Below` is withdrawn with [CAP-306: a public store-below interface](../docs/capabilities/README.md#CAP-306).
+- **Atomicity is the database's**: the interface as built "breaks persistence-enforced atomicity", a transaction's
+  reads being made apart from its writes, and one transaction above being many requests below.
+- **Streaming, not calls**: it was added "in a synchronous style that is inferior to its existing streaming
+  counterpart", the mutation-transaction stream ([CAP-138: mutation expressions over frame streams](../docs/capabilities/README.md#CAP-138)).
+- **The design**, in the user's words:
+
+  > The Store interface supports stacking by passing mutation transactions down the stack and back up - all of it in a
+  > single round trip.
+  >
+  > - minor adjustments to the vocabulary of mutations may be needed to facilitate inter-layer cooperation
+  > - mutation transacations are always processed in streaming fashion
+  > - client code sends a mutation transaction in which embedded queries mix reads, computations, and writes of paths,
+  >   properties, adjacencies
+  > - client code receives a stream of frames as the fundamental result
+  > - any errors that occur duriung processing are annotated on frames
+  > - in the case of an unresolvable error that occurs partway through interpreting the mutation expression, a
+  >   partially bound frame is a preferred result
+  >
+  > The cache layer code interprets the mutation expression doing two things in parallel:
+  > A. forwarding the mutation expression to layers below
+  > B. interpreting the mutation expression recursively
+  >
+  > A "partial-aware" variant of mutation expression interpretation might use these arguments:
+  >
+  > - the original mutation expression (root)
+  > - a residual/remainder handle to the subterm being evaluated
+  > - a map from symbols that *should be bound* at that evaluation level to a stream of pre-qualified candidates for
+  >   each symbol
+  >
+  > If the mutation expression interpreter reaches a leaf with all symbols fully bound, it may stream the resulting
+  > frame back to the caller immediately.
+  >
+  > If the layer below streams back a frame (same symbol/variable bindings) that collides with a frame already
+  > returned, the cache layer should check if there is any information present in that frame (such as property values)
+  > that conflicts, and if so, the cache should be updated and the updated frame from below forwarded to the client.
+  >
+  > This also implies that clients must be capable of receiving a frame with identical bindings more than once,
+  > treating each subsequent arrival as a re-evaluation or replacement for the previous arrival.
+- **Frames are those already implemented**: a frame comes back up the stack as `References.OfFrame`, each symbol bound
+  to an object by its reference and each variable to its value ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)); the user asked, of what a
+  frame carries, "frames are already implemented - where?".
+- **No read of an object a store does not hold, outside a transaction**: a proxy's `.get()` of an object a cache layer
+  does not hold "should not be possible"; nothing but the loading these capabilities replace uses it.
+- **Others' writes reach a cache layer by a follow**: "continuous synchronization requires a `follow`", the store
+  below reporting each transaction it commits, as `Changes.observe` and mbse-journals' `follow` do; they apply to the
+  objects present alone, as [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285)'s second decision has it.
+- **An install keeps a method of its own, where that is simpler**: "I do not object to the separate `Store.install`
+  method, if preserving it avoids noticably increased net complexity."
+
+## Stacking by mutation transactions
+
+As the user decided (2026-11-16), a stack of stores has one interface, the Store interface's own: a mutation
+transaction goes in, and a stream of frames comes out ([CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308)). A client sends one transaction, whose embedded queries
+mix reads, computations and writes of paths, properties and adjacencies, and receives the frames it binds, as a
+stream; errors are annotated on frames, and an unresolvable error partway through gives a partially bound frame
+([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309)). Each layer takes the same transaction and streams frames back, so that a transaction goes down the stack and
+its frames come back up in one round trip.
+
+A cache layer, a store over another, does two things with a transaction at once: it forwards the transaction to the
+layer below, and it interprets it itself, partially, over what it holds ([CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310)). Where its own interpretation binds a
+frame fully, it may stream the frame to the client at once. Where the layer below streams back a frame with the same
+bindings as one already given, it compares them: where they conflict, as in a property's value, the layer below's
+holds, the cache takes it, and the client is given the frame again, as the layer below gave it. So a client receives a
+frame with the same bindings more than once, each later arrival a re-evaluation of the one before, which it replaces.
+The lowest layer, a
+store kept in a database, executes the transaction within the database's transaction, so that the database alone
+decides what commits and in what order ([the journal storage proposal](JOURNAL-STORAGE.md#what-a-backend-must-do)).
+
+What it replaces in what is built: `Stores.Below` and its members (`document`, `commit`, `install`, `follow`,
+`records`); a store above loading each object it reads by a request of its own; and a store above interpreting a
+transaction before sending what it changed below. The sections that follow describe the stack as CAP-283 to CAP-285
+built it, until these capabilities replace it.
+
 ## The stack
 
 Each layer implements the store interface, and each but the lowest is given the store below it:
@@ -119,8 +197,8 @@ decided (2026-11-13):
 
 In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework): the five steps above are
 [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283), [CAP-284: objects loaded on demand](../docs/capabilities/README.md#CAP-284), [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285),
-[CAP-286: an extent through ownership](../docs/capabilities/README.md#CAP-286) and [CAP-287: lazy or eager, tuned when it runs](../docs/capabilities/README.md#CAP-287), in mbse-schemas, with [CAP-304: a store below that answers later](../docs/capabilities/README.md#CAP-304); mbse-rest's part is
-[CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
+[CAP-286: an extent through ownership](../docs/capabilities/README.md#CAP-286) and [CAP-287: lazy or eager, tuned when it runs](../docs/capabilities/README.md#CAP-287), in mbse-schemas; mbse-rest's part is [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290). Stacking by mutation transactions is
+[CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308), with [CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309) and [CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310).
 
 ## Snapshots today, and what replaces each
 
@@ -254,15 +332,11 @@ labeled with the repository and number it was decided under.
 
 ## Open questions
 
-- **A transaction down the stack and back up, in one round trip.** The user (2026-11-15): "The Store interface supports
-  stacking by passing mutation transactions down the stack and back up - all of it in a single round trip." As built,
-  a store above interprets a transaction itself, over what it holds, and loads each object it reads that it does not
-  hold, a `.get()` among them, by a read of its own from the store below (`document(path)`), applied above by a
-  transaction of its own, before it sends what it changed below (`commit`); and a transaction that writes schemas and
-  data is sent below as two (`install`, then `commit`). So one transaction above is many requests below. To be taken up
-  again: whether a store above passes each transaction below whole, the lowest store executing it and what it committed
-  and read coming back up in one answer, reads being transactions too, so that `document` and loading object by object
-  go.
+- **Stacking by mutation transactions: what is open.** Each to be decided as
+  [CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308) to [CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310) are planned:
+  - the "minor adjustments to the vocabulary of mutations" the layers need to cooperate;
+  - what of [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283) to [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285), met as built, these capabilities supersede, and what
+    of mbse-rest and mbse-dynamodb is rewritten.
 
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
   a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
