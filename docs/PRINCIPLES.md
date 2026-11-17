@@ -103,7 +103,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   the user decided: declaring a name (`.name('crm.Contact')`, a link's name) is not covered. *Relates to* [PRI-010: proxies and generated code read alike](#PRI-010), [CAP-027: Python3 source generated from schemas](capabilities/CAP-027.md).
   *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
   properties by string, as the user decided ([CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md#decided), "Schema builders align with their
-  schemas of schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as
+  meta-schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as
   the user decided, an object reference written from a singleton through ownership entries, each step its adjacency
   called with the entry's keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
   and 27 in [CAP-119: owned objects found by their owner's reference and key](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.

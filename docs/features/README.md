@@ -141,7 +141,7 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
   is read and written alike, with the same results and errors, by every binding and by generated source code.
   *Confers* [QUA-006: the same in every language](../QUALITIES.md#QUA-006). *Applies*
   [PRI-027: developers can assume completely consistent behavior across bindings and generated source code](../PRINCIPLES.md#PRI-027).
-- <a id="FEA-031"></a>**[FEA-031: schemas as extensible data](FEA-031.md)** · proposed · external · Schemas are data, reference objects of their schemas of schemas in modules, that any store holding them extends. *Confers*
+- <a id="FEA-031"></a>**[FEA-031: schemas as extensible data](FEA-031.md)** · proposed · external · Schemas are data, reference objects of their meta-schemas in modules, that any store holding them extends. *Confers*
   [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 - <a id="FEA-032"></a>**[FEA-032: schema loading and wire alignment](FEA-032.md)** · proposed · external · Schemas are loaded into a store by idempotent installs and read by name, so that every implementation holds and
   writes them alike. *Confers*
