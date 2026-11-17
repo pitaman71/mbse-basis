@@ -52,6 +52,12 @@ specifications.
   ambiguity in generation is a parameter of the step that resolves it, decided by a human, an agent or a policy chosen
   up front, and kept in the trace. *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001). *Relates to*
   [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014). Formerly CAP-040.
+- <a id="FEA-059"></a>**FEA-059: transforms of models, applied step by step and certified** · proposed · external ·
+  Models are rewritten by transforms, each a prototype, a procedure and its parameters, applied to the caller's
+  visitors one step at a time, every application certified in a history, and a rerun reusing earlier decisions.
+  *Confers* [QUA-001: AI and humans in the loop](../QUALITIES.md#QUA-001). *Relates to*
+  [FEA-021: every generation ambiguity a parameter](FEA-021.md), [FEA-017: AI in the loop via the model trace](#FEA-017),
+  [PRI-017: transforms, models, dialects, schemas](../PRINCIPLES.md#PRI-017).
 - <a id="FEA-001"></a>**FEA-001: schema-driven UI** · adopted · external · Services and UI present an app driven by its
   schemas, extended by schema-aware code only where wanted. *Confers* [QUA-008: usable without code](../QUALITIES.md#QUA-008), [QUA-011: fully responsive views](../QUALITIES.md#QUA-011)
   to [QUA-013: device-native gestures](../QUALITIES.md#QUA-013). [Detail](FEA-001.md)
