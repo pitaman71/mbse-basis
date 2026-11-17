@@ -465,11 +465,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 ### Schemas as extensible data
 
 - <a id="CAP-109"></a>**[CAP-109: schemas as linked objects in modules](CAP-109.md)** · proposed · Every schema object
-  is a reference object of its kind's meta-schema, linked to the others by relations, built by builders that are
+  is a reference object of its kind's schema of schemas, linked to the others by relations, built by builders that are
   visitors of it, and defined in nesting modules. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md).
   - **Current**: met in mbse-schemas 0.26.3.
 - <a id="CAP-116"></a>**[CAP-116: framework schemas extended, checked](CAP-116.md)** · proposed · Any transaction may
-  add members to a schema the store was made holding, meta-schemas included, but not change or remove them, each store
+  add members to a schema the store was made holding, schemas of schemas included, but not change or remove them, each store
   extending its own. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md), [FEA-020: refinable models](../features/FEA-020.md).
   - **Current**: met in mbse-schemas 0.23.0.
 - <a id="CAP-117"></a>**[CAP-117: extension adjacencies to any relation](CAP-117.md)** · proposed · An adjacency
