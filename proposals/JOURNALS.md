@@ -87,6 +87,14 @@ The user's decisions (2026-11-17):
 - **A counted object is held inline**: in a `Changes.Transaction`, a counted object is written by value, "inline", in
   the entry change or property change that links it, not bound to a symbol.
 - **A transaction carries a unique id**: "yes a unique id".
+- **mbse-journals' scope** (agreed, "yes", to the scope as offered): journals as values, outside any store, for the
+  `follow` of the stores built over backends, mbse-dynamodb's and mbse-rest's, which catch up and stream:
+  - **streams**: the one-transaction journals a `follow` gives, joined, spliced and cut into slices of whole
+    transactions, and sent to a peer;
+  - **positions**: a transaction's `id` is a position; a follower reads or follows after a transaction to catch up;
+  - **files**: a journal, or a slice of one, written to a file and read back, by mbse-schemas' own serialization.
+
+  mbse-schemas' own `follow` does not use it, since mbse-journals depends on mbse-schemas.
 - **A store's data knows nothing about journals**: "Stored objects, entries, etc. know nothing about journals. Why would
   they?" A journal is not kept in a store. "Journal is not an extension of Store, and never has been".
 
