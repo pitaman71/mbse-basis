@@ -146,7 +146,7 @@ mbse-schemas' generic machinery: data of any schema, its identity, its transacti
 - <a id="FEA-032"></a>**[FEA-032: schema loading and wire alignment](FEA-032.md)** · proposed · external · Schemas are loaded into a store by idempotent installs and read by name, so that every implementation holds and
   writes them alike. *Confers*
   [QUA-006: the same in every language](../QUALITIES.md#QUA-006).
-- <a id="FEA-033"></a>**[FEA-033: model parameters](FEA-033.md)** · proposed · external · Models take parameters: a definition declares them, binds them, and has its bindings substituted and checked. *Confers*
+- <a id="FEA-033"></a>**[FEA-033: model parameters](FEA-033.md)** · proposed · external · Models take parameters: a definition declares them, binds them, and has its parameter bindings substituted and checked. *Confers*
   [QUA-008: usable without code](../QUALITIES.md#QUA-008).
 - <a id="FEA-058"></a>**[FEA-058: parametric schema templates](FEA-058.md)** · proposed · external · A template
   declares, in one schema declaration, the relations that cooperate to give a model a kind of container, an ordered,

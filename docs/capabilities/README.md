@@ -519,12 +519,12 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: met in mbse-schemas 0.24.0.
 - <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · superseded by [CAP-314: parameters bound by the data objects their schema governs](#CAP-314) · A definition binds
-  each of its parameters to a value or an object, through `Parametrics`' bindings. *Implements*
+  each of its parameters to a value or an object, through `Parametrics`' parameter bindings. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
-- <a id="CAP-114"></a>**[CAP-114: parameter bindings are substituted and checked](CAP-114.md)** · proposed · A binding is substituted
-  where its definition is used, and its value checked against the schema its parameter is for. *Implements*
-  [FEA-033: model parameters](../features/FEA-033.md).
+- <a id="CAP-114"></a>**[CAP-114: parameter bindings are substituted and checked](CAP-114.md)** · proposed · A parameter
+  binding is substituted where its definition is used, and its value checked against the schema its parameter is for.
+  *Implements* [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
 
 - <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are bound and applied in mbse-expressions, bound by patterns (mbse-schemas' `OfPattern` and mbse-expressions' `Patterns` dialect) and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
@@ -798,13 +798,14 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: built in mbse-schemas 0.26.24 (`Stores.Below`), mbse-rest and mbse-dynamodb written against it; to be
     removed as CAP-308 replaces it.
 - <a id="CAP-308"></a>**CAP-308: stacking by mutation transactions, in one round trip** · proposed · A stack of stores
-  has one interface, the Store interface's own: a client sends a mutation transaction, whose embedded queries mix
-  reads, computations and writes of paths, properties and adjacencies, and receives a stream of frames; each layer
-  passes the transaction to the layer below and streams frames back, so that it goes down the stack and comes back up
-  in one round trip, always processed as a stream, the lowest layer executing it within its database's transaction; a
-  client receives a frame with the same bindings more than once, each later arrival replacing the one before; the
-  vocabulary of mutations adjusted where the layers need it; in mbse-schemas, in Python and TypeScript, with mbse-rest
-  and mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md), [FEA-027: mutations as queries](../features/FEA-027.md).
+  has one interface, the Store interface's own: a client sends a mutation transaction, whose embedded queries mix reads,
+  computations and writes of paths, properties and adjacencies, and receives a stream of frames; each layer passes the
+  transaction to the layer below and streams frames back, so that it goes down the stack and comes back up in one round
+  trip, always processed as a stream, the lowest layer executing it within its database's transaction; a client receives
+  a frame with the same symbol bindings more than once, each later arrival replacing the one before; the vocabulary of
+  mutations adjusted where the layers need it; in mbse-schemas, in Python and TypeScript, with mbse-rest and
+  mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md),
+  [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
 - <a id="CAP-309"></a>**[CAP-309: errors annotated on frames](CAP-309.md)** · proposed · An error that occurs while a mutation
   transaction is processed is annotated on the frames it concerns; an unresolvable error partway through interpreting
@@ -812,13 +813,14 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.26.26 (checked in its main at 40c408c: TXN-18 to TXN-20 and REF-10 pass in both
     languages, at 100% coverage); a layer of a stack streaming the annotated frames is CAP-308's.
-- <a id="CAP-310"></a>**[CAP-310: a cache layer's partial-aware interpretation](CAP-310.md)** · proposed · A cache layer, a store over
-  another, forwards a mutation transaction to the layer below and at once interprets it recursively over what it
-  holds, given the original expression, a handle to the subterm it evaluates, and, for each symbol that should be bound
-  there, a stream of candidates; a frame it binds fully it streams to the client at once; where the layer below streams
-  back a frame with the same bindings that conflicts with one given, as in a property's value, the cache takes the layer
-  below's and gives the client that frame, which replaces the one given before; in mbse-schemas, in Python and
-  TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+- <a id="CAP-310"></a>**[CAP-310: a cache layer's partial-aware interpretation](CAP-310.md)** · proposed · A cache
+  layer, a store over another, forwards a mutation transaction to the layer below and at once interprets it recursively
+  over what it holds, given the original expression, a handle to the subterm it evaluates, and, for each symbol that
+  should be bound there, a stream of candidates; a frame it binds fully it streams to the client at once; where the
+  layer below streams back a frame with the same symbol bindings that conflicts with one given, as in a property's
+  value, the cache takes the layer below's and gives the client that frame, which replaces the one given before; in
+  mbse-schemas, in Python and TypeScript. *Implements*
+  [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,

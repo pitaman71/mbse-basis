@@ -111,12 +111,12 @@ labeled with the repository and number it was decided under.
   `transactions`, `changes`, `follow`, `record` and `replay`. The singleton `Journals.Directory` owns each journal by
   its name; a journal owns its journal transactions (`Journals.Contains`); `Journals.Before(journal, earlier, later)`
   is read from the earlier as `next` and from the later as `previous`.
-- **(mbse-journals 1)** **A journal transaction's changes as the journal's own data.** Each object the changes name is
-  a binding, the `reference` of one the store held or the `schema` of one it made; each change an entry inserted or
-  removed, on its holder's adjacency, with its other links' bindings and its properties' values, or a property set or
-  cleared, with its value. Bindings and changes are each an indexed container, its index an entry property, as the
-  user allows ("Indexed containers can have their index encoded as entry props"), so that the order the reported
-  changes were written in is kept.
+- **(mbse-journals 1)** **A journal transaction's changes as the journal's own data.** Each object the changes name is a
+  symbol binding, the `reference` of one the store held or the `schema` of one it made; each change an entry inserted or
+  removed, on its holder's adjacency, with its other links' symbol bindings and its properties' values, or a property
+  set or cleared, with its value. Symbol bindings and changes are each an indexed container, its index an entry
+  property, as the user allows ("Indexed containers can have their index encoded as entry props"), so that the order the
+  reported changes were written in is kept.
 - **(mbse-journals 1)** **Plain forms carried as written.** A reference, a schema's path and a value are each held as
   their plain form, as text ([PRI-024: the plain form, carried as written](../docs/PRINCIPLES.md#PRI-024)), so that a journal store holds the journal's schemas
   alone, and not those of the store it records.

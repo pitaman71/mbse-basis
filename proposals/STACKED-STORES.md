@@ -130,14 +130,15 @@ where it holds no such object. A store in memory finds none there. A cache layer
 below. A follow that a layer gives is coupled with the layer too, and its follower reads only what it delivers.
 
 A cache layer, a store over another, does two things with a transaction at once: it forwards the transaction to the
-layer below, and it interprets it itself, partially, over what it holds ([CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310)). Where its own interpretation binds a
-frame fully, it may stream the frame to the client at once. Where the layer below streams back a frame with the same
-bindings as one already given, it compares them: where they conflict, as in a property's value, the layer below's
-holds, the cache takes it, and the client is given the frame again, as the layer below gave it. So a client receives a
-frame with the same bindings more than once, each later arrival a re-evaluation of the one before, which it replaces.
-The lowest layer, a
-store kept in a database, executes the transaction within the database's transaction, so that the database alone
-decides what commits and in what order ([the journal storage proposal](JOURNAL-STORAGE.md#what-a-backend-must-do)).
+layer below, and it interprets it itself, partially, over what it holds
+([CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310)). Where its own
+interpretation binds a frame fully, it may stream the frame to the client at once. Where the layer below streams back a
+frame with the same symbol bindings as one already given, it compares them: where they conflict, as in a property's
+value, the layer below's holds, the cache takes it, and the client is given the frame again, as the layer below gave it.
+So a client receives a frame with the same symbol bindings more than once, each later arrival a re-evaluation of the one
+before, which it replaces. The lowest layer, a store kept in a database, executes the transaction within the database's
+transaction, so that the database alone decides what commits and in what order
+([the journal storage proposal](JOURNAL-STORAGE.md#what-a-backend-must-do)).
 
 What it replaces in what is built: `Stores.Below` and its members (`document`, `commit`, `install`, `follow`,
 `records`); a store above loading each object it reads by a request of its own; and a store above interpreting a
