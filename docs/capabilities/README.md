@@ -760,9 +760,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-schemas 0.26.15 (checked in its main at 0f0fb57: BLW-01..08 pass in both languages, at
     100% coverage).
 - <a id="CAP-284"></a>**CAP-284: objects loaded on demand** · proposed · A store given a store below loads an object's
-  values and entries when they are first read, and keeps them; an object an entry links that is not yet loaded is a
-  proxy whose identity is kept by its reference, its singletons and ownership keys resolved on demand, in mbse-schemas,
-  in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  values and entries when they are first read, and keeps them; an object an entry links that is not yet loaded is held
+  as `Proxies._Unresolved`, a placeholder that holds the object's reference until the link is read, when the store loads
+  the object, in mbse-schemas, in Python and TypeScript.
+  [CAP-308: stacking by mutation transactions, in one round trip](#CAP-308) retires the placeholder for a
+  `References.OfObject`. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.26.15 (checked in its main at 0f0fb57: BLW-01..08 pass in both languages, at
     100% coverage).
 - <a id="CAP-285"></a>**CAP-285: writes through, others' writes in** · proposed · A store given a store below sends each

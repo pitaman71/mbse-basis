@@ -177,9 +177,11 @@ and TypeScript:
 1. **A store below.** `Builders.Store` is given the store below it, or none; its committed layer, `_Committed`, reads
    through it. With none, it behaves as it does today. Small, and no change of behaviour.
 2. **Loading on demand.** On the first read of an object's values or entries, the committed layer reads them from the
-   store below, and keeps them. An entry loaded links objects not yet loaded, so that the store gives each a proxy, its
-   identity kept by its reference ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)) in an identity map, its
-   singletons and ownership keys resolved on demand. This is the largest part, in the proxies' core, and the one to
+   store below, and keeps them. An entry loaded links objects not yet loaded, and the store holds each as a placeholder,
+   `Proxies._Unresolved`, which holds the object's reference
+   ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)) until the link is read, when
+   the store loads the object. [CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308)
+   retires the placeholder for a `References.OfObject`. This is the largest part, in the proxies' core, and the one to
    prototype first.
 3. **Writes through, and others' writes in.** A commit sends its effect to the store below, as a journal transaction; the
    store applies each effect the store below observes to what it has loaded.
