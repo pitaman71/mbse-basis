@@ -47,6 +47,13 @@ The user's decisions (2026-11-15):
   data changes alone; a store runs each install the store below first, so that a store below given no schemas of its
   own holds those of the stores above it. Whether a journal is headed by its installs stays open.
 
+The user's decision (2026-11-16), on conformance corpora:
+
+- **A corpus is frames, in mbse-programs**: each case is the `References.OfFrame` of the transaction that builds it,
+  written as any value is (`References.of(store, frame)`), its `binds` each object's reference and its `assigns` its
+  properties: "transaction is one representation but may be difficult to compare. Frame I think already has equality
+  and comparison". Recorded here at the user's word, for the conformance corpora below.
+
 The user's decisions (2026-11-16), on the stack as CAP-283 to CAP-285 and CAP-306 built it, a store above interpreting
 each transaction itself, loading each object it reads by a request of its own, and sending what it changed below:
 
@@ -228,7 +235,7 @@ In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework): the
 |---|---|---|
 | mbse-rest's service, with mbse-dynamodb's plugin | Persistence: a snapshot every 100 transactions (`snapshot_every`), and startup from the latest one and the journal after it | The journal alone, below a lazy `Builders.Store`; that store's own rolling checkpoint, for a restart or a new instance |
 | mbse-rest's `GET /schemas`, and its client | A store's schemas sent to a client, the first of a snapshot's two transactions | The install transactions that made the schemas, the head of the journal |
-| The conformance corpora of mbse-schemas, mbse-expressions and mbse-patterns | Each case's store written as a snapshot, compared across the two languages | Open: see below |
+| The conformance corpora of mbse-schemas, mbse-expressions and mbse-patterns | Each case's store written as a snapshot, compared across the two languages | Each case as a frame, as mbse-programs' are; for these three, open: see below |
 | mbse-schemas' examples | A store copied into another | A journal replayed into the other |
 
 ## Decided by an agent, for review
@@ -353,8 +360,20 @@ labeled with the repository and number it was decided under.
     of mbse-rest and mbse-dynamodb is rewritten.
 
 - **The conformance corpora.** Each implementation writes each case's store as a snapshot, and the two are compared:
-  a store analyzed as a snapshot. Writing each case as the journal that makes it would compare how the two languages
-  write as well as what they hold; it touches the corpora of three repositories.
+  a store analyzed as a snapshot. mbse-programs' corpora are frames, as the user decided (below); whether mbse-schemas',
+  mbse-expressions' and mbse-patterns' follow is open. The mbse-programs Python port measured them on mbse-schemas 0.27,
+  over its corpus of 153 objects:
+  - a case's frame was 146 KB, against 180 KB as a transaction and 274 KB as a snapshot, the last even for a case of
+    two objects;
+  - it was byte-identical when built in two separate stores, and written, read back and written again;
+  - two stores' frames, read back into one store, compared equal (`Comparison.OfObject`, 0); compared across stores
+    directly, they were incomparable, each store holding its own schema objects;
+  - a change of the source's layout alone left it equal and byte-identical; a change of a value made it incomparable.
+
+  What it asks of a corpus: a frame witnesses the data and does not make it, so that a case is made again by running
+  it; the values `assigns` holds are of a registered schema, so that an unnamed container is named; only the objects
+  bound to symbols are witnessed, with the properties the spec names, and a counted object is refused; and a
+  comparison says equal or incomparable, not where, which a diff of the written frames shows.
 - **A transaction applied above, refused there.** A store above that cannot apply what the store below committed, an
   entry linking a counted object that no object present has an adjacency to by name, raises within the store below's
   report of its commit: the writer below, whose transaction has committed, is given the error, and the store below's
