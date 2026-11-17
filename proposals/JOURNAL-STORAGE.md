@@ -50,12 +50,13 @@ only to order journal transactions. It must give, for each journal:
 
 ## The interface, and how a backend is held to it
 
-The interface is the store interface itself, as the user decided ("exactly"): a journal is data in a store
-([FEA-028: one Store interface, lazy by default](../docs/features/FEA-028.md)), so that a backend is a store over its database, which interprets the mutation-transaction
+The interface is the store interface itself, as the user decided ("exactly"): a backend is a store over its database
+([FEA-028: one Store interface, lazy by default](../docs/features/FEA-028.md)), which interprets the mutation-transaction
 streams it is given, each within a database transaction, and reports to each follower only the changes, its change
 feed giving what `Changes.observe` gives for a store kept in memory ([the journals proposal](JOURNALS.md#decided)). Nothing
-in it is a database's. A conformance suite, in mbse-journals, states what a journal kept in a store does as cases,
-among them two writers appending after one last, each from what it last saw, and a follower that catches up; it runs
+in it is a database's, and a store's data knows nothing about journals ([the journals proposal](JOURNALS.md#decided)):
+a journal is not kept in a store. A conformance suite states what a backend does as cases, among them a follower that
+catches up; it runs
 against the store kept in memory, the test double, which also lets a front end and a back end each be unit-tested
 alone, and every backend passes it unchanged, much as [PRI-037: the same conformance corpora](../docs/PRINCIPLES.md#PRI-037) holds every repository's
 implementations to the same corpora.

@@ -35,11 +35,11 @@ The user's decisions:
   [PRI-003: everything is schema data](../docs/PRINCIPLES.md#PRI-003) and
   [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018) require, and lives in the lowest
   repository that can own it, as [PRI-011: the lowest repository that can own it](../docs/PRINCIPLES.md#PRI-011) has it.
-- **A journal's order is relations, never an order of its transactions** (open: a journal built without a store, below,
-  may not hold relations; see [Open questions](#open-questions)): relation entries have no order,
+- **A journal's order is relations, never an order of its transactions** (superseded: a journal is not kept in a
+  store, and holds no relations; see "a store's data knows nothing about journals", below): relation entries have no order,
   permanently, and ordering them would be a second-order invention; a sequenced container is relations that cooperate,
   as [FEA-058: parametric schema templates](../docs/features/FEA-058.md#decided) records.
-- **An append that collides is refused by a unique clause** (2026-11-12; open, as the order above is): "a correct client
+- **An append that collides is refused by a unique clause** (2026-11-12; superseded, as the order above is): "a correct client
   will send - Last(container,a) + Last(container,b) in the same transaction", and where another appended first, "if -
   Last(container,a) is ignored because it has no effect then applying +Last(container,b) violates the unique clause";
   "constraints are still under construction so it would be preferable not to rely on them for urgent functionality"
@@ -88,6 +88,9 @@ The user's decisions (2026-11-17):
 - **A counted object is held inline**: in a `Changes.Transaction`, a counted object is written by value, "inline", in
   the entry change or property change that links it, not bound to a symbol.
 - **A transaction carries a unique id**: "yes a unique id".
+- **A store's data knows nothing about journals**: "Stored objects, entries, etc. know nothing about journals. Why would
+  they?" A journal is not kept in a store. "Journal is not an extension of Store, and never has been"
+  ([CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md) is marked [NEVER]).
 
 ## The journal, a sequenced container
 
@@ -186,17 +189,13 @@ The 2026-11-17 decisions leave these open:
 1. **Value or reference objects** (proposed below, in [the `Changes` schemas](#the-changes-schemas-proposed)). mbse-schemas holds reference objects only in a store, and links only reference
    objects by relations. A journal built without a store would be a value object, its transactions in order in an
    ordered container. Then its order is not relations, and the decisions on a journal's order and on an append refused
-   by a unique clause, above, hold only where a journal is kept in a store, or not at all.
-2. **A journal kept in a store.** Whether a store still keeps journals, as data of its own, for persistence and
-   [the journal storage proposal](JOURNAL-STORAGE.md)'s backends, and how such a journal relates to the value: one
-   schema, or the value held as a property of an object the store keeps.
-3. **The change transaction's schema** (proposed below, in [the `Changes` schemas](#the-changes-schemas-proposed)). A journal transaction is written now as a transaction expression of
+   by a unique clause, above, do not hold: a journal is not kept in a store.
+2. **The change transaction's schema** (proposed below, in [the `Changes` schemas](#the-changes-schemas-proposed)). A journal transaction is written now as a transaction expression of
    mbse-schemas' own schemas, "for now" ("a journal is downstream of a store's interpreter", above); schema-governed
    transactions and changes may want a schema of their own, the journal language's A, B and C.
-4. **Where `record` and `replay` go.** Recording a store's transactions is a follower's work, and applying a journal to
+3. **Where `record` and `replay` go.** Recording a store's transactions is a follower's work, and applying a journal to
    a store is a store's; neither is the journal's.
-5. **The capabilities that describe a journal kept in a store**:
-   [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md),
+4. **The capabilities that describe a journal kept in a store**:
    [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273),
    [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274) and
    [CAP-288: the journal storage interface](../docs/capabilities/README.md#CAP-288), revised once the questions above are.
