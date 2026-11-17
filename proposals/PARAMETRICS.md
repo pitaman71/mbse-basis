@@ -127,8 +127,9 @@ a value before generating ([CAP-163: parameters bound, applied and generated bey
 
 ### Identity
 
-An object reference's identity is its path, written in one canonical form, so that two equal paths give one identity
-whatever the order of their keys. A link's key, and so the key of every relation entry, is built from that identity.
+An object reference's identity is its written form, in one canonical form, so that two references written alike give
+one identity whatever the order of their keys. A link's key, and so the key of every relation entry, is built from that
+identity.
 
 ### Resolution
 
@@ -141,21 +142,22 @@ does not hold the object forwards the transaction down the stack whole, so that 
 time; frames come back up the stack as `References.OfFrame`, each object by its reference. mbse-schemas' private
 placeholder for an object of the store below, `Proxies._Unresolved`, therefore becomes a `References.OfObject`
 ([CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308)). A reference
-that a transaction does not resolve has the schema that its path implies, which the interpreter's hooks give through the
+that a transaction does not resolve has the schema that it implies, which the interpreter's hooks give through the
 layer's schemas alone, and the caller decides what an unresolved reference means: validation reports it, and
 simplification leaves it in the residual.
 
 ### The wire form
 
 A reference is written in the plain form as any value object is. Where the schema that the reader expects at a node
-already says that the node holds a reference, the reference is written bare. Where the reader could take the node for
-a value of the expected schema, the reference carries a reference to its schema, as the user's wire rule requires. The plain form uses one written
-form for references, in place of the forms it uses today (`{"reference": ...}` in effects, `{"ref": ...}` in documents'
-specs, and `$ref` in the nested expression form). The written form keeps a reference to a schema object, whose path
-starts at the singleton `"."`, apart from a reference to data, because the two resolve differently: a schema path
-through the store's schemas, and a data path through its objects. Changing the written form changes the conformance
-corpora of mbse-schemas, mbse-rest, mbse-expressions and mbse-programs, the only data written in the forms it
-replaces, which are regenerated ([CAP-316: one written form for references](../docs/capabilities/CAP-316.md)).
+already says that the node holds a reference, the reference is written bare. Where the reader could take the node for a
+value of the expected schema, the reference carries a reference to its schema, as the user's wire rule requires. The
+plain form uses one written form for references, in place of the forms it uses today (`{"reference": ...}` in effects,
+`{"ref": ...}` in documents' specs, and `$ref` in the nested expression form). The written form keeps a reference to a
+schema object, which is reached from the singleton `"."`, apart from a reference to data, because the two resolve
+differently: a reference to a schema object through the store's schemas, and a reference to data through its objects.
+Changing the written form changes the conformance corpora of mbse-schemas, mbse-rest, mbse-expressions and
+mbse-programs, the only data written in the forms it replaces, which are regenerated
+([CAP-316: one written form for references](../docs/capabilities/CAP-316.md)).
 
 ## Capabilities
 

@@ -394,7 +394,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
 - <a id="CAP-260"></a>**[CAP-260: dialects extending Patterns checked by their own operations](CAP-260.md)** · proposed · A
   dialect that extends Patterns has its calls checked against the operations it defines, not Patterns': validation
-  finds the calling dialect's singleton rather than Patterns' by a fixed path. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
+  finds the calling dialect's singleton rather than Patterns' by a fixed object reference. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
 
 ### Serialization behavior conventions in schema
@@ -497,8 +497,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-110"></a>**[CAP-110: a store's schemas read as one module](CAP-110.md)** · proposed · A store's schemas are
   read as one hierarchical root module, each by its module-qualified name, which resolves or is refused. *Implements*
   [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
-  - **Current**: met in mbse-schemas 0.26.4, by schema objects' paths from the root module `"."` and `References`, not
-    by a `root_module()` method.
+  - **Current**: met in mbse-schemas 0.26.4, by schema objects' references from the root module `"."` and `References`,
+    not by a `root_module()` method.
 
 - <a id="CAP-156"></a>**[CAP-156: the five basic scalars with boundless domains](CAP-156.md)** · proposed · Every store holds the five basic scalars, `Schemas.OfBool` to `Schemas.OfBytes`, each mapped to each language's host type, and builds no other scalar schema. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: met since mbse-schemas 0.18.0 (checked in the code at 0.26.4: "a store builds no scalar schema").
@@ -534,8 +534,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
   - **Current**: not met.
 - <a id="CAP-311"></a>**CAP-311: references stabilized** · proposed · mbse-schemas' `References` defines
-  `References.OfParameter` beside its other references; an object reference has one canonical identity, its path in one
-  canonical form. *Implements* [FEA-033: model parameters](../features/FEA-033.md),
+  `References.OfParameter` beside its other references; an object reference has one canonical identity, its written form,
+  in one canonical form. *Implements* [FEA-033: model parameters](../features/FEA-033.md),
   [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [CAP-130: references to objects, entries and frames](CAP-130.md),
   [CAP-316: one written form for references](#CAP-316), [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: met in mbse-schemas 0.26.27 (checked in its main at 2c520f4: REF-11 and BLW-21 pass in both
@@ -544,7 +544,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   a reference to an object in one form, the plain form of `References.OfObject`, `{"path": P}`: bare where the schema
   that the reader expects at a node already says that the node holds a reference, and marked with its schema,
   `{"$schema": "References.OfObject", "path": P}`, where the reader could take it for a value of another schema. It
-  replaces `$ref`, and a link's `ref` is named `reference`. A schema object's reference is a reference by its path, from
+  replaces `$ref`, and a link's `ref` is named `reference`. A schema object's reference is an object reference from
   the singleton `"."`. The conformance corpora of mbse-schemas, mbse-rest, mbse-expressions and mbse-programs, the only
   data written in the forms it replaces, are regenerated. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
   [CAP-311: references stabilized](#CAP-311), [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [the parametrics proposal](../../proposals/PARAMETRICS.md#the-wire-form).
@@ -575,9 +575,10 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   is a singleton, owned or counted, as its schema declares, and nothing about its identity is drawn at random.
   *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.20.0.
-- <a id="CAP-119"></a>**[CAP-119: owned objects found by path](CAP-119.md)** · proposed · An owned object is found by
-  its path, each step's adjacency called with the keys of the entry that leads to it, and its path is read off its
-  ownership entries. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+- <a id="CAP-119"></a>**[CAP-119: owned objects found by their owner's reference and key](CAP-119.md)** · proposed · An
+  owned object is found by its owner's reference and its key, each owner's adjacency called with the keys of the entry
+  that leads to it, and its reference is read off its ownership entries. *Implements*
+  [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.20.0.
 - <a id="CAP-120"></a>**[CAP-120: owned objects named and placed when built](CAP-120.md)** · proposed · An owned
   object's keys are generated from its owning relation's key patterns, and an object built without an owner is given the
@@ -591,9 +592,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   owns is deleted, by counting the relation entries that link it. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md). *Relates to* [CAP-121: owned objects deleted in cascade](CAP-121.md).
   - **Current**: not met; not yet in priority scope.
-- <a id="CAP-123"></a>**[CAP-123: schema objects identified by path](CAP-123.md)** · proposed · A named schema object's
-  identity is its path from the root module; an unnamed one has none, and is written nested in the one object that links
-  it. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+- <a id="CAP-123"></a>**[CAP-123: schema objects identified by object reference](CAP-123.md)** · proposed · A named
+  schema object's identity is its object reference from the root module; an unnamed one has none, and is written nested
+  in the one object that links it. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.21.0.
 - <a id="CAP-130"></a>**[CAP-130: references to objects, entries and frames](CAP-130.md)** · proposed · An object, a
   relation entry and a frame each have a reference, a value written and read as any, which resolves to what it
@@ -650,7 +651,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-128"></a>**[CAP-128: graphs sent as one-transaction documents](CAP-128.md)** · proposed · A graph sent
   without its store is one transaction, its counted objects numbered within it, and the owned objects and singletons it
-  links referred to by path. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  links referred to by object reference. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-129"></a>**[CAP-129: journals replayed by execution](CAP-129.md)** · proposed · A journal is the list of
   transactions as submitted, replayed by executing each again. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
@@ -784,13 +785,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-304"></a>**CAP-304: a store below that answers later** · superseded by [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · A store below may give one object
   (`document`), and commit or refuse a transaction's changes, later, as a promise, so that a store over a network, such as
   mbse-rest's client in a browser, blocks nothing while it waits; building a transaction's expression loads nothing,
-  a symbol's schema being the object's where it is present, else the one its path implies; in mbse-schemas, in
+  a symbol's schema being the object's where it is present, else the one its object reference implies; in mbse-schemas, in
   TypeScript, and in Python where the interface is shared. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
 - <a id="CAP-306"></a>**CAP-306: a public store-below interface** · superseded by
   [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · What a store asks of the store
   below it is a public interface of mbse-schemas, which a store below implements without being a `Builders.Store` nor
-  overriding any of its private methods: one object, written as one transaction (`document`), by its path, a
+  overriding any of its private methods: one object, written as one transaction (`document`), by its object reference, a
   transaction's changes given as plain data and committed or refused, what it committed of them given back, an install,
   a transaction that writes schemas, run, each committed transaction reported to its followers in order, and whether it
   records transactions (`Provenance`); mbse-dynamodb's store and mbse-rest's client and service are written against it
@@ -801,8 +802,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     removed as CAP-308 replaces it.
 - <a id="CAP-308"></a>**CAP-308: stacking by mutation transactions, in one round trip** · proposed · A stack of stores
   has one interface, the Store interface's own: a client sends a mutation transaction, whose embedded queries mix reads,
-  computations and writes of paths, properties and adjacencies, and receives a stream of frames; each layer passes the
-  transaction to the layer below and streams frames back, so that it goes down the stack and comes back up in one round
+  computations and writes of references, properties and adjacencies, and receives a stream of frames; each layer passes
+  the transaction to the layer below and streams frames back, so that it goes down the stack and comes back up in one round
   trip, always processed as a stream, the lowest layer executing it within its database's transaction; a client receives
   a frame with the same symbol bindings more than once, each later arrival replacing the one before; the vocabulary of
   mutations adjusted where the layers need it; in mbse-schemas, in Python and TypeScript, with mbse-rest and
@@ -1335,9 +1336,9 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
     across them, at 100% coverage).
 - <a id="CAP-264"></a>**CAP-264: containment separate from ownership** · proposed · Every shape is a member of its
   diagram, and owned by it, whether or not it is contained; containment is a relation of its own, between a container's
-  grid and a child (CAP-280), apart from both, so that a shape moved into or out of a container keeps its identity, its path and
-  what it owns: its points, vectors and annotations. A shape with no container is at the diagram's top level, and
-  removing a shape's containment entry deletes nothing: it moves the shape there, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+  grid and a child (CAP-280), apart from both, so that a shape moved into or out of a container keeps its identity,
+  its object reference and what it owns: its points, vectors and annotations. A shape with no container is at the
+  diagram's top level, and removing a shape's containment entry deletes nothing: it moves the shape there, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 909c7a1: suites LOG, CNT, PHY and PLC pass in both
     languages, at 100% coverage).
 - <a id="CAP-280"></a>**[CAP-280: the grid in the logical layout](CAP-280.md)** · proposed · A container, a shape or the

@@ -110,13 +110,13 @@ labeled with the repository and number it was decided under.
   refuse
   ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293));
   a transaction written imperatively, which the store cannot run again, is refused, to be run again by its writer.
-- **(mbse-dynamodb 15)** **The index in DynamoDB.** By a hash of each object's path: an item of its schema and property
-  values, and an item for each entry linking it, under every object the entry links, so that a deletion finds each entry
-  linking what it deletes, loaded or not, and what that owns, in cascade. Equal entries of a relation that keeps them
-  are one item, with their count. The index items a transaction changes are written in the same `TransactWriteItems` as
-  its journal transaction where DynamoDB's limits on one allow (100 items, 4 MB); else the journal transaction is
-  committed with them kept beside it, and they are written out before any process reads the store, by the writer or by
-  whichever process reads next. A transaction is committed once its journal transaction is.
+- **(mbse-dynamodb 15)** **The index in DynamoDB.** By a hash of each object's reference: an item of its schema and
+  property values, and an item for each entry linking it, under every object the entry links, so that a deletion finds
+  each entry linking what it deletes, loaded or not, and what that owns, in cascade. Equal entries of a relation that
+  keeps them are one item, with their count. The index items a transaction changes are written in the same
+  `TransactWriteItems` as its journal transaction where DynamoDB's limits on one allow (100 items, 4 MB); else the
+  journal transaction is committed with them kept beside it, and they are written out before any process reads the
+  store, by the writer or by whichever process reads next. A transaction is committed once its journal transaction is.
 - **(mbse-dynamodb 15)** **Subscriptions read the table, in order.** A process catches up by reading the journal's
   transactions after the last it gave its followers, in order, before each of its transactions and when polled, rather
   than from DynamoDB Streams: a stream orders records per item and keeps them a day, while the journal's numbers are its

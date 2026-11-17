@@ -116,18 +116,19 @@ Later, as the user decided:
 
 As the user decided (2026-11-16), a stack of stores has one interface, the Store interface's own: a mutation
 transaction goes in, and a stream of frames comes out ([CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308)). A client sends one transaction, whose embedded queries
-mix reads, computations and writes of paths, properties and adjacencies, and receives the frames it binds, as a
-stream; errors are annotated on frames, and an unresolvable error partway through gives a partially bound frame
+mix reads, computations and writes of object references, properties and adjacencies, and receives the frames it binds,
+as a stream; errors are annotated on frames, and an unresolvable error partway through gives a partially bound frame
 ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309)). Each layer takes the same transaction and streams frames back, so that a transaction goes down the stack and
 its frames come back up in one round trip.
 
-Each layer interprets a transaction with an interpreter of its own: an instance of a class coupled with the layer,
-which reads and writes the layer directly, not through the Store interface. A base class holds what every layer
-interprets alike, so that each refuses what every layer refuses: binding symbols, frames, unique clauses and errors
-annotated on frames. Each kind of store gives the base class hooks for what only that kind knows: the object at a path
-among what it holds, the entries of a relation that link an object, the schema that a path implies, and what it does
-where it holds no such object. A store in memory finds none there. A cache layer forwards the transaction to the layer
-below. A follow that a layer gives is coupled with the layer too, and its follower reads only what it delivers.
+Each layer interprets a transaction with an interpreter of its own: an instance of a class coupled with the layer, which
+reads and writes the layer directly, not through the Store interface. A base class holds what every layer interprets
+alike, so that each refuses what every layer refuses: binding symbols, frames, unique clauses and errors annotated on
+frames. Each kind of store gives the base class hooks for what only that kind knows: the object an object reference
+designates among what it holds, the entries of a relation that link an object, the schema that an object reference
+implies, and what it does where it holds no such object. A store in memory finds none there. A cache layer forwards the
+transaction to the layer below. A follow that a layer gives is coupled with the layer too, and its follower reads only
+what it delivers.
 
 A cache layer, a store over another, does two things with a transaction at once: it forwards the transaction to the
 layer below, and it interprets it itself, partially, over what it holds
@@ -209,9 +210,9 @@ decided (2026-11-13):
    ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)), refuses the transaction above. The changes are written as plain data before
    the commit.
 2. **Others' writes apply to present objects alone** ("agreed - broadcast updates apply only to present objects"). The
-   store below reports each transaction it commits; the store above applies each to the objects present in it and to
-   no other, an object not present staying so, linked by its path where an object present links it; and its followers
-   are told of what changed above.
+   store below reports each transaction it commits; the store above applies each to the objects present in it and to no
+   other, an object not present staying so, linked by its object reference where an object present links it; and its
+   followers are told of what changed above.
 3. **In the order the store below committed them** ("right"): synchronously from a store in memory, and from a store
    over a database or over REST as its change feed delivers them, each applied as it arrives.
 
@@ -240,24 +241,25 @@ Where the user's decisions were silent, the simplest default consistent with the
 labeled with the repository and number it was decided under.
 
 - **(mbse-schemas 30)** **What a store below answers: one object, as one transaction.** `Stores.Below.document(path)`
-  gives the object at a path as a one-transaction document
+  gives the object an object reference designates as a one-transaction document
   ([CAP-128: graphs sent as one-transaction documents](../docs/capabilities/CAP-128.md)), its properties and its
-  entries, each object they link by its path; None where it holds none. It is a mutation-transaction stream, the
-  language stores already speak, so that a database's store and mbse-rest's client answer it alike, with no new form.
-  This answer belongs to the design that
-  [CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308) supersedes,
-  in which a store below streams back the frames of the transaction it is sent.
-- **(mbse-schemas 30)** **Identity by path.** An object loaded from the store below is one proxy, kept by its path, the
-  same each time it is named. A path resolves to an object present, through its owner's entries where it was made
-  above, else to the store below's, loaded, else to none: one read, of the object named, and no owner loaded.
-- **(mbse-schemas 30)** **A link to an object not present holds its path.** An entry the store below gives that links
-  an object not present holds that object's path, and is held by the objects present it links; reading the link loads
-  the object, which every entry waiting on its path then links, re-keyed. Nothing is made that is not present. Whether
-  a link owns what it links is known from the relation, without the object: a relation that owns through a link owns
-  whatever it links.
+  entries, each object they link by its object reference; None where it holds none. It is a mutation-transaction stream,
+  the language stores already speak, so that a database's store and mbse-rest's client answer it alike, with no new
+  form. This answer belongs to the design that
+  [CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308) supersedes, in
+  which a store below streams back the frames of the transaction it is sent.
+- **(mbse-schemas 30)** **Identity by object reference.** An object loaded from the store below is one proxy, kept by
+  its object reference, the same each time it is named. An object reference resolves to an object present, through its
+  owner's entries where it was made above, else to the store below's, loaded, else to none: one read, of the object
+  named, and no owner loaded.
+- **(mbse-schemas 30)** **A link to an object not present holds its object reference.** An entry the store below gives
+  that links an object not present holds that object's reference, and is held by the objects present it links; reading
+  the link loads the object, which every entry waiting on its reference then links, re-keyed. Nothing is made that is
+  not present. Whether a link owns what it links is known from the relation, without the object: a relation that owns
+  through a link owns whatever it links.
 - **(mbse-schemas 30, 35)** **Changes reported load nothing.** Removing the owning entry of an object not present
   deletes it, and is reported by its owner's key, as any deletion is; anything else not present the reported changes
-  name, they name by its path, the schema it is written by the one its path implies.
+  name, they name by its object reference, the schema it is written by the one its reference implies.
 - **(mbse-schemas 35)** **Each store of a stack commits a write as one transaction, as the lowest did.** While a store
   sends a transaction below, what the store below reports it committed, what it added among it, as its record, is
   taken into the transaction before it commits, and is the effect the store's followers are given of it: one effect
@@ -287,9 +289,9 @@ labeled with the repository and number it was decided under.
 - **(mbse-dynamodb 15)** **A read is of one transaction of the journal.** What `document` gives for an object is read
   from its index items as they stood after one journal transaction; where another process commits while they are read,
   they are read again.
-- **(mbse-dynamodb 15)** **A counted object is kept by its value.** It has no path, so that an entry linking it is kept
-  under the objects it links that have one, with the counted object's schema and values; `document` is refused for one
-  of them, as a store in memory refuses it.
+- **(mbse-dynamodb 15)** **A counted object is kept by its value.** It has no reference, so that an entry linking it is
+  kept under the objects it links that have one, with the counted object's schema and values; `document` is refused for
+  one of them, as a store in memory refuses it.
 - **(mbse-dynamodb 15)** **mbse-dynamodb's persistence plugin is kept until CAP-290.** The plugin, which snapshots, is
   superseded by the store kept in DynamoDB, and kept unchanged while mbse-rest's service persists through it; it goes
   with [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
@@ -302,7 +304,7 @@ labeled with the repository and number it was decided under.
   a database is one whose store below is its index, in Python and TypeScript alike: a store above gives the store below
   plain data read with that store's own schemas, and observes it through mbse-schemas' `Changes.observe`, so that it
   needs no change to mbse-schemas. Made, it executes the install transactions the service gives.
-- **(mbse-rest 19)** **The endpoints a store below needs.** What `document` gives for an object by its path
+- **(mbse-rest 19)** **The endpoints a store below needs.** What `document` gives for an object by its object reference
   (`POST /documents`), or none; a transaction's changes, committed or refused, the refusal named by the kind of error
   the store raised (`ValueError`, `TypeError`, `LookupError`), which the client raises; the change feed
   (`GET /changes`); the install transactions that made the schemas (`GET /schemas`), and an install given
@@ -328,9 +330,9 @@ labeled with the repository and number it was decided under.
   store below that does not record, such as a database store's own index, records; one over another store does not.
 - **(mbse-schemas 34)** **An entry no object present has an adjacency to by name is applied directly.** Applying the
   store below's transaction, an entry that no object present it links has an adjacency to by name, as Provenance's
-  `CreatedBy` and `ModifiedBy` on an object extended by an anonymous adjacency, is written to the tables of the
-  objects present it links, the others linked by their paths, rather than refused; applied again, it changes nothing.
-  Only such an entry linking a counted object, which has no path, is refused.
+  `CreatedBy` and `ModifiedBy` on an object extended by an anonymous adjacency, is written to the tables of the objects
+  present it links, the others linked by their object references, rather than refused; applied again, it changes
+  nothing. Only such an entry linking a counted object, which has no reference, is refused.
 - **(mbse-rest 19)** **The client's transport is synchronous**, as mbse-schemas' store interface is: in Node, a request
   waits on a worker thread that fetches; in a browser, it is a synchronous `XMLHttpRequest`, best made from a worker.
 - **(mbse-rest 19)** **A view that writes is refused before it runs where its frames cannot bind the view's symbols**,
@@ -369,9 +371,9 @@ labeled with the repository and number it was decided under.
   report of its commit: the writer below, whose transaction has committed, is given the error, and the store below's
   later followers are not told. Whether a store above should instead hold such a transaction aside, and report it, is
   open.
-- **Identity by path, where an ownership key changes.** A store keeps each object it loaded by its path; an object whose
-  owning entry is rewritten with other keys is at a new path, and a store above that loaded it by its old one holds it
-  there still.
+- **Identity by object reference, where an ownership key changes.** A store keeps each object it loaded by its object
+  reference; an object whose owning entry is rewritten with other keys has a new reference, and a store above that
+  loaded it by its old one holds it under that one still.
 - **Reads over REST, one object at a time**, are many requests: whether mbse-rest's service answers a read of several
   objects, or of what one reaches, at once.
 - **A journal headed by its installs.** A store kept in a database is given its schemas by each process that opens it,

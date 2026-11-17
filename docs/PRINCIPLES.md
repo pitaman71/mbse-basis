@@ -104,9 +104,9 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
   properties by string, as the user decided ([CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md#decided), "Schema builders align with their
   meta-schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as
-  the user decided, a path from a singleton through ownership entries, each step its adjacency called with the entry's
-  keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
-  and 27 in [CAP-119: owned objects found by path](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.
+  the user decided, an object reference written from a singleton through ownership entries, each step its adjacency
+  called with the entry's keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
+  and 27 in [CAP-119: owned objects found by their owner's reference and key](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns 0.9.1, mbse-transforms' precursor).
 - <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once: each repository has one source

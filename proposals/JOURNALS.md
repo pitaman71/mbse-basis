@@ -117,9 +117,9 @@ labeled with the repository and number it was decided under.
   set or cleared, with its value. Symbol bindings and changes are each an indexed container, its index an entry
   property, as the user allows ("Indexed containers can have their index encoded as entry props"), so that the order the
   reported changes were written in is kept.
-- **(mbse-journals 1)** **Plain forms carried as written.** A reference, a schema's path and a value are each held as
-  their plain form, as text ([PRI-024: the plain form, carried as written](../docs/PRINCIPLES.md#PRI-024)), so that a journal store holds the journal's schemas
-  alone, and not those of the store it records.
+- **(mbse-journals 1)** **Plain forms carried as written.** A reference, a schema's reference and a value are each held
+  as their plain form, as text ([PRI-024: the plain form, carried as written](../docs/PRINCIPLES.md#PRI-024)), so that a
+  journal store holds the journal's schemas alone, and not those of the store it records.
 - **(mbse-journals 1)** **A journal transaction's name is given by its writer** where others append too: two writers
   counting alike would name two different transactions alike, and a store applying the other's changes would take one
   for the other. A single writer's are named `t` and their count.
