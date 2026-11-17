@@ -132,6 +132,15 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
 - <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · adopted · A policy's clauses are guarded by patterns over the match (mbse-schemas' `OfPattern`), and weigh a parameter's values by
   a distribution over its domain, written as data. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
+- <a id="CAP-317"></a>**CAP-317: transforms targeting value objects** · proposed · A transform's prototype matches,
+  and its application takes as an argument, a value object held within a reference object, such as a statement, a
+  clause or a class member of a program's file, and not only the reference objects a pattern's symbols bind. Until it
+  is met, transforms to and from program trees match whole files, as the user decided: "the restriction of pattern
+  symbol bindings to reference objects means the granularity at which we can write transforms to/from AST is at the
+  file level. This is acceptable temporarily and might streamline implementation a bit. We can open a future capability
+  that allows transforms to target value objects." *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md). *Relates to*
+  [CAP-074: transforms applied step by step](CAP-074.md).
+  - **Current**: not met.
 
 ### Expressions as data
 

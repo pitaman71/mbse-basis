@@ -110,6 +110,8 @@ Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/mai
 - [CAP-081: transforms composed into pipelines](../docs/capabilities/CAP-081.md): not met
 - [CAP-082: completeness reported](../docs/capabilities/CAP-082.md): not met
 - [CAP-083: policies with guards and distributions](../docs/capabilities/CAP-083.md): not met
+- [CAP-317: transforms targeting value objects](../docs/capabilities/README.md#CAP-317): not met; until then, transforms
+  to and from program trees match whole files
 
 ## INI-030 : no/low-code and apps framework
 
