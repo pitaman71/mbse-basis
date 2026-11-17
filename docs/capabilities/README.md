@@ -93,25 +93,26 @@ their place ([CAP-150: predicates as data](CAP-150.md#decided)), and its transfo
 ### Transforms
 
 Transforms leave mbse-patterns for a repository of their own, [mbse-transforms](https://github.com/pitaman71/mbse-transforms), as the user
-decided (2026-11-05, "yes transforms goes in its own repo"; [its charter](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md)). It is new, at 0.1.0,
-and built after mbse-programs' port. Its precursor, mbse-patterns 0.9.1's `Transforms`, met [CAP-074: transforms applied step by step](CAP-074.md) to
-[CAP-076: reruns reuse decisions](CAP-076.md) and is its design input, not code to port: a rewrite is now a mutation expression of mbse-schemas, not code
-([CAP-074: transforms applied step by step](CAP-074.md#decided)), and reruns are in its first release
-([CAP-076: reruns reuse decisions](CAP-076.md#decided)). [CAP-077: changes explained across runs](CAP-077.md) to [CAP-083: policies with guards and distributions](CAP-083.md), which the precursor did not meet, are
-mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
+decided ("yes transforms goes in its own repo"; [its charter](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md)). It is new, at 0.1.0,
+and built after mbse-programs' port. Its first release is [CAP-074: transforms applied step by step](CAP-074.md) to
+[CAP-076: reruns reuse decisions](CAP-076.md), on the transform model that the user decided
+([CAP-074: transforms applied step by step](CAP-074.md#decided)): a transform is a prototype, a procedure (native code for the
+time being) and a certificate, applied to up to three frames. Its precursor, mbse-patterns 0.9.1's `Transforms`, is its
+design input, not code to port, and mbse-patterns 0.10.0 removes its code. [CAP-077: changes explained across runs](CAP-077.md) to [CAP-083: policies with guards and distributions](CAP-083.md), which the precursor did not meet, are
+mbse-transforms' too, as the user agreed ("placements - agreed").
 
-- <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · proposed · A transform, a rewrite with a before and an after, is applied by a session one decision per
-  step, a policy ranking the candidates, and the steps kept as a trace. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: met in mbse-patterns 0.7 to 0.9.1 (the TRF suites), whose code mbse-patterns 0.10.0 removes; not met
-    in mbse-transforms yet.
-- <a id="CAP-075"></a>**[CAP-075: steps linked to what they matched and wrote](CAP-075.md)** · proposed · Each step of a transform links the elements it matched and wrote, each in
-  a role, as relations that patterns query. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: met in mbse-patterns 0.9 to 0.9.1, whose code mbse-patterns 0.10.0 removes; not met in
-    mbse-transforms yet.
-- <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · adopted · A rerun takes each earlier decision again where its key still occurs, reports the orphans, and diffs
-  the traces. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
-  - **Current**: met in mbse-patterns 0.8 to 0.9.1 (TRF-08), whose code mbse-patterns 0.10.0 removes; not met in
-    mbse-transforms yet.
+- <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · proposed · A transform, a prototype, a procedure and a certificate, is applied by a
+  session one transform per step to up to three frames (source, sync and target), a policy ranking the candidates and
+  answering parameters, and every application certified. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met in mbse-transforms yet.
+- <a id="CAP-075"></a>**[CAP-075: steps linked to what they matched and wrote](CAP-075.md)** · proposed · Every application is certified: a history certificate records the
+  sequence of transforms, a transform certificate records one application and its parameters, and a sub-certificate for
+  each frame that the application took links that frame and the preceding transform on that pattern. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met in mbse-transforms yet.
+- <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · adopted · A rerun given an earlier history certificate reuses its transform certificates'
+  parameters where the same transform applies to the same frame, reports the orphans, and diffs the histories; the history
+  certificate records who decided each step's parameters. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-077"></a>**[CAP-077: changes explained across runs](CAP-077.md)** · proposed · A source diff names what changed in the model, and a target diff traces each change in the
   output to the model change or the answer that caused it. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet; blocked: diffing stores in general is mbse-journals', which is planned.

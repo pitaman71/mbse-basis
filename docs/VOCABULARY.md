@@ -377,8 +377,10 @@ predicates give way to mbse-schemas' `OfPattern` ([FEA-023: patterns over data](
 
 ### mbse-transforms
 
-- Transform, session, policy, trace: [The model](capabilities/CAP-074.md#the-model),
-  [Data](capabilities/CAP-074.md#data), as built in its precursor, mbse-patterns 0.9.1's `Transforms`
+- Transform (a prototype, a procedure and parameters), session, policy:
+  [The model](capabilities/CAP-074.md#the-model), [Data](capabilities/CAP-074.md#data).
+- History, transform and sub-certificates, a complete audit history of applications:
+  [CAP-075: steps linked to what they matched and wrote](capabilities/CAP-075.md).
 
 ### mbse-codegen-python
 
