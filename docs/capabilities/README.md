@@ -571,7 +571,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   `Parametrics.extend` has given the schema their named adjacencies; a parameter that the object leaves unassigned and
   unbound stays so. A value object assigns and binds differently. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-313: parameter references bound and validated](#CAP-313),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
-  - **Current**: The capability is not met.
+  - **Current**: met in mbse-schemas 0.28.0 (checked in its main at cf9dc15: PAR-05 to PAR-08 pass in both
+    languages, at 100% coverage).
 ### Deterministic object identity
 
 - <a id="CAP-118"></a>**[CAP-118: singletons, owned and counted objects](CAP-118.md)** · proposed · A reference object
