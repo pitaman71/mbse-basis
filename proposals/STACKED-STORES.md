@@ -180,7 +180,7 @@ and TypeScript:
    identity kept by its reference ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)) in an identity map, its
    singletons and ownership keys resolved on demand. This is the largest part, in the proxies' core, and the one to
    prototype first.
-3. **Writes through, and others' writes in.** A commit sends its effect to the store below, as a journal entry; the
+3. **Writes through, and others' writes in.** A commit sends its effect to the store below, as a journal transaction; the
    store applies each effect the store below observes to what it has loaded.
 4. **Extent, through ownership.** `extent(name)`, the objects of a schema or of a schema refining it, is found as the
    user decided: the schemas give the ownership paths from the singletons that can reach `name`, and the extent is
@@ -277,8 +277,9 @@ labeled with the repository and number it was decided under.
   no changes, so that a store above sends no install below and none is journaled: each process gives the store kept in
   a database its installs, as an app gives its own store its installs. Whether a journal also begins with them is open
   (below).
-- **(mbse-dynamodb 15)** **A read is of one entry of the journal.** An object's document is read from its index items
-  as they stood after one journal entry; where another process commits while they are read, they are read again.
+- **(mbse-dynamodb 15)** **A read is of one transaction of the journal.** An object's document is read from its index
+  items as they stood after one journal transaction; where another process commits while they are read, they are read
+  again.
 - **(mbse-dynamodb 15)** **A counted object is kept by its value.** It has no path, so that an entry linking it is kept
   under the objects it links that have one, with the counted object's schema and values; a document of one of them is
   refused, as a store in memory refuses it.
@@ -286,9 +287,9 @@ labeled with the repository and number it was decided under.
   superseded by the store kept in DynamoDB, and kept unchanged while mbse-rest's service persists through it; it goes
   with [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
 - **(mbse-rest 19)** **The service makes its store over the store below it is given.** It is given a store below, a
-  database's or one in memory, and makes its own store, a `Builders.Store` over it; each install runs in both, the
-  store below given its schemas apart, and an app's seed runs in its own store where the store below is new: one that
-  keeps a journal holding no entry, or one in memory. A seed is not run again over what it wrote, which may have been
+  database's or one in memory, and makes its own store, a `Builders.Store` over it; each install runs in both, the store
+  below given its schemas apart, and an app's seed runs in its own store where the store below is new: one that keeps a
+  journal holding no transaction, or one in memory. A seed is not run again over what it wrote, which may have been
   edited since.
 - **(mbse-rest 19)** **mbse-rest's client is a `Builders.Store` whose store below is the service**, as a store kept in
   a database is one whose store below is its index, in Python and TypeScript alike: a store above gives the store below

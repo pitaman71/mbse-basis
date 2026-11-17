@@ -661,27 +661,28 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   immutable: a change to one is copied on write, a new object, in Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.26.11 (checked in its main at 7224b17: suite CHG passes in both languages, at
     100% coverage).
-- <a id="CAP-271"></a>**CAP-271: the journal language** · proposed · A journal entry is a transaction's symbols, each
-  bound to an object by its reference or to a new object of a schema, then its mutations, in order: relation entries
-  added and removed, and properties mutated by mbse-schemas' verbs, each value written by its property's schema.
-  Applying an entry is idempotent, and its symbols are its own. It is a transaction expression of mbse-schemas' own
-  schemas, with no schema of its own, in mbse-schemas, in Python and TypeScript, as
-  [the journals proposal](../../proposals/JOURNALS.md) states: the form a store reports its changes in, for now, which a journal records as data of its
-  own, since mutation-transaction streams and change journals "are not the same language - yet", as the user decided
-  (2026-11-12). *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
-  - **Current**: met in mbse-schemas 0.26.11 (checked in its main at 7224b17: suite CHG passes in both languages, at
-    100% coverage).
-- <a id="CAP-269"></a>**CAP-269: transactions resolved into their effects** · proposed · A transaction's changes
-  (CAP-270) are written as a journal entry (CAP-271), its effect, which a reader sections exactly, without evaluating
-  the expression again or reading the store it ran against; a counted object is written by value where it is linked,
-  in mbse-schemas, in Python and TypeScript. *Implements*
+- <a id="CAP-271"></a>**CAP-271: the journal language** · proposed · A journal transaction is a transaction's symbols,
+  each bound to an object by its reference or to a new object of a schema, then its mutations, in order: relation
+  entries added and removed, and properties mutated by mbse-schemas' verbs, each value written by its property's schema.
+  Applying a journal transaction is idempotent, and its symbols are its own. It is a transaction expression of
+  mbse-schemas' own schemas, with no schema of its own, in mbse-schemas, in Python and TypeScript, as
+  [the journals proposal](../../proposals/JOURNALS.md) states: the form a store reports its changes in, for now, which a
+  journal records as data of its own, since mutation-transaction streams and change journals "are not the same
+  language - yet", as the user decided. *Implements*
   [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.26.11 (checked in its main at 7224b17: suite CHG passes in both languages, at
     100% coverage).
-- <a id="CAP-272"></a>**CAP-272: surgical mutations of a property's value** · proposed · A journal entry mutates a part
-  of a property's value by the verbs of its schema kind, a container's items inserted before or after an item, first or
-  last, removed or cleared, a union's branch or an intersection's part, and clears any value, in mbse-journals, in
-  Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+- <a id="CAP-269"></a>**CAP-269: transactions resolved into their effects** · proposed · A transaction's changes
+  (CAP-270) are written as a journal transaction (CAP-271), its effect, which a reader sections exactly, without
+  evaluating the expression again or reading the store it ran against; a counted object is written by value where it is
+  linked, in mbse-schemas, in Python and TypeScript. *Implements*
+  [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
+  - **Current**: met in mbse-schemas 0.26.11 (checked in its main at 7224b17: suite CHG passes in both languages, at
+    100% coverage).
+- <a id="CAP-272"></a>**CAP-272: surgical mutations of a property's value** · proposed · A journal transaction mutates a
+  part of a property's value by the verbs of its schema kind, a container's items inserted before or after an item,
+  first or last, removed or cleared, a union's branch or an intersection's part, and clears any value, in mbse-journals,
+  in Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
 - <a id="CAP-134"></a>**[CAP-134: transactions recorded with provenance](CAP-134.md)** · proposed · Each transaction
   that writes is recorded with when and where it ran, its session and its identity, and linked to the objects it created
@@ -1137,19 +1138,20 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   leaves nothing to undo; where a persistence stack journals, it commits once the journal accepts it. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
   [CAP-290: a service's store stacked, with no snapshot](CAP-290.md).
   - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
-- <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received: its entries in order, each a transaction's effect (CAP-269), read from any position and inserted at one. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
+- <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received: its transactions in order, each a transaction's effect (CAP-269), read from any position and inserted at one. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
   - **Current**: met in mbse-journals 0.2.0 (checked in its main at 58c34b9: suite JRN passes in both languages, at
     100% coverage).
 - <a id="CAP-273"></a>**CAP-273: journals in memory and in local files** · proposed · A journal is kept in memory, and
   in a local file, in mbse-journals, in Python and TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: not met.
-- <a id="CAP-274"></a>**CAP-274: journals sent and received** · proposed · A journal's entries are sent from a store and
-  received into one, as a stream, through sender and receiver endpoints, in mbse-journals, in Python and TypeScript.
-  *Implements* [FEA-006: persistence](../features/FEA-006.md).
+- <a id="CAP-274"></a>**CAP-274: journals sent and received** · proposed · A journal's transactions are sent from a
+  store and received into one, as a stream, through sender and receiver endpoints, in mbse-journals, in Python and
+  TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: not met.
-- <a id="CAP-275"></a>**CAP-275: two stores' difference as a journal entry** · proposed · The difference between two
-  stores is written as a journal entry that, applied to the first, makes it the second, in mbse-journals, in Python and
-  TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-077: changes explained across runs](CAP-077.md).
+- <a id="CAP-275"></a>**CAP-275: two stores' difference as a journal transaction** · proposed · The difference between
+  two stores is written as a journal transaction that, applied to the first, makes it the second, in mbse-journals, in
+  Python and TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
+  [CAP-077: changes explained across runs](CAP-077.md).
   - **Current**: not met.
 - <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · A journal is kept in any store through
   the store interface ([FEA-028: one Store interface, lazy by default](../features/FEA-028.md)): a backend is a store over its database, which interprets each
@@ -1338,11 +1340,12 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   owns each cell through `HasCells`, keyed by its row and column, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 909c7a1: suites LOG, CNT, ADJ, CNF, PHY and PLC pass in both
     languages, at 100% coverage).
-- <a id="CAP-261"></a>**[CAP-261: layout driven by any journal entry](CAP-261.md)** · proposed · The layout engine follows a journal
-  entry it is given, any transaction, by its resolved effect (CAP-269): it sections the effect into the model's
-  mutations, anticipates what they remove, applies them, and calls the container layout and placement functions they
-  imply, so that a diagram's layout is a function of its journal
-  alone, with no caller that knows the entry's kind, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
+- <a id="CAP-261"></a>**[CAP-261: layout driven by any journal transaction](CAP-261.md)** · proposed · The layout engine
+  follows a journal's transaction it is given, any transaction, by its resolved effect (CAP-269): it sections the effect
+  into the model's mutations, anticipates what they remove, applies them, and calls the container layout and placement
+  functions they imply, so that a diagram's layout is a function of its journal alone, with no caller that knows the
+  transaction's kind, in Python and TypeScript. *Implements*
+  [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 31088fb: suite DRV and every bench suite, through the driver,
     pass in both languages, at 100% coverage).
 - <a id="CAP-243"></a>**CAP-243: a diagram displayed from its mutation stream** · proposed · A UI streams a diagram's

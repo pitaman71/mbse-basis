@@ -158,10 +158,11 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   date properties ([FEA-007: property kinds](features/FEA-007.md), not yet planned).
 - <a id="PRI-024"></a>**PRI-024: the plain form, carried as written** · proposed · A service or a store carries
   mbse-schemas' plain form as mbse-schemas wrote it, and defines no format of its own: a request's body, a frame, a
-  journal entry or a table's item holds the value as written, never reinterpreted or re-encoded into the medium's own
-  types. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003). *Relates to* [PRI-012: model published standards](#PRI-012).
-  *Applied in*: mbse-rest's wire format ([CAP-012: logical view endpoints](capabilities/CAP-012.md)); mbse-dynamodb's
-  table, which keeps JSON rather than DynamoDB maps, whose numbers would lose `1` against `1.0`
+  journal's transaction or a table's item holds the value as written, never reinterpreted or re-encoded into the
+  medium's own types. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003). *Relates to*
+  [PRI-012: model published standards](#PRI-012). *Applied in*: mbse-rest's wire format
+  ([CAP-012: logical view endpoints](capabilities/CAP-012.md)); mbse-dynamodb's table, which keeps JSON rather than
+  DynamoDB maps, whose numbers would lose `1` against `1.0`
   ([CAP-289: journals kept in DynamoDB](capabilities/README.md#CAP-289)).
 - <a id="PRI-025"></a>**PRI-025: never guess the schema** · adopted · "Never guess the schema": what a value is, is never inferred from
   the shape of its data. A reader tracks the expected schema as context while traversing wire data, and the wire
