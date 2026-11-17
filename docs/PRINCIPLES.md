@@ -133,7 +133,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
     package by `skills/sync.sh`.
 - <a id="PRI-017"></a>**PRI-017: transforms, models, dialects, schemas** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* [PRI-014: every ambiguity a decision](#PRI-014), [PRI-018: no model needs code to read or write](#PRI-018).
-- <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · superseded by [CAP-282: no model needs code to read or write](capabilities/README.md#CAP-282), absorbed as a capability "until we start logging no-builds as their own category", as the user decided (2026-11-12) · "No model should need code to read or write. Ever." All model data is governed by a schema,
+- <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · superseded by [CAP-282: no model needs bespoke schema-aware code to read or write](capabilities/README.md#CAP-282), absorbed as a capability "until we start logging no-builds as their own category", as the user decided · "No model should need bespoke schema-aware code to read or write. Use mbse-schemas built-in serialization support." All model data is governed by a schema,
   and all builder/visitor/reader/write functionality comes from either proxies in mbse-schemas or generated
   dataclasses. No bespoke class implementations are allowed for models. *Relates to* [PRI-003: everything is schema data](#PRI-003), [PRI-004: one visitor protocol per kind](#PRI-004), [PRI-010: proxies and generated code read alike](#PRI-010), [PRI-017: transforms, models, dialects, schemas](#PRI-017).
   *Not yet applied* in mbse-expressions ([CAP-098: dialects over one framework](capabilities/CAP-098.md#open-questions), Open questions).
@@ -286,7 +286,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   bespoke data structures that may be useful in privately scoped optimization >> bespoke data structures that are
   durable and public". A bespoke structure is tolerated only as a privately scoped optimization; one that is durable
   or public is far worse. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003), [QUA-014: precise typing for bespoke and generated source code](QUALITIES.md#QUA-014). *Relates to*
-  [CAP-282: no model needs code to read or write](capabilities/README.md#CAP-282), which forbids bespoke classes for models outright, and [PRI-003: everything is schema data](#PRI-003).
+  [CAP-282: no model needs bespoke schema-aware code to read or write](capabilities/README.md#CAP-282), which forbids bespoke classes for models outright, and [PRI-003: everything is schema data](#PRI-003).
 - <a id="PRI-045"></a>**PRI-045: docs optimized for efficient representation and selective consumption** · adopted · As
   the user stated it (2026-11-12): "Docs optimize for efficient representation and selective consumption striking a
   balance of partitioning + linking + bridging across plan items and plan categories": "know your plan categories and
@@ -316,7 +316,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   [INI-104](../proposals/PRIORITIES.md#ini-104--gaps-plan-category) and
   [INI-105](../proposals/PRIORITIES.md#ini-105--nope-plan-category), not tackled yet. Until then tech debt is a
   capability of an internal feature ([the basis](README.md#other-documents)), and [PRI-018: no model needs code to read or write](#PRI-018) is absorbed as
-  [CAP-282: no model needs code to read or write](capabilities/README.md#CAP-282).
+  [CAP-282: no model needs bespoke schema-aware code to read or write](capabilities/README.md#CAP-282).
 - **Snapshots, the first nope.** [CAP-127: snapshots made of transactions](capabilities/CAP-127.md) is met in mbse-schemas, and mbse-rest's service and the
   conformance corpora of three repositories use snapshots; under [FEA-028: one Store interface, lazy by default](features/FEA-028.md), each is to be superseded
   or replaced, as [the stacked stores proposal](../proposals/STACKED-STORES.md) proposes: mbse-rest's service by

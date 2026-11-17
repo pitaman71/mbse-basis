@@ -169,7 +169,7 @@ Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
 
 - log boundaries around things we will not build in a "nope" plan category
 - first entries: snapshots ([CAP-127: snapshots made of transactions](../docs/capabilities/CAP-127.md)), and
-  [CAP-282: no model needs code to read or write](../docs/capabilities/README.md#CAP-282), absorbed as a capability until then
+  [CAP-282: no model needs bespoke schema-aware code to read or write](../docs/capabilities/README.md#CAP-282), absorbed as a capability until then
 
 ## Later
 

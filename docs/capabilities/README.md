@@ -417,8 +417,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   not `Any`, and catches its misuse. *Implements*
   [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [CAP-107: one visitor protocol reads and writes data](CAP-107.md).
   - **Current**: not met; tech debt (checked in mbse-schemas' main at 21db1ee).
-- <a id="CAP-282"></a>**CAP-282: no model needs code to read or write** · adopted · "No model should need code to read
-  or write. Ever." All model data is governed by a schema, and every builder, visitor, reader and writer of it comes
+- <a id="CAP-282"></a>**CAP-282: no model needs bespoke schema-aware code to read or write** · adopted · "No model should need bespoke schema-aware code to read or write. Use mbse-schemas built-in serialization support." All model data is governed by a schema, and every builder, visitor, reader and writer of it comes
   from mbse-schemas' proxies or from generated dataclasses, never a bespoke class: a judgement on how serialization
   abides, as the user put it (2026-11-12). *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Replaces*
   [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018), absorbed here until no-builds are a plan category of their own. *Relates to*
