@@ -85,6 +85,9 @@ The user's decisions (2026-11-17):
 - **mbse-journals' store-held form is the second-order invention**: "The 'third form for storage' actually seems more
   like a second order invention than (a)": the journal transactions, symbol bindings and changes mbse-journals keeps as
   reference objects of its own schemas, their values as text.
+- **A counted object is held inline**: in a `Changes.Transaction`, a counted object is written by value, "inline", in
+  the entry change or property change that links it, not bound to a symbol.
+- **A transaction carries a unique id**: "yes a unique id".
 
 ## The journal, a sequenced container
 
@@ -145,8 +148,8 @@ store.
 A value is written by its property's schema, marked with its schema where the reader cannot tell it
 ([PRI-025: never guess the schema](../docs/PRINCIPLES.md#PRI-025)). A store's effect, as `Changes.observe` gives it, is
 a `Changes.Journal` of one transaction, the form a follower streams. Applying a transaction stays idempotent, and a
-symbol stays the transaction's own. Left for review: how a counted object, written by value where it is linked, is
-held; and whether a transaction carries a name, which a writer gives where others append too.
+symbol stays the transaction's own. A counted object is written inline, by value, in the change that links it, and a
+`Changes.Transaction` carries a unique id (decided above).
 
 ## Decided by an agent, for review
 
@@ -168,7 +171,8 @@ labeled with the repository and number it was decided under.
 - **(mbse-journals 1)** **Plain forms carried as written.** (Superseded, as the form above is.) A reference, a schema's reference and a value are each held
   as their plain form, as text ([PRI-024: the plain form, carried as written](../docs/PRINCIPLES.md#PRI-024)), so that a
   journal store holds the journal's schemas alone, and not those of the store it records.
-- **(mbse-journals 1)** **A journal transaction's name is given by its writer** where others append too: two writers
+- **(mbse-journals 1)** **A journal transaction's name is given by its writer** (superseded by "a transaction carries a
+  unique id", 2026-11-17) where others append too: two writers
   counting alike would name two different transactions alike, and a store applying the other's changes would take one
   for the other. A single writer's are named `t` and their count.
 - **(mbse-journals 1)** **Following a journal** (superseded by "a journal is not a follower", 2026-11-17) gives a
