@@ -229,7 +229,7 @@ that define it.
   [FEA-025: serialization behavior conventions in schema](features/FEA-025.md);
   [CAP-153: unions and intersections of named branches and parts](capabilities/CAP-153.md).
 - Schema extension (`store.extend`): the members, properties and adjacencies, that a transaction adds to the schemas
-  that a store holds, meta-schemas included. A schema extension adds members, and it never changes or removes one. A
+  that a store holds, its plain schemas of schemas included. A schema extension adds members, and it never changes or removes one. A
   module that extends the framework's schemas in its install, such as `Parametrics`, is an extending module, as the
   user decided: "A module that uses schema extension is an "extending module" not an "extension"." *Never*:
   "extension" for the module.
