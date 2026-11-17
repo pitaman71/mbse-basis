@@ -67,6 +67,10 @@ principles serve them.
   proliferation of repetition", as the user stated it (2026-11-12). *Relates to* [QUA-019: docs point clearly to the source of truth](#QUA-019), which ranks a
   clear arrow to the source of truth above it. *Conferred by* [FEA-057: documentation organized by semantic role](features/FEA-057.md); *served by*
   [PRI-045: docs optimized for efficient representation and selective consumption](PRINCIPLES.md#PRI-045) and [PRI-016: guidance written once](PRINCIPLES.md#PRI-016).
+- <a id="QUA-021"></a>**QUA-021: state, computation and agency separated** · adopted · "MBSE repo source code and
+  generated source code provide a clean separation (of classes) between state, computation, and agency", as the user
+  stated it (2026-11-17). *Relates to* [QUA-014: precise typing for bespoke and generated source code](#QUA-014), a quality of the same code.
+  *Conferred by* no feature yet.
 
 ## Earlier IDs
 
