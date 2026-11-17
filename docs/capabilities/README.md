@@ -555,7 +555,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   wrong kind of thing is a validation error. The proxies, validation and the plain form apply that one rule, in both
   languages. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-311: references stabilized](#CAP-311),
   [CAP-313: parameter references bound and validated](#CAP-313), [the parametrics proposal](../../proposals/PARAMETRICS.md).
-  - **Current**: The capability is not met.
+  - **Current**: met in mbse-schemas 0.27.2 (checked in its main at ebc23b6: REF-12 to REF-17 and CMP-14
+    cases pass in both languages, at 100% coverage).
 - <a id="CAP-313"></a>**CAP-313: parameter references bound and validated** · proposed · A parameter reference is valid
   where an enclosing definition declares and binds its parameter to a value of the schema that the reference stands
   for, and validation reports it as invalid otherwise. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
