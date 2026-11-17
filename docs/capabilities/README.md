@@ -965,7 +965,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-047"></a>**CAP-047: parametric schemas as Python3 generics** · proposed · A parametric schema generates a Python3 generic: its value parameters as PEP 695 type parameters bounded by
   their types (`class Matrix[rows: int, cols: int]`), an application with `Literal` arguments. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: not met.
-- <a id="CAP-048"></a>**CAP-048: terms in generated Python3** · proposed · A width, an extent or an argument that is a term is written in generated Python3. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+- <a id="CAP-048"></a>**CAP-048: terms in generated Python3** · proposed · A width, an index domain or an argument that is a term is written in generated Python3. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: blocked: terms are written by [CAP-051: Python3 source from expression models](#CAP-051).
 - <a id="CAP-049"></a>**CAP-049: type parameters in Python3** · proposed · A schema's type parameters generate a generic Python3 class (`class Box[T]`). *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: blocked: mbse-schemas has no type parameters.
@@ -983,7 +983,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-056"></a>**CAP-056: parametric schemas as TypeScript5 generics** · proposed · A parametric schema generates a TypeScript5 generic, its parameters as type
   parameters and an application with literal type arguments. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: not met.
-- <a id="CAP-057"></a>**CAP-057: terms in generated TypeScript5** · proposed · A width, an extent or an argument that is a term is written in generated TypeScript5. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
+- <a id="CAP-057"></a>**CAP-057: terms in generated TypeScript5** · proposed · A width, an index domain or an argument that is a term is written in generated TypeScript5. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: blocked: terms are written by [CAP-060: TypeScript5 source from expression models](#CAP-060).
 - <a id="CAP-058"></a>**CAP-058: type parameters in TypeScript5** · proposed · A schema's type parameters generate a generic TypeScript5 class (`class Box<T>`). *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md).
   - **Current**: blocked: mbse-schemas has no type parameters.
