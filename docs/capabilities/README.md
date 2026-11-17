@@ -593,9 +593,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   owns is deleted, by counting the relation entries that link it. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md). *Relates to* [CAP-121: owned objects deleted in cascade](CAP-121.md).
   - **Current**: not met; not yet in priority scope.
-- <a id="CAP-123"></a>**[CAP-123: schema objects identified by object reference](CAP-123.md)** · proposed · A named
-  schema object's identity is its object reference from the root module; an unnamed one has none, and is written nested
-  in the one object that links it. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
+- <a id="CAP-123"></a>**[CAP-123: schema objects identified by path](CAP-123.md)** · proposed · A named schema object's
+  identity is its path from the root module; an unnamed one has none, and is written nested in the one object that links
+  it. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.21.0.
 - <a id="CAP-130"></a>**[CAP-130: references to objects, entries and frames](CAP-130.md)** · proposed · An object, a
   relation entry and a frame each have a reference, a value written and read as any, which resolves to what it
@@ -763,7 +763,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     100% coverage).
 - <a id="CAP-284"></a>**CAP-284: objects loaded on demand** · proposed · A store given a store below loads an object's
   values and entries when they are first read, and keeps them; an object an entry links that is not yet loaded is held
-  as `Proxies._Unresolved`, a placeholder that holds the object's reference until the link is read, when the store loads
+  as `Proxies._Unresolved`, a placeholder that holds the object's path until the link is read, when the store loads
   the object, in mbse-schemas, in Python and TypeScript.
   [CAP-308: stacking by mutation transactions, in one round trip](#CAP-308) retires the placeholder for a
   `References.OfObject`. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
