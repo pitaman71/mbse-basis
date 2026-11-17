@@ -565,7 +565,8 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   and its procedures interpret them, each making a sub-context. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
   [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
-  - **Current**: The capability is not met.
+  - **Current**: met in mbse-schemas 0.28.2 (checked in its main at a5f6c64: PAR-09 to PAR-12, REF-14 and REF-16
+    pass in both languages, at 100% coverage).
 - <a id="CAP-314"></a>**[CAP-314: parameters assigned or bound by the data objects their schema governs](CAP-314.md)** · superseded by [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313) ·
   A schema may declare parameters, and a reference object that the schema governs may assign a value to any of them,
   through `Parametrics.AssignsValue`, or bind any of them to an object, through `Parametrics.BindsObject`, once
