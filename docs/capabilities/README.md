@@ -559,7 +559,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313), [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: met in mbse-schemas 0.27.2 (checked in its main at ebc23b6: REF-12 to REF-17 and CMP-14
     cases pass in both languages, at 100% coverage).
-- <a id="CAP-313"></a>**[CAP-313: parameter references valid where their parameters are assigned or bound](CAP-313.md)** · proposed ·
+- <a id="CAP-313"></a>**[CAP-313: parameter references valid where their parameters are assigned or bound](CAP-313.md)** · adopted ·
   A parameter reference is valid where its parameter context assigns its parameter a value, or binds it to an object, of
   the schema that the place holding it expects, and validation reports it as invalid otherwise. Validation takes a
   parameter context, and makes a sub-context where it meets a data object that holds parameter assignments or parameter
