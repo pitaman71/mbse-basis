@@ -418,8 +418,7 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   not `Any`, and catches its misuse. *Implements*
   [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [CAP-107: one visitor protocol reads and writes data](CAP-107.md).
   - **Current**: not met; tech debt (checked in mbse-schemas' main at 21db1ee).
-- <a id="CAP-282"></a>**CAP-282: no model needs code to read or write** · adopted · "No model should need code to read
-  or write. Ever." All model data is governed by a schema, and every builder, visitor, reader and writer of it comes
+- <a id="CAP-282"></a>**CAP-282: no model needs bespoke schema-aware code to read or write** · adopted · "No model should need bespoke schema-aware code to read or write. Use mbse-schemas built-in serialization support." All model data is governed by a schema, and every builder, visitor, reader and writer of it comes
   from mbse-schemas' proxies or from generated dataclasses, never a bespoke class: a judgement on how serialization
   abides, as the user put it (2026-11-12). *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Replaces*
   [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018), absorbed here until no-builds are a plan category of their own. *Relates to*
@@ -560,11 +559,12 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313), [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: met in mbse-schemas 0.27.2 (checked in its main at ebc23b6: REF-12 to REF-17 and CMP-14
     cases pass in both languages, at 100% coverage).
-- <a id="CAP-313"></a>**CAP-313: parameter references valid where their parameters are assigned or bound** · proposed · A parameter reference is valid
-  where an enclosing definition declares its parameter and assigns it a value, or binds it to an object, of the schema
-  that the reference stands for, and validation reports it as invalid otherwise. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
-  [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
-  [the parametrics proposal](../../proposals/PARAMETRICS.md).
+- <a id="CAP-313"></a>**[CAP-313: parameter references valid where their parameters are assigned or bound](CAP-313.md)** · adopted ·
+  A parameter reference is valid where its parameter context assigns its parameter a value, or binds it to an object, of
+  the schema that the place holding it expects, and validation reports it as invalid otherwise. Validation takes a
+  parameter context, and makes a sub-context where it meets a data object that holds parameter assignments or parameter
+  bindings. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-312: a parameter reference in place of anything with a schema](#CAP-312),
+  [CAP-114: parameter bindings are substituted and checked](CAP-114.md), [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
 - <a id="CAP-314"></a>**[CAP-314: parameters assigned or bound by the data objects their schema governs](CAP-314.md)** · adopted ·
   A schema may declare parameters, and a reference object that the schema governs may assign a value to any of them,
