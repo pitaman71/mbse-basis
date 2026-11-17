@@ -4,8 +4,13 @@
 # Vocabulary
 
 The terms every mbse repository uses alike, in code, docs and messages. Terms that are not modeling constructs are
-defined here; a modeling construct is only named here, by the repository that defines it, with a link to its
-definition. A repository's documents cite these rather than define them again.
+defined here. A modeling construct is listed under the repository that defines it, in
+[Modeling constructs](#modeling-constructs), below, with a link to its definition. A construct may also have a term
+here, as the user decided: "A modeling construct is allowed to have a term in this doc. In that case the term
+definition should be a simple sentence or paragraph that describes what the construct models and a link to the feature
+if one is defined. Moving such entries to the mbse-schemas modeling constructs section is preferred." A line under
+Modeling constructs that says what a construct models follows the same rule. A repository's documents cite these rather
+than define them again.
 
 Across this many languages, terms collide: an SVA `property`, a C++ template parameter, a SystemVerilog `constraint`
 block. As the user put it: "Apparent collisions across this many languages are inevitable. Just be sure any
@@ -85,7 +90,7 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   type of the property that keys a relation's entries, not part of the schema; a parameter bound into it gives a
   tensor's shape. Planned in mbse-schemas'
   meta-schemas overhaul ([CAP-108: relations as scalable containers](capabilities/CAP-108.md), containers), which removes
-  the list's extent.
+  the list's `extent`.
 - <a id="VOC-027"></a>**VOC-027: second-order invention** · adopted · **Second-order invention**: a thing that can be modeled and invented
   elsewhere, such as a neutral expression language or datatypes. The project avoids them ([QUA-003: no second-order inventions](QUALITIES.md#QUA-003)), save as [PRI-022: second-order inventions by approval](PRINCIPLES.md#PRI-022)
   permits.
@@ -99,222 +104,55 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
 VOC-006, VOC-010 to VOC-019 and VOC-021 became modeling constructs, listed below; VOC-020 and VOC-022 to VOC-024 were withdrawn.
 Their IDs are not reused.
 
-The terms below name the parts of mbse-schemas' data model and store, which every repository that keeps data in a store
-uses. Each entry names mbse-schemas' own construct where one implements the term. The questions that these entries leave
-open are listed under [Open items](#open-items), below.
+### Data and stores
 
-### Objects and relations
+The terms below name what code and documents in several repositories do with mbse-schemas' data and stores. The
+constructs of mbse-schemas' data model and store, from reference objects to transactions and frames, are listed under
+[mbse-schemas](#mbse-schemas), below.
 
-- <a id="VOC-035"></a>**VOC-035: reference object** · proposed · **Reference object**: an object that stands on its own,
-  has an identity where it is a singleton or owned, and is reached only through relations, never held by a property or a
-  container. Its schema is a reference object schema, marked `.ref(True)` on mbse-schemas' `Schemas.OfObject` builder. A
-  model makes a thing a reference object where several owners share it, where code navigates back from it, where it is
-  part of a cycle, or where something refers to it by identity
-  ([CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects)). A
-  reference object is a singleton ([VOC-042: singleton](#VOC-042)), an owned object ([VOC-043: owned object](#VOC-043))
-  or a counted object ([VOC-044: counted object](#VOC-044)), as its schema declares
-  ([CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md)). A reference object is not a reference
-  ([VOC-046: reference](#VOC-046)), though a reference may designate one.
-- <a id="VOC-036"></a>**VOC-036: value object** · proposed · **Value object**: an object without identity, held by one
-  owner's property, directly or in a container, copied by value, compared deeply and written nested in its owner. Its
-  schema is an object schema not marked `.ref()`, and it has no adjacencies, since no entry links a value object
-  ([CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects)). Union
-  values, intersection values and references are value objects. A value object is not its visitor: as the user decided,
-  "a value object and a visitor of that value object are not necessarily the same thing", so that the value outlives the
-  transaction while the visitor that reads it does not
+- <a id="VOC-035"></a>**VOC-035: visitor** · adopted · **Visitor**: the protocol through which code reads and writes a
+  value of one kind, `Visitors.OfX` for kind X ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004),
+  [FEA-025: serialization behavior conventions in schema](features/FEA-025.md)). As the user decided: "Visitor is a
+  protocol pure and simple. Proxy implements that protocol using dynamic classes. Codegen implements the protocol as
+  generated `Builder` claseses." A proxy is mbse-schemas' implementation (under [mbse-schemas](#mbse-schemas), below),
+  and a builder ([VOC-036: builder](#VOC-036)) is code generation's. An instance of a visitor of a store's data lives
+  only within the transaction that made it
   ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-- <a id="VOC-037"></a>**VOC-037: relation** · proposed · **Relation**: a schema, mbse-schemas' `Schemas.OfRelation`, of
-  two or more named links and any number of properties, whose data is its entries ([VOC-038: entry](#VOC-038)). Each
-  link is filled by a reference object, never by a value object, and values that belong to one owner are held in a
-  container instead ([CAP-108: relations as scalable containers](capabilities/CAP-108.md)). A relation's `unique`
-  clauses decide whether its entries are a set or a list, and what keys them from each end
-  ([CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md)).
-- <a id="VOC-038"></a>**VOC-038: entry** · proposed · **Entry**: a relation entry, one fact of a relation, which links
-  one reference object by each of the relation's links and holds a value for each of its properties
-  ([CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md)). An entry has
-  no identity of its own. Its reference, `References.OfEntry`, designates it by its relation, its links and its
-  properties, and entries compare by value
-  ([CAP-130: references to objects, entries and frames](capabilities/CAP-130.md)). An ownership entry is an entry
-  through an adjacency marked `owner()`, and it places the object it owns
-  ([CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md)).
-- <a id="VOC-039"></a>**VOC-039: adjacency** · proposed · **Adjacency**: an object schema's declaration, mbse-schemas'
-  `Schemas.OfAdjacency`, that its objects fill one named link of a relation. An object reads and writes the entries that
-  link it through its adjacency, by the adjacency's name (`card.phones`), and `Visitors.OfAdjacency` is its visitor
-  ([CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md),
-  [CAP-108: relations as scalable containers](capabilities/CAP-108.md)). An adjacency marked `owner()` points back to
-  the object's owner ([CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md)). An adjacency declared
-  without a name lets an object fill the link with nothing held on the object
-  ([CAP-205: anonymous adjacencies, a link filled without storage on the object](capabilities/CAP-205.md)).
-- <a id="VOC-040"></a>**VOC-040: union** · proposed · **Union**: a schema, mbse-schemas' `Schemas.OfUnion`, of one or
-  more named branches, each a schema of the same kind. A union value holds exactly one branch, by name, and writing one
-  branch clears any other ([CAP-153: unions and intersections of named branches and parts](capabilities/CAP-153.md)). A
-  union value is a value object. A document that stands at a seam qualifies the term where it could be read as a C or
-  C++ `union` or as a union of classifiers
-  ([CAP-034: schemas specialized by classifier intersection and union](capabilities/CAP-034.md)).
-- <a id="VOC-041"></a>**VOC-041: schema extension** · proposed · **Schema extension**: the members, properties and
-  adjacencies, that a transaction adds to a schema that the store was made holding, meta-schemas included. An extension
-  may add members, but it may not change or remove any, and each store extends its own schemas
-  ([CAP-116: framework schemas extended, checked](capabilities/CAP-116.md)). A module that extends the framework's
-  schemas, such as `Parametrics`, does so in its install, run before use ([VOC-050: install](#VOC-050),
-  [CAP-171: parameters attached to every schema kind by extension](capabilities/CAP-171.md)). A store that reads a
-  snapshot made with an extension it lacks ignores, and lists, each member whose meaning needs that extension
-  ([CAP-165: snapshots read by a store lacking their extensions](capabilities/CAP-165.md)).
-
-### Identity and reference
-
-- <a id="VOC-042"></a>**VOC-042: singleton** · proposed · **Singleton**: a reference object identified by its global
-  name, which its schema declares by `.singleton(name)`. A singleton's path has no steps, and it is the root of every
-  path to another reference object ([CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md)). A
-  store's data is what its singletons reach
-  ([CAP-161: isolated stores, with no global registry](capabilities/CAP-161.md)). The root module, the singleton `"."`,
-  is where every schema object's path starts ([CAP-123: schema objects identified by path](capabilities/CAP-123.md)).
-- <a id="VOC-043"></a>**VOC-043: owned object** · proposed · **Owned object**: a reference object identified by its
-  path, the route from a singleton through the ownership entries that own it
-  ([CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
-  [CAP-119: owned objects found by path](capabilities/CAP-119.md)). An object is owned through an adjacency marked
-  `owner()`, whose relation has two links, and an owned object lives as long as its owning entry. Its keys are generated
-  from its owning relation's key patterns
-  ([CAP-120: owned objects named and placed when built](capabilities/CAP-120.md)). Removing its owning entry deletes it,
-  and in cascade everything it owns ([CAP-121: owned objects deleted in cascade](capabilities/CAP-121.md)).
-- <a id="VOC-044"></a>**VOC-044: counted object** · proposed · **Counted object**: a reference object that is neither a
-  singleton nor owned. It has no identity beyond the document that writes it, nothing finds it except through what links
-  it, and it lives while anything holds it, as the host language decides
-  ([CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
-  [CAP-133: no durable references to counted objects](capabilities/CAP-133.md)). A counted object has no reference, and
-  a frame refuses one ([CAP-130: references to objects, entries and frames](capabilities/CAP-130.md),
-  [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md)). Counted objects are
-  deprecated: as the user decided, "counted objects are now deprecated", and a reference object is to be a singleton or
-  owned ([INI-082: eliminate counted objects](../proposals/PRIORITIES.md#ini-082--eliminate-counted-objects)).
-- <a id="VOC-045"></a>**VOC-045: path** · proposed · **Path**: the identity of a singleton, an owned object or a schema
-  object, written as a nested value object, mbse-schemas' `Paths.OfRoot`, never as a string. A path names the singleton
-  it starts from, then each ownership entry it transits, by its adjacencies and its keys
-  ([CAP-119: owned objects found by path](capabilities/CAP-119.md),
-  [CAP-123: schema objects identified by path](capabilities/CAP-123.md)). A path is durable: as the user decided, "Paths
-  on the other hand are durable"
-  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)). An object reference
-  holds its object's path, in one canonical form ([CAP-311: references stabilized](capabilities/README.md#CAP-311)).
-- <a id="VOC-046"></a>**VOC-046: reference** · proposed · **Reference**: a value object that designates something
-  without holding it, written and read as any value is, of one of mbse-schemas' `References` schemas
-  ([CAP-130: references to objects, entries and frames](capabilities/CAP-130.md),
-  [CAP-311: references stabilized](capabilities/README.md#CAP-311)). An object reference, `References.OfObject`,
-  designates a singleton, an owned object or a schema object by its path, and is written `{"path": P}`
-  ([CAP-316: one written form for references](capabilities/CAP-316.md)). An entry reference, `References.OfEntry`,
-  designates a relation entry, and a frame reference, `References.OfFrame`, a frame
-  ([CAP-130: references to objects, entries and frames](capabilities/CAP-130.md)). A parameter reference,
-  `References.OfParameter`, designates a parameter by its name
-  ([CAP-312: a parameter reference in place of anything with a schema](capabilities/CAP-312.md)). A transaction resolves
-  an object reference, through a symbol that is given it
-  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md)), and a binding in the
-  reference's scope resolves a parameter reference
-  ([the parametrics proposal](../proposals/PARAMETRICS.md#references-as-first-class-values)).
-- <a id="VOC-047"></a>**VOC-047: extent** · proposed · **Extent**: a store's extent of a schema, the objects of that
-  schema, or of a schema that refines it, that the store holds. mbse-schemas gives one by `store.extent(name)`, which is
-  read within a transaction, as every read of a store's data is
-  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md)). As the user decided, a
-  store client finds an extent "by introspecting schemas. Then closing ownership relations"
-  ([CAP-286: an extent through ownership](capabilities/README.md#CAP-286),
-  [the stacked stores proposal](../proposals/STACKED-STORES.md#decided)).
-
-### Stores and transactions
-
-- <a id="VOC-048"></a>**VOC-048: store** · proposed · **Store**: the root object of a body of data, through which code
-  reaches schemas, builders and objects. A store holds its own schemas and its data, which is what its singletons reach,
-  and it is isolated from every other store
-  ([CAP-161: isolated stores, with no global registry](capabilities/CAP-161.md)). There is one Store interface, lazy by
-  default, and a store may be stacked on a store below it
-  ([FEA-028: one Store interface, lazy by default](features/FEA-028.md),
-  [CAP-283: a store given a store below](capabilities/README.md#CAP-283),
-  [CAP-308: stacking by mutation transactions, in one round trip](capabilities/README.md#CAP-308)). mbse-schemas' store
-  is `Builders.Store`, which implements that interface, `Visitors.OfStore`
-  ([CAP-149: data accessed through the store protocol](capabilities/CAP-149.md)). As the user decided, "the store
-  survives indefinitely": a store outlives every transaction on it
-  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-- <a id="VOC-049"></a>**VOC-049: transaction** · proposed · **Transaction**: a unit of work on a store, under an id the
-  program gives, which commits all of its writes or none
-  ([CAP-124: writes all-or-nothing in transactions](capabilities/CAP-124.md)). Every write to a store's data happens
-  within a transaction, and so does every read that no follow delivers
-  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md)). A transaction is written as
-  an expression, mbse-schemas' `Mutations.OfTransaction`, a chain of terms (map, upsert, update, reduce, partition),
-  each of which consumes and produces a stream of frames
-  ([CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md)). A transaction's imperative scope, `with
-  store.transaction()`, has no expression ([CAP-125: imperative transaction scope](capabilities/CAP-125.md)).
-  Transactions do not nest.
-- <a id="VOC-050"></a>**VOC-050: install** · proposed · **Install**: a module-scope `install(txn)`, a transaction that
-  upserts the schemas a module defines, so that installing it again writes nothing and installing more extends what it
-  defined. The framework defines its own schemas by installs too
-  ([CAP-115: schemas defined by idempotent installs](capabilities/CAP-115.md)). A store also runs an install given as
-  plain data, by `store.install(...)`, which sends it to the store below first
-  ([the stacked stores proposal](../proposals/STACKED-STORES.md#decided)). A document that stands at a seam qualifies
-  the term where it could be read as a package manager's install.
-- <a id="VOC-051"></a>**VOC-051: upsert** · proposed · **Upsert**: a transaction's term, mbse-schemas'
-  `Mutations.OfUpsert`, that binds each of its symbols to the object its pattern's spec designates, finding the object
-  before it creates one. An upsert creates an object only where it finds none, and then writes its spec wherever the
-  spec does not hold ([CAP-139: upserts find before they create](capabilities/CAP-139.md),
-  [CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md)). An upsert finds an owned object by its
-  owning entry and a schema object by its name ([CAP-139: upserts find before they create](capabilities/CAP-139.md)).
-  Every install is an upsert.
-- <a id="VOC-052"></a>**VOC-052: frame** · proposed · **Frame**: one result of a transaction's expression, which binds
-  each symbol that its terms declare to one object, and each variable to a value. A transaction's terms consume and
-  produce a stream of frames, and the transaction gives back the frames that its chain ends with
-  ([CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md)). A frame given back holds each object by
-  its reference, not by a visitor: as the user decided, "Frames hold symbol bindings and property assignments, not
-  proxies" ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-  mbse-schemas' constructs are `Transactions.Frame`, which `store.transaction` gives back, and `References.OfFrame`, a
-  frame's reference, which carries the frame to a client and up a stack of stores
-  ([CAP-130: references to objects, entries and frames](capabilities/CAP-130.md),
-  [CAP-308: stacking by mutation transactions, in one round trip](capabilities/README.md#CAP-308)). A frame carries the
-  errors annotated on it ([CAP-309: errors annotated on frames](capabilities/CAP-309.md)), and it may witness the
-  property values and relation entries it asserts
-  ([CAP-131: frames witness values and entries](capabilities/CAP-131.md)).
-- <a id="VOC-053"></a>**VOC-053: binding** · proposed · **Binding**: what associates a name with what it stands for. As
-  the user decided, "bindings" names two different things
-  ([the parametrics proposal](../proposals/PARAMETRICS.md#decided)). A frame binds each of its symbols to an object or
-  to a parameter, and it assigns values to its variables ([VOC-052: frame](#VOC-052)). A data object binds parameters
-  that its schema declares, through `Parametrics.BindsValue` and `Parametrics.BindsObject`
+- <a id="VOC-036"></a>**VOC-036: builder** · adopted · **Builder**: a class that code generation generates for a schema,
+  which implements the visitor protocol ([VOC-035: visitor](#VOC-035)) for that schema's values
+  ([FEA-022: code generation](features/README.md#FEA-022)). As the user decided, "Codegen implements the protocol as
+  generated `Builder` claseses." [PRI-019: fluent builder syntax](PRINCIPLES.md#PRI-019) names the syntax in which code
+  writes a model through the protocol, whether it writes through a generated `Builder` or through a proxy, whose
+  dynamic classes include a `Builder` of their own ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004)).
+- <a id="VOC-037"></a>**VOC-037: symbol binding** · adopted · **Symbol binding**: what a frame holds for each of its
+  symbols, the object, or the parameter, that the symbol stands for in that result of a transaction
+  ([FEA-027: mutations as queries](features/FEA-027.md),
+  [the parametrics proposal](../proposals/PARAMETRICS.md#decided)). As the user decided, "Frames hold symbol bindings
+  and property assignments, not proxies"
+  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)). A symbol binding is
+  not a parameter binding ([VOC-038: parameter binding](#VOC-038)): as the user decided, "Parameter binding and symbol
+  binding have different meanings and should be used as phrases, not just "binding"." *Never*: a bare "binding".
+- <a id="VOC-038"></a>**VOC-038: parameter binding** · adopted · **Parameter binding**: what gives a parameter its value
+  or its object within a scope ([FEA-033: model parameters](features/FEA-033.md)). A data object holds the parameter
+  bindings for the parameters that its schema declares
   ([CAP-314: parameters bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
-  mbse-expressions, an expression root or an application binds the parameters of a definition
-  ([CAP-163: parameters bound, applied and generated beyond mbse-schemas](capabilities/CAP-163.md)).
-- <a id="VOC-054"></a>**VOC-054: journal** · proposed · **Journal**: a store's transactions, recorded as data in the
-  order in which they were committed, from which the store's data is made again. As the user decided, a model is stored,
-  communicated and analyzed in journal form ([the stacked stores proposal](../proposals/STACKED-STORES.md#decided),
-  [FEA-056: fungible diagramming keeps agents and humans in the loop](features/FEA-056.md#decided)). In mbse-schemas, a
-  journal is the list of transactions as they were submitted, replayed by executing each again
-  ([CAP-129: journals replayed by execution](capabilities/CAP-129.md)). In mbse-journals, a journal entry is a
-  transaction's effect, written in the journal language
-  ([CAP-271: the journal language](capabilities/README.md#CAP-271)).
-- <a id="VOC-055"></a>**VOC-055: follow** · proposed · **Follow**: a subscription through which a store gives a follower
-  each transaction it commits, as that transaction's effect, in the order in which it commits them
-  ([CAP-270: a transaction's changes observed at its commit](capabilities/README.md#CAP-270),
-  [CAP-285: writes through, others' writes in](capabilities/README.md#CAP-285)). mbse-schemas' store gives one by
-  `store.follow(follower)`. As the user decided, "Follows is the one legitimate alternative to transactions for
-  read-only access", and "A follower reads what the follow delivers, and Follower subscriptions are layer-coupled as
-  well" ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-
-### Reading and writing
-
-- <a id="VOC-056"></a>**VOC-056: visitor** · proposed · **Visitor**: an object through which code reads and writes a
-  value of one kind, mbse-schemas' `Visitors.OfX`, the one protocol for kind X. An algorithm receives a visitor and
-  pulls through it, and the visitor's mode decides whether a write takes effect
-  ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004),
-  [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md)). Serialization reads and writes
-  through the visitor protocol ([PRI-026: serialization through the visitor protocol](PRINCIPLES.md#PRI-026)). A visitor
-  of a store's data lives only within the transaction that made it: as the user decided, "any class that implements
-  Visitor must be have a lifetime that is lexically scoped (such as `with store.transaction()`)"
-  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-- <a id="VOC-057"></a>**VOC-057: proxy** · proposed · **Proxy**: mbse-schemas' dynamic implementation of the visitor
-  protocol, `Proxies.OfX`, which lets a program use a schema without generated code. A proxy's data instance visits
-  read-only, and its builder is writable ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004)). Within a
-  transaction, a proxy is the visitor that wraps an object's durable copy: as the user decided, "_Proxy (the
-  in-tranasaction visitor) can serve double as _Data (the durable, ideally more compact representation), but in the
-  _Proxy case it needs to wrap the durable copy"
-  ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-- <a id="VOC-058"></a>**VOC-058: builder** · proposed · **Builder**: a writable visitor that builds or changes a value
-  in fluent syntax, one setter per property, finalized by `create`, `clone` or `update`, none of which validates
-  ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004)). As the user decided, "The preferred form of models
-  as data is fluent builder syntax" ([PRI-019: fluent builder syntax](PRINCIPLES.md#PRI-019)). mbse-schemas has data
-  builders, `Proxies.OfX.Builder`, which `store.<Name>(...)` gives, and schema builders, `Schemas.OfX.Builder`, each a
-  visitor of its kind's plain schema of schemas
-  ([CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md)).
+  mbse-expressions, an expression root holds parameter bindings for parameters that it declares, and an application
+  holds them for the parameters of the definition that it applies
+  ([CAP-163: parameters bound, applied and generated beyond mbse-schemas](capabilities/CAP-163.md),
+  [the parametrics proposal](../proposals/PARAMETRICS.md#bound)). A parameter reference resolves through a parameter
+  binding in its scope. A parameter binding is not a symbol binding ([VOC-037: symbol binding](#VOC-037)), as the user
+  decided: "Parameter binding and symbol binding have different meanings and should be used as phrases, not just
+  "binding"." *Never*: a bare "binding".
+- <a id="VOC-039"></a>**VOC-039: journal** · adopted · **Journal**: a store's committed transactions, recorded as data in
+  the order in which they were committed, from which the store's data is made again
+  ([FEA-030: clean mutation-based transactional API](features/FEA-030.md)). "Journal" names two records, until their
+  languages become one, as the user decided, choosing "(b)" of the options offered. In mbse-schemas, a journal is the
+  list of transactions as they were submitted, replayed by executing each again
+  ([CAP-129: journals replayed by execution](capabilities/CAP-129.md)). In mbse-journals, a journal records the changes
+  that the transactions made ([CAP-271: the journal language](capabilities/README.md#CAP-271)): as the user put it,
+  "journals store changes", and "journals store journal trransactions which store changes". The two records differ, as
+  the user decided: "Mutation-transaction streams and change journals are not the same language - yet." A journal's
+  elements are transactions, as the user decided: "Journals comprise transactions." *Never*: "journal entry".
 ## Modeling constructs
 
 Links are relative to a polyrepo checkout, each repository beside mbse-basis, and read its `main` unless marked.
@@ -328,8 +166,11 @@ its [skill](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-sche
 `Corpus.py` in mbse-schemas' conformance package, one program building every kind of schema and data,
 whose output in [conformance/python3/](https://github.com/pitaman71/mbse-schemas/blob/main/conformance/python3) is the wire format, byte-identical in both languages;
 and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob/main/python3/tests) (TypeScript's notebooks have the same case IDs), `25_Builders`
-(building in a store, the plain schemas of schemas, paths such as `store.Schemas.OfInt`), `28_Extensions`
-(`store.extend`), `27_Snapshots` (mutation logs, reading without an extension) and `22_Parametrics`.
+(building in a store, the plain schemas of schemas, attributes such as `store.Schemas.OfInt`), `28_Extensions`
+(`store.extend`), `27_Snapshots` (mutation logs, reading without a schema extension) and `22_Parametrics`.
+
+Where a line below says what a construct models, it links the feature that the construct serves, then the capabilities
+that define it.
 
 - `OfAny`, `OfScalar`, `OfObject`, `OfProperty`, `OfRelation`, `OfAdjacency`, `OfEntry`, `OfUnion`,
   `OfIntersection`, `OfContainer`, `OfParameter`, `OfModule`:
@@ -341,21 +182,154 @@ and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob
   branch or part is an entry of `HasBranch` or `HasPart` (since 0.18.0), linking its type and carrying its name and
   description, not an object of its own.
 - Container: [CAP-108: relations as scalable containers](capabilities/CAP-108.md)
-- Value object, reference object, the constructs that implement [VOC-036: value object](#VOC-036) and
-  [VOC-035: reference object](#VOC-035):
-  [CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects)
-- Cardinality, `unique`: [CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md)
+- Reference object (an object schema marked `.ref(True)`): an object that stands on its own and that relations link,
+  never held by a property or a container. A model makes a thing a reference object where several owners share it,
+  where it is part of a cycle, or where something refers to it by identity. A reference object is a singleton, an
+  owned object or a counted object, as its schema declares.
+  [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md);
+  [CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects),
+  [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md).
+- Value object (an object schema not marked `.ref()`): an object without identity, held by one owner's property,
+  directly or in a container, and copied and compared by value. Union values, intersection values and references are
+  value objects.
+  [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md);
+  [CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects).
+- Relation (`OfRelation`): a kind of fact that links two or more reference objects, one by each of its named links, and
+  that holds a value for each of its properties. Its `unique` clauses decide whether its entries are a set or a list.
+  [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md);
+  [CAP-108: relations as scalable containers](capabilities/CAP-108.md),
+  [CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md).
+- Relation entry (`OfEntry`; its reference, `References.OfEntry`): one fact of a relation, with no identity beyond its
+  relation, its links and its properties. An ownership entry, an entry through an adjacency marked `owner()`, places the
+  object that it owns. A bare "entry" means a relation entry, as the user decided: ""entry" means relation entries.
+  Journals comprise transactions." Any other sense of "entry" is qualified, and a journal's elements are transactions
+  ([VOC-039: journal](#VOC-039)).
+  [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md);
+  [CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md),
+  [CAP-130: references to objects, entries and frames](capabilities/CAP-130.md).
+- Adjacency (`OfAdjacency`): an object schema's declaration that its objects fill one named link of a relation, by
+  which an object reaches the entries that link it (`card.phones`). An adjacency marked `owner()` reaches the object's
+  owner.
+  [FEA-035: clean modeling separation between value objects and reference objects](features/FEA-035.md);
+  [CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md),
+  [CAP-205: anonymous adjacencies, a link filled without storage on the object](capabilities/CAP-205.md).
+- Union (`OfUnion`): a value that holds exactly one of several named branches, each a schema of the same kind. A
+  document that stands at a seam qualifies the term where it could be read as a C or C++ `union`.
+  [FEA-025: serialization behavior conventions in schema](features/FEA-025.md);
+  [CAP-153: unions and intersections of named branches and parts](capabilities/CAP-153.md).
+- Schema extension (`store.extend`): the members, properties and adjacencies, that a transaction adds to the schemas
+  that a store holds, meta-schemas included. A schema extension adds members, and it never changes or removes one. A
+  module that extends the framework's schemas in its install, such as `Parametrics`, is an extending module, as the
+  user decided: "A module that uses schema extension is an "extending module" not an "extension"." *Never*:
+  "extension" for the module.
+  [FEA-031: schemas as extensible data](features/FEA-031.md);
+  [CAP-116: framework schemas extended, checked](capabilities/CAP-116.md),
+  [CAP-171: parameters attached to every schema kind by extension](capabilities/CAP-171.md).
 - Level (data, schema, plain schema of schemas, meta-schema):
   [Store overhaul, Levels](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
-  (`Schemas.OfObject`, level 2) is what an extension extends; a *meta-schema* (level 3) is static code describing it.
+  (`Schemas.OfObject`, level 2) is what a schema extension extends; a *meta-schema* (level 3) is static code describing it.
 - Module: [CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md)
 - Planned in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [FEA-026: deterministic object identity](features/FEA-026.md));
   `Parameters.Bind` and `Parameters.Apply` ([CAP-114: parameter bindings are substituted and checked](capabilities/CAP-114.md)).
-- Store, singleton, the constructs that implement [VOC-048: store](#VOC-048) and [VOC-042: singleton](#VOC-042):
+- Singleton (an object schema's `.singleton(name)`): a reference object identified by its global name. A store's data
+  is what its singletons reach, and every schema object is reached from the root module, the singleton `"."`.
+  [FEA-026: deterministic object identity](features/FEA-026.md);
+  [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
   [CAP-161: isolated stores, with no global registry](capabilities/CAP-161.md).
-  Each store holds its own schemas, built when it is made or through `store.extend`; no schema object is shared
-  across stores (schema extension 23 in [CAP-116: framework schemas extended, checked](capabilities/CAP-116.md#decided)). There is one store type,
+- Owned object: a reference object identified by its owner's reference and its key in its owning relation. It lives as
+  long as its owning entry, and removing that entry deletes it and, in cascade, everything that it owns.
+  [FEA-026: deterministic object identity](features/FEA-026.md);
+  [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
+  [CAP-119: owned objects found by path](capabilities/CAP-119.md),
+  [CAP-121: owned objects deleted in cascade](capabilities/CAP-121.md).
+- Counted object: a reference object that is neither a singleton nor owned. It has no identity beyond the document
+  that writes it, nothing finds it except through what links it, and it lives while anything holds it. A counted object
+  has no reference, and a frame carries none. Counted objects are deprecated, as the user decided ("counted objects are
+  now deprecated"), and this line stands until the capabilities of
+  [INI-082: eliminate counted objects](../proposals/PRIORITIES.md#ini-082--eliminate-counted-objects) land and
+  supersede it, as the user decided ("(a) ofc").
+  [FEA-026: deterministic object identity](features/FEA-026.md);
+  [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
+  [CAP-133: no durable references to counted objects](capabilities/CAP-133.md).
+- Reference (`References.OfObject`, `.OfEntry`, `.OfFrame`, `.OfParameter`): a value object that designates something
+  without holding it. An object reference designates a singleton, an owned object or a schema object; an entry
+  reference, a relation entry; a frame reference, a frame; and a parameter reference, a parameter, by its name. A
+  transaction resolves an object reference through a symbol that is given it, and a parameter binding
+  ([VOC-038: parameter binding](#VOC-038)) in the reference's scope resolves a parameter reference. Paths are retired as
+  a term, and documents speak of object references alone, as the user decided, choosing "(b)" of the options offered.
+  *Never*: "path", where an object reference is meant.
+  [FEA-026: deterministic object identity](features/FEA-026.md);
+  [CAP-130: references to objects, entries and frames](capabilities/CAP-130.md),
+  [CAP-311: references stabilized](capabilities/README.md#CAP-311),
+  [CAP-312: a parameter reference in place of anything with a schema](capabilities/CAP-312.md).
+- Extent (`store.extent(name)`): a store's extent of a schema, the objects of that schema, or of a schema that refines
+  it, that the store holds. A store client finds an extent, as the user decided, "by introspecting schemas. Then closing
+  ownership relations" ([the stacked stores proposal](../proposals/STACKED-STORES.md#decided)). "Extent" means a
+  store's extent alone. The bounds of a list's or a container's index are its index domain, as the user put it: "For
+  index types I refer to them as "index domains"". *Never*: "extent" for the bounds of an index.
+  [FEA-028: one Store interface, lazy by default](features/FEA-028.md);
+  [CAP-286: an extent through ownership](capabilities/README.md#CAP-286).
+- Store (`Builders.Store`, which implements `Visitors.OfStore`): the root object of a body of data, which holds its own
+  schemas and its data, isolated from every other store, and which may be stacked on a store below. A store outlives
+  every transaction on it, as the user decided: "the store survives indefinitely." Each store holds its own schemas,
+  built when it is made or through `store.extend`; no schema object is shared across stores (schema extension 23 in
+  [CAP-116: framework schemas extended, checked](capabilities/CAP-116.md#decided)). There is one store type,
   `Builders.Store`, which registers a named schema by building it; `Stores.Combined` is deprecated (since 0.16.0).
+  [FEA-028: one Store interface, lazy by default](features/FEA-028.md);
+  [CAP-161: isolated stores, with no global registry](capabilities/CAP-161.md),
+  [CAP-283: a store given a store below](capabilities/README.md#CAP-283),
+  [CAP-308: stacking by mutation transactions, in one round trip](capabilities/README.md#CAP-308).
+- Transaction (`Mutations.OfTransaction`; its imperative scope, `with store.transaction()`): a unit of work on a store,
+  which commits all of its writes or none. Every write to a store's data happens within a transaction, and so does
+  every read that no follow delivers. A transaction is a chain of terms over a stream of frames. Transactions do not
+  nest.
+  [FEA-030: clean mutation-based transactional API](features/FEA-030.md);
+  [CAP-124: writes all-or-nothing in transactions](capabilities/CAP-124.md),
+  [CAP-125: imperative transaction scope](capabilities/CAP-125.md),
+  [CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md),
+  [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md).
+- Install (a module-scope `install(txn)`; `store.install(...)`): a transaction that upserts the schemas that a module
+  defines, so that installing it again writes nothing. A document that stands at a seam qualifies the term where it
+  could be read as a package manager's install.
+  [FEA-032: schema loading and wire alignment](features/FEA-032.md);
+  [CAP-115: schemas defined by idempotent installs](capabilities/CAP-115.md).
+- Upsert (`Mutations.OfUpsert`): a transaction's term that finds the object that its pattern designates before it
+  creates one, and then writes its spec wherever the spec does not hold. Every install is an upsert.
+  [FEA-027: mutations as queries](features/FEA-027.md);
+  [CAP-139: upserts find before they create](capabilities/CAP-139.md).
+- Frame (`Transactions.Frame`; its reference, `References.OfFrame`): one result of a transaction, which holds a symbol
+  binding ([VOC-037: symbol binding](#VOC-037)) for each of its symbols and the property values that the transaction
+  assigned. As the user decided, "Frames hold symbol bindings and property assignments, not proxies", and a frame
+  carries no counted object (agreed: "fine"). A frame carries the errors annotated on it.
+  [FEA-027: mutations as queries](features/FEA-027.md);
+  [CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md),
+  [CAP-130: references to objects, entries and frames](capabilities/CAP-130.md),
+  [CAP-309: errors annotated on frames](capabilities/CAP-309.md),
+  [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided).
+- Document (`Plain.ToPlain(store).OfObject` and `.Reachable`): one transaction that writes a graph sent without its
+  store, in which its counted objects are numbered and the owned objects and singletons it links are referred to by
+  reference. Of data, "document" names this construct alone, as the user decided, choosing "(b)" of the options
+  offered; a written text, such as this one, is a document in the ordinary sense.
+  *Never*: "an object's document", which names the answer of `Stores.Below.document`, code that
+  [CAP-308: stacking by mutation transactions, in one round trip](capabilities/README.md#CAP-308) removes. A document
+  is neither a frame nor a snapshot.
+  [FEA-030: clean mutation-based transactional API](features/FEA-030.md);
+  [CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md).
+- Follow: a subscription through which a store delivers to a follower the changes of each transaction that it
+  commits, in the order of their commits. As the user decided, "Follows is the one legitimate alternative to
+  transactions for read-only access", and "A follower reads what the follow delivers, and Follower subscriptions are
+  layer-coupled as well."
+  [FEA-030: clean mutation-based transactional API](features/FEA-030.md);
+  [CAP-270: a transaction's changes observed at its commit](capabilities/README.md#CAP-270),
+  [CAP-285: writes through, others' writes in](capabilities/README.md#CAP-285),
+  [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided).
+- Proxy (`Proxies.OfX`): mbse-schemas' implementation of the visitor protocol ([VOC-035: visitor](#VOC-035)) with
+  dynamic classes, so that a program uses a schema without generated code. A proxy's data instances visit read-only,
+  and its builders are writable.
+  [FEA-025: serialization behavior conventions in schema](features/FEA-025.md);
+  [PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004),
+  [PRI-010: proxies and generated code read alike](PRINCIPLES.md#PRI-010),
+  [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md).
 - Parameter (`OfParameter`): a name only, a symbol standing for a schema (since 0.17.0); terms, applications and
   widths are mbse-expressions'. Bound by `Parameters.Bind`, planned: a reference object recording the substitution,
   which any operation taking the function interprets, applying it lazily or through `Parameters.Apply`
@@ -405,112 +379,19 @@ V-001 to V-026 are [VOC-001: specification](#VOC-001) to [VOC-026: schema](#VOC-
 
 ## Open items
 
-Each item below is a question that the entries from [VOC-035: reference object](#VOC-035) to [VOC-058: builder](#VOC-058)
-leave to the user. Each entry is written as the documents best support it until the user decides.
+The question below is one that the terms and the constructs of mbse-schemas' data model and store leave to the user.
+The text above is written as the documents best support it until the user decides.
 
-- **Terms or modeling constructs.** The preface above says that a modeling construct is only named here, with a link to
-  its definition, while [VOC-035: reference object](#VOC-035) to [VOC-058: builder](#VOC-058) define mbse-schemas'
-  constructs, as [VOC-033: dialect](#VOC-033) defines a dialect beside the construct `Terms.Dialect`. The options are:
-  (a) keep the entries, each construct line under mbse-schemas linking its term, as the line for `Terms.Dialect` links
-  [VOC-033: dialect](#VOC-033); (b) move the entries into the list of mbse-schemas' constructs, each a name and a link
-  to the capability that defines it; (c) keep as terms only those that are not mbse-schemas' constructs, such as
-  transaction, journal and binding.
-- **Document, frame and snapshot.** The user has said that "document", as in "an object's document", is not canon, and
-  that the canonical construct is the frame ([VOC-052: frame](#VOC-052)). "Document" names a built construct of
-  mbse-schemas: [CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md), which
-  `Plain.ToPlain(store).OfObject` and `.Reachable` write, one transaction that holds an object and the counted objects
-  it reaches. [CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects)
-  ("a document writes it once") and [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md) ("no
-  identity beyond the document that writes it") use the word so, and so does [VOC-044: counted object](#VOC-044). "An object's document", the answer of `Stores.Below.document(path)`, is used in
-  [the stacked stores proposal](../proposals/STACKED-STORES.md#decided-by-an-agent-for-review) (mbse-schemas 30,
-  mbse-dynamodb 15, mbse-rest 19), in [CAP-304: a store below that answers later](capabilities/README.md#CAP-304) and
-  [CAP-306: a public store-below interface](capabilities/README.md#CAP-306), both superseded by
-  [CAP-308: stacking by mutation transactions, in one round trip](capabilities/README.md#CAP-308), and in
-  [the journal storage proposal](../proposals/JOURNAL-STORAGE.md). A frame binds symbols to references, a document
-  writes objects, and a snapshot writes a whole store, so that the three are not
-  synonyms. The options are: (a) no term for "document":
-  [CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md)'s construct is named anew, and "an
-  object's document" gives way to the frames that a transaction streams back
-  ([CAP-308: stacking by mutation transactions, in one round trip](capabilities/README.md#CAP-308)); (b) "document" kept
-  for [CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md)'s construct alone, with "an object's
-  document" marked *Never*; (c) "document" adopted for any written form of objects, a snapshot among them.
-- **Visitor and proxy.** [PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004) makes `Proxies.OfX` the
-  implementation whose data instances and builders implement `Visitors.OfX`, and [VOC-057: proxy](#VOC-057) follows it.
-  [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided) calls a proxy "the
-  in-tranasaction visitor" that wraps the durable `_Data`, and says that frames hold no proxies, where its Design says
-  that they hold no visitors. [CAP-284: objects loaded on demand](capabilities/README.md#CAP-284) calls an object of the
-  store below not yet loaded "a proxy whose identity is kept by its reference", which
-  [the parametrics proposal](../proposals/PARAMETRICS.md#references-as-first-class-values) turns into a
-  `References.OfObject`. The options are: (a) "visitor" names the protocol and its role, and "proxy" names mbse-schemas'
-  dynamic implementation, as drafted; (b) "proxy" names only the in-transaction wrapper of durable data, the `_Proxy`
-  beside `_Data`; (c) "proxy" is not a term, and documents say "visitor" throughout.
-- **Entry.** A bare "entry" means a relation entry in [VOC-038: entry](#VOC-038),
-  [CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md) and
-  `References.OfEntry`. It also names a journal entry ([CAP-271: the journal language](capabilities/README.md#CAP-271)),
-  a step of a path (`Paths.OfEntry`, [CAP-119: owned objects found by path](capabilities/CAP-119.md)), a container's
-  entry-like elements ([CAP-108: relations as scalable containers](capabilities/CAP-108.md)), a callback's entry in a
-  transaction's term list
-  ([mbse-schemas' query guide](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-schemas/references/queries.md)),
-  and an item's entry in an index ([the mbse basis](README.md#rules-for-writing-items)). The options are: (a) a bare
-  "entry" means a relation entry, and every other use is qualified, as in "journal entry"; (b) "relation entry" is
-  written in full everywhere; (c) the journal's entries, or the path's steps, are renamed.
-- **Reference.** "Reference" names a value of a `References` schema ([VOC-046: reference](#VOC-046)), which may be an
-  object, entry, frame or parameter reference. It is also part of the name of a reference object
-  ([VOC-035: reference object](#VOC-035)), which is an object rather than a reference, and it names a concrete or
-  symbolic reference in code ([PRI-015: concrete references are programmatic](PRINCIPLES.md#PRI-015)). A parameter
-  reference ([CAP-312: a parameter reference in place of anything with a schema](capabilities/CAP-312.md)) is resolved
-  by a binding in its scope, not by a store, unlike an object reference. The options are: (a) "reference" means a
-  `References` value, always qualified by what it designates ("object reference", "parameter reference"), with
-  "reference object" kept; (b) "reference object" renamed, so that "reference" names a `References` value alone; (c) a
-  parameter reference given a name of its own, since nothing in a store resolves it.
-- **Counted object, deprecated.**
-  [INI-082: eliminate counted objects](../proposals/PRIORITIES.md#ini-082--eliminate-counted-objects) deprecates counted
-  objects, while [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
-  [CAP-133: no durable references to counted objects](capabilities/CAP-133.md) and
-  [CAP-270: a transaction's changes observed at its commit](capabilities/README.md#CAP-270) still describe them as
-  built, and [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md) still gives the counted mode to
-  most objects other than singletons and definitions. The options are: (a) [VOC-044: counted object](#VOC-044) adopted
-  now, and superseded when INI-082's capabilities land; (b) [VOC-044: counted object](#VOC-044) withdrawn, and the term
-  marked deprecated in the entry for reference objects; (c) [VOC-044: counted object](#VOC-044) kept with *Never* for
-  new models.
-- **Binding and assignment.** As the user decided, "bindings" names two things ([VOC-053: binding](#VOC-053)): a frame
-  binds symbols, and a data object, an expression root or an application binds parameters. A frame also assigns values
-  to its variables ([the parametrics proposal](../proposals/PARAMETRICS.md#bound)), while
-  [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)'s "property
-  assignments" and `Transactions.Frame.assigns` mean the property values that the transaction left on the objects its
-  symbols bind. A frame's variables collide with [VOC-004: variable](#VOC-004), a variable that constraints bind. The
-  options are: (a) one term, binding, qualified as "a frame's binding" or "a parameter binding", as drafted; (b) two
-  terms, such as a frame "binding" its symbols and a data object "binding" its parameters under another name; (c) the
-  frame's own vocabulary settled apart: its symbols bound, its variables valued, and its property assignments witnessed.
-- **Journal: submitted or effects.** [CAP-129: journals replayed by execution](capabilities/CAP-129.md) defines a
-  journal as the transactions as submitted, replayed by executing each again, while
-  [CAP-271: the journal language](capabilities/README.md#CAP-271) defines a journal entry as a transaction's effect,
-  applied idempotently. As the user decided, mutation-transaction streams and change journals "are not the same language
-  - yet" ([CAP-271: the journal language](capabilities/README.md#CAP-271)). The options are: (a) "journal" means the
-  record of effects, mbse-journals', and [CAP-129: journals replayed by execution](capabilities/CAP-129.md)'s list is
-  named otherwise; (b) "journal" covers both, as drafted, until the two languages become one; (c)
-  [CAP-129: journals replayed by execution](capabilities/CAP-129.md) is superseded by
-  [CAP-271: the journal language](capabilities/README.md#CAP-271).
-- **Extent.** [VOC-047: extent](#VOC-047) means a store's extent of a schema
-  ([CAP-286: an extent through ownership](capabilities/README.md#CAP-286)). "Extent" also means the bounds of a list's
-  or a container's index, in [VOC-025: shape constraint](#VOC-025) ("the list's extent"),
-  [CAP-027: Python3 source generated from schemas](capabilities/CAP-027.md) and
-  [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md). The options are: (a) "extent" means a
-  store's extent of a schema alone, and the other sense is called a bound or a shape constraint
-  ([VOC-025: shape constraint](#VOC-025)); (b) both senses are kept, each qualified.
-- **Schema extension.** "Schema extension" names the construct ([VOC-041: schema extension](#VOC-041)), and also a
-  series of decisions numbered in mbse-schemas' design ("schema extension 23" in
-  [CAP-116: framework schemas extended, checked](capabilities/CAP-116.md#decided)), while "extension" also names a
-  module installed to extend the framework, such as `Parametrics`. The options are: (a) the term as drafted, with the
-  decision series cited by its document's name; (b) "extension" alone for the module, and "schema extension" for the
-  members it adds.
-- **Path and reference.** [CAP-132: paths retired for references](capabilities/CAP-132.md) plans to retire paths for
-  references, while [CAP-311: references stabilized](capabilities/README.md#CAP-311) makes a path an object reference's
-  identity and [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided) records
-  that "Paths on the other hand are durable". The options are: (a) a path is kept as the identity that an object
-  reference holds ([VOC-045: path](#VOC-045), as drafted), and
-  [CAP-132: paths retired for references](capabilities/CAP-132.md) is restated or superseded; (b) paths are retired as a
-  term, and documents speak of object references alone.
+- **Reference.** "Reference" names a value of a `References` schema (Reference, under [mbse-schemas](#mbse-schemas)),
+  which may be an object, entry, frame or parameter reference. It is also part of the name of a reference object
+  (Reference object, under [mbse-schemas](#mbse-schemas)), which is an object rather than a reference, and it names a
+  concrete or symbolic reference in code ([PRI-015: concrete references are programmatic](PRINCIPLES.md#PRI-015)). A
+  parameter reference ([CAP-312: a parameter reference in place of anything with a schema](capabilities/CAP-312.md)) is
+  resolved by a parameter binding ([VOC-038: parameter binding](#VOC-038)) in its scope, not by a store, unlike an
+  object reference. The options are: (a) "reference" means a `References` value, always qualified by what it
+  designates ("object reference", "parameter reference"), with "reference object" kept; (b) "reference object" renamed,
+  so that "reference" names a `References` value alone; (c) a parameter reference given a name of its own, since
+  nothing in a store resolves it.
 
 ---
 
