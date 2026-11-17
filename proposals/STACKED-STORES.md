@@ -341,7 +341,7 @@ labeled with the repository and number it was decided under.
 - **(mbse-dynamodb 17)** **A store kept in DynamoDB implements `Stores.Below`, interpreting each transaction in a store
   of its own.** It holds a `Builders.Store` over an index that implements the interface itself and records nothing, so
   that its store records each transaction; the index's `commit`, within that store's transaction, writes the journal
-  entry and the index items in one DynamoDB transaction, a conflict or a failure there rolling the transaction back,
+  transaction and the index items in one DynamoDB transaction, a conflict or a failure there rolling the transaction back,
   which is interpreted again once caught up, up to a bound, as a transaction written in a block is too. Each object's
   document is kept as that store's `document(path)` gives it, with the objects linking it; reading one needs no install.
 
