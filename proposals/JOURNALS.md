@@ -34,13 +34,14 @@ The user's decisions:
   [PRI-003: everything is schema data](../docs/PRINCIPLES.md#PRI-003) and
   [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018) require, and lives in the lowest
   repository that can own it, as [PRI-011: the lowest repository that can own it](../docs/PRINCIPLES.md#PRI-011) has it.
-- **A journal's order is relations, never an order of its transactions**: relation entries have no order,
+- **A journal's order is relations, never an order of its transactions** (open: a journal built without a store, below,
+  may not hold relations; see [Open questions](#open-questions)): relation entries have no order,
   permanently, and ordering them would be a second-order invention; a sequenced container is relations that cooperate,
   as [FEA-058: parametric schema templates](../docs/features/FEA-058.md#decided) records.
-- **An append that collides is refused by a unique clause** (2026-11-12): "a correct client will send - Last(container,a)
-  + Last(container,b) in the same transaction", and where another appended first, "if - Last(container,a) is ignored
-  because it has no effect then applying +Last(container,b) violates the unique clause"; "constraints are still under
-  construction so it would be preferable not to rely on them for urgent functionality"
+- **An append that collides is refused by a unique clause** (2026-11-12; open, as the order above is): "a correct client
+  will send - Last(container,a) + Last(container,b) in the same transaction", and where another appended first, "if -
+  Last(container,a) is ignored because it has no effect then applying +Last(container,b) violates the unique clause";
+  "constraints are still under construction so it would be preferable not to rely on them for urgent functionality"
   ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)).
 - **`Precedes` and `Follows` are held, as alternatives or complements** (2026-11-12): "They are stored as expressive
   alternatives or complements to After/Before. it is not necessary to infer the complete relation for any reason."
@@ -56,9 +57,24 @@ The user's decisions:
   the two ways the user was offered: "(a) is fine for now".
 - **A journal is kept in any store, through the store interface** (2026-11-12): the journal storage interface is the
   store interface, "exactly" ([the journal storage proposal](JOURNAL-STORAGE.md#the-interface-and-how-a-backend-is-held-to-it)).
+  (Superseded by "a journal is data", below: a journal is built without a store.)
 - **A counted object is immutable**: "Any change to a counted object, which is immutable, results in copy-on-write". It
   is written by value where it is linked, so that nothing is refused or dropped
   ([PRI-002: preserve, don't lose](../docs/PRINCIPLES.md#PRI-002)).
+
+The user's decisions (2026-11-17):
+
+- **A journal is data**: "a journal is data. It's passive. We need to be able to construct it, build it, splice it,
+  stream it, etc. without a store."
+- **A subsection of a journal is a journal**: "Journals comprise transactions. A subsection of a journal (of whole
+  transactions) is still a journal, which fundamentally supports streaming between peers synchronizing some data."
+- **Schema-governed throughout**: "The transactions, changes, and journal object itself should be mbse schema governed
+  data. mbse-schemas then provides built-in utilities for serialization, comparison, etc."
+- **Iteration is its API**: "As data, the journal must provide at least an iteration api. That may be it."
+- **A journal is not a follower**: "A journal is not a follower. A follower is a subscription object owned by a store
+  that watches for transactions, forwards the effective changes from each transaction on a store as a
+  single-transaction journal streamed to registered observers." This is the follower of "a journal is downstream of a
+  store's interpreter", above, and the follow of [CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md).
 
 ## The journal, a sequenced container
 
@@ -107,10 +123,11 @@ as the diagrams framework's layout engine does
 Where the user's decisions were silent, the simplest default consistent with them, each *proposed* until reviewed,
 labeled with the repository and number it was decided under.
 
-- **(mbse-journals 1)** **Names.** `Framework.Journals`: `install`, `journal(store, name)`, `append`, `insert`,
-  `transactions`, `changes`, `follow`, `record` and `replay`. The singleton `Journals.Directory` owns each journal by
-  its name; a journal owns its journal transactions (`Journals.Contains`); `Journals.Before(journal, earlier, later)`
-  is read from the earlier as `next` and from the later as `previous`.
+- **(mbse-journals 1)** **Names.** (Superseded by "iteration is its API" and "a journal is not a follower", 2026-11-17.)
+  `Framework.Journals`: `install`, `journal(store, name)`, `append`, `insert`, `transactions`, `changes`, `follow`,
+  `record` and `replay`. The singleton `Journals.Directory` owns each journal by its name; a journal owns its journal
+  transactions (`Journals.Contains`); `Journals.Before(journal, earlier, later)` is read from the earlier as `next` and
+  from the later as `previous`.
 - **(mbse-journals 1)** **A journal transaction's changes as the journal's own data.** Each object the changes name is a
   symbol binding, the `reference` of one the store held or the `schema` of one it made; each change an entry inserted or
   removed, on its holder's adjacency, with its other links' symbol bindings and its properties' values, or a property
@@ -123,7 +140,28 @@ labeled with the repository and number it was decided under.
 - **(mbse-journals 1)** **A journal transaction's name is given by its writer** where others append too: two writers
   counting alike would name two different transactions alike, and a store applying the other's changes would take one
   for the other. A single writer's are named `t` and their count.
-- **(mbse-journals 1)** **Following a journal** gives a follower each journal transaction in order, from the first or
-  after one, then each appended, by the journal store's own change observation; a transaction inserted before where a
-  follower has reached is not given to it.
+- **(mbse-journals 1)** **Following a journal** (superseded by "a journal is not a follower", 2026-11-17) gives a
+  follower each journal transaction in order, from the first or after one, then each appended, by the journal store's
+  own change observation; a transaction inserted before where a follower has reached is not given to it.
 
+## Open questions
+
+The 2026-11-17 decisions leave these open:
+
+1. **Value or reference objects.** mbse-schemas holds reference objects only in a store, and links only reference
+   objects by relations. A journal built without a store would be a value object, its transactions in order in an
+   ordered container. Then its order is not relations, and the decisions on a journal's order and on an append refused
+   by a unique clause, above, hold only where a journal is kept in a store, or not at all.
+2. **A journal kept in a store.** Whether a store still keeps journals, as data of its own, for persistence and
+   [the journal storage proposal](JOURNAL-STORAGE.md)'s backends, and how such a journal relates to the value: one
+   schema, or the value held as a property of an object the store keeps.
+3. **The change transaction's schema.** A journal transaction is written now as a transaction expression of
+   mbse-schemas' own schemas, "for now" ("a journal is downstream of a store's interpreter", above); schema-governed
+   transactions and changes may want a schema of their own, the journal language's A, B and C.
+4. **Where `record` and `replay` go.** Recording a store's transactions is a follower's work, and applying a journal to
+   a store is a store's; neither is the journal's.
+5. **The capabilities that describe a journal kept in a store**:
+   [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md),
+   [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273),
+   [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274) and
+   [CAP-288: the journal storage interface](../docs/capabilities/README.md#CAP-288), revised once the questions above are.
