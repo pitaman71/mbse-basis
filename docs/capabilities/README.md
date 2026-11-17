@@ -49,14 +49,14 @@ that reinforce [FEA-019: equivalent implementations](../features/README.md#FEA-0
   - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (sampling and generators, 0.3, 0.4; the GEN
     suites), whose code mbse-patterns 0.10.0 removes; not met there yet, and rejecting a draw by its `requires` is
     blocked on [CAP-142: expressions evaluated in queries](CAP-142.md#blocked).
-- <a id="CAP-043"></a>**[CAP-043: constraints resolved in any direction](CAP-043.md)** · proposed · Constraints are resolved in any direction. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
+- <a id="CAP-043"></a>**[CAP-043: constraints resolved in any direction](CAP-043.md)** · adopted · Constraints are resolved in any direction. *Implements* [FEA-020: refinable models](../features/README.md#FEA-020).
   - **Current**: to assess.
 
-- <a id="CAP-167"></a>**[CAP-167: schemas refined by other schemas](CAP-167.md)** · proposed · An object or container schema refines another through `Schemas.Refines`, inheriting its members and narrowing them where validation confirms it. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-034: schemas specialized by classifier intersection and union](CAP-034.md).
+- <a id="CAP-167"></a>**[CAP-167: schemas refined by other schemas](CAP-167.md)** · adopted · An object or container schema refines another through `Schemas.Refines`, inheriting its members and narrowing them where validation confirms it. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-034: schemas specialized by classifier intersection and union](CAP-034.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.Refines`).
-- <a id="CAP-251"></a>**[CAP-251: values of a refinement held where what it refines is declared](CAP-251.md)** · proposed · A property, a container's element, a union's branch or a restricted value of any schema declaring a value object schema holds a value of any refinement of it, written with its own schema named (`$schema`) and read back as it, never guessed. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-167: schemas refined by other schemas](CAP-167.md), [CAP-153: unions and intersections of named branches and parts](CAP-153.md).
+- <a id="CAP-251"></a>**[CAP-251: values of a refinement held where what it refines is declared](CAP-251.md)** · adopted · A property, a container's element, a union's branch or a restricted value of any schema declaring a value object schema holds a value of any refinement of it, written with its own schema named (`$schema`) and read back as it, never guessed. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [CAP-167: schemas refined by other schemas](CAP-167.md), [CAP-153: unions and intersections of named branches and parts](CAP-153.md).
   - **Current**: met in mbse-schemas 0.26.10 (checked in the code of both languages at 0.26.10: `Proxies._refines`, `Plain`'s `$schema`; SCH-27, SCH-28, ANY-08).
-- <a id="CAP-256"></a>**[CAP-256: a value object builder's schema relied on by type checkers](CAP-256.md)** · proposed · In
+- <a id="CAP-256"></a>**[CAP-256: a value object builder's schema relied on by type checkers](CAP-256.md)** · adopted · In
   TypeScript, code given a value object's builder can rely, as the type checker does, on the schema it builds never
   changing: the builder holds its schema `readonly` again, a refinement's value given to it placed in its owner rather
   than changing the builder's schema. *Implements* [FEA-020: refinable models](../features/FEA-020.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014),
@@ -70,7 +70,7 @@ predicates, queries, constraints and validators are removed, mbse-schemas' `OfPa
 their place ([CAP-150: predicates as data](CAP-150.md#decided)), and its transforms move to mbse-transforms
 (Transforms, below). Release 0.9.1, which met the capabilities below, stays tagged.
 
-- <a id="CAP-150"></a>**[CAP-150: predicates as data](CAP-150.md)** · proposed · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
+- <a id="CAP-150"></a>**[CAP-150: predicates as data](CAP-150.md)** · adopted · A predicate, a named constraint over symbols and parameters, is built fluently, written and read as
   data, applied by reference, and checked when asked. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
   - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.1, 0.5, 0.6; the CON suites), whose predicates
     mbse-patterns 0.10.0 removes; in mbse-schemas' `OfPattern`, specs and executor, which take their place, to assess.
@@ -82,7 +82,7 @@ their place ([CAP-150: predicates as data](CAP-150.md#decided)), and its transfo
   store's extents, tests of an adjacency's entries, and weighted alternatives. *Implements* [FEA-023: patterns over data](../features/FEA-023.md). Numbered CAP-069 to CAP-071 in batch 2c by mistake; those IDs belong to the wire-format shorthands.
   - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.2; the ALG suites), whose predicates
     mbse-patterns 0.10.0 removes; in mbse-schemas' `OfPattern`, specs and executor, which take their place, to assess.
-- <a id="CAP-072"></a>**[CAP-072: distributions linked to patterns](CAP-072.md)** · proposed · Distributions linked to a pattern's variables say how its matches are distributed, by weighted alternatives and
+- <a id="CAP-072"></a>**[CAP-072: distributions linked to patterns](CAP-072.md)** · adopted · Distributions linked to a pattern's variables say how its matches are distributed, by weighted alternatives and
   distributions of values, so that one pattern is validated, queried, sampled and generated from alike. *Implements* [FEA-023: patterns over data](../features/FEA-023.md).
   - **Current**: met in mbse-patterns 0.9.1, on mbse-schemas 0.10.0 (0.3, 0.4; the DST suites), whose code
     mbse-patterns 0.10.0 removes; not met there yet.
@@ -100,7 +100,7 @@ and built after mbse-programs' port. Its precursor, mbse-patterns 0.9.1's `Trans
 ([CAP-076: reruns reuse decisions](CAP-076.md#decided)). [CAP-077: changes explained across runs](CAP-077.md) to [CAP-083: policies with guards and distributions](CAP-083.md), which the precursor did not meet, are
 mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
-- <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · proposed · A transform, a rewrite with a before and an after, is applied by a session one decision per
+- <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · adopted · A transform, a rewrite with a before and an after, is applied by a session one decision per
   step, a policy ranking the candidates, and the steps kept as a trace. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: met in mbse-patterns 0.7 to 0.9.1 (the TRF suites), whose code mbse-patterns 0.10.0 removes; not met
     in mbse-transforms yet.
@@ -108,7 +108,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   a role, as relations that patterns query. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: met in mbse-patterns 0.9 to 0.9.1, whose code mbse-patterns 0.10.0 removes; not met in
     mbse-transforms yet.
-- <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · proposed · A rerun takes each earlier decision again where its key still occurs, reports the orphans, and diffs
+- <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · adopted · A rerun takes each earlier decision again where its key still occurs, reports the orphans, and diffs
   the traces. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: met in mbse-patterns 0.8 to 0.9.1 (TRF-08), whose code mbse-patterns 0.10.0 removes; not met in
     mbse-transforms yet.
@@ -128,13 +128,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-082"></a>**[CAP-082: completeness reported](CAP-082.md)** · proposed · A session reports every element no transform has rewritten that some transform could match. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
-- <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · proposed · A policy's clauses are guarded by patterns over the match (mbse-schemas' `OfPattern`), and weigh a parameter's values by
+- <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · adopted · A policy's clauses are guarded by patterns over the match (mbse-schemas' `OfPattern`), and weigh a parameter's values by
   a distribution over its domain, written as data. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 
 ### Expressions as data
 
-- <a id="CAP-095"></a>**[CAP-095: Basic terms as data](CAP-095.md)** · proposed · Constraints are written as terms of Basic's core vocabulary, total and pure so that any is also a
+- <a id="CAP-095"></a>**[CAP-095: Basic terms as data](CAP-095.md)** · adopted · Constraints are written as terms of Basic's core vocabulary, total and pure so that any is also a
   constraint, and are validated, stored, serialized and compared as any value of their schemas. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
 - <a id="CAP-106"></a>**[CAP-106: expressions evaluated three-valued](CAP-106.md)** · proposed · An expression is evaluated in three-valued
@@ -144,20 +144,20 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-096"></a>**[CAP-096: collections in expressions](CAP-096.md)** · proposed · Expressions read lists and an object's entries as collections, quantify over their items, and
   compare them deeply. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current** (main, v0.5.4): met.
-- <a id="CAP-097"></a>**[CAP-097: value domains of published standards](CAP-097.md)** · proposed · A value's domain names a published standard (IEEE 754, IEEE 1164, two's complement integers),
+- <a id="CAP-097"></a>**[CAP-097: value domains of published standards](CAP-097.md)** · adopted · A value's domain names a published standard (IEEE 754, IEEE 1164, two's complement integers),
   with exact-then-rounded arithmetic, bitwise operations and explicit conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the
     version bumped and the records drained: both gates at 100% in both languages): every dialect's domains but LaTeX's
     are stored data, of the standards' own dialects' kinds or their language's, and no domain is code; but no Patterns
     term has a domain, and its conversions are [CAP-232: domains inferred for terms](CAP-232.md)'s.
-- <a id="CAP-180"></a>**[CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md)** · proposed · The
+- <a id="CAP-180"></a>**[CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md)** · adopted · The
   general-purpose datatypes of ISO/IEC 11404 replace the Basic expression dialect, their operations modeled, not
   coded. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met (checked at mbse-expressions' main c57882b): the ISO/IEC 11404 dialect holds 11404's kinds
     and Basic's datatypes, but Patterns' terms and operations are not replaced, and 11404's operations not modeled.
 - <a id="CAP-203"></a>**[CAP-203: evaluators delegating to per-language libraries](CAP-203.md)** · proposed · An expression evaluator may delegate to a library of its language, perhaps in a sub-repository. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
-- <a id="CAP-098"></a>**[CAP-098: dialects over one framework](CAP-098.md)** · proposed · Expression languages are dialects of one framework, which validates, infers, evaluates and
+- <a id="CAP-098"></a>**[CAP-098: dialects over one framework](CAP-098.md)** · adopted · Expression languages are dialects of one framework, which validates, infers, evaluates and
   translates any of them from its kinds' roles, a dialect extending another. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version
     bumped and the records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions'
@@ -199,7 +199,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   is. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
   [CAP-114: parameter bindings are substituted and checked](CAP-114.md), [CAP-181: parameters wherever literals may appear](CAP-181.md).
   - **Current**: not met; in plan, as the user decided (2026-11-13).
-- <a id="CAP-299"></a>**[CAP-299: simplification across a sub-dialect](CAP-299.md)** · proposed · An expression
+- <a id="CAP-299"></a>**[CAP-299: simplification across a sub-dialect](CAP-299.md)** · adopted · An expression
   that involves a sub-dialect (a host reading its sublanguage's terms: a cast's type, a `randomize() with` constraint, a
   preprocessor condition) is simplified, each part by its own dialect. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
@@ -208,7 +208,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   involves type algebra (types computed from types) is simplified. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-298: simplification over type parameters](#CAP-298).
   - **Current**: not met; deferred, as the user decided (2026-11-13).
-- <a id="CAP-301"></a>**[CAP-301: simplification delegated to a surrogate dialect](CAP-301.md)** · proposed · An
+- <a id="CAP-301"></a>**[CAP-301: simplification delegated to a surrogate dialect](CAP-301.md)** · adopted · An
   expression containing terms whose evaluation delegates to a surrogate dialect (a lowering into the standard dialects,
   or a language's own runtime) is simplified through it. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-203: evaluators delegating to per-language libraries](CAP-203.md), [CAP-180: ISO/IEC 11404 datatypes replace the Basic expression dialect](CAP-180.md).
@@ -217,7 +217,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   expression that involves statements (a function's or a lambda's block, a statement expression) is simplified.
   *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046).
   - **Current**: not met; deferred, as the user decided (2026-11-13).
-- <a id="CAP-305"></a>**[CAP-305: simplification's options, chosen up front](CAP-305.md)** · proposed · Where a
+- <a id="CAP-305"></a>**[CAP-305: simplification's options, chosen up front](CAP-305.md)** · adopted · Where a
   dialect's simplification could follow either of two defensible behaviors, the caller chooses one before simplifying,
   as a parameter of the scope, with a default for each. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
   [PRI-014: every ambiguity a decision](../PRINCIPLES.md#PRI-014), [PRI-042: optionality kept](../PRINCIPLES.md#PRI-042), [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
@@ -226,7 +226,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     mbse-expressions' main holds at commit f295fc2. Both coverage gates reached 100% in both languages, and TypeScript's
     gate passed on Node 22, 24 and 26. The conformance corpora were byte-identical, and every tutorial, re-executed,
     gave its committed outputs ([As built](CAP-305.md#as-built-mbse-expressions)).
-- <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · proposed · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
+- <a id="CAP-100"></a>**[CAP-100: six languages' expression dialects](CAP-100.md)** · adopted · Python's, MATLAB's, Excel's, LaTeX's, C and C++'s and SystemVerilog's expressions are
   dialects, each with its own kinds, values, evaluation, source text and scope. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: met (checked on mbse-expressions' branch `release-0.9.0` at 6b7fe2f, its main c57882b with the version
     bumped and the records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions'
@@ -241,11 +241,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-103"></a>**[CAP-103: SystemVerilog's other operations translated](CAP-103.md)** · proposed · `has`, the logical `>>` and the 4-state comparisons translate between
   Basic and SystemVerilog. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
-- <a id="CAP-235"></a>**[CAP-235: `has` translated to C++](CAP-235.md)** · proposed · A term asking whether a value holds
+- <a id="CAP-235"></a>**[CAP-235: `has` translated to C++](CAP-235.md)** · adopted · A term asking whether a value holds
   a property translates to C++, where an optional property is a `std::optional` member: `has(x, name)` is
   `x.name.has_value()`. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-230: the C++ expression dialect](CAP-230.md).
   - **Current**: not met.
-- <a id="CAP-236"></a>**[CAP-236: `has` translated to C](CAP-236.md)** · proposed · A term asking whether a value holds a
+- <a id="CAP-236"></a>**[CAP-236: `has` translated to C](CAP-236.md)** · adopted · A term asking whether a value holds a
   property translates to C, by whatever representation of an optional property code generation for C picks.
   *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [FEA-022: code generation](../features/README.md#FEA-022).
   - **Current**: not met; blocked on that representation.
@@ -254,13 +254,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 - <a id="CAP-105"></a>**[CAP-105: Excel ranges and structured references](CAP-105.md)** · proposed · Excel's ranges (`A1:B3`) and structured references (`Table1[@age]`) are
   modeled, as array values. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: not met.
-- <a id="CAP-226"></a>**[CAP-226: complete expression dialects](CAP-226.md)** · proposed · A dialect per language and major
+- <a id="CAP-226"></a>**[CAP-226: complete expression dialects](CAP-226.md)** · adopted · A dialect per language and major
   version covers its language's whole expression syntax, mbse-programs' kinds in its own `Expression`, printed here and
   parsed by mbse-programs. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
     mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
     byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · proposed · `Python3` covers every
+- <a id="CAP-227"></a>**[CAP-227: the Python3 expression dialect](CAP-227.md)** · adopted · `Python3` covers every
   expression of Python 3. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 7d85127: PR #16, both gates at 100% in both
     languages, DIA-19 and DIA-20 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in 0.9.0
@@ -268,7 +268,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions' branch
     `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22,
     24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-228"></a>**[CAP-228: the TypeScript5 expression dialect](CAP-228.md)** · proposed · `TypeScript5` covers every
+- <a id="CAP-228"></a>**[CAP-228: the TypeScript5 expression dialect](CAP-228.md)** · adopted · `TypeScript5` covers every
   expression of TypeScript 5, with its types, patterns and JSX. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked in its main at 8804e1e: PR #18, both gates at 100% in both
     languages, DIA-21 to DIA-23 among them; and at v0.8.0, ff7c762, both gates at 100% in both languages); and in 0.9.0
@@ -276,7 +276,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     records drained: both gates at 100% in both languages); and in 0.10.0 (checked on mbse-expressions' branch
     `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22,
     24 and 26; the corpora byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-229"></a>**[CAP-229: the C expression dialect](CAP-229.md)** · proposed · `C` covers every expression of C11
+- <a id="CAP-229"></a>**[CAP-229: the C expression dialect](CAP-229.md)** · adopted · `C` covers every expression of C11
   to C23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
     languages, DIA-11, DIA-12 and DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch
@@ -284,7 +284,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     both languages); and in 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on mbse-schemas
     0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora byte-identical; every
     tutorial re-executed, its outputs identical).
-- <a id="CAP-230"></a>**[CAP-230: the C++ expression dialect](CAP-230.md)** · proposed · `Cpp` covers every expression of
+- <a id="CAP-230"></a>**[CAP-230: the C++ expression dialect](CAP-230.md)** · adopted · `Cpp` covers every expression of
   C++17 to C++23. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.8.0 (checked at v0.8.0, ff7c762: PRs #19 and #23, both gates at 100% in both
     languages, DIA-24 to DIA-26 among them); and in 0.9.0 (checked on mbse-expressions' branch `release-0.9.0` at
@@ -292,22 +292,22 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     and in 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on mbse-schemas 0.26.10: both gates
     at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora byte-identical; every tutorial re-executed,
     its outputs identical).
-- <a id="CAP-231"></a>**[CAP-231: the SystemVerilog expression dialect, complete](CAP-231.md)** · proposed ·
+- <a id="CAP-231"></a>**[CAP-231: the SystemVerilog expression dialect, complete](CAP-231.md)** · adopted ·
   `SystemVerilog` covers every expression of IEEE 1800-2023, Verilog its subset. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md).
   - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
     mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
     byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-232"></a>**[CAP-232: domains inferred for terms](CAP-232.md)** · proposed · Each term's domain is inferred,
+- <a id="CAP-232"></a>**[CAP-232: domains inferred for terms](CAP-232.md)** · adopted · Each term's domain is inferred,
   so that evaluation and translation work in widths, formats, enums and conversions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Relates to* [CAP-097: value domains of published standards](CAP-097.md).
   - **Current**: not met (checked at mbse-expressions' main c57882b): a term carries no domain; the domains it would
     be inferred from are stored since 0.9.0.
-- <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · proposed · A literal holds any value its `OfAny`
+- <a id="CAP-233"></a>**[CAP-233: literals of any value](CAP-233.md)** · adopted · A literal holds any value its `OfAny`
   can, scalars, containers and value objects; what has no schema is a dialect's constant kind. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
     mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
     byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-267"></a>**[CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md)** · proposed · A C
+- <a id="CAP-267"></a>**[CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md)** · adopted · A C
   or C++ term reads the types its standard leaves to the implementation from the ABI dialect its holder names, each
   psABI a dialect of its own holding those types as stored domains. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
   *Relates to* [CAP-229: the C expression dialect](CAP-229.md), [CAP-230: the C++ expression dialect](CAP-230.md),
@@ -322,7 +322,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   out, so that `sizeof` and `alignof` of those types fold. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
   [CAP-267: C and C++ terms read under the ABI their holder names](CAP-267.md), [CAP-295: simplification of single-dialect expressions with literal leaves](CAP-295.md).
   - **Current**: The capability is not met.
-- <a id="CAP-268"></a>**[CAP-268: standards as tagged data](CAP-268.md)** · proposed · Each dialect covers the
+- <a id="CAP-268"></a>**[CAP-268: standards as tagged data](CAP-268.md)** · adopted · Each dialect covers the
   editions of its standards as data, each found by its body's designation or a common name, and records the kinds each
   has. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-226: complete expression dialects](CAP-226.md),
   [PRI-012: model published standards](../PRINCIPLES.md#PRI-012).
@@ -338,7 +338,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
     mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
     byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-277"></a>**[CAP-277: TypeScript's types and destructuring patterns as data](CAP-277.md)** · proposed ·
+- <a id="CAP-277"></a>**[CAP-277: TypeScript's types and destructuring patterns as data](CAP-277.md)** · adopted ·
   TypeScript's types and destructuring patterns are expressions of dialects of their own, `TypeScript Types` and
   `TypeScript Patterns`, each validated, stored, printed and read with TypeScript5's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
   [FEA-008: expressive program models](../features/FEA-008.md). *Relates to* [CAP-228: the TypeScript5 expression dialect](CAP-228.md).
@@ -360,7 +360,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
     mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
     byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-281"></a>**[CAP-281: Python's, ECMAScript's and C++'s regular expressions as data](CAP-281.md)** · proposed ·
+- <a id="CAP-281"></a>**[CAP-281: Python's, ECMAScript's and C++'s regular expressions as data](CAP-281.md)** · adopted ·
   The regular expressions each language's standard defines, Python's `re`, ECMA-262's and C++'s `std::regex`
   ECMAScript grammar, are expressions of dialects of their own, `Python RegExp`, `TypeScript RegExp` and `Cpp RegExp`, each
   validated, stored, printed and read with its family's. *Implements* [FEA-024: expressions as data](../features/FEA-024.md),
@@ -368,7 +368,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
     mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
     byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-294"></a>**[CAP-294: POSIX's regular expressions as data](CAP-294.md)** · proposed · POSIX's basic and extended regular expressions (IEEE Std
+- <a id="CAP-294"></a>**[CAP-294: POSIX's regular expressions as data](CAP-294.md)** · adopted · POSIX's basic and extended regular expressions (IEEE Std
   1003.1, XBD 9) are expressions of dialects of their own, `POSIX BRE` and `POSIX ERE`, each with grep's list of
   patterns and awk's EREs printed with its escapes, validated, stored, printed, and read by a C++ regex whose flags name
   a POSIX grammar. *Implements* [FEA-024: expressions as data](../features/FEA-024.md), [FEA-008: expressive program models](../features/FEA-008.md). *Relates to*
@@ -376,43 +376,43 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-expressions 0.10.0 (checked on mbse-expressions' branch `release-0.10.0` at 17d8572, on
     mbse-schemas 0.26.10: both gates at 100% in both languages, TypeScript on Node 22, 24 and 26; the corpora
     byte-identical; every tutorial re-executed, its outputs identical).
-- <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · proposed · A type checker
+- <a id="CAP-255"></a>**[CAP-255: type checkers catch mistakes in code that builds expressions](CAP-255.md)** · adopted · A type checker
   catches a wrong kind, property or argument in code that installs, defines or writes expressions, as it does in other
   typed code: mbse-expressions' installs, defines, writers and conformance corpus are typed, through typed bindings for
   mbse-schemas' builder proxies, rather than built through `any` callbacks and untyped transactions. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
   [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [PRI-015: concrete references are programmatic](../PRINCIPLES.md#PRI-015).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
-- <a id="CAP-258"></a>**[CAP-258: expressions validated in time proportional to their size](CAP-258.md)** · proposed · Validating
+- <a id="CAP-258"></a>**[CAP-258: expressions validated in time proportional to their size](CAP-258.md)** · adopted · Validating
   an expression takes time in proportion to its size, not to its size times its dialect's operations: validation reads
   a dialect's stored operations, and their arities, once per store for one run, not again for every call node. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
-- <a id="CAP-259"></a>**[CAP-259: domain inference replaced without changing evaluation](CAP-259.md)** · proposed ·
+- <a id="CAP-259"></a>**[CAP-259: domain inference replaced without changing evaluation](CAP-259.md)** · adopted ·
   Domain inference ([CAP-232: domains inferred for terms](CAP-232.md)) replaces today's code without changing how
   TypeScript evaluates: its Patterns evaluator and partial evaluator check a native type of their own, as Python's do,
   rather than calling inference's code. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to*
   [CAP-232: domains inferred for terms](CAP-232.md).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
-- <a id="CAP-260"></a>**[CAP-260: dialects extending Patterns checked by their own operations](CAP-260.md)** · proposed · A
+- <a id="CAP-260"></a>**[CAP-260: dialects extending Patterns checked by their own operations](CAP-260.md)** · adopted · A
   dialect that extends Patterns has its calls checked against the operations it defines, not Patterns': validation
   finds the calling dialect's singleton rather than Patterns' by a fixed object reference. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Relates to* [CAP-098: dialects over one framework](CAP-098.md).
   - **Current**: not met; tech debt (checked in mbse-expressions' main at 3711f8a).
 
 ### Serialization behavior conventions in schema
 
-- <a id="CAP-107"></a>**[CAP-107: one visitor protocol reads and writes data](CAP-107.md)** · proposed · Code reads and
+- <a id="CAP-107"></a>**[CAP-107: one visitor protocol reads and writes data](CAP-107.md)** · adopted · Code reads and
   writes a value of any schema through one protocol per kind, `Visitors.OfX`, its read-only view `Readers.OfX` and their
   shorthands, the visitor's mode deciding whether a write takes effect. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   *Applies* [PRI-004: one visitor protocol per kind](../PRINCIPLES.md#PRI-004).
   - **Current**: met in mbse-schemas 0.26.3.
-- <a id="CAP-153"></a>**[CAP-153: unions and intersections of named branches and parts](CAP-153.md)** · proposed · A union holds exactly one of its named branches and an intersection every one of its named parts, written unpacked, by name, and read flat where the schema says so. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
+- <a id="CAP-153"></a>**[CAP-153: unions and intersections of named branches and parts](CAP-153.md)** · adopted · A union holds exactly one of its named branches and an intersection every one of its named parts, written unpacked, by name, and read flat where the schema says so. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `HasBranch`, `HasPart`, flat unions and intersections, unique names).
 - <a id="CAP-155"></a>**[CAP-155: `unique` clauses on relation schemas govern relation cardinality](CAP-155.md)** · proposed · A relation links two or more reference objects by named links, and its `unique` clauses decide whether its entries are a set or a list and what keys them from each end. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [FEA-034: analytic behavior conventions in schema](../features/FEA-034.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: equal entries elided in a set, an adjacency's `at` and `project`).
-- <a id="CAP-157"></a>**[CAP-157: values of any schema, restricted or not](CAP-157.md)** · proposed · An `OfAny` holds a value of any schema, or of the schemas its builder selects, refusing any other when written and read. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
+- <a id="CAP-157"></a>**[CAP-157: values of any schema, restricted or not](CAP-157.md)** · adopted · An `OfAny` holds a value of any schema, or of the schemas its builder selects, refusing any other when written and read. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Schemas.OfAny.Value`, the refusal of another host type).
 - <a id="CAP-168"></a>**[CAP-168: containers by an index neither ordered nor hashable read back](CAP-168.md)** · proposed · A container whose index is neither ordered nor hashable is read back from a snapshot. *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md).
   - **Current**: not met (checked in the code: reading one is refused, "not read from snapshots yet").
-- <a id="CAP-257"></a>**[CAP-257: Python type checkers see an object's members as its schema types them](CAP-257.md)** · proposed · In Python, a
+- <a id="CAP-257"></a>**[CAP-257: Python type checkers see an object's members as its schema types them](CAP-257.md)** · adopted · In Python, a
   type checker sees each member read through an object's reader, `Readers.OfObject`, as the type its schema declares,
   not `Any`, and catches its misuse. *Implements*
   [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Relates to* [QUA-014: precise typing for bespoke and generated source code](../QUALITIES.md#QUA-014), [CAP-107: one visitor protocol reads and writes data](CAP-107.md).
@@ -428,7 +428,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 ### Clean modeling separation between value objects and reference objects
 
-- <a id="CAP-108"></a>**[CAP-108: relations as scalable containers](CAP-108.md)** · proposed · Values, value objects among
+- <a id="CAP-108"></a>**[CAP-108: relations as scalable containers](CAP-108.md)** · adopted · Values, value objects among
   them, are held in containers by an index of any schema, dense, sparse or by key, nesting, and belong to their one
   owner; reference objects are never held in containers, but linked by relations of two links or more, and identified.
   *Implements* [FEA-035: clean modeling separation between value objects and reference objects](../features/FEA-035.md).
@@ -464,11 +464,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: not met: not designed (Open questions).
 ### Schemas as extensible data
 
-- <a id="CAP-109"></a>**[CAP-109: schemas as linked objects in modules](CAP-109.md)** · proposed · Every schema object
+- <a id="CAP-109"></a>**[CAP-109: schemas as linked objects in modules](CAP-109.md)** · adopted · Every schema object
   is a reference object of its kind's schema of schemas, linked to the others by relations, built by builders that are
   visitors of it, and defined in nesting modules. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md).
   - **Current**: met in mbse-schemas 0.26.3.
-- <a id="CAP-116"></a>**[CAP-116: framework schemas extended, checked](CAP-116.md)** · proposed · Any transaction may
+- <a id="CAP-116"></a>**[CAP-116: framework schemas extended, checked](CAP-116.md)** · adopted · Any transaction may
   add members to a schema the store was made holding, schemas of schemas included, but not change or remove them, each store
   extending its own. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md), [FEA-020: refinable models](../features/FEA-020.md).
   - **Current**: met in mbse-schemas 0.23.0.
@@ -479,18 +479,18 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 - <a id="CAP-165"></a>**[CAP-165: snapshots read by a store lacking their extensions](CAP-165.md)** · proposed · A store reading a snapshot made with an extension it lacks ignores, and lists, each member whose meaning needs that extension. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `ignored` in `Plain`, `JSON` and `YAML`).
-- <a id="CAP-171"></a>**[CAP-171: parameters attached to every schema kind by extension](CAP-171.md)** · proposed · `Parametrics`, installed before
+- <a id="CAP-171"></a>**[CAP-171: parameters attached to every schema kind by extension](CAP-171.md)** · adopted · `Parametrics`, installed before
   use, extends every kind of schema with an adjacency to its set of parameters, which the core no longer declares, and
   a store lacking it reads their snapshots. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md); *relates to*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: met in mbse-schemas 0.24.0.
 ### Schema loading and wire alignment
 
-- <a id="CAP-115"></a>**[CAP-115: schemas defined by idempotent installs](CAP-115.md)** · proposed · Every schema is
+- <a id="CAP-115"></a>**[CAP-115: schemas defined by idempotent installs](CAP-115.md)** · adopted · Every schema is
   defined in a module-scope `install(txn)`, a transaction that upserts it, so that installing again writes nothing, and
   the framework defines its own schemas the same way. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: met in mbse-schemas 0.23.0.
-- <a id="CAP-254"></a>**[CAP-254: an install's uid changed with its content](CAP-254.md)** · proposed · When an install's
+- <a id="CAP-254"></a>**[CAP-254: an install's uid changed with its content](CAP-254.md)** · adopted · When an install's
   content changes, what identifies it changes too, so that a store holding an earlier install is brought to the new
   one, or refused, never silently left behind. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: not met; tech debt, not yet in priority scope.
@@ -500,7 +500,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-schemas 0.26.4, by schema objects' references from the root module `"."` and `References`,
     not by a `root_module()` method.
 
-- <a id="CAP-156"></a>**[CAP-156: the five basic scalars with boundless domains](CAP-156.md)** · proposed · Every store holds the five basic scalars, `Schemas.OfBool` to `Schemas.OfBytes`, each mapped to each language's host type, and builds no other scalar schema. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
+- <a id="CAP-156"></a>**[CAP-156: the five basic scalars with boundless domains](CAP-156.md)** · adopted · Every store holds the five basic scalars, `Schemas.OfBool` to `Schemas.OfBytes`, each mapped to each language's host type, and builds no other scalar schema. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: met since mbse-schemas 0.18.0 (checked in the code at 0.26.4: "a store builds no scalar schema").
 - <a id="CAP-158"></a>**[CAP-158: values written as plain data, JSON and YAML](CAP-158.md)** · proposed · Any value is written as plain data, strict JSON or YAML 1.2, through a store that names its schemas, and read back, byte-identical in every implementation. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md).
   - **Current**: met in mbse-schemas 0.26.4 (checked in the code at 0.26.4: `Plain`, `JSON`, `YAML` in both languages).
@@ -514,7 +514,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 ### Model parameters
 
-- <a id="CAP-112"></a>**[CAP-112: parameters modeled as schema data](CAP-112.md)** · proposed · A definition's
+- <a id="CAP-112"></a>**[CAP-112: parameters modeled as schema data](CAP-112.md)** · adopted · A definition's
   parameters are declared through `Parametrics`, a module installed before use, which validates them. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: met in mbse-schemas 0.24.0.
@@ -523,7 +523,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   bindings. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
-- <a id="CAP-114"></a>**[CAP-114: parameter bindings are substituted and checked](CAP-114.md)** · proposed · A parameter
+- <a id="CAP-114"></a>**[CAP-114: parameter bindings are substituted and checked](CAP-114.md)** · adopted · A parameter
   assignment or a parameter binding is substituted where its definition is used, and its value or object checked against
   the schema its parameter is for.
   *Implements* [FEA-033: model parameters](../features/FEA-033.md).
@@ -542,7 +542,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [CAP-316: one written form for references](#CAP-316), [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: met in mbse-schemas 0.26.27 (checked in its main at 2c520f4: REF-11 and BLW-21 pass in both
     languages, at 100% coverage).
-- <a id="CAP-316"></a>**[CAP-316: one written form for references](CAP-316.md)** · proposed · The plain form writes
+- <a id="CAP-316"></a>**[CAP-316: one written form for references](CAP-316.md)** · adopted · The plain form writes
   a reference to an object in one form, the plain form of `References.OfObject`, `{"path": P}`: bare where the schema
   that the reader expects at a node already says that the node holds a reference, and marked with its schema,
   `{"$schema": "References.OfObject", "path": P}`, where the reader could take it for a value of another schema. It
@@ -551,7 +551,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   data written in the forms it replaces, are regenerated. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
   [CAP-311: references stabilized](#CAP-311), [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [the parametrics proposal](../../proposals/PARAMETRICS.md#the-wire-form).
   - **Current**: The capability is not met.
-- <a id="CAP-312"></a>**[CAP-312: a parameter reference in place of anything with a schema](CAP-312.md)** · proposed ·
+- <a id="CAP-312"></a>**[CAP-312: a parameter reference in place of anything with a schema](CAP-312.md)** · adopted ·
   Wherever mbse-schemas expects something of a schema, a parameter reference may stand in its place, the expected schema
   given by the context; it is read through `Visitors.OfAny.as_parameter()`, written marked, and a parameter given the
   wrong kind of thing is a validation error. The proxies, validation and the plain form apply that one rule, in both
@@ -565,7 +565,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
-- <a id="CAP-314"></a>**[CAP-314: parameters assigned or bound by the data objects their schema governs](CAP-314.md)** · proposed ·
+- <a id="CAP-314"></a>**[CAP-314: parameters assigned or bound by the data objects their schema governs](CAP-314.md)** · adopted ·
   A schema may declare parameters, and a reference object that the schema governs may assign a value to any of them,
   through `Parametrics.AssignsValue`, or bind any of them to an object, through `Parametrics.BindsObject`, once
   `Parametrics.extend` has given the schema their named adjacencies; a parameter that the object leaves unassigned and
@@ -575,41 +575,41 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     languages, at 100% coverage).
 ### Deterministic object identity
 
-- <a id="CAP-118"></a>**[CAP-118: singletons, owned and counted objects](CAP-118.md)** · proposed · A reference object
+- <a id="CAP-118"></a>**[CAP-118: singletons, owned and counted objects](CAP-118.md)** · adopted · A reference object
   is a singleton, owned or counted, as its schema declares, and nothing about its identity is drawn at random.
   *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.20.0.
-- <a id="CAP-119"></a>**[CAP-119: owned objects found by their owner's reference and key](CAP-119.md)** · proposed · An
+- <a id="CAP-119"></a>**[CAP-119: owned objects found by their owner's reference and key](CAP-119.md)** · adopted · An
   owned object is found by its owner's reference and its key, each owner's adjacency called with the keys of the entry
   that leads to it, and its reference is read off its ownership entries. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.20.0.
-- <a id="CAP-120"></a>**[CAP-120: owned objects named and placed when built](CAP-120.md)** · proposed · An owned
+- <a id="CAP-120"></a>**[CAP-120: owned objects named and placed when built](CAP-120.md)** · adopted · An owned
   object's keys are generated from its owning relation's key patterns, and an object built without an owner is given the
   one owner possible when its transaction ends. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.20.0.
-- <a id="CAP-121"></a>**[CAP-121: owned objects deleted in cascade](CAP-121.md)** · proposed · Removing an owned
+- <a id="CAP-121"></a>**[CAP-121: owned objects deleted in cascade](CAP-121.md)** · adopted · Removing an owned
   object's owning entry deletes it, and in cascade everything it owns, within the transaction. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.20.0.
-- <a id="CAP-234"></a>**[CAP-234: an object no entry owns deleted](CAP-234.md)** · proposed · An object that no entry
+- <a id="CAP-234"></a>**[CAP-234: an object no entry owns deleted](CAP-234.md)** · adopted · An object that no entry
   owns is deleted, by counting the relation entries that link it. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md). *Relates to* [CAP-121: owned objects deleted in cascade](CAP-121.md).
   - **Current**: not met; not yet in priority scope.
-- <a id="CAP-123"></a>**[CAP-123: schema objects identified by object reference](CAP-123.md)** · proposed · A named
+- <a id="CAP-123"></a>**[CAP-123: schema objects identified by object reference](CAP-123.md)** · adopted · A named
   schema object's identity is its object reference from the root module; an unnamed one has none, and is written nested
   in the one object that links it. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.21.0.
-- <a id="CAP-130"></a>**[CAP-130: references to objects, entries and frames](CAP-130.md)** · proposed · An object, a
+- <a id="CAP-130"></a>**[CAP-130: references to objects, entries and frames](CAP-130.md)** · adopted · An object, a
   relation entry and a frame each have a reference, a value written and read as any, which resolves to what it
   designates in a store. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.25.0.
-- <a id="CAP-132"></a>**[CAP-132: paths retired for references](CAP-132.md)** · proposed · Paths are retired: references
+- <a id="CAP-132"></a>**[CAP-132: paths retired for references](CAP-132.md)** · adopted · Paths are retired: references
   designate objects, entries and frames, and a path is internal to an object reference; no API takes or returns a bare
   one. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: not met.
-- <a id="CAP-133"></a>**[CAP-133: no durable references to counted objects](CAP-133.md)** · proposed · Nothing holds a
+- <a id="CAP-133"></a>**[CAP-133: no durable references to counted objects](CAP-133.md)** · adopted · Nothing holds a
   durable reference to a counted object: the executor finds what an upsert made without one. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: not met.
@@ -631,11 +631,11 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   which are still being built. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.26.14 (checked in its main at 1bbd199: TXN-16 and TXN-17 pass in both
     languages, at 100% coverage).
-- <a id="CAP-124"></a>**[CAP-124: writes all-or-nothing in transactions](CAP-124.md)** · proposed · Every write to a
+- <a id="CAP-124"></a>**[CAP-124: writes all-or-nothing in transactions](CAP-124.md)** · adopted · Every write to a
   store is part of a transaction, under an id the program gives, which commits all of its writes or none, each store's
   apart from another's. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-315"></a>**[CAP-315: every read within a transaction or through a follow](CAP-315.md)** · proposed · Every
+- <a id="CAP-315"></a>**[CAP-315: every read within a transaction or through a follow](CAP-315.md)** · adopted · Every
   read of a store's data happens within a transaction that the store's layer interprets, as every write does, or through a
   follow, whose follower reads what the follow delivers; a read with no transaction open is refused, and a reference
   is resolved by a transaction whose symbol is given it. A visitor of a store's data lives only within the
@@ -647,18 +647,18 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     coverage): a visitor is refused after its transaction, and a frame holds references and assignments. The
     repositories that depend on it are not yet migrated: mbse-journals, mbse-rest, mbse-dynamodb, mbse-diagrams,
     mbse-expressions and mbse-demo-apps.
-- <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · proposed · Code that calls builders
+- <a id="CAP-125"></a>**[CAP-125: imperative transaction scope](CAP-125.md)** · adopted · Code that calls builders
   writes within a transaction's imperative scope, all or nothing, as an expression's terms do. *Implements*
   [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-127"></a>**[CAP-127: snapshots made of transactions](CAP-127.md)** · proposed · A store's snapshot is two
+- <a id="CAP-127"></a>**[CAP-127: snapshots made of transactions](CAP-127.md)** · adopted · A store's snapshot is two
   transactions, its schemas then its data, and reading one replays them. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-128"></a>**[CAP-128: graphs sent as one-transaction documents](CAP-128.md)** · proposed · A graph sent
+- <a id="CAP-128"></a>**[CAP-128: graphs sent as one-transaction documents](CAP-128.md)** · adopted · A graph sent
   without its store is one transaction, its counted objects numbered within it, and the owned objects and singletons it
   links referred to by object reference. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-129"></a>**[CAP-129: journals replayed by execution](CAP-129.md)** · proposed · A journal is the list of
+- <a id="CAP-129"></a>**[CAP-129: journals replayed by execution](CAP-129.md)** · adopted · A journal is the list of
   transactions as submitted, replayed by executing each again. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-270"></a>**CAP-270: a transaction's changes observed at its commit** · proposed · What a transaction
@@ -690,7 +690,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   first or last, removed or cleared, a union's branch or an intersection's part, and clears any value, in mbse-journals,
   in Python and TypeScript. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
-- <a id="CAP-134"></a>**[CAP-134: transactions recorded with provenance](CAP-134.md)** · proposed · Each transaction
+- <a id="CAP-134"></a>**[CAP-134: transactions recorded with provenance](CAP-134.md)** · adopted · Each transaction
   that writes is recorded with when and where it ran, its session and its identity, and linked to the objects it created
   or last modified, for the schemas an app chooses. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: met in mbse-schemas 0.26.3.
@@ -702,7 +702,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 - <a id="CAP-164"></a>**[CAP-164: subsequent snapshots sent as transactions](CAP-164.md)** · proposed · A stateful writer sends a store's later snapshots as the transactions since the last, without its modules and schemas again. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md).
   - **Current**: not met.
-- <a id="CAP-178"></a>**[CAP-178: an object's provenance read through its own named adjacencies](CAP-178.md)** · proposed · An
+- <a id="CAP-178"></a>**[CAP-178: an object's provenance read through its own named adjacencies](CAP-178.md)** · adopted · An
   object whose schema has a history links its provenance records through named adjacencies of its own, so that they
   are read from its side, not by a map over every record. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md). *Relates to*
   [CAP-134: transactions recorded with provenance](CAP-134.md).
@@ -712,34 +712,34 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 ### Mutations as queries
 
-- <a id="CAP-131"></a>**[CAP-131: frames witness values and entries](CAP-131.md)** · proposed · A frame witnesses the
+- <a id="CAP-131"></a>**[CAP-131: frames witness values and entries](CAP-131.md)** · adopted · A frame witnesses the
   property values and relation entries it asserts, each by its objects' references. *Implements*
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.26.3.
-- <a id="CAP-137"></a>**[CAP-137: patterns of symbols, variables and specs](CAP-137.md)** · proposed · A pattern
+- <a id="CAP-137"></a>**[CAP-137: patterns of symbols, variables and specs](CAP-137.md)** · adopted · A pattern
   declares symbols bound to reference objects and variables assigned values, and its spec says what must hold of a
   frame, all as schema data. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-138"></a>**[CAP-138: mutation expressions over frame streams](CAP-138.md)** · proposed · A transaction's
+- <a id="CAP-138"></a>**[CAP-138: mutation expressions over frame streams](CAP-138.md)** · adopted · A transaction's
   expression is a chain of terms, map, reduce, partition, update and upsert, each consuming and producing a stream of
   frames. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.22.0.
-- <a id="CAP-139"></a>**[CAP-139: upserts find before they create](CAP-139.md)** · proposed · An upsert finds the object
+- <a id="CAP-139"></a>**[CAP-139: upserts find before they create](CAP-139.md)** · adopted · An upsert finds the object
   its spec designates before it creates one: an owned object by its owning entry, a counted one by what made it, a
   schema object by its name. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.22.0.
 - <a id="CAP-140"></a>**[CAP-140: entries removed through a spec](CAP-140.md)** · proposed · A spec removes entries as
   it inserts them, through an adjacency's `remove` and `clear`. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.23.0.
-- <a id="CAP-141"></a>**[CAP-141: queries start from a referenced object](CAP-141.md)** · proposed · A pattern's symbol
+- <a id="CAP-141"></a>**[CAP-141: queries start from a referenced object](CAP-141.md)** · adopted · A pattern's symbol
   may be given a reference in place of a schema, binding the one object it designates, so that a query starts from it.
   *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.26.3.
-- <a id="CAP-142"></a>**[CAP-142: expressions evaluated in queries](CAP-142.md)** · proposed · The executor evaluates
+- <a id="CAP-142"></a>**[CAP-142: expressions evaluated in queries](CAP-142.md)** · adopted · The executor evaluates
   the expressions of a query: a pattern's `requires` and variables, a collector's fold, a branch's condition.
   *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: blocked: its evaluation is mbse-expressions', in its port ([CAP-142: expressions evaluated in queries](CAP-142.md#blocked)).
-- <a id="CAP-144"></a>**[CAP-144: transactions sharded and run in parallel](CAP-144.md)** · proposed · A transaction is
+- <a id="CAP-144"></a>**[CAP-144: transactions sharded and run in parallel](CAP-144.md)** · adopted · A transaction is
   divided into shards that run in parallel, as MapReduce runs, with the same effect as run in order. *Implements*
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
@@ -751,7 +751,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   plans a query from its patterns' specs and constraints, rather than enumerating each cross product. *Implements*
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
-- <a id="CAP-174"></a>**[CAP-174: a spec that clears then inserts holds when re-run](CAP-174.md)** · proposed · A spec
+- <a id="CAP-174"></a>**[CAP-174: a spec that clears then inserts holds when re-run](CAP-174.md)** · adopted · A spec
   that clears an adjacency and then inserts into it holds where the adjacency holds just what it inserts, so that
   running it again writes nothing. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md). *Relates to*
   [CAP-140: entries removed through a spec](CAP-140.md).
@@ -815,13 +815,13 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md),
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
-- <a id="CAP-309"></a>**[CAP-309: errors annotated on frames](CAP-309.md)** · proposed · An error that occurs while a mutation
+- <a id="CAP-309"></a>**[CAP-309: errors annotated on frames](CAP-309.md)** · adopted · An error that occurs while a mutation
   transaction is processed is annotated on the frames it concerns; an unresolvable error partway through interpreting
   the expression gives a partially bound frame, preferred to none; in mbse-schemas, in Python and TypeScript.
   *Implements* [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: met in mbse-schemas 0.26.26 (checked in its main at 40c408c: TXN-18 to TXN-20 and REF-10 pass in both
     languages, at 100% coverage); a layer of a stack streaming the annotated frames is CAP-308's.
-- <a id="CAP-310"></a>**[CAP-310: a cache layer's partial-aware interpretation](CAP-310.md)** · proposed · A cache
+- <a id="CAP-310"></a>**[CAP-310: a cache layer's partial-aware interpretation](CAP-310.md)** · adopted · A cache
   layer, a store over another, forwards a mutation transaction to the layer below and at once interprets it recursively
   over what it holds, given the original expression, a handle to the subterm it evaluates, and, for each symbol that
   should be bound there, a stream of candidates; a frame it binds fully it streams to the client at once; where the
@@ -830,7 +830,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   mbse-schemas, in Python and TypeScript. *Implements*
   [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
-- <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · proposed · An object's
+- <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · adopted · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.22.0.
@@ -853,7 +853,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 ### The framework built on its own protocols
 
-- <a id="CAP-126"></a>**[CAP-126: schema objects read through the store protocol](CAP-126.md)** · proposed · Schema
+- <a id="CAP-126"></a>**[CAP-126: schema objects read through the store protocol](CAP-126.md)** · adopted · Schema
   objects are read and written through `Visitors.OfStore`, as data is, not field by field, keeping the rule that a
   change to an existing schema is seen once its transaction commits. *Implements*
   [FEA-037: the framework built on its own protocols](../features/FEA-037.md).
@@ -880,9 +880,9 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met (`update_doc_titles.py`, mbse-basis#45, and each repository's pass).
 - <a id="CAP-250"></a>**CAP-250: decision tags made readable** · proposed · A decision cited by the number it had in a drained log, such as "(object identity 100)", is made legible: a link to the item that holds it, or a statement of what the number refers to. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md).
   - **Current**: not met; not yet scheduled (the user, 2026-11-01: leave the decision tags for now).
-- <a id="CAP-252"></a>**[CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](CAP-252.md)** · proposed · `polyrepo.py new <dir> --package <Area.Name> [--npm <name>]` creates a new repository beside the others, from templates kept in mbse-basis, its starting set already passing the link checks and its suites. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [PRI-041: a new repository starts in the conventions](../PRINCIPLES.md#PRI-041).
+- <a id="CAP-252"></a>**[CAP-252: script generates a standard scaffold for new MBSE-adjacent repositories](CAP-252.md)** · adopted · `polyrepo.py new <dir> --package <Area.Name> [--npm <name>]` creates a new repository beside the others, from templates kept in mbse-basis, its starting set already passing the link checks and its suites. *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [PRI-041: a new repository starts in the conventions](../PRINCIPLES.md#PRI-041).
   - **Current**: met (checked on mbse-basis' branch CAP-252: `scripts/test_scaffold.py`, and a scaffold of mbse-example).
-- <a id="CAP-303"></a>**[CAP-303: mbse-expressions' tutorials, from domains and trivial expressions up](CAP-303.md)** · proposed ·
+- <a id="CAP-303"></a>**[CAP-303: mbse-expressions' tutorials, from domains and trivial expressions up](CAP-303.md)** · adopted ·
   mbse-expressions' tutorials, in Python and TypeScript, teach how values, their domains and each language's
   expressions are modeled, from one literal up, before constraints, each step a case run in both languages.
   *Implements* [FEA-057: documentation organized by semantic role](../features/FEA-057.md). *Relates to* [FEA-024: expressions as data](../features/FEA-024.md).
@@ -959,7 +959,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
 
 ### Code generation and the model trace
 
-- <a id="CAP-027"></a>**[CAP-027: Python3 source generated from schemas](CAP-027.md)** · proposed · MBSE can generate Python3
+- <a id="CAP-027"></a>**[CAP-027: Python3 source generated from schemas](CAP-027.md)** · adopted · MBSE can generate Python3
   source code from schema models: their types, as dataclasses and type aliases. *Implements* [FEA-022: code generation](../features/README.md#FEA-022), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md),
   [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   [PRI-015: concrete references are programmatic](../PRINCIPLES.md#PRI-015) depends on it: typed bindings are how code refers to model elements by reference.
@@ -1026,7 +1026,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
     code at 0.26.4: `Adapters/Dataclasses.py`).
 ### Wire format
 
-- <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · proposed · "in the scalar case of a `Schemas.OfAny` that represents a specific
+- <a id="CAP-069"></a>**[CAP-069: wire format shorthand (scalars)](CAP-069.md)** · adopted · "in the scalar case of a `Schemas.OfAny` that represents a specific
   scalar (such as `Schemas.OfScalar` -> `Schemas.OfInt`) the wire format may omit the implied union wrapper(s) e.g.
   `1` instead of `{ "scalar": { "int": 1 } }` provided the written form unambiguously aligns with the schema (e.g.
   `scalar` -> `int`) and the reader must tolerate this optionality of representation": from `OfAny` through `OfScalar`
@@ -1035,14 +1035,14 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
   - **Current**: met in mbse-schemas 0.26.3 (checked in the code of both languages, and by the ANY suite: wrapped by
     kind and schema, bare only where one of the restriction's schemas takes the plain form).
-- <a id="CAP-070"></a>**[CAP-070: wire format shorthand (containers)](CAP-070.md)** · proposed · "in the container case of a `Schemas.OfAny` that represents a
+- <a id="CAP-070"></a>**[CAP-070: wire format shorthand (containers)](CAP-070.md)** · adopted · "in the container case of a `Schemas.OfAny` that represents a
   specific container (e.g. `Schemas.OfContainer`) the wire format may omit the implied union wrapper
   `[ "dog", "cat", "mouse" ]` instead of `{ "container": [ "dog", "cat", "mouse" ] }` and the reader must tolerate this
   optionality of representation". *Implements* [FEA-006: persistence](../features/README.md#FEA-006), [FEA-032: schema loading and wire alignment](../features/FEA-032.md); applies
   [PRI-025: never guess the schema](../PRINCIPLES.md#PRI-025) and [PRI-026: serialization through the visitor protocol](../PRINCIPLES.md#PRI-026).
   - **Current**: met in mbse-schemas 0.26.3 (checked in the code of both languages: `{"container": [...]}`, bare where
     the restriction's one container schema takes the plain form).
-- <a id="CAP-071"></a>**[CAP-071: unrestricted OfAny serializes with 1-level tag](CAP-071.md)** · proposed · An unrestricted
+- <a id="CAP-071"></a>**[CAP-071: unrestricted OfAny serializes with 1-level tag](CAP-071.md)** · adopted · An unrestricted
   `OfAny`'s value is written tagged by one level, its basic scalar's tag or its schema's registered name (`{"int": 1}`,
   `{"crm.Phone": {...}}`), and read back only so tagged. Accepting untagged plain data is
   [CAP-170: unrestricted OfAny also accepts and roundtrips untagged plain data](#CAP-170).
@@ -1050,7 +1050,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met since before mbse-schemas 0.20.0, the first tagged release holding it (built with "`OfAny`
     returns"); checked in the code at 0.26.4 (`Plain.py`'s `_any_value` and `_decode_any`, `Plain.ts`'s `anyValue` and
     `decodeAny`).
-- <a id="CAP-170"></a>**[CAP-170: unrestricted OfAny also accepts and roundtrips untagged plain data](CAP-170.md)** · proposed · An
+- <a id="CAP-170"></a>**[CAP-170: unrestricted OfAny also accepts and roundtrips untagged plain data](CAP-170.md)** · adopted · An
   unrestricted `OfAny` may also hold any plain data, untagged, and writes it back as read, the one-level tag of
   [CAP-071: unrestricted OfAny serializes with 1-level tag](#CAP-071) legal but no longer required. *Implements* [FEA-032: schema loading and wire alignment](../features/FEA-032.md); *relates to*
   [FEA-020: refinable models](../features/FEA-020.md), [QUA-002: open-world models](../QUALITIES.md#QUA-002).
@@ -1063,16 +1063,16 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   firmware, software, device, user, community, cloud resource, agent) and the interfaces between them. *Implements*
   [FEA-010: system behavior](../features/README.md#FEA-010) to [FEA-016: community behavior](../features/README.md#FEA-016).
   - **Current**: no kind covered.
-- <a id="CAP-182"></a>**[CAP-182: modeling system structure as containers, axes and containment](CAP-182.md)** · proposed · A
+- <a id="CAP-182"></a>**[CAP-182: modeling system structure as containers, axes and containment](CAP-182.md)** · adopted · A
   system's structure is modeled as containers that contain one another hard or soft, and axes that orient soft
   containers. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041).
   - **Current**: met in mbse-sysarch 0.1.0, Python only (checked in the code at 0.1.0: `Structure`; the STR and CHK suites).
-- <a id="CAP-183"></a>**[CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md)** · proposed · A
+- <a id="CAP-183"></a>**[CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md)** · adopted · A
   system's interactions are modeled as modules with interfaces and ports, implemented by instances of other modules
   cooperating over channels that carry messages of one schema. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to*
   [CAP-028: layered interaction models](#CAP-028), [CAP-041: every kind of participant](#CAP-041), [CAP-182: modeling system structure as containers, axes and containment](CAP-182.md).
   - **Current**: met in mbse-sysarch 0.1.0, Python only (checked in the code at 0.1.0: `Interactions`; the INT, CHK and SER suites).
-- <a id="CAP-204"></a>**[CAP-204: cost estimates of a declared work metric over patterns of system architecture activity](CAP-204.md)** · proposed · A system architecture declares a work metric, and cost estimates of it are associated with patterns of its activity. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-182: modeling system structure as containers, axes and containment](CAP-182.md), [CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md).
+- <a id="CAP-204"></a>**[CAP-204: cost estimates of a declared work metric over patterns of system architecture activity](CAP-204.md)** · adopted · A system architecture declares a work metric, and cost estimates of it are associated with patterns of its activity. *Implements* [FEA-009: layered interaction models](../features/FEA-009.md). *Relates to* [CAP-182: modeling system structure as containers, axes and containment](CAP-182.md), [CAP-183: modeling system interactions as modules, interfaces, ports, implementations, instances and channels](CAP-183.md).
   - **Current**: not met.
 
 ### Schema-driven visualization and editing
@@ -1147,7 +1147,7 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   [CAP-289: journals kept in DynamoDB](#CAP-289) · An in-memory store journaled to DynamoDB, with occasional snapshots,
   replayed at startup. It is refined by a journal kept in DynamoDB, with no snapshot, below the service's store
   ([CAP-290: a service's store stacked, with no snapshot](CAP-290.md)). *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
-- <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until committed](CAP-176.md)** · proposed · A
+- <a id="CAP-176"></a>**[CAP-176: a transaction's changes held in builders and mutation frames until committed](CAP-176.md)** · adopted · A
   transaction's changes are held in builders and mutation frames until it commits, so that one refused or failed
   leaves nothing to undo; where a persistence stack journals, it commits once the journal accepts it. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
   [CAP-290: a service's store stacked, with no snapshot](CAP-290.md).
@@ -1180,7 +1180,7 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   - **Current**: met in mbse-dynamodb 0.1.0 (checked in its main at 7981bc8: mbse-journals' JRN-01..08 pass with each
     journal kept in DynamoDB, as mbse-schemas' BLW-01..13 do over it, at 100% coverage, against moto; its DynamoDB Local
     cases not yet run).
-- <a id="CAP-290"></a>**[CAP-290: a service's store stacked, with no snapshot](CAP-290.md)** · proposed · mbse-rest's service serves a
+- <a id="CAP-290"></a>**[CAP-290: a service's store stacked, with no snapshot](CAP-290.md)** · adopted · mbse-rest's service serves a
   store given a store below, a database's, and persists by its journal alone: no snapshot is taken or read, and a
   client is sent a store's schemas as the install transactions that made them; its client implements every method of
   the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
@@ -1313,27 +1313,27 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
 
 Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md#design)'s.
 
-- <a id="CAP-237"></a>**[CAP-237: logical layout schemas](CAP-237.md)** · proposed · `Framework.Logical` models a diagram's logical
+- <a id="CAP-237"></a>**[CAP-237: logical layout schemas](CAP-237.md)** · adopted · `Framework.Logical` models a diagram's logical
   layout, in Python and TypeScript: points, vectors with their rotations, shapes with their origin, border and
   extent points, and containment and adjacency between shapes. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 8bac082: suites PKG and LOG pass in both languages, at 100% coverage).
-- <a id="CAP-238"></a>**[CAP-238: container schemas and grid insertion](CAP-238.md)** · proposed · `Framework.Container` models a
+- <a id="CAP-238"></a>**[CAP-238: container schemas and grid insertion](CAP-238.md)** · adopted · `Framework.Container` models a
   container's cells, their extents and the children in each, and a grid container places children without adjacency
   specs each in its own cell in a predictable sequence, incrementally, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 7e021ea: suites PKG, LOG and CNT pass in both languages, at 100% coverage).
-- <a id="CAP-239"></a>**[CAP-239: grid adjacency](CAP-239.md)** · proposed · A grid container reorders a child when an adjacency
+- <a id="CAP-239"></a>**[CAP-239: grid adjacency](CAP-239.md)** · adopted · A grid container reorders a child when an adjacency
   spec is added, reverts it to its original insertion position when the spec is removed, quantizes or rejects a
   rotation it cannot represent, and gives children sharing a "from" shape and rotation a nested cell container, in
   Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 99c77f2: suites PKG, LOG, CNT and ADJ pass in both languages, at 100% coverage).
-- <a id="CAP-240"></a>**[CAP-240: conflicting layout rules ignored and requeued](CAP-240.md)** · proposed · Of two trivially
+- <a id="CAP-240"></a>**[CAP-240: conflicting layout rules ignored and requeued](CAP-240.md)** · adopted · Of two trivially
   incompatible rules, the later is ignored and queued, and a mutation that lifts the conflict reapplies the queued
   rules in order: in Python and TypeScript for container layout, in TypeScript for physical layout. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: not met.
-- <a id="CAP-241"></a>**[CAP-241: physical layout schemas](CAP-241.md)** · proposed · `Framework.Physical` models a physical layout's
+- <a id="CAP-241"></a>**[CAP-241: physical layout schemas](CAP-241.md)** · adopted · `Framework.Physical` models a physical layout's
   relative and absolute coordinates, annotating a logical layout, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 34aa685: suite PHY passes in both languages, at 100% coverage).
-- <a id="CAP-242"></a>**[CAP-242: incremental physical placement](CAP-242.md)** · proposed · Physical layout, in both languages,
+- <a id="CAP-242"></a>**[CAP-242: incremental physical placement](CAP-242.md)** · adopted · Physical layout, in both languages,
   resolves orientations to absolute directions, places points so that every vector's rotation and length hold, sizes
   each cell, container and the diagram just enough to hold what it contains, with a collapsing margin, and enforces the
   minimum shape size, one mutation at a time. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
@@ -1346,7 +1346,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   diagram's top level, and removing a shape's containment entry deletes nothing: it moves the shape there, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 909c7a1: suites LOG, CNT, PHY and PLC pass in both
     languages, at 100% coverage).
-- <a id="CAP-280"></a>**[CAP-280: the grid in the logical layout](CAP-280.md)** · proposed · A container, a shape or the
+- <a id="CAP-280"></a>**[CAP-280: the grid in the logical layout](CAP-280.md)** · adopted · A container, a shape or the
   diagram, owns at most one grid, through `Logical.Owns` as `grid`, and containment links a child to that grid, so that
   a child is contained only by a grid and a container has only one; the diagram's grid holds every shape no other grid
   holds. A grid's span, axis and cell rotation are its own
@@ -1354,7 +1354,7 @@ Each is built in mbse-diagrams; the design is [FEA-056: fungible diagramming kee
   owns each cell through `HasCells`, keyed by its row and column, in Python and TypeScript. *Implements* [FEA-056: fungible diagramming keeps agents and humans in the loop](../features/FEA-056.md).
   - **Current**: met (checked in mbse-diagrams' main at 909c7a1: suites LOG, CNT, ADJ, CNF, PHY and PLC pass in both
     languages, at 100% coverage).
-- <a id="CAP-261"></a>**[CAP-261: layout driven by any journal transaction](CAP-261.md)** · proposed · The layout engine
+- <a id="CAP-261"></a>**[CAP-261: layout driven by any journal transaction](CAP-261.md)** · adopted · The layout engine
   follows a journal's transaction it is given, any transaction, by its resolved effect (CAP-269): it sections the effect
   into the model's mutations, anticipates what they remove, applies them, and calls the container layout and placement
   functions they imply, so that a diagram's layout is a function of its journal alone, with no caller that knows the
