@@ -779,18 +779,22 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   keeps or lets go, are settings given when it runs, lazy by default, never code that uses it, in mbse-schemas, in
   Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
-- <a id="CAP-304"></a>**CAP-304: a store below that answers later** · superseded by [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · A store below may give an object's
-  document, and commit or refuse a transaction's changes, later, as a promise, so that a store over a network, such as
+- <a id="CAP-304"></a>**CAP-304: a store below that answers later** · superseded by [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · A store below may give one object
+  (`document`), and commit or refuse a transaction's changes, later, as a promise, so that a store over a network, such as
   mbse-rest's client in a browser, blocks nothing while it waits; building a transaction's expression loads nothing,
   a symbol's schema being the object's where it is present, else the one its path implies; in mbse-schemas, in
   TypeScript, and in Python where the interface is shared. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
-- <a id="CAP-306"></a>**CAP-306: a public store-below interface** · superseded by [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · What a store asks of the store below it is
-  a public interface of mbse-schemas, which a store below implements without being a `Builders.Store` nor overriding
-  any of its private methods: an object's document by its path, a transaction's changes given as plain data and
-  committed or refused, what it committed of them given back, an install, a transaction that writes schemas, run,
-  each committed transaction reported to its followers in order, and whether it records transactions (`Provenance`); mbse-dynamodb's store and mbse-rest's client and service are written against it alone, in
-  mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to* [PRI-043: framework interfaces authoritative and versatile](../PRINCIPLES.md#PRI-043).
+- <a id="CAP-306"></a>**CAP-306: a public store-below interface** · superseded by
+  [CAP-308: stacking by mutation transactions, in one round trip](README.md#CAP-308) · What a store asks of the store
+  below it is a public interface of mbse-schemas, which a store below implements without being a `Builders.Store` nor
+  overriding any of its private methods: one object, written as one transaction (`document`), by its path, a
+  transaction's changes given as plain data and committed or refused, what it committed of them given back, an install,
+  a transaction that writes schemas, run, each committed transaction reported to its followers in order, and whether it
+  records transactions (`Provenance`); mbse-dynamodb's store and mbse-rest's client and service are written against it
+  alone, in mbse-schemas, in Python and TypeScript. *Implements*
+  [FEA-028: one Store interface, lazy by default](../features/FEA-028.md). *Relates to*
+  [PRI-043: framework interfaces authoritative and versatile](../PRINCIPLES.md#PRI-043).
   - **Current**: built in mbse-schemas 0.26.24 (`Stores.Below`), mbse-rest and mbse-dynamodb written against it; to be
     removed as CAP-308 replaces it.
 - <a id="CAP-308"></a>**CAP-308: stacking by mutation transactions, in one round trip** · proposed · A stack of stores

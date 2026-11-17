@@ -236,10 +236,14 @@ In [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framework): the
 Where the user's decisions were silent, the simplest default consistent with them, each *proposed* until reviewed,
 labeled with the repository and number it was decided under.
 
-- **(mbse-schemas 30)** **What a store below answers: an object's document.** `document(path)` gives the object at a
-  path as a one-transaction document ([CAP-128: graphs sent as one-transaction documents](../docs/capabilities/CAP-128.md)), its properties and its entries, each
-  object they link by its path; None where it holds none. It is a mutation-transaction stream, the language stores
-  already speak, so that a database's store and mbse-rest's client answer it alike, with no new form.
+- **(mbse-schemas 30)** **What a store below answers: one object, as one transaction.** `Stores.Below.document(path)`
+  gives the object at a path as a one-transaction document
+  ([CAP-128: graphs sent as one-transaction documents](../docs/capabilities/CAP-128.md)), its properties and its
+  entries, each object they link by its path; None where it holds none. It is a mutation-transaction stream, the
+  language stores already speak, so that a database's store and mbse-rest's client answer it alike, with no new form.
+  This answer belongs to the design that
+  [CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308) supersedes,
+  in which a store below streams back the frames of the transaction it is sent.
 - **(mbse-schemas 30)** **Identity by path.** An object loaded from the store below is one proxy, kept by its path, the
   same each time it is named. A path resolves to an object present, through its owner's entries where it was made
   above, else to the store below's, loaded, else to none: one read, of the object named, and no owner loaded.
@@ -270,19 +274,19 @@ labeled with the repository and number it was decided under.
 - **(mbse-schemas 31)** **Deleting an object not present deletes, among those present, what reached it.** Removing
   the owning entry of an object not present removes every entry that links it, or anything it owns, and so deletes
   each object present it owns; these follow from the removal, which alone is reported, as a deletion's cascade is.
-- **(mbse-schemas 30)** **Loading is no transaction of the store's.** An object's document is applied as the store's
-  committed data, outside any transaction open, observed by no follower, recorded by no provenance and checked by
-  nothing.
+- **(mbse-schemas 30)** **Loading is no transaction of the store's.** What `document` gives for an object is applied as
+  the store's committed data, outside any transaction open, observed by no follower, recorded by no provenance and
+  checked by nothing.
 - **(mbse-dynamodb 15)** **A store below is given its schemas apart.** A transaction that writes only schemas reports
   no changes, so that a store above sends no install below and none is journaled: each process gives the store kept in
   a database its installs, as an app gives its own store its installs. Whether a journal also begins with them is open
   (below).
-- **(mbse-dynamodb 15)** **A read is of one transaction of the journal.** An object's document is read from its index
-  items as they stood after one journal transaction; where another process commits while they are read, they are read
-  again.
+- **(mbse-dynamodb 15)** **A read is of one transaction of the journal.** What `document` gives for an object is read
+  from its index items as they stood after one journal transaction; where another process commits while they are read,
+  they are read again.
 - **(mbse-dynamodb 15)** **A counted object is kept by its value.** It has no path, so that an entry linking it is kept
-  under the objects it links that have one, with the counted object's schema and values; a document of one of them is
-  refused, as a store in memory refuses it.
+  under the objects it links that have one, with the counted object's schema and values; `document` is refused for one
+  of them, as a store in memory refuses it.
 - **(mbse-dynamodb 15)** **mbse-dynamodb's persistence plugin is kept until CAP-290.** The plugin, which snapshots, is
   superseded by the store kept in DynamoDB, and kept unchanged while mbse-rest's service persists through it; it goes
   with [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290).
@@ -295,10 +299,11 @@ labeled with the repository and number it was decided under.
   a database is one whose store below is its index, in Python and TypeScript alike: a store above gives the store below
   plain data read with that store's own schemas, and observes it through mbse-schemas' `Changes.observe`, so that it
   needs no change to mbse-schemas. Made, it executes the install transactions the service gives.
-- **(mbse-rest 19)** **The endpoints a store below needs.** An object's document by its path (`POST /documents`), or
-  none; a transaction's changes, committed or refused, the refusal named by the kind of error the store raised
-  (`ValueError`, `TypeError`, `LookupError`), which the client raises; the change feed (`GET /changes`); the install
-  transactions that made the schemas (`GET /schemas`), and an install given (`POST /schemas`).
+- **(mbse-rest 19)** **The endpoints a store below needs.** What `document` gives for an object by its path
+  (`POST /documents`), or none; a transaction's changes, committed or refused, the refusal named by the kind of error
+  the store raised (`ValueError`, `TypeError`, `LookupError`), which the client raises; the change feed
+  (`GET /changes`); the install transactions that made the schemas (`GET /schemas`), and an install given
+  (`POST /schemas`).
 - **(mbse-rest 19)** **The change feed is read by position, its reads long-polled.** Each transaction the service's
   store commits is numbered from 1 in commit order, and a client reads those after the last it was given, so that it is
   given each once, none missed, from any position the feed keeps; a read that finds none new is held open until one
@@ -341,9 +346,9 @@ labeled with the repository and number it was decided under.
 - **(mbse-dynamodb 17)** **A store kept in DynamoDB implements `Stores.Below`, interpreting each transaction in a store
   of its own.** It holds a `Builders.Store` over an index that implements the interface itself and records nothing, so
   that its store records each transaction; the index's `commit`, within that store's transaction, writes the journal
-  transaction and the index items in one DynamoDB transaction, a conflict or a failure there rolling the transaction back,
-  which is interpreted again once caught up, up to a bound, as a transaction written in a block is too. Each object's
-  document is kept as that store's `document(path)` gives it, with the objects linking it; reading one needs no install.
+  transaction and the index items in one DynamoDB transaction, a conflict or a failure there rolling the transaction
+  back, which is interpreted again once caught up, up to a bound, as a transaction written in a block is too. Each
+  object is kept as that store's `document(path)` gives it, with the objects linking it; reading one needs no install.
 
 ## Open questions
 

@@ -132,10 +132,11 @@ labeled with the repository and number it was decided under.
 
 ## Open questions
 
-- **A write's cost, where an object holds many entries.** mbse-dynamodb keeps each object's document whole, so that a
-  write rewrites it, entries and all, its cost growing with the object. A write of part of a property's value is
-  [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272); a document kept in parts by entry, as the layout above may
-  give, would bound the cost of a write to an object's entries too.
+- **A write's cost, where an object holds many entries.** mbse-dynamodb keeps each object whole, as
+  `Stores.Below.document` gives it, so that a write rewrites it, entries and all, its cost growing with the object. A
+  write of part of a property's value is
+  [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272); an object kept in parts
+  by relation entry, as the layout above may give, would bound the cost of a write to an object's entries too.
 
 - **Subscribers in browsers.** A browser holds no database's credentials, so it subscribes through mbse-journals'
   sender and receiver ([CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)) rather than to a backend directly; Firestore's own
