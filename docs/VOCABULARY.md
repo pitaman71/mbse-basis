@@ -58,11 +58,14 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   `if` statement's branches, a loop's body, an arrow function's block), as ISO/IEC 14882 uses the word. As the user
   asked (2026-11-12): "Is "substatement" cleaner than "clause"".
 - <a id="VOC-032"></a>**VOC-032: clause** · adopted · **Clause**: Expression and statement languages are part of what
-  dialects ([VOC-033: dialect](#VOC-033)) model. A child that is a subterm ([VOC-030: subterm](#VOC-030)) or a
-  substatement ([VOC-031: substatement](#VOC-031)), named by the property that holds it (`left`, `body`, `else`); not a
-  helper (a value object that is neither, such as a declarator) nor a scalar property. As the user decided (2026-11-12):
-  "Maybe "clause" can refer to the union of all children : substatements and subterms." Qualified where it meets an
-  mbse-transforms policy's clauses, or a grammar's own `…Clause` syntax nodes.
+  dialects ([VOC-033: dialect](#VOC-033)) model. A part of a statement that its language's grammar allows only within
+  that statement, and that holds statements: Python's `except` clause and `case`, owned by their `try` and `match`;
+  mbse-programs' `Programs.Framework.Clause`, never a statement. As the user decided (2026-11-16): "I don't much like
+  treating a clause as a statement when it can only appear in that place", choosing `Clause` as its name, with this
+  entry narrowed to it. Any child, subterm ([VOC-030: subterm](#VOC-030)) or substatement ([VOC-031:
+  substatement](#VOC-031)), is a child; "clause" named that union from 2026-11-12 ("Maybe "clause" can refer to the
+  union of all children : substatements and subterms."). Qualified where it meets an mbse-transforms policy's clauses,
+  mbse-schemas' `unique` clauses, or a grammar's own `…Clause` syntax nodes.
 - <a id="VOC-034"></a>**VOC-034: closed constructor expression** · adopted · **Closed constructor expression**:
   Expression languages are part of what dialects ([VOC-033: dialect](#VOC-033)) model. A closed constructor expression
   is an expression that constructs a value from literals through the dialect's constructors and that refers to no free
