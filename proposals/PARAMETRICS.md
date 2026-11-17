@@ -89,7 +89,7 @@ parameter a value through `Parametrics.AssignsValue`, the value an entry propert
 `Parametrics.BindsObject`, the object a third link, each linking the data object and the parameter;
 `Parametrics.extend` gives the data object's schema the adjacencies `assigned_values` and `bound_objects`. A data
 object's parameter assignments and parameter bindings are
-[CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314)'s.
+[CAP-314: parameters assigned or bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314)'s.
 
 ### Referenced
 
@@ -130,7 +130,7 @@ any parameter ([CAP-296: simplification over literals, variables and parameters]
 
 A code generator writes a parameter as the target language's own construct: a C++ template parameter, a C macro, a
 SystemVerilog `parameter`, or a Python generic. A parameter stays a parameter in generated code, and is not replaced by
-a value before generating ([CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md)).
+a value before generating ([CAP-163: parameters assigned, bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md)).
 
 ## References as first-class values
 
@@ -180,10 +180,10 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
    writes every reference in one form. It changes no behavior that a caller sees but the written form of a reference.
 3. [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
-4. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may assign
+4. [CAP-314: parameters assigned or bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may assign
    or bind the parameters that its schema declares. It supersedes [CAP-113: parameters bound at their
    definitions](../docs/capabilities/CAP-113.md), which gave a parameter its value or object at its schema.
-5. [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
+5. [CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
    parameter reference is valid where its scope assigns it a value, or binds it to an object, of the right schema, and
    invalid otherwise. It supersedes [CAP-181: parameters wherever literals may appear](../docs/capabilities/CAP-181.md),
    which asked for the same of literals alone.
@@ -193,7 +193,7 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
    [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298), in mbse-expressions: the
    simplifier's rule for a parameter reference, and the scope's parameter assignments. These two need only CAP-311 and
    CAP-312, because the caller's scope assigns the parameters, so they may proceed beside steps 4 to 6.
-8. [CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md), in the
+8. [CAP-163: parameters assigned, bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md), in the
    code generators and mbse-programs.
 
 ## Open questions
@@ -202,5 +202,5 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
   tensor's shape ([CAP-114: parameter bindings are substituted and
   checked](../docs/capabilities/CAP-114.md#open-questions))?
 - **Equal applications.** Are two applications that substitute alike, such as `Matrix(n, n)` and `Square(n)`, equal
-  ([CAP-163: parameters bound, applied and generated beyond
+  ([CAP-163: parameters assigned, bound, applied and generated beyond
   mbse-schemas](../docs/capabilities/CAP-163.md#open-questions))?

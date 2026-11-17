@@ -136,10 +136,10 @@ constructs of mbse-schemas' data model and store, from reference objects to tran
   assigned a value, as the user decided: "Values are not bound. Values are assigned." What gives a parameter its value
   is a parameter assignment ([VOC-040: parameter assignment](#VOC-040)). A data object holds the parameter bindings for
   the parameters that its schema declares for an object, through `Parametrics.BindsObject`
-  ([CAP-314: parameters bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
+  ([CAP-314: parameters assigned or bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
   mbse-expressions, an expression root holds parameter bindings for parameters that it declares, and an application
   holds them for the parameters of the definition that it applies
-  ([CAP-163: parameters bound, applied and generated beyond mbse-schemas](capabilities/CAP-163.md),
+  ([CAP-163: parameters assigned, bound, applied and generated beyond mbse-schemas](capabilities/CAP-163.md),
   [the parametrics proposal](../proposals/PARAMETRICS.md#assigned-and-bound)). A parameter reference to a parameter
   for an object resolves through a parameter binding in its scope. A parameter binding is not a symbol binding
   ([VOC-037: symbol binding](#VOC-037)), as the user decided: "Parameter binding and symbol binding have different
@@ -160,7 +160,7 @@ constructs of mbse-schemas' data model and store, from reference objects to tran
   bound. Values are assigned." A parameter is assigned a value, and bound to an object
   ([VOC-038: parameter binding](#VOC-038)). A data object holds the parameter assignments for the parameters that its
   schema declares for a value, through `Parametrics.AssignsValue`, the value an entry property
-  ([CAP-314: parameters bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
+  ([CAP-314: parameters assigned or bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
   mbse-expressions, an expression root and an application hold parameter assignments as they hold parameter bindings
   ([the parametrics proposal](../proposals/PARAMETRICS.md#assigned-and-bound)). A parameter reference to a parameter
   for a value resolves through a parameter assignment in its scope. *Never*: "binding a value", "a value bound".
