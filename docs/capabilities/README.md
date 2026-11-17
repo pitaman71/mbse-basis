@@ -602,7 +602,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   designates in a store. *Implements* [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: met in mbse-schemas 0.25.0.
 - <a id="CAP-132"></a>**[CAP-132: paths retired for references](CAP-132.md)** · proposed · Paths are retired: references
-  designate objects, entries and frames, and paths no longer overlap them. *Implements*
+  designate objects, entries and frames, and a path is internal to an object reference; no API takes or returns a bare
+  one. *Implements*
   [FEA-026: deterministic object identity](../features/FEA-026.md).
   - **Current**: not met.
 - <a id="CAP-133"></a>**[CAP-133: no durable references to counted objects](CAP-133.md)** · proposed · Nothing holds a
