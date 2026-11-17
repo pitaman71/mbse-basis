@@ -155,7 +155,7 @@ open are listed under [Open items](#open-items), below.
   adjacencies, that a transaction adds to a schema that the store was made holding, meta-schemas included. An extension
   may add members, but it may not change or remove any, and each store extends its own schemas
   ([CAP-116: framework schemas extended, checked](capabilities/CAP-116.md)). A module that extends the framework's
-  schemas, such as `Parametrics`, does so in its install, run before use ([VOC-051: install](#VOC-051),
+  schemas, such as `Parametrics`, does so in its install, run before use ([VOC-050: install](#VOC-050),
   [CAP-171: parameters attached to every schema kind by extension](capabilities/CAP-171.md)). A store that reads a
   snapshot made with an extension it lacks ignores, and lists, each member whose meaning needs that extension
   ([CAP-165: snapshots read by a store lacking their extensions](capabilities/CAP-165.md)).
@@ -239,27 +239,21 @@ open are listed under [Open items](#open-items), below.
   ([CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md)). A transaction's imperative scope, `with
   store.transaction()`, has no expression ([CAP-125: imperative transaction scope](capabilities/CAP-125.md)).
   Transactions do not nest.
-- <a id="VOC-050"></a>**VOC-050: savepoint** · proposed · **Savepoint**: a write within an open transaction that commits
-  or fails alone, all or nothing, without ending the transaction. A savepoint's writes become the transaction's writes
-  when the savepoint commits. In mbse-schemas a savepoint is a set of proposals over the transaction's proposals
-  (`Proposals.OfStore`), and a decoder that reads a document within an open transaction makes one
-  ([CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md),
-  [CAP-124: writes all-or-nothing in transactions](capabilities/CAP-124.md)).
-- <a id="VOC-051"></a>**VOC-051: install** · proposed · **Install**: a module-scope `install(txn)`, a transaction that
+- <a id="VOC-050"></a>**VOC-050: install** · proposed · **Install**: a module-scope `install(txn)`, a transaction that
   upserts the schemas a module defines, so that installing it again writes nothing and installing more extends what it
   defined. The framework defines its own schemas by installs too
   ([CAP-115: schemas defined by idempotent installs](capabilities/CAP-115.md)). A store also runs an install given as
   plain data, by `store.install(...)`, which sends it to the store below first
   ([the stacked stores proposal](../proposals/STACKED-STORES.md#decided)). A document that stands at a seam qualifies
   the term where it could be read as a package manager's install.
-- <a id="VOC-052"></a>**VOC-052: upsert** · proposed · **Upsert**: a transaction's term, mbse-schemas'
+- <a id="VOC-051"></a>**VOC-051: upsert** · proposed · **Upsert**: a transaction's term, mbse-schemas'
   `Mutations.OfUpsert`, that binds each of its symbols to the object its pattern's spec designates, finding the object
   before it creates one. An upsert creates an object only where it finds none, and then writes its spec wherever the
   spec does not hold ([CAP-139: upserts find before they create](capabilities/CAP-139.md),
   [CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md)). An upsert finds an owned object by its
   owning entry and a schema object by its name ([CAP-139: upserts find before they create](capabilities/CAP-139.md)).
   Every install is an upsert.
-- <a id="VOC-053"></a>**VOC-053: frame** · proposed · **Frame**: one result of a transaction's expression, which binds
+- <a id="VOC-052"></a>**VOC-052: frame** · proposed · **Frame**: one result of a transaction's expression, which binds
   each symbol that its terms declare to one object, and each variable to a value. A transaction's terms consume and
   produce a stream of frames, and the transaction gives back the frames that its chain ends with
   ([CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md)). A frame given back holds each object by
@@ -272,15 +266,15 @@ open are listed under [Open items](#open-items), below.
   errors annotated on it ([CAP-309: errors annotated on frames](capabilities/CAP-309.md)), and it may witness the
   property values and relation entries it asserts
   ([CAP-131: frames witness values and entries](capabilities/CAP-131.md)).
-- <a id="VOC-054"></a>**VOC-054: binding** · proposed · **Binding**: what associates a name with what it stands for. As
+- <a id="VOC-053"></a>**VOC-053: binding** · proposed · **Binding**: what associates a name with what it stands for. As
   the user decided, "bindings" names two different things
   ([the parametrics proposal](../proposals/PARAMETRICS.md#decided)). A frame binds each of its symbols to an object or
-  to a parameter, and it assigns values to its variables ([VOC-053: frame](#VOC-053)). A data object binds parameters
+  to a parameter, and it assigns values to its variables ([VOC-052: frame](#VOC-052)). A data object binds parameters
   that its schema declares, through `Parametrics.BindsValue` and `Parametrics.BindsObject`
   ([CAP-314: parameters bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
   mbse-expressions, an expression root or an application binds the parameters of a definition
   ([CAP-163: parameters bound, applied and generated beyond mbse-schemas](capabilities/CAP-163.md)).
-- <a id="VOC-055"></a>**VOC-055: journal** · proposed · **Journal**: a store's transactions, recorded as data in the
+- <a id="VOC-054"></a>**VOC-054: journal** · proposed · **Journal**: a store's transactions, recorded as data in the
   order in which they were committed, from which the store's data is made again. As the user decided, a model is stored,
   communicated and analyzed in journal form ([the stacked stores proposal](../proposals/STACKED-STORES.md#decided),
   [FEA-056: fungible diagramming keeps agents and humans in the loop](features/FEA-056.md#decided)). In mbse-schemas, a
@@ -288,13 +282,7 @@ open are listed under [Open items](#open-items), below.
   ([CAP-129: journals replayed by execution](capabilities/CAP-129.md)). In mbse-journals, a journal entry is a
   transaction's effect, written in the journal language
   ([CAP-271: the journal language](capabilities/README.md#CAP-271)).
-- <a id="VOC-056"></a>**VOC-056: snapshot** · proposed · **Snapshot**: a store's state written as two transactions, its
-  schemas and then its data, which reading executes in order
-  ([CAP-127: snapshots made of transactions](capabilities/CAP-127.md)). mbse-schemas writes one by
-  `Plain.ToPlain(store).Snapshot()`. The framework is to make no snapshot except for checkpoints: as the user decided,
-  "I'm really trying to avoid snapshotting at all in the framework - except for a rolling checkpoint/restore for
-  reliability, possibly some for hot-scaling" ([the stacked stores proposal](../proposals/STACKED-STORES.md#decided)).
-- <a id="VOC-057"></a>**VOC-057: follow** · proposed · **Follow**: a subscription through which a store gives a follower
+- <a id="VOC-055"></a>**VOC-055: follow** · proposed · **Follow**: a subscription through which a store gives a follower
   each transaction it commits, as that transaction's effect, in the order in which it commits them
   ([CAP-270: a transaction's changes observed at its commit](capabilities/README.md#CAP-270),
   [CAP-285: writes through, others' writes in](capabilities/README.md#CAP-285)). mbse-schemas' store gives one by
@@ -304,7 +292,7 @@ open are listed under [Open items](#open-items), below.
 
 ### Reading and writing
 
-- <a id="VOC-058"></a>**VOC-058: visitor** · proposed · **Visitor**: an object through which code reads and writes a
+- <a id="VOC-056"></a>**VOC-056: visitor** · proposed · **Visitor**: an object through which code reads and writes a
   value of one kind, mbse-schemas' `Visitors.OfX`, the one protocol for kind X. An algorithm receives a visitor and
   pulls through it, and the visitor's mode decides whether a write takes effect
   ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004),
@@ -313,34 +301,20 @@ open are listed under [Open items](#open-items), below.
   of a store's data lives only within the transaction that made it: as the user decided, "any class that implements
   Visitor must be have a lifetime that is lexically scoped (such as `with store.transaction()`)"
   ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-- <a id="VOC-059"></a>**VOC-059: proxy** · proposed · **Proxy**: mbse-schemas' dynamic implementation of the visitor
+- <a id="VOC-057"></a>**VOC-057: proxy** · proposed · **Proxy**: mbse-schemas' dynamic implementation of the visitor
   protocol, `Proxies.OfX`, which lets a program use a schema without generated code. A proxy's data instance visits
   read-only, and its builder is writable ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004)). Within a
   transaction, a proxy is the visitor that wraps an object's durable copy: as the user decided, "_Proxy (the
   in-tranasaction visitor) can serve double as _Data (the durable, ideally more compact representation), but in the
   _Proxy case it needs to wrap the durable copy"
   ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)).
-- <a id="VOC-060"></a>**VOC-060: builder** · proposed · **Builder**: a writable visitor that builds or changes a value
+- <a id="VOC-058"></a>**VOC-058: builder** · proposed · **Builder**: a writable visitor that builds or changes a value
   in fluent syntax, one setter per property, finalized by `create`, `clone` or `update`, none of which validates
   ([PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004)). As the user decided, "The preferred form of models
   as data is fluent builder syntax" ([PRI-019: fluent builder syntax](PRINCIPLES.md#PRI-019)). mbse-schemas has data
   builders, `Proxies.OfX.Builder`, which `store.<Name>(...)` gives, and schema builders, `Schemas.OfX.Builder`, each a
   visitor of its kind's plain schema of schemas
   ([CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md)).
-- <a id="VOC-061"></a>**VOC-061: reader** · proposed · **Reader**: two constructs of mbse-schemas carry the name.
-  `Readers.OfX` is the read-only view of a visitor protocol, a type that code which must not write takes, so that a type
-  checker enforces it ([CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md),
-  [CAP-257: Python type checkers see an object's members as its schema types them](capabilities/CAP-257.md)). The reader
-  of the wire format reads plain data, JSON or YAML into a store, `Plain.FromPlain`, tracking the schema that it expects
-  as context ([PRI-026: serialization through the visitor protocol](PRINCIPLES.md#PRI-026),
-  [CAP-158: values written as plain data, JSON and YAML](capabilities/CAP-158.md)).
-- <a id="VOC-062"></a>**VOC-062: writer** · proposed · **Writer**: two constructs carry the name. In mbse-schemas, the
-  writer of the wire format, `Plain.ToPlain`, writes a value as plain data, JSON or YAML, reading it through the visitor
-  protocol ([PRI-026: serialization through the visitor protocol](PRINCIPLES.md#PRI-026),
-  [CAP-158: values written as plain data, JSON and YAML](capabilities/CAP-158.md)). In mbse-expressions, a `Writer`
-  writes an expression's terms through the builders, with methods, and evaluates nothing
-  ([CAP-095: Basic terms as data](capabilities/CAP-095.md)).
-
 ## Modeling constructs
 
 Links are relative to a polyrepo checkout, each repository beside mbse-basis, and read its `main` unless marked.
@@ -431,30 +405,29 @@ V-001 to V-026 are [VOC-001: specification](#VOC-001) to [VOC-026: schema](#VOC-
 
 ## Open items
 
-Each item below is a question that the entries from [VOC-035: reference object](#VOC-035) to [VOC-062: writer](#VOC-062)
+Each item below is a question that the entries from [VOC-035: reference object](#VOC-035) to [VOC-058: builder](#VOC-058)
 leave to the user. Each entry is written as the documents best support it until the user decides.
 
 - **Terms or modeling constructs.** The preface above says that a modeling construct is only named here, with a link to
-  its definition, while [VOC-035: reference object](#VOC-035) to [VOC-062: writer](#VOC-062) define mbse-schemas'
+  its definition, while [VOC-035: reference object](#VOC-035) to [VOC-058: builder](#VOC-058) define mbse-schemas'
   constructs, as [VOC-033: dialect](#VOC-033) defines a dialect beside the construct `Terms.Dialect`. The options are:
   (a) keep the entries, each construct line under mbse-schemas linking its term, as the line for `Terms.Dialect` links
   [VOC-033: dialect](#VOC-033); (b) move the entries into the list of mbse-schemas' constructs, each a name and a link
   to the capability that defines it; (c) keep as terms only those that are not mbse-schemas' constructs, such as
   transaction, journal and binding.
 - **Document, frame and snapshot.** The user has said that "document", as in "an object's document", is not canon, and
-  that the canonical construct is the frame ([VOC-053: frame](#VOC-053)). "Document" names a built construct of
+  that the canonical construct is the frame ([VOC-052: frame](#VOC-052)). "Document" names a built construct of
   mbse-schemas: [CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md), which
   `Plain.ToPlain(store).OfObject` and `.Reachable` write, one transaction that holds an object and the counted objects
   it reaches. [CAP-108: relations as scalable containers](capabilities/CAP-108.md#value-objects-and-reference-objects)
   ("a document writes it once") and [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md) ("no
-  identity beyond the document that writes it") use the word so, and so do [VOC-044: counted object](#VOC-044) and
-  [VOC-050: savepoint](#VOC-050). "An object's document", the answer of `Stores.Below.document(path)`, is used in
+  identity beyond the document that writes it") use the word so, and so does [VOC-044: counted object](#VOC-044). "An object's document", the answer of `Stores.Below.document(path)`, is used in
   [the stacked stores proposal](../proposals/STACKED-STORES.md#decided-by-an-agent-for-review) (mbse-schemas 30,
   mbse-dynamodb 15, mbse-rest 19), in [CAP-304: a store below that answers later](capabilities/README.md#CAP-304) and
   [CAP-306: a public store-below interface](capabilities/README.md#CAP-306), both superseded by
   [CAP-308: stacking by mutation transactions, in one round trip](capabilities/README.md#CAP-308), and in
   [the journal storage proposal](../proposals/JOURNAL-STORAGE.md). A frame binds symbols to references, a document
-  writes objects, and a snapshot ([VOC-056: snapshot](#VOC-056)) writes a whole store, so that the three are not
+  writes objects, and a snapshot writes a whole store, so that the three are not
   synonyms. The options are: (a) no term for "document":
   [CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md)'s construct is named anew, and "an
   object's document" gives way to the frames that a transaction streams back
@@ -462,7 +435,7 @@ leave to the user. Each entry is written as the documents best support it until 
   for [CAP-128: graphs sent as one-transaction documents](capabilities/CAP-128.md)'s construct alone, with "an object's
   document" marked *Never*; (c) "document" adopted for any written form of objects, a snapshot among them.
 - **Visitor and proxy.** [PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004) makes `Proxies.OfX` the
-  implementation whose data instances and builders implement `Visitors.OfX`, and [VOC-059: proxy](#VOC-059) follows it.
+  implementation whose data instances and builders implement `Visitors.OfX`, and [VOC-057: proxy](#VOC-057) follows it.
   [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided) calls a proxy "the
   in-tranasaction visitor" that wraps the durable `_Data`, and says that frames hold no proxies, where its Design says
   that they hold no visitors. [CAP-284: objects loaded on demand](capabilities/README.md#CAP-284) calls an object of the
@@ -471,22 +444,6 @@ leave to the user. Each entry is written as the documents best support it until 
   `References.OfObject`. The options are: (a) "visitor" names the protocol and its role, and "proxy" names mbse-schemas'
   dynamic implementation, as drafted; (b) "proxy" names only the in-transaction wrapper of durable data, the `_Proxy`
   beside `_Data`; (c) "proxy" is not a term, and documents say "visitor" throughout.
-- **Reader, writer and builder.** "Reader" names `Readers.OfX`, the read-only view of a visitor protocol, and also the
-  wire format's reader, `Plain.FromPlain` ([PRI-026: serialization through the visitor protocol](PRINCIPLES.md#PRI-026),
-  [CAP-069: wire format shorthand (scalars)](capabilities/CAP-069.md)). "Writer" names the wire format's writer,
-  `Plain.ToPlain` ([PRI-026: serialization through the visitor protocol](PRINCIPLES.md#PRI-026),
-  [CAP-108: relations as scalable containers](capabilities/CAP-108.md)), a stateful writer of snapshots
-  ([CAP-164: subsequent snapshots sent as transactions](capabilities/CAP-164.md)), and mbse-expressions' `Writer`, which
-  builds terms as a builder does ([CAP-095: Basic terms as data](capabilities/CAP-095.md)) and which
-  [the principles' open items](PRINCIPLES.md#open-items) list as not yet following
-  [PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004).
-  [CAP-143: specs declarative, no read-modify-write](capabilities/CAP-143.md) proposes splitting `Visitor` into `Writer`
-  and `Reader` classes. The options are: (a) both names kept, qualified by repository and construct, as drafted; (b)
-  mbse-expressions' writers become builders, as [PRI-004: one visitor protocol per kind](PRINCIPLES.md#PRI-004)'s open
-  item expects, so that "writer" means the wire format's alone; (c) the wire format's reader and writer are called
-  decoder and encoder, as `Errors.DecodeError` already does
-  ([CAP-159: error handling during deserialization is consistent across Python3 and Typescript5 bindings](capabilities/CAP-159.md)),
-  so that "reader" means `Readers.OfX` alone.
 - **Entry.** A bare "entry" means a relation entry in [VOC-038: entry](#VOC-038),
   [CAP-155: `unique` clauses on relation schemas govern relation cardinality](capabilities/CAP-155.md) and
   `References.OfEntry`. It also names a journal entry ([CAP-271: the journal language](capabilities/README.md#CAP-271)),
@@ -516,7 +473,7 @@ leave to the user. Each entry is written as the documents best support it until 
   now, and superseded when INI-082's capabilities land; (b) [VOC-044: counted object](#VOC-044) withdrawn, and the term
   marked deprecated in the entry for reference objects; (c) [VOC-044: counted object](#VOC-044) kept with *Never* for
   new models.
-- **Binding and assignment.** As the user decided, "bindings" names two things ([VOC-054: binding](#VOC-054)): a frame
+- **Binding and assignment.** As the user decided, "bindings" names two things ([VOC-053: binding](#VOC-053)): a frame
   binds symbols, and a data object, an expression root or an application binds parameters. A frame also assigns values
   to its variables ([the parametrics proposal](../proposals/PARAMETRICS.md#bound)), while
   [CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)'s "property
