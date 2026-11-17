@@ -551,7 +551,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: The capability is not met.
 - <a id="CAP-312"></a>**[CAP-312: a parameter reference in place of anything with a schema](CAP-312.md)** · proposed ·
   Wherever mbse-schemas expects something of a schema, a parameter reference may stand in its place, the expected schema
-  given by the context; it is read through `Visitors.OfAny.as_parameter()`, written marked, and a parameter bound to the
+  given by the context; it is read through `Visitors.OfAny.as_parameter()`, written marked, and a parameter given the
   wrong kind of thing is a validation error. The proxies, validation and the plain form apply that one rule, in both
   languages. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-311: references stabilized](#CAP-311),
   [CAP-313: parameter references bound and validated](#CAP-313), [the parametrics proposal](../../proposals/PARAMETRICS.md).
