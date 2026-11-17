@@ -29,7 +29,8 @@ The user's decisions:
   values, but also surgical mutations on subtrees of the property state using schema-appropriate mutation verbs. A
   container for example has clear, set, and get but also has insert (after/before/first/last) etc.", and "clear"
   applies to any property value.
-- **The language is mbse-schemas' own** ("(b) agreed"): a journal transaction is a transaction expression of
+- **The language is mbse-schemas' own** ("(b) agreed"; its form superseded by "`Changes` schemas", 2026-11-17, below;
+  that the language is mbse-schemas' own stands): a journal transaction is a transaction expression of
   mbse-schemas' own schemas, with no schema of its own, so that it is schema data, as
   [PRI-003: everything is schema data](../docs/PRINCIPLES.md#PRI-003) and
   [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018) require, and lives in the lowest
@@ -75,6 +76,15 @@ The user's decisions (2026-11-17):
   that watches for transactions, forwards the effective changes from each transaction on a store as a
   single-transaction journal streamed to registered observers." This is the follower of "a journal is downstream of a
   store's interpreter", above, and the follow of [CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md).
+- **`Changes` schemas, a temporary exception**: of the two forms offered for a transaction's changes, (a) a `Changes`
+  schema module in mbse-schemas and (b) a transaction expression of the existing `Mutations` schemas, the user takes
+  (a): "I don't see this as a second order invention but rather a temporary exception to the rule to allow us to
+  envision what the future of changes, mutations, and queries should look like", as
+  [PRI-022: second-order inventions by approval](../docs/PRINCIPLES.md#PRI-022) permits. Their names are of the form
+  "`Changes.Journal`, `Changes.Transaction`, `Changes.Symbol`, `Changes.OfProperty`, `Changes.OfEntry` or somesuch".
+- **mbse-journals' store-held form is the second-order invention**: "The 'third form for storage' actually seems more
+  like a second order invention than (a)": the journal transactions, symbol bindings and changes mbse-journals keeps as
+  reference objects of its own schemas, their values as text.
 
 ## The journal, a sequenced container
 
@@ -118,6 +128,26 @@ as a journal transaction in this language: its effect. A reader sections an effe
 as the diagrams framework's layout engine does
 ([CAP-261: layout driven by any journal transaction](../docs/capabilities/README.md#CAP-261)).
 
+## The `Changes` schemas (proposed)
+
+A sketch, for the user's review, of the `Changes` schemas: the journal language's A, B and C as value object schemas
+in mbse-schemas, so that a journal is built, spliced, streamed, written, read and compared as any value is, with no
+store.
+
+| Schema | What it holds |
+|---|---|
+| `Changes.Journal` | Its transactions, in order: an ordered container of `Changes.Transaction`. A subsection of whole transactions is a `Changes.Journal` too. |
+| `Changes.Transaction` | Its symbols, each by its name, then its changes, in order: an ordered container whose elements are a `Changes.OfEntry` or a `Changes.OfProperty`. |
+| `Changes.Symbol` | A: an object exists. Either an object the store held, by its `References.OfObject`, or a new object of a schema, by the schema's reference. |
+| `Changes.OfEntry` | B: a relation entry `inserted` or `removed`, on its holder's adjacency: the holder's symbol, the adjacency's name, each other link's symbol by the link's name, and the entry's properties' values. |
+| `Changes.OfProperty` | C: a property mutated: its holder's symbol, the property's name, and its mutations, mbse-schemas' verbs of the value's schema kind, `set` and `clear` on any value. |
+
+A value is written by its property's schema, marked with its schema where the reader cannot tell it
+([PRI-025: never guess the schema](../docs/PRINCIPLES.md#PRI-025)). A store's effect, as `Changes.observe` gives it, is
+a `Changes.Journal` of one transaction, the form a follower streams. Applying a transaction stays idempotent, and a
+symbol stays the transaction's own. Left for review: how a counted object, written by value where it is linked, is
+held; and whether a transaction carries a name, which a writer gives where others append too.
+
 ## Decided by an agent, for review
 
 Where the user's decisions were silent, the simplest default consistent with them, each *proposed* until reviewed,
@@ -128,13 +158,14 @@ labeled with the repository and number it was decided under.
   `record` and `replay`. The singleton `Journals.Directory` owns each journal by its name; a journal owns its journal
   transactions (`Journals.Contains`); `Journals.Before(journal, earlier, later)` is read from the earlier as `next` and
   from the later as `previous`.
-- **(mbse-journals 1)** **A journal transaction's changes as the journal's own data.** Each object the changes name is a
+- **(mbse-journals 1)** **A journal transaction's changes as the journal's own data.** (Superseded by "`Changes`
+  schemas, a temporary exception", 2026-11-17.) Each object the changes name is a
   symbol binding, the `reference` of one the store held or the `schema` of one it made; each change an entry inserted or
   removed, on its holder's adjacency, with its other links' symbol bindings and its properties' values, or a property
   set or cleared, with its value. Symbol bindings and changes are each an indexed container, its index an entry
   property, as the user allows ("Indexed containers can have their index encoded as entry props"), so that the order the
   reported changes were written in is kept.
-- **(mbse-journals 1)** **Plain forms carried as written.** A reference, a schema's reference and a value are each held
+- **(mbse-journals 1)** **Plain forms carried as written.** (Superseded, as the form above is.) A reference, a schema's reference and a value are each held
   as their plain form, as text ([PRI-024: the plain form, carried as written](../docs/PRINCIPLES.md#PRI-024)), so that a
   journal store holds the journal's schemas alone, and not those of the store it records.
 - **(mbse-journals 1)** **A journal transaction's name is given by its writer** where others append too: two writers
@@ -148,14 +179,14 @@ labeled with the repository and number it was decided under.
 
 The 2026-11-17 decisions leave these open:
 
-1. **Value or reference objects.** mbse-schemas holds reference objects only in a store, and links only reference
+1. **Value or reference objects** (proposed below, in [the `Changes` schemas](#the-changes-schemas-proposed)). mbse-schemas holds reference objects only in a store, and links only reference
    objects by relations. A journal built without a store would be a value object, its transactions in order in an
    ordered container. Then its order is not relations, and the decisions on a journal's order and on an append refused
    by a unique clause, above, hold only where a journal is kept in a store, or not at all.
 2. **A journal kept in a store.** Whether a store still keeps journals, as data of its own, for persistence and
    [the journal storage proposal](JOURNAL-STORAGE.md)'s backends, and how such a journal relates to the value: one
    schema, or the value held as a property of an object the store keeps.
-3. **The change transaction's schema.** A journal transaction is written now as a transaction expression of
+3. **The change transaction's schema** (proposed below, in [the `Changes` schemas](#the-changes-schemas-proposed)). A journal transaction is written now as a transaction expression of
    mbse-schemas' own schemas, "for now" ("a journal is downstream of a store's interpreter", above); schema-governed
    transactions and changes may want a schema of their own, the journal language's A, B and C.
 4. **Where `record` and `replay` go.** Recording a store's transactions is a follower's work, and applying a journal to
