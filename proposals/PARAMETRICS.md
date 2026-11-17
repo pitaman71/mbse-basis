@@ -3,9 +3,9 @@
 Initiative: [INI-010: schemas framework](PRIORITIES.md#ini-010--schemas-framework).
 
 A model takes parameters ([FEA-033: model parameters](../docs/features/FEA-033.md)). This proposal states how a
-parameter is declared, bound, referenced, validated, substituted, simplified and generated, from one end to the other.
-Its central idea is the parameter reference: a value object that stands in a model's data in place of anything that has
-a schema, and that a parameter binding in an enclosing scope resolves. mbse-schemas' `References` module is the one seam
+parameter is declared, assigned or bound, referenced, validated, substituted, simplified and generated, from one end to
+the other. Its central idea is the parameter reference: a value object that stands in a model's data in place of
+anything that has a schema, and that a parameter assignment or a parameter binding in an enclosing scope resolves. mbse-schemas' `References` module is the one seam
 through which any reference stands in place of a value, so that a parameter reaches every dialect, kind and property
 without any of them opting in. The same seam serves the stacked stores, whose objects not yet loaded are references too
 ([the stacked stores proposal](STACKED-STORES.md)). The capabilities' detail files keep the decisions already taken
@@ -18,7 +18,8 @@ The user decided these rules:
 - **Parameters are universal**: "a parameter reference, as a value object, may appear in any data structure in place
   of anything that has a schema."
 - **Validation**: "at validation time that parameter reference must be bound in an enclosing scope/context to the right
-  kind of schema, or the reference is invalid."
+  kind of schema, or the reference is invalid." A parameter for a value meets this rule where its scope assigns it a
+  value, and a parameter for an object where its scope binds it to an object.
 - **Simplification**: "at simplification time a reference to an unbound parameter are left in the residual, allowing
   ancestors to potentially simplify that out if possible."
 - **Code generation**: "at codegen time, parameters should be encoded in constructs idiomatic to the langauge (such as
@@ -37,23 +38,27 @@ The user decided these rules:
   [PRI-026: serialization through the visitor protocol](../docs/PRINCIPLES.md#PRI-026), applied to references.
 - **Stacked stores in parallel**: "We should plan the work to stabilize references so that the stacked stores work can
   resume in paralell asap."
+- **Values are assigned, objects bound**: "Values are not bound. Values are assigned." A parameter is assigned a value,
+  through a parameter assignment ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040)), and bound to an
+  object, through a parameter binding ([VOC-038: parameter binding](../docs/VOCABULARY.md#VOC-038)).
 - **Parameter bindings and symbol bindings**: "Parameter binding and symbol binding have different meanings and should
   be used as phrases, not just "binding"." A frame holds a symbol binding for each of its symbols, to an object or to a
   parameter, and it assigns values to variables; frames stay in mbse-schemas. An expression root that declares
-  parameters may also hold parameter bindings for one or more of them; those parameter bindings go in mbse-expressions.
-- **A schema declares, its data binds**: "Schemas may hold parameter declarations. Parameter bindings should be held by
-  the data object governed by that schema."
-- **Parameter bindings link the data object**: `Parametrics.BindsValue` and `BindsObject` link the data object that
-  binds a parameter, not its schema, as the user decided.
+  parameters may also hold parameter assignments and parameter bindings for one or more of them; those go in
+  mbse-expressions.
+- **A schema declares, its data assigns and binds**: "Schemas may hold parameter declarations. Parameter bindings should
+  be held by the data object governed by that schema." The data object holds its parameter assignments too.
+- **Parameter assignments and bindings link the data object**: `Parametrics.AssignsValue` and `BindsObject` link the
+  data object that assigns or binds a parameter, not its schema, as the user decided.
 - **A parameter is a named reference**: the user chose that a parameter, in an expression, is written as a name, and
-  that simplification takes a parameter's value from the scope first, and from the parameter bindings stored in a model
-  later. A parameter reference holds its parameter's name and nothing else.
+  that simplification takes a parameter's value from the scope first, and from the parameter assignments stored in a
+  model later. A parameter reference holds its parameter's name and nothing else.
 
 The capabilities' detail files hold the user's earlier decisions about parameters, which this proposal builds on:
 [CAP-112: parameters modeled as schema data](../docs/capabilities/CAP-112.md#decided) (a parameter is for a value or for
 an object, exactly one; parameters are names only; parameters that denote domains belong to mbse-expressions),
-[CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md#decided) (`BindsValue`'s `value` is
-an entry property and `BindsObject`'s object a third link), and
+[CAP-113: parameters bound at their definitions](../docs/capabilities/CAP-113.md#decided) (`AssignsValue`'s `value`
+is an entry property and `BindsObject`'s object a third link), and
 [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md#decided) (a type parameter's
 constraint starts at level 0, with level 2 planned).
 
@@ -67,20 +72,23 @@ A definition, a schema of any kind, declares its parameters, as mbse-schemas' `P
 object schema (`Parametrics.ForObject`), exactly one. A definition holds its parameters through
 `Parametrics.HasParameters`, as one `Parametrics.OfParameters`.
 
-### Bound
+### Assigned and bound
 
-Parameter bindings exist in two repositories, and symbol bindings in one
-([VOC-037: symbol binding](../docs/VOCABULARY.md#VOC-037), [VOC-038: parameter binding](../docs/VOCABULARY.md#VOC-038)).
-In mbse-schemas, a data object may hold parameter bindings for the parameters that its schema declares, and a frame
-holds a symbol binding for each of its symbols, to an object or to a parameter, and assigns values to its variables. In
-mbse-expressions, an expression root that declares parameters may hold parameter bindings for one or more of them, and
-an application holds parameter bindings for the parameters of the definition it applies, by name, and partially where it
-binds some parameters alone. A parameter given no argument stays unbound. The scope in which a parameter reference is
-resolved is the chain of data objects, frames, expression roots and applications that enclose the reference, innermost
-first; a data object encloses its own values. In mbse-expressions' simplification, the scope that the caller gives is
-also such a scope. A data object binds a parameter through `Parametrics.BindsValue`, its value an entry property, or
-`Parametrics.BindsObject`, its object a third link, each linking the data object and the parameter. A data object's
-parameter bindings are
+A parameter is assigned a value, and bound to an object. Parameter assignments and parameter bindings exist in two
+repositories, and symbol bindings in one ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040),
+[VOC-038: parameter binding](../docs/VOCABULARY.md#VOC-038), [VOC-037: symbol binding](../docs/VOCABULARY.md#VOC-037)).
+In mbse-schemas, a data object may hold parameter assignments and parameter bindings for the parameters that its schema
+declares, and a frame holds a symbol binding for each of its symbols, to an object or to a parameter, and assigns values
+to its variables. In mbse-expressions, an expression root that declares parameters may hold parameter assignments and
+parameter bindings for one or more of them, and an application holds them for the parameters of the definition it
+applies, by name, and partially where it gives some parameters alone. A parameter given no argument stays unassigned
+and unbound. The scope in which a parameter reference is resolved is the chain of data objects, frames, expression
+roots and applications that enclose the reference, innermost first; a data object encloses its own values. In
+mbse-expressions' simplification, the scope that the caller gives is also such a scope. A data object assigns a
+parameter a value through `Parametrics.AssignsValue`, the value an entry property, or binds it to an object through
+`Parametrics.BindsObject`, the object a third link, each linking the data object and the parameter;
+`Parametrics.extend` gives the data object's schema the adjacencies `assigned_values` and `bound_objects`. A data
+object's parameter assignments and parameter bindings are
 [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314)'s.
 
 ### Referenced
@@ -96,23 +104,24 @@ entry; and the plain form's encoder and decoder.
 
 ### Validated
 
-A parameter reference is valid where an enclosing definition or application declares and binds its parameter, and binds
-it to a value of the schema that the reference stands for. Validation reports an unbound parameter reference, and a
-parameter reference bound to a value of another schema, as invalid. A parameter binding's value is checked against its
-parameter's `ForValue` schema, or its object against its `ForObject` schema. Data whose schema depends on a parameter
-that its scope leaves unbound is neither valid nor invalid there: validation reports it as unknown.
+A parameter reference is valid where an enclosing definition or application declares its parameter, and assigns it a
+value, or binds it to an object, of the schema that the reference stands for. Validation reports as invalid a parameter
+reference whose parameter is neither assigned nor bound, and one whose parameter is assigned a value, or bound to an
+object, of another schema. A parameter assignment's value is checked against its parameter's `ForValue` schema, and a
+parameter binding's object against its parameter's `ForObject` schema. Data whose schema depends on a parameter that its
+scope leaves unassigned and unbound is neither valid nor invalid there: validation reports it as unknown.
 
 ### Substituted
 
-Applying a definition substitutes each of its parameter bindings for the parameter references that designate the bound
-parameter ([CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md)). Substitution
+Applying a definition substitutes each of its parameter assignments and parameter bindings for the parameter
+references that designate the parameter that it assigns or binds ([CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md)). Substitution
 writes new data and changes none, as simplification does. An expression parameter, which CAP-114 leaves to be designed,
 is a parameter reference in an expression's term, and substituting it is the same operation.
 
 ### Simplified
 
-In mbse-expressions, a parameter reference is a leaf of an expression. The simplifier substitutes the value of a bound
-parameter, and it leaves an unbound one in the residual, where an ancestor may still fold it away (`false && p`). A
+In mbse-expressions, a parameter reference is a leaf of an expression. The simplifier substitutes the value of an
+assigned parameter, and it leaves an unassigned one in the residual, where an ancestor may still fold it away (`false && p`). A
 type parameter is a parameter reference where a type is expected, and the simplifier substitutes it as it substitutes
 any parameter ([CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296),
 [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298)).
@@ -133,7 +142,7 @@ identity.
 
 ### Resolution
 
-A parameter reference resolves through a parameter binding in its scope. An object reference resolves within a
+A parameter reference resolves through a parameter assignment or a parameter binding in its scope. An object reference resolves within a
 transaction, as every read does: a symbol given the reference binds what it designates
 ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md)). Each layer of a stack
 resolves it with its own transaction interpreter, through hooks the layer provides, and no function resolves a reference
@@ -171,19 +180,19 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
    writes every reference in one form. It changes no behavior that a caller sees but the written form of a reference.
 3. [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312), in mbse-schemas: the one rule,
    in each place that checks a value against its schema, in both languages.
-4. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may bind
-   the parameters that its schema declares. It supersedes [CAP-113: parameters bound at their
-   definitions](../docs/capabilities/CAP-113.md), which bound a parameter at its schema.
+4. [CAP-314: parameters bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314), in mbse-schemas: a data object may assign
+   or bind the parameters that its schema declares. It supersedes [CAP-113: parameters bound at their
+   definitions](../docs/capabilities/CAP-113.md), which gave a parameter its value or object at its schema.
 5. [CAP-313: parameter references bound and validated](../docs/capabilities/README.md#CAP-313), in mbse-schemas: a
-   parameter reference is valid where its scope binds it to a value of the right schema, and invalid otherwise. It
-   supersedes [CAP-181: parameters wherever literals may appear](../docs/capabilities/CAP-181.md), which asked for the
-   same of literals alone.
+   parameter reference is valid where its scope assigns it a value, or binds it to an object, of the right schema, and
+   invalid otherwise. It supersedes [CAP-181: parameters wherever literals may appear](../docs/capabilities/CAP-181.md),
+   which asked for the same of literals alone.
 6. [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): applying a definition
-   substitutes its parameter bindings, and checks each parameter binding against its parameter's schema.
+   substitutes its parameter assignments and parameter bindings, and checks each against its parameter's schema.
 7. [CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296) and
    [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298), in mbse-expressions: the
-   simplifier's rule for a parameter reference, and the scope's parameter bindings. These two need only CAP-311 and
-   CAP-312, because the caller's scope binds the parameters, so they may proceed beside steps 4 to 6.
+   simplifier's rule for a parameter reference, and the scope's parameter assignments. These two need only CAP-311 and
+   CAP-312, because the caller's scope assigns the parameters, so they may proceed beside steps 4 to 6.
 8. [CAP-163: parameters bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md), in the
    code generators and mbse-programs.
 

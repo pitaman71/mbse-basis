@@ -518,16 +518,18 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   parameters are declared through `Parametrics`, a module installed before use, which validates them. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: met in mbse-schemas 0.24.0.
-- <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · superseded by [CAP-314: parameters bound by the data objects their schema governs](#CAP-314) · A definition binds
-  each of its parameters to a value or an object, through `Parametrics`' parameter bindings. *Implements*
+- <a id="CAP-113"></a>**[CAP-113: parameters bound at their definitions](CAP-113.md)** · superseded by [CAP-314: parameters bound by the data objects their schema governs](#CAP-314) · A definition assigns
+  each of its parameters a value or binds it to an object, through `Parametrics`' parameter assignments and parameter
+  bindings. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
 - <a id="CAP-114"></a>**[CAP-114: parameter bindings are substituted and checked](CAP-114.md)** · proposed · A parameter
-  binding is substituted where its definition is used, and its value checked against the schema its parameter is for.
+  assignment or a parameter binding is substituted where its definition is used, and its value or object checked against
+  the schema its parameter is for.
   *Implements* [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
 
-- <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are bound and applied in mbse-expressions, bound by patterns (mbse-schemas' `OfPattern` and mbse-expressions' `Patterns` dialect) and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
+- <a id="CAP-163"></a>**[CAP-163: parameters bound, applied and generated beyond mbse-schemas](CAP-163.md)** · proposed · Parameters are assigned, bound and applied in mbse-expressions, assigned and bound by patterns (mbse-schemas' `OfPattern` and mbse-expressions' `Patterns` dialect) and by statements in mbse-programs, and generated as each language's own construct. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-113: parameters bound at their definitions](CAP-113.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
   - **Current**: not met.
 - <a id="CAP-181"></a>**[CAP-181: parameters wherever literals may appear](CAP-181.md)** · superseded by [CAP-313: parameter references bound and validated](#CAP-313) · Anywhere a
   literal may appear, a parameter may appear in its place. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
@@ -558,8 +560,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: met in mbse-schemas 0.27.2 (checked in its main at ebc23b6: REF-12 to REF-17 and CMP-14
     cases pass in both languages, at 100% coverage).
 - <a id="CAP-313"></a>**CAP-313: parameter references bound and validated** · proposed · A parameter reference is valid
-  where an enclosing definition declares and binds its parameter to a value of the schema that the reference stands
-  for, and validation reports it as invalid otherwise. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
+  where an enclosing definition declares its parameter and assigns it a value, or binds it to an object, of the schema
+  that the reference stands for, and validation reports it as invalid otherwise. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
   [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.

@@ -131,17 +131,20 @@ constructs of mbse-schemas' data model and store, from reference objects to tran
   ([CAP-315: every read within a transaction or through a follow](capabilities/CAP-315.md#decided)). A symbol binding is
   not a parameter binding ([VOC-038: parameter binding](#VOC-038)): as the user decided, "Parameter binding and symbol
   binding have different meanings and should be used as phrases, not just "binding"." *Never*: a bare "binding".
-- <a id="VOC-038"></a>**VOC-038: parameter binding** · adopted · **Parameter binding**: what gives a parameter its value
-  or its object within a scope ([FEA-033: model parameters](features/FEA-033.md)). A data object holds the parameter
-  bindings for the parameters that its schema declares
+- <a id="VOC-038"></a>**VOC-038: parameter binding** · adopted · **Parameter binding**: what binds a parameter to its
+  object within a scope ([FEA-033: model parameters](features/FEA-033.md)). A parameter is bound to an object and
+  assigned a value, as the user decided: "Values are not bound. Values are assigned." What gives a parameter its value
+  is a parameter assignment ([VOC-040: parameter assignment](#VOC-040)). A data object holds the parameter bindings for
+  the parameters that its schema declares for an object, through `Parametrics.BindsObject`
   ([CAP-314: parameters bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
   mbse-expressions, an expression root holds parameter bindings for parameters that it declares, and an application
   holds them for the parameters of the definition that it applies
   ([CAP-163: parameters bound, applied and generated beyond mbse-schemas](capabilities/CAP-163.md),
-  [the parametrics proposal](../proposals/PARAMETRICS.md#bound)). A parameter reference resolves through a parameter
-  binding in its scope. A parameter binding is not a symbol binding ([VOC-037: symbol binding](#VOC-037)), as the user
-  decided: "Parameter binding and symbol binding have different meanings and should be used as phrases, not just
-  "binding"." *Never*: a bare "binding".
+  [the parametrics proposal](../proposals/PARAMETRICS.md#assigned-and-bound)). A parameter reference to a parameter
+  for an object resolves through a parameter binding in its scope. A parameter binding is not a symbol binding
+  ([VOC-037: symbol binding](#VOC-037)), as the user decided: "Parameter binding and symbol binding have different
+  meanings and should be used as phrases, not just "binding"." *Never*: a bare "binding"; "parameter binding" for a
+  value.
 - <a id="VOC-039"></a>**VOC-039: journal** · adopted · **Journal**: a store's committed transactions, recorded as data in
   the order in which they were committed, from which the store's data is made again
   ([FEA-030: clean mutation-based transactional API](features/FEA-030.md)). "Journal" names two records, until their
@@ -152,6 +155,15 @@ constructs of mbse-schemas' data model and store, from reference objects to tran
   "journals store changes", and "journals store journal trransactions which store changes". The two records differ, as
   the user decided: "Mutation-transaction streams and change journals are not the same language - yet." A journal's
   elements are transactions, as the user decided: "Journals comprise transactions." *Never*: "journal entry".
+- <a id="VOC-040"></a>**VOC-040: parameter assignment** · adopted · **Parameter assignment**: what gives a parameter
+  its value within a scope ([FEA-033: model parameters](features/FEA-033.md)). As the user decided: "Values are not
+  bound. Values are assigned." A parameter is assigned a value, and bound to an object
+  ([VOC-038: parameter binding](#VOC-038)). A data object holds the parameter assignments for the parameters that its
+  schema declares for a value, through `Parametrics.AssignsValue`, the value an entry property
+  ([CAP-314: parameters bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
+  mbse-expressions, an expression root and an application hold parameter assignments as they hold parameter bindings
+  ([the parametrics proposal](../proposals/PARAMETRICS.md#assigned-and-bound)). A parameter reference to a parameter
+  for a value resolves through a parameter assignment in its scope. *Never*: "binding a value", "a value bound".
 ## Modeling constructs
 
 Links are relative to a polyrepo checkout, each repository beside mbse-basis, and read its `main` unless marked.
@@ -252,8 +264,9 @@ that define it.
 - Reference (`References.OfObject`, `.OfEntry`, `.OfFrame`, `.OfParameter`): a value object that designates something
   without holding it. An object reference designates a singleton, an owned object or a schema object; an entry
   reference, a relation entry; a frame reference, a frame; and a parameter reference, a parameter, by its name. A
-  transaction resolves an object reference through a symbol that is given it, and a parameter binding
-  ([VOC-038: parameter binding](#VOC-038)) in the reference's scope resolves a parameter reference. Paths are retired as
+  transaction resolves an object reference through a symbol that is given it, and a parameter assignment or a
+  parameter binding ([VOC-040: parameter assignment](#VOC-040), [VOC-038: parameter binding](#VOC-038)) in the
+  reference's scope resolves a parameter reference. Paths are retired as
   a term, and documents speak of object references alone, as the user decided, choosing "(b)" of the options offered.
   *Never*: "path", where an object reference is meant.
   [FEA-026: deterministic object identity](features/FEA-026.md);
@@ -329,7 +342,7 @@ that define it.
   [PRI-010: proxies and generated code read alike](PRINCIPLES.md#PRI-010),
   [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md).
 - Parameter (`OfParameter`): a name only, a symbol standing for a schema (since 0.17.0); terms, applications and
-  widths are mbse-expressions'. Bound by `Parameters.Bind`, planned: a reference object recording the substitution,
+  widths are mbse-expressions'. Assigned or bound by `Parameters.Bind`, planned: a reference object recording the substitution,
   which any operation taking the function interprets, applying it lazily or through `Parameters.Apply`
   ([CAP-114: parameter bindings are substituted and checked](capabilities/CAP-114.md)).
 - Constraint: [CAP-166: constraints attached where they constrain](capabilities/CAP-166.md#open-questions). A pattern's `requires` is mbse-schemas'
@@ -384,7 +397,8 @@ The text above is written as the documents best support it until the user decide
   (Reference object, under [mbse-schemas](#mbse-schemas)), which is an object rather than a reference, and it names a
   concrete or symbolic reference in code ([PRI-015: concrete references are programmatic](PRINCIPLES.md#PRI-015)). A
   parameter reference ([CAP-312: a parameter reference in place of anything with a schema](capabilities/CAP-312.md)) is
-  resolved by a parameter binding ([VOC-038: parameter binding](#VOC-038)) in its scope, not by a store, unlike an
+  resolved by a parameter assignment or a parameter binding ([VOC-040: parameter assignment](#VOC-040),
+  [VOC-038: parameter binding](#VOC-038)) in its scope, not by a store, unlike an
   object reference. The options are: (a) "reference" means a `References` value, always qualified by what it
   designates ("object reference", "parameter reference"), with "reference object" kept; (b) "reference object" renamed,
   so that "reference" names a `References` value alone; (c) a parameter reference given a name of its own, since
