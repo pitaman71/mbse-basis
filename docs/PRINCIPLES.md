@@ -22,7 +22,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
 
 - <a id="PRI-001"></a>**PRI-001: declaration order** · adopted · Declaration order over sorted order. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001).
   *Applied in*: a schema's properties, adjacencies, branches, parts and parameters in declared order, in builders and
-  in the meta-schemas; a store's `names()` in registration order; a keyed list's items in insertion order;
+  in the plain schemas of schemas; a store's `names()` in registration order; a keyed list's items in insertion order;
   reachability and symbols in first-reference order (mbse-schemas `Reachable`, `Plain`); a transform session's
   candidates in the order it first saw them (mbse-patterns 0.9.1).
   *Exceptions*: a relation's entries are written sorted by the key it declares, where the key's values are ordered
@@ -37,10 +37,10 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   (mbse-programs); drops recorded as steps (mbse-codegen-python).
   *Not yet applied* in mbse-schemas: decoding refuses undeclared keys. [CAP-033: undeclared properties preserved](capabilities/CAP-033.md#design) proposes preserving
   them as a reading policy (Undeclared properties, policy 3).
-- <a id="PRI-003"></a>**PRI-003: everything is schema data** · proposed · Each kind of schema is a meta-schema held by the store
+- <a id="PRI-003"></a>**PRI-003: everything is schema data** · proposed · Each kind of schema is a plain schema of schemas held by the store
   (`Schemas.OfObject`; mbse-schemas' store overhaul, Levels), and expressions, predicates, syntax trees, modules and
   traces serialize, reflect and compare like any other data. *Serves* [QUA-001: AI and humans in the loop](QUALITIES.md#QUA-001), [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005).
-  *Applied in*: the meta-schemas (mbse-schemas); kinds (mbse-programs); traces (mbse-patterns 0.9.1).
+  *Applied in*: the plain schemas of schemas (mbse-schemas); kinds (mbse-programs); traces (mbse-patterns 0.9.1).
   *Not yet applied*: mbse-expressions ([PRI-018: no model needs code to read or write](#PRI-018)).
 - <a id="PRI-004"></a>**PRI-004: one visitor protocol per kind** · adopted · For kind X: `Visitors.OfX` is the one protocol through which code reads and writes a value of
   X, whether or not it knows the schema; `Proxies.OfX` defines `Spec`, `Builder` and `Data`, and both data instances
@@ -53,7 +53,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   it, or an instance of what the builder builds. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005). *Relates to* [PRI-005: one entry point per kind](#PRI-005).
   *Applied in*: mbse-schemas, as [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md) records it, which supersedes the reverse protocol (`accept(visitor)`, a
   value writing itself into serializers and recorders that implemented `Visitors`); built in mbse-schemas 0.11, where
-  each schema builder is a `Visitors.OfObject` over its store's meta-schema (`Schemas.OfX`, since 0.14),
+  each schema builder is a `Visitors.OfObject` over its store's plain schema of schemas (`Schemas.OfX`, since 0.14),
   through which the members that an extending module adds reach it: the same policy one level up.
 - <a id="PRI-005"></a>**PRI-005: one entry point per kind** · proposed · One entry point per kind, named `OfX`: visitors, comparison, evaluation and validation dispatch
   on a value's kind. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005).
