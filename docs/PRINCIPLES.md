@@ -54,7 +54,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Applied in*: mbse-schemas, as [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md) records it, which supersedes the reverse protocol (`accept(visitor)`, a
   value writing itself into serializers and recorders that implemented `Visitors`); built in mbse-schemas 0.11, where
   each schema builder is a `Visitors.OfObject` over its store's plain schema of schemas (`Schemas.OfX`, since 0.14),
-  through which an extension's members reach it: the same policy one level up.
+  through which the members that an extending module adds reach it: the same policy one level up.
 - <a id="PRI-005"></a>**PRI-005: one entry point per kind** · proposed · One entry point per kind, named `OfX`: visitors, comparison, evaluation and validation dispatch
   on a value's kind. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005).
   *Applied in*: `Visitors.OfX`, `Comparison.OfX` (mbse-schemas); `Evaluators.OfAny` (mbse-expressions).

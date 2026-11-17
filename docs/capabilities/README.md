@@ -472,8 +472,8 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   add members to a schema the store was made holding, meta-schemas included, but not change or remove them, each store
   extending its own. *Implements* [FEA-031: schemas as extensible data](../features/FEA-031.md), [FEA-020: refinable models](../features/FEA-020.md).
   - **Current**: met in mbse-schemas 0.23.0.
-- <a id="CAP-117"></a>**[CAP-117: extension adjacencies to any relation](CAP-117.md)** · proposed · An extension's
-  adjacency may be to any relation, one with properties or more than two links included. *Implements*
+- <a id="CAP-117"></a>**[CAP-117: extension adjacencies to any relation](CAP-117.md)** · proposed · An adjacency
+  that schema extension adds may be to any relation, one with properties or more than two links included. *Implements*
   [FEA-031: schemas as extensible data](../features/FEA-031.md).
   - **Current**: not met.
 
