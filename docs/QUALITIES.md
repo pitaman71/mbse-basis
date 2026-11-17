@@ -11,7 +11,7 @@ principles serve them.
 
 - <a id="QUA-001"></a>**QUA-001: AI and humans in the loop** · adopted · AI and humans are always in the loop at every step. *Conferred by*
   [FEA-017: AI in the loop via the model trace](features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](features/README.md#FEA-018),
-  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md), [FEA-026: deterministic object identity](features/FEA-026.md), [FEA-030: clean mutation-based transactional API](features/FEA-030.md), [FEA-041: agent chat integration](features/FEA-041.md), [FEA-049: MCP integration](features/FEA-049.md).
+  [FEA-021: every generation ambiguity a parameter](features/FEA-021.md), [FEA-059: transforms of models, applied step by step and certified](features/README.md#FEA-059), [FEA-026: deterministic object identity](features/FEA-026.md), [FEA-030: clean mutation-based transactional API](features/FEA-030.md), [FEA-041: agent chat integration](features/FEA-041.md), [FEA-049: MCP integration](features/FEA-049.md).
 - <a id="QUA-002"></a>**QUA-002: open-world models** · adopted · Models are open-world by default, allowing incremental addition of detail
   that transits from descriptive to prescriptive. *Conferred by* [FEA-020: refinable models](features/README.md#FEA-020),
   [FEA-023: patterns over data](features/FEA-023.md).

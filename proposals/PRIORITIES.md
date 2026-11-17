@@ -98,7 +98,7 @@ mbse-journals, in build order:
 
 ## INI-020 : code mutation framework
 
-Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md). Transforms ([FEA-021: every generation ambiguity a parameter](../docs/features/FEA-021.md)), in mbse-transforms:
+Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md). Transforms ([FEA-059: transforms of models, applied step by step and certified](../docs/features/README.md#FEA-059), serving [FEA-021: every generation ambiguity a parameter](../docs/features/FEA-021.md)), in mbse-transforms:
 
 - [CAP-074: transforms applied step by step](../docs/capabilities/CAP-074.md),
   [CAP-075: steps linked to what they matched and wrote](../docs/capabilities/CAP-075.md) and
@@ -110,6 +110,8 @@ Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/mai
 - [CAP-081: transforms composed into pipelines](../docs/capabilities/CAP-081.md): not met
 - [CAP-082: completeness reported](../docs/capabilities/CAP-082.md): not met
 - [CAP-083: policies with guards and distributions](../docs/capabilities/CAP-083.md): not met
+- [CAP-317: transforms targeting value objects](../docs/capabilities/README.md#CAP-317): not met; until then, transforms
+  to and from program trees match whole files
 
 ## INI-030 : no/low-code and apps framework
 

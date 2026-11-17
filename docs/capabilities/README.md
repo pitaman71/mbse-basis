@@ -103,35 +103,44 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
 
 - <a id="CAP-074"></a>**[CAP-074: transforms applied step by step](CAP-074.md)** · proposed · A transform, a prototype, a procedure and a certificate, is applied by a
   session one transform per step to up to three frames (source, sync and target), a policy ranking the candidates and
-  answering parameters, and every application certified. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  answering parameters, and every application certified. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-075"></a>**[CAP-075: steps linked to what they matched and wrote](CAP-075.md)** · proposed · Every application is certified: a history certificate records the
   sequence of transforms, a transform certificate records one application and its parameters, and a sub-certificate for
-  each frame that the application took links that frame and the preceding transform on that pattern. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  each frame that the application took links that frame and the preceding transform on that pattern. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-076"></a>**[CAP-076: reruns reuse decisions](CAP-076.md)** · adopted · A rerun given an earlier history certificate reuses its transform certificates'
   parameters where the same transform applies to the same frame, reports the orphans, and diffs the histories; the history
-  certificate records who decided each step's parameters. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  certificate records who decided each step's parameters. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-077"></a>**[CAP-077: changes explained across runs](CAP-077.md)** · proposed · A source diff names what changed in the model, and a target diff traces each change in the
-  output to the model change or the answer that caused it. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  output to the model change or the answer that caused it. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet; blocked: diffing stores in general is mbse-journals', which is planned.
 - <a id="CAP-078"></a>**[CAP-078: incremental rebuild](CAP-078.md)** · proposed · A rerun after a model change reuses the work of every step whose reads did not change, by recorded reads,
-  fingerprints and invalidation, with the same result as a run from scratch. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  fingerprints and invalidation, with the same result as a run from scratch. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
-- <a id="CAP-079"></a>**[CAP-079: steps undone](CAP-079.md)** · proposed · A session takes back its last step exactly, every step's effect recorded as mutations with what they replaced. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+- <a id="CAP-079"></a>**[CAP-079: steps undone](CAP-079.md)** · proposed · A session takes back its last step exactly, every step's effect recorded as mutations with what they replaced. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-080"></a>**[CAP-080: invertible transforms](CAP-080.md)** · proposed · A transform declares its inverse, so that a target and its trace give back the source, and an edit of
-  the output is carried back to the model or named as one no inverse can carry. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  the output is carried back to the model or named as one no inverse can carry. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-081"></a>**[CAP-081: transforms composed into pipelines](CAP-081.md)** · proposed · Transforms compose as passes, one's after-symbols bound to the next one's before-symbols, a
-  pipeline itself a transform. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  pipeline itself a transform. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
-- <a id="CAP-082"></a>**[CAP-082: completeness reported](CAP-082.md)** · proposed · A session reports every element no transform has rewritten that some transform could match. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+- <a id="CAP-082"></a>**[CAP-082: completeness reported](CAP-082.md)** · proposed · A session reports every element no transform has rewritten that some transform could match. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
 - <a id="CAP-083"></a>**[CAP-083: policies with guards and distributions](CAP-083.md)** · adopted · A policy's clauses are guarded by patterns over the match (mbse-schemas' `OfPattern`), and weigh a parameter's values by
-  a distribution over its domain, written as data. *Implements* [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
+  a distribution over its domain, written as data. *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059), [FEA-021: every generation ambiguity a parameter](../features/FEA-021.md), [FEA-017: AI in the loop via the model trace](../features/README.md#FEA-017), [FEA-018: humans in the loop via the model trace](../features/README.md#FEA-018).
   - **Current**: not met in mbse-transforms yet.
+- <a id="CAP-317"></a>**CAP-317: transforms targeting value objects** · proposed · A transform's prototype matches,
+  and its application takes as an argument, a value object held within a reference object, such as a statement, a
+  clause or a class member of a program's file, and not only the reference objects a pattern's symbols bind. Until it
+  is met, transforms to and from program trees match whole files, as the user decided: "the restriction of pattern
+  symbol bindings to reference objects means the granularity at which we can write transforms to/from AST is at the
+  file level. This is acceptable temporarily and might streamline implementation a bit. We can open a future capability
+  that allows transforms to target value objects." *Implements* [FEA-059: transforms of models, applied step by step and certified](../features/README.md#FEA-059). *Relates to*
+  [CAP-074: transforms applied step by step](CAP-074.md).
+  - **Current**: not met.
 
 ### Expressions as data
 
