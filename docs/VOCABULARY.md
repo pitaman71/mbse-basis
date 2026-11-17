@@ -311,7 +311,9 @@ that define it.
 - Frame (`Transactions.Frame`; its reference, `References.OfFrame`): one result of a transaction, which holds a symbol
   binding ([VOC-037: symbol binding](#VOC-037)) for each of its symbols and the property values that the transaction
   assigned. As the user decided, "Frames hold symbol bindings and property assignments, not proxies", and a frame
-  carries no counted object (agreed: "fine"). A frame carries the errors annotated on it.
+  carries no counted object (agreed: "fine"). A frame carries the errors annotated on it. A pattern instance is a
+  frame, as the user decided ("a pattern instance is a frame"); within a transaction, it is read and written through
+  `Visitors.OfPattern`, each of its symbols a member. *Never*: a pattern instance as anything but a frame.
   [FEA-027: mutations as queries](features/FEA-027.md);
   [CAP-138: mutation expressions over frame streams](capabilities/CAP-138.md),
   [CAP-130: references to objects, entries and frames](capabilities/CAP-130.md),
