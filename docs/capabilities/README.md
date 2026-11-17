@@ -560,13 +560,13 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   - **Current**: met in mbse-schemas 0.27.2 (checked in its main at ebc23b6: REF-12 to REF-17 and CMP-14
     cases pass in both languages, at 100% coverage).
 - <a id="CAP-313"></a>**[CAP-313: parameter references valid where their parameters are assigned or bound](CAP-313.md)** · adopted ·
-  A parameter reference is valid where its parameter context assigns its parameter a value, or binds it to an object, of
-  the schema that the place holding it expects, and validation reports it as invalid otherwise. Validation takes a
-  parameter context, and makes a sub-context where it meets a data object that holds parameter assignments or parameter
-  bindings. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-312: a parameter reference in place of anything with a schema](#CAP-312),
-  [CAP-114: parameter bindings are substituted and checked](CAP-114.md), [the parametrics proposal](../../proposals/PARAMETRICS.md).
+  Validation takes a parameter context as an argument, and reports the parameter references in what it validates as
+  invalid, partial and valid, or bound and valid. A dialect defines its own statements that assign or bind parameters,
+  and its procedures interpret them, each making a sub-context. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to*
+  [CAP-312: a parameter reference in place of anything with a schema](#CAP-312), [CAP-114: parameter bindings are substituted and checked](CAP-114.md),
+  [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: The capability is not met.
-- <a id="CAP-314"></a>**[CAP-314: parameters assigned or bound by the data objects their schema governs](CAP-314.md)** · adopted ·
+- <a id="CAP-314"></a>**[CAP-314: parameters assigned or bound by the data objects their schema governs](CAP-314.md)** · superseded by [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313) ·
   A schema may declare parameters, and a reference object that the schema governs may assign a value to any of them,
   through `Parametrics.AssignsValue`, or bind any of them to an object, through `Parametrics.BindsObject`, once
   `Parametrics.extend` has given the schema their named adjacencies; a parameter that the object leaves unassigned and

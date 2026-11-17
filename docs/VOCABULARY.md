@@ -134,9 +134,9 @@ constructs of mbse-schemas' data model and store, from reference objects to tran
 - <a id="VOC-038"></a>**VOC-038: parameter binding** · adopted · **Parameter binding**: what binds a parameter to its
   object within a scope ([FEA-033: model parameters](features/FEA-033.md)). A parameter is bound to an object and
   assigned a value, as the user decided: "Values are not bound. Values are assigned." What gives a parameter its value
-  is a parameter assignment ([VOC-040: parameter assignment](#VOC-040)). A data object holds the parameter bindings for
-  the parameters that its schema declares for an object, through `Parametrics.BindsObject`
-  ([CAP-314: parameters assigned or bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
+  is a parameter assignment ([VOC-040: parameter assignment](#VOC-040)). A dialect defines its own statements that hold
+  parameter bindings, and its procedures interpret them
+  ([CAP-313: parameter references valid where their parameters are assigned or bound](capabilities/README.md#CAP-313)). In
   mbse-expressions, an expression root holds parameter bindings for parameters that it declares, and an application
   holds them for the parameters of the definition that it applies
   ([CAP-163: parameters assigned, bound, applied and generated beyond mbse-schemas](capabilities/CAP-163.md),
@@ -158,9 +158,9 @@ constructs of mbse-schemas' data model and store, from reference objects to tran
 - <a id="VOC-040"></a>**VOC-040: parameter assignment** · adopted · **Parameter assignment**: what gives a parameter
   its value within a scope ([FEA-033: model parameters](features/FEA-033.md)). As the user decided: "Values are not
   bound. Values are assigned." A parameter is assigned a value, and bound to an object
-  ([VOC-038: parameter binding](#VOC-038)). A data object holds the parameter assignments for the parameters that its
-  schema declares for a value, through `Parametrics.AssignsValue`, the value an entry property
-  ([CAP-314: parameters assigned or bound by the data objects their schema governs](capabilities/README.md#CAP-314)). In
+  ([VOC-038: parameter binding](#VOC-038)). A dialect defines its own statements that hold parameter
+  assignments, and its procedures interpret them
+  ([CAP-313: parameter references valid where their parameters are assigned or bound](capabilities/README.md#CAP-313)). In
   mbse-expressions, an expression root and an application hold parameter assignments as they hold parameter bindings
   ([the parametrics proposal](../proposals/PARAMETRICS.md#assigned-and-bound)). A parameter reference to a parameter
   for a value resolves through a parameter assignment in its scope. *Never*: "binding a value", "a value bound".
