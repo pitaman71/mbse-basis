@@ -85,6 +85,15 @@ The user's decisions (2026-11-17):
 - **mbse-journals' store-held form is the second-order invention**: "The 'third form for storage' actually seems more
   like a second order invention than (a)": the journal transactions, symbol bindings and changes mbse-journals keeps as
   reference objects of its own schemas, their values as text.
+- **Certificates, a transform's complete audit history**: "There's actually 3 levels of certificates that form a
+  complete audit history for transforms: a history certificate which records a sequence of transforms, a transform
+  certificate which records the application, linked to the transform's prototype, the history certificate, and
+  prev/next transforms in the history. A transform certificate has sub-certificates for the source, sync, and target
+  (whichever are present). Each sub-certificate links to the corresponding pattern instance and to the preceding
+  transform for that pattern on the same history." It bears on the journal's design
+  ([the transforms charter](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md)'s
+  trace; the certificate of
+  [CAP-145: queries over a distributed persistent store](../docs/capabilities/CAP-145.md#certificates)).
 
 ## The journal, a sequenced container
 
@@ -191,7 +200,12 @@ The 2026-11-17 decisions leave these open:
    transactions and changes may want a schema of their own, the journal language's A, B and C.
 4. **Where `record` and `replay` go.** Recording a store's transactions is a follower's work, and applying a journal to
    a store is a store's; neither is the journal's.
-5. **The capabilities that describe a journal kept in a store**:
+5. **Certificates and journals.** Whether a history certificate is a journal whose transactions are transform
+   certificates, or a record beside a journal whose transform certificates link the change transactions each
+   application made; whether the certificates are `Changes` schemas or mbse-transforms'; and what a sub-certificate's
+   "preceding transform for that pattern on the same history" asks of a journal: an order per pattern instance, beside
+   the history's own.
+6. **The capabilities that describe a journal kept in a store**:
    [CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md),
    [CAP-273: journals in memory and in local files](../docs/capabilities/README.md#CAP-273),
    [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274) and
