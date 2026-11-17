@@ -177,7 +177,7 @@ its [skill](https://github.com/pitaman71/mbse-schemas/blob/main/skills/mbse-sche
 `Corpus.py` in mbse-schemas' conformance package, one program building every kind of schema and data,
 whose output in [conformance/python3/](https://github.com/pitaman71/mbse-schemas/blob/main/conformance/python3) is the wire format, byte-identical in both languages;
 and by topic, in [python3/tests/](https://github.com/pitaman71/mbse-schemas/blob/main/python3/tests) (TypeScript's notebooks have the same case IDs), `25_Builders`
-(building in a store, the plain schemas of schemas, attributes such as `store.Schemas.OfInt`), `28_Extensions`
+(building in a store, the meta-schemas, attributes such as `store.Schemas.OfInt`), `28_Extensions`
 (`store.extend`), `27_Snapshots` (mutation logs, reading without a schema extension) and `22_Parametrics`.
 
 Where a line below says what a construct models, it links the feature that the construct serves, then the capabilities
@@ -236,9 +236,10 @@ that define it.
   [FEA-031: schemas as extensible data](features/FEA-031.md);
   [CAP-116: framework schemas extended, checked](capabilities/CAP-116.md),
   [CAP-171: parameters attached to every schema kind by extension](capabilities/CAP-171.md).
-- Level (data, schema, plain schema of schemas, meta-schema):
-  [Store overhaul, Levels](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md#levels). A *plain schema of schemas*
-  (`Schemas.OfObject`, level 2) is what a schema extension extends; a *meta-schema* (level 3) is static code describing it.
+- Level (data, schema, meta-schema, and the static code that describes a meta-schema):
+  [Store overhaul, Levels](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md#levels). A *meta-schema*
+  (`Schemas.OfObject`, level 2), a schema whose instances are schemas, held by the store, is what a schema extension
+  extends; level 3, the dataclasses, is the static code that describes it. *Never*: "schema of schemas".
 - Module: [CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md)
 - Planned in the [Store overhaul](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/store-overhaul/README.md): object identity, `OfIdentity`, `as_instance` (step 4, [FEA-026: deterministic object identity](features/FEA-026.md));
   `Parameters.Bind` and `Parameters.Apply` ([CAP-114: parameter bindings are substituted and checked](capabilities/CAP-114.md)).
