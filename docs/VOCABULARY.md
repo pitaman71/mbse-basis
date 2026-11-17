@@ -56,20 +56,19 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
 - <a id="VOC-030"></a>**VOC-030: subterm** · adopted · **Subterm**: Expression and statement languages are part of what
   dialects ([VOC-033: dialect](#VOC-033)) model. A term that is a child of a term or a statement, held by one of its
   properties (`a` and `b` of `a + b`; a let's `value` and `body`; a cast's type). *Never*: "slot", "position". As the
-  user decided (2026-11-12): "I would refer to a child that is a statement as a "clause" and a child that is an
+  user decided: "I would refer to a child that is a statement as a "clause" and a child that is an
   expression term as a "subterm"", then "substatement" for the former.
 - <a id="VOC-031"></a>**VOC-031: substatement** · adopted · **Substatement**: Expression and statement languages are
   part of what dialects ([VOC-033: dialect](#VOC-033)) model. A statement that is a child of a statement or a term (an
   `if` statement's branches, a loop's body, an arrow function's block), as ISO/IEC 14882 uses the word. As the user
-  asked (2026-11-12): "Is "substatement" cleaner than "clause"".
+  asked: "Is "substatement" cleaner than "clause"".
 - <a id="VOC-032"></a>**VOC-032: clause** · adopted · **Clause**: Expression and statement languages are part of what
   dialects ([VOC-033: dialect](#VOC-033)) model. A part of a statement that its language's grammar allows only within
   that statement, and that holds statements: Python's `except` clause and `case`, owned by their `try` and `match`;
-  mbse-programs' `Programs.Framework.Clause`, never a statement. As the user decided (2026-11-16): "I don't much like
+  mbse-programs' `Programs.Framework.Clause`, never a statement. As the user decided: "I don't much like
   treating a clause as a statement when it can only appear in that place", choosing `Clause` as its name, with this
   entry narrowed to it. Any child, subterm ([VOC-030: subterm](#VOC-030)) or substatement ([VOC-031:
-  substatement](#VOC-031)), is a child; "clause" named that union from 2026-11-12 ("Maybe "clause" can refer to the
-  union of all children : substatements and subterms."). Qualified where it meets an mbse-transforms policy's clauses,
+  substatement](#VOC-031)), is a child. Qualified where it meets an mbse-transforms policy's clauses,
   mbse-schemas' `unique` clauses, or a grammar's own `…Clause` syntax nodes.
 - <a id="VOC-034"></a>**VOC-034: closed constructor expression** · adopted · **Closed constructor expression**:
   Expression languages are part of what dialects ([VOC-033: dialect](#VOC-033)) model. A closed constructor expression
@@ -98,7 +97,7 @@ is: "a Verilog module", "an mbse module"; a host language's "type" beside an mbs
   operates. A **user** is one persona of humans, beside engineering personas. *Never*: "user" as a synonym for humans.
 - <a id="VOC-029"></a>**VOC-029: fungible** · adopted · **Fungible**: readily changeable to adapt to new situations;
   flexible. The third sense in [Merriam-Webster](https://www.merriam-webster.com/dictionary/fungible), which the
-  project adopts uniformly, as the user decided (2026-11-05). Its first two senses, interchangeable or replaceable by an
+  project adopts uniformly, as the user decided. Its first two senses, interchangeable or replaceable by an
   equal part, are special cases of it.
 
 VOC-006, VOC-010 to VOC-019 and VOC-021 became modeling constructs, listed below; VOC-020 and VOC-022 to VOC-024 were withdrawn.
@@ -245,9 +244,8 @@ that define it.
 - Counted object: a reference object that is neither a singleton nor owned. It has no identity beyond the document
   that writes it, nothing finds it except through what links it, and it lives while anything holds it. A counted object
   has no reference, and a frame carries none. Counted objects are deprecated, as the user decided ("counted objects are
-  now deprecated"), and this line stands until the capabilities of
-  [INI-082: eliminate counted objects](../proposals/PRIORITIES.md#ini-082--eliminate-counted-objects) land and
-  supersede it, as the user decided ("(a) ofc").
+  now deprecated"); this line is rewritten when the capabilities of
+  [INI-082: eliminate counted objects](../proposals/PRIORITIES.md#ini-082--eliminate-counted-objects) land.
   [FEA-026: deterministic object identity](features/FEA-026.md);
   [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
   [CAP-133: no durable references to counted objects](capabilities/CAP-133.md).
