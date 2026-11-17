@@ -930,7 +930,7 @@ mbse-transforms' too, as the user agreed (2026-11-05, "placements - agreed").
   - **Current**: to assess.
 - <a id="CAP-038"></a>**[CAP-038: every construct of Python's standards](CAP-038.md)** · proposed · Python's program model reads every
   construct of Python's standards, and locates an error where the text goes wrong. *Implements* [FEA-008: expressive program models](../features/FEA-008.md).
-  - **Current**: not met: tree-sitter-python 0.25 lags Python 3.13 and later, and its errors are located where recovery
+  - **Current**: not met: tree-sitter-python 0.25 lags Python 3.11 and later, and its errors are located where recovery
     starts.
 - <a id="CAP-092"></a>**[CAP-092: every construct of TypeScript's standards](CAP-092.md)** · proposed · TypeScript's and JavaScript's
   program model reads every construct of their standards, and locates an error where the text goes wrong. *Implements*
