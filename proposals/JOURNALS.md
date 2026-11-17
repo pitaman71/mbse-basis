@@ -5,8 +5,7 @@ Initiative: [INI-013: journals framework](PRIORITIES.md#ini-013--journals-framew
 A journal is a store's history as a sequence of transactions, each written in a journal language that states exactly
 what it changes. It is how a model is stored, communicated and analyzed: never as a snapshot. The journal language is
 mbse-schemas' own, written in its schemas; the journal itself, its positions, files and streams, is a new repository's,
-`mbse-journals`, depending on mbse-schemas alone, in Python and TypeScript; its outline is
-[CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md).
+`mbse-journals`, depending on mbse-schemas alone, in Python and TypeScript.
 
 A transaction expression, as mbse-schemas executes it, reads like a query: an upsert finds or creates, a map ranges over
 what matches, and a spec writes only where it does not hold, so what it changes depends on the state it meets. A journal
@@ -89,8 +88,7 @@ The user's decisions (2026-11-17):
   the entry change or property change that links it, not bound to a symbol.
 - **A transaction carries a unique id**: "yes a unique id".
 - **A store's data knows nothing about journals**: "Stored objects, entries, etc. know nothing about journals. Why would
-  they?" A journal is not kept in a store. "Journal is not an extension of Store, and never has been"
-  ([CAP-199: journals as queryable stores (mbse-journals)](../docs/capabilities/CAP-199.md) is marked [NEVER]).
+  they?" A journal is not kept in a store. "Journal is not an extension of Store, and never has been".
 
 ## The journal, a sequenced container
 
