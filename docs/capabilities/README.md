@@ -1154,9 +1154,8 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   leaves nothing to undo; where a persistence stack journals, it commits once the journal accepts it. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
   [CAP-290: a service's store stacked, with no snapshot](CAP-290.md).
   - **Current**: not met (checked in mbse-rest's code on main: `Service._commit` commits, then journals).
-- <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · proposed · A journal, in a new repository mbse-journals, is an extension of a store that may be queried, sent and received: its transactions in order, each a transaction's effect (CAP-269), read from any position and inserted at one. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
-  - **Current**: met in mbse-journals 0.2.0 (checked in its main at 58c34b9: suite JRN passes in both languages, at
-    100% coverage).
+- <a id="CAP-199"></a>**[CAP-199: journals as queryable stores (mbse-journals)](CAP-199.md)** · **[NEVER]** · A journal is not an extension of a store: "Journal is not an extension of Store, and never has been", as the user marks it. A journal is data, built without a store, and a store's data knows nothing about journals ([the journals proposal](../../proposals/JOURNALS.md#decided)). *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-129: journals replayed by execution](CAP-129.md), [CAP-077: changes explained across runs](CAP-077.md).
+  - **Current**: [NEVER]. mbse-journals 0.2.0 built journals kept in a store, which is to be undone.
 - <a id="CAP-273"></a>**CAP-273: journals in memory and in local files** · proposed · A journal is kept in memory, and
   in a local file, in mbse-journals, in Python and TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md).
   - **Current**: not met.
@@ -1169,8 +1168,8 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   Python and TypeScript. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to*
   [CAP-077: changes explained across runs](CAP-077.md).
   - **Current**: not met.
-- <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · A journal is kept in any store through
-  the store interface ([FEA-028: one Store interface, lazy by default](../features/FEA-028.md)): a backend is a store over its database, which interprets each
+- <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · A backend is reached through the store
+  interface ([FEA-028: one Store interface, lazy by default](../features/FEA-028.md)): a backend is a store over its database, which interprets each
   transaction within a database transaction, which orders them, and reports its changes to each follower; a
   conformance suite, in mbse-journals, run against the store kept in memory, which every backend passes, in Python and
   TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).

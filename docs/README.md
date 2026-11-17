@@ -190,6 +190,8 @@ Every item has a status:
 - **adopted**: agreed; repositories cite it and follow it.
 - **superseded by X**: replaced. The item keeps its ID and its entry, so that citations still resolve, and says what
   replaced it.
+- **[NEVER]**: wrong, as the user marks it: what it states is not, and never was, the design, and nothing builds on
+  it. The item keeps its ID and its entry, so that citations still resolve, and says why.
 
 An item is adopted only as the user decides it: an agent proposes, and records an open item rather than resolve one
 silently.
