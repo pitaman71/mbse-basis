@@ -33,3 +33,7 @@ These may be read selectively, on demand: [Vocabulary](docs/VOCABULARY.md) and [
   worktree or workspace that held it, without asking. The agent also removes any clone, link or scratch checkout that
   it made for the work, once that work is merged. A checkout with uncommitted changes is kept until its owner, or the
   user, says that the changes may be discarded.
+- Each session, and each agent of a session that writes files, works in a workspace of its own: a directory holding a
+  worktree of each repository it needs, its siblings included, each at the commit it needs. Never a symlink between
+  worktrees, and never another session's or agent's checkout: a build, an install or a test writes into a sibling too.
+  Agents that only read may share their session's workspace.
