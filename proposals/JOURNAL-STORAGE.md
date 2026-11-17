@@ -30,10 +30,11 @@ The user's decisions (2026-11-15):
 
 ## What a backend must do
 
-A journal is never snapshotted ([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md#decided)), and whether an entry is
-accepted is decided by mbse-schemas alike in every recipient, by the constraints its schemas declare. So a backend
-judges nothing: it never reads an entry's meaning, and needs a transaction only to order entries. It must give, for
-each journal:
+A journal is never snapshotted
+([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md#decided)), and whether
+a journal's transaction is accepted is decided by mbse-schemas alike in every recipient, by the constraints its schemas
+declare. So a backend judges nothing: it never reads a journal transaction's meaning, and needs a database transaction
+only to order journal transactions. It must give, for each journal:
 
 1. **Each journal transaction within a database transaction.** A journal's order is its relations
    ([the journals proposal](JOURNALS.md#the-journal-a-sequenced-container)), and a backend applies each journal transaction, an append or an insertion, within a
@@ -41,10 +42,11 @@ each journal:
    "Backend bindings should use a database transaction around the journal transaction. This makes the db more or less
    responsible for serialization order." Two writers appending after one last are told apart by a unique clause
    ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)).
-2. **Reads and subscriptions from any entry.** A position is an entry. A subscriber catches up from any entry, the
-   first included, since there is no snapshot to start from, and then follows live, with no entry missed or given
-   twice.
-3. **Entries as schema-free documents.** An entry is the plain form mbse-schemas writes, JSON, stored as it is.
+2. **Reads and subscriptions from any journal transaction.** A position is a journal transaction. A subscriber catches
+   up from any journal transaction, the first included, since there is no snapshot to start from, and then follows
+   live, with no journal transaction missed or given twice.
+3. **Journal transactions as schema-free JSON.** A journal transaction is the plain form mbse-schemas writes, JSON,
+   stored as it is.
 
 ## The interface, and how a backend is held to it
 
@@ -102,26 +104,27 @@ Where the user's decisions were silent, the simplest default consistent with the
 labeled with the repository and number it was decided under.
 
 - **(mbse-dynamodb 15)** **DynamoDB orders a journal by an item holding its length.** Each journal transaction is
-  committed in one `TransactWriteItems` with an item holding the number of the journal's last entry, on condition that
-  it holds the number the committing process last caught up to, so that of two processes committing at once one is
+  committed in one `TransactWriteItems` with an item holding the number of the journal's last transaction, on condition
+  that it holds the number the committing process last caught up to, so that of two processes committing at once one is
   refused. The refused one catches up and interprets its transaction again, which what the other committed may now
-  refuse ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293)); a transaction written imperatively, which the store cannot run again,
-  is refused, to be run again by its writer.
-- **(mbse-dynamodb 15)** **The index in DynamoDB.** By a hash of each object's path: an item of its schema and property
-  values, and an item for each entry linking it, under every object the entry links, so that a deletion finds each
-  entry linking what it deletes, loaded or not, and what that owns, in cascade. Equal entries of a relation that keeps
-  them are one item, with their count. The index items a transaction changes are written in the same
-  `TransactWriteItems` as its journal entry where DynamoDB's limits on one allow (100 items, 4 MB); else the journal
-  entry is committed with them kept beside it, and they are written out before any process reads the store, by the
-  writer or by whichever process reads next. A transaction is committed once its journal entry is.
+  refuse
+  ([CAP-293: an entry inserted against a unique clause refuses its transaction](../docs/capabilities/README.md#CAP-293));
+  a transaction written imperatively, which the store cannot run again, is refused, to be run again by its writer.
+- **(mbse-dynamodb 15)** **The index in DynamoDB.** By a hash of each object's reference: an item of its schema and
+  property values, and an item for each entry linking it, under every object the entry links, so that a deletion finds
+  each entry linking what it deletes, loaded or not, and what that owns, in cascade. Equal entries of a relation that
+  keeps them are one item, with their count. The index items a transaction changes are written in the same
+  `TransactWriteItems` as its journal transaction where DynamoDB's limits on one allow (100 items, 4 MB); else the
+  journal transaction is committed with them kept beside it, and they are written out before any process reads the
+  store, by the writer or by whichever process reads next. A transaction is committed once its journal transaction is.
 - **(mbse-dynamodb 15)** **Subscriptions read the table, in order.** A process catches up by reading the journal's
-  entries after the last it gave its followers, in order, before each of its transactions and when polled, rather than
-  from DynamoDB Streams: a stream orders records per item and keeps them a day, while the journal's numbers are its
+  transactions after the last it gave its followers, in order, before each of its transactions and when polled, rather
+  than from DynamoDB Streams: a stream orders records per item and keeps them a day, while the journal's numbers are its
   commit order, kept as long as the table. A stream may later wake a process to poll, and no more.
 - **(mbse-dynamodb 1)** **One table, keyed by store and record**: one thing to make and configure, which several
   stores (demos, tests) share, each under its own partition key.
-- **(mbse-dynamodb 3)** **Parts of 350 000 bytes** of UTF-8 JSON, uncompressed, so that a journal entry reads back as
-  text in the console; compression (zlib) would cut cost and parts roughly tenfold.
+- **(mbse-dynamodb 3)** **Parts of 350 000 bytes** of UTF-8 JSON, uncompressed, so that a journal transaction reads back
+  as text in the console; compression (zlib) would cut cost and parts roughly tenfold.
 - **(mbse-dynamodb 7)** **The table is made when absent by default** (`create=True`, on-demand capacity), for demos;
   production sets `MBSE_DYNAMODB_CREATE=0` and makes the table with its own tooling.
 - **(mbse-dynamodb 10)** **Settings from `MBSE_DYNAMODB_*`**, read by `Store()` with no arguments, as mbse-rest's
@@ -129,10 +132,11 @@ labeled with the repository and number it was decided under.
 
 ## Open questions
 
-- **A write's cost, where an object holds many entries.** mbse-dynamodb keeps each object's document whole, so that a
-  write rewrites it, entries and all, its cost growing with the object. A write of part of a property's value is
-  [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272); a document kept in parts by entry, as the layout above may
-  give, would bound the cost of a write to an object's entries too.
+- **A write's cost, where an object holds many entries.** mbse-dynamodb keeps each object whole, as
+  `Stores.Below.document` gives it, so that a write rewrites it, entries and all, its cost growing with the object. A
+  write of part of a property's value is
+  [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272); an object kept in parts
+  by relation entry, as the layout above may give, would bound the cost of a write to an object's entries too.
 
 - **Subscribers in browsers.** A browser holds no database's credentials, so it subscribes through mbse-journals'
   sender and receiver ([CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)) rather than to a backend directly; Firestore's own

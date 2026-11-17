@@ -54,7 +54,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Applied in*: mbse-schemas, as [CAP-107: one visitor protocol reads and writes data](capabilities/CAP-107.md) records it, which supersedes the reverse protocol (`accept(visitor)`, a
   value writing itself into serializers and recorders that implemented `Visitors`); built in mbse-schemas 0.11, where
   each schema builder is a `Visitors.OfObject` over its store's plain schema of schemas (`Schemas.OfX`, since 0.14),
-  through which an extension's members reach it: the same policy one level up.
+  through which the members that an extending module adds reach it: the same policy one level up.
 - <a id="PRI-005"></a>**PRI-005: one entry point per kind** · proposed · One entry point per kind, named `OfX`: visitors, comparison, evaluation and validation dispatch
   on a value's kind. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005).
   *Applied in*: `Visitors.OfX`, `Comparison.OfX` (mbse-schemas); `Evaluators.OfAny` (mbse-expressions).
@@ -104,9 +104,9 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   *Exceptions*: in mbse-schemas' schema builders, an adjacency's `me` and a relation's `uniques` name links and
   properties by string, as the user decided ([CAP-109: schemas as linked objects in modules](capabilities/CAP-109.md#decided), "Schema builders align with their
   meta-schemas"). There is no other: "Code expressions that name a reference object use Paths, not string lookup," as
-  the user decided, a path from a singleton through ownership entries, each step its adjacency called with the entry's
-  keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
-  and 27 in [CAP-119: owned objects found by path](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.
+  the user decided, an object reference written from a singleton through ownership entries, each step its adjacency
+  called with the entry's keys (`store.Instances.wts.Features.dir({ name: 'DEF-693' })`, object identity 26
+  and 27 in [CAP-119: owned objects found by their owner's reference and key](capabilities/CAP-119.md#decided)); the earlier `as_instance` exception is withdrawn.
   *Not yet applied*, in the API the design documents show: `E.variable("c")` beside `pred.c`, `s.get("properties")`
   (mbse-patterns, mbse-codegen-python); `Transform("Label", ...)` and `Clause("Label", ...)` (mbse-patterns 0.9.1, mbse-transforms' precursor).
 - <a id="PRI-016"></a>**PRI-016: guidance written once** · proposed · Guidance is written once: each repository has one source
@@ -158,10 +158,11 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   date properties ([FEA-007: property kinds](features/FEA-007.md), not yet planned).
 - <a id="PRI-024"></a>**PRI-024: the plain form, carried as written** · proposed · A service or a store carries
   mbse-schemas' plain form as mbse-schemas wrote it, and defines no format of its own: a request's body, a frame, a
-  journal entry or a table's item holds the value as written, never reinterpreted or re-encoded into the medium's own
-  types. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003). *Relates to* [PRI-012: model published standards](#PRI-012).
-  *Applied in*: mbse-rest's wire format ([CAP-012: logical view endpoints](capabilities/CAP-012.md)); mbse-dynamodb's
-  table, which keeps JSON rather than DynamoDB maps, whose numbers would lose `1` against `1.0`
+  journal's transaction or a table's item holds the value as written, never reinterpreted or re-encoded into the
+  medium's own types. *Serves* [QUA-003: no second-order inventions](QUALITIES.md#QUA-003). *Relates to*
+  [PRI-012: model published standards](#PRI-012). *Applied in*: mbse-rest's wire format
+  ([CAP-012: logical view endpoints](capabilities/CAP-012.md)); mbse-dynamodb's table, which keeps JSON rather than
+  DynamoDB maps, whose numbers would lose `1` against `1.0`
   ([CAP-289: journals kept in DynamoDB](capabilities/README.md#CAP-289)).
 - <a id="PRI-025"></a>**PRI-025: never guess the schema** · adopted · "Never guess the schema": what a value is, is never inferred from
   the shape of its data. A reader tracks the expected schema as context while traversing wire data, and the wire

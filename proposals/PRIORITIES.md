@@ -94,7 +94,7 @@ mbse-journals, in build order:
 - [CAP-291: journals kept in MongoDB](../docs/capabilities/README.md#CAP-291)
 - [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272)
 - [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)
-- [CAP-275: two stores' difference as a journal entry](../docs/capabilities/README.md#CAP-275)
+- [CAP-275: two stores' difference as a journal transaction](../docs/capabilities/README.md#CAP-275)
 
 ## INI-020 : code mutation framework
 
@@ -126,7 +126,7 @@ Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a 
 - [CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264)
 - [CAP-280: the grid in the logical layout](../docs/capabilities/CAP-280.md)
 - [CAP-269: transactions resolved into their effects](../docs/capabilities/README.md#CAP-269), from [INI-013: journals framework](#ini-013--journals-framework), with what it builds on
-- [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261)
+- [CAP-261: layout driven by any journal transaction](../docs/capabilities/README.md#CAP-261)
 - [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243)
 - [CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262)
 - [CAP-263: touch-first gestures, each one mutation](../docs/capabilities/README.md#CAP-263)

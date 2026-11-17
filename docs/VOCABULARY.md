@@ -239,7 +239,7 @@ that define it.
   long as its owning entry, and removing that entry deletes it and, in cascade, everything that it owns.
   [FEA-026: deterministic object identity](features/FEA-026.md);
   [CAP-118: singletons, owned and counted objects](capabilities/CAP-118.md),
-  [CAP-119: owned objects found by path](capabilities/CAP-119.md),
+  [CAP-119: owned objects found by their owner's reference and key](capabilities/CAP-119.md),
   [CAP-121: owned objects deleted in cascade](capabilities/CAP-121.md).
 - Counted object: a reference object that is neither a singleton nor owned. It has no identity beyond the document
   that writes it, nothing finds it except through what links it, and it lives while anything holds it. A counted object

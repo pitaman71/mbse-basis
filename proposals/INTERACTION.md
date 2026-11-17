@@ -4,7 +4,7 @@ Initiative: [INI-040: diagrams framework](PRIORITIES.md#ini-040--diagrams-framew
 
 How a person edits a diagram that [the diagrams proposal](DIAGRAMS.md) lays out: the gestures, what each shows while it
 is under way, and the one mutation it makes when it ends. Its capabilities:
-[CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264), [CAP-261: layout driven by any journal entry](../docs/capabilities/README.md#CAP-261), [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243),
+[CAP-264: containment separate from ownership](../docs/capabilities/README.md#CAP-264), [CAP-261: layout driven by any journal transaction](../docs/capabilities/README.md#CAP-261), [CAP-243: a diagram displayed from its mutation stream](../docs/capabilities/README.md#CAP-243),
 [CAP-262: a candidate mutation's layout previewed, never journalled](../docs/capabilities/README.md#CAP-262) and [CAP-263: touch-first gestures, each one mutation](../docs/capabilities/README.md#CAP-263).
 
 ## Decided
@@ -25,7 +25,7 @@ The user's decisions (2026-11-10):
   be inserted at the current view position in the journal." Nothing is ever snapshotted: the model and its layouts
   are always stored, communicated and analyzed in journal form.
 - **One shape at a time**, at first: a selection of several shapes is not dragged as one intent ("initially no").
-- **CAP-243 split now** ("yes split now"): into the driver that takes any journal entry to the layout functions it
+- **CAP-243 split now** ("yes split now"): into the driver that takes any journal transaction to the layout functions it
   implies (CAP-261), the renderer and its viewport (CAP-243), previews (CAP-262) and gestures (CAP-263).
 - **A reorder that splits an adjacency is an insertion; one that splits none is an adjacency**: "if the reordering
   splits any existing adjacency, then it is an insertion event. if no adjacencies are split, create an adjacency
