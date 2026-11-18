@@ -195,7 +195,11 @@ to the store implementation." The steps above, in its terms:
 - a partial frame come back is C's `exec(frame, remainder, allow_write=True)` again.
 
 Where a frame halts within a term, `remainder` is "the rest of that term plus the terms after it as an expression of
-its own. As it is a suffix no rewrite is required" (the user, 2026-11-18).
+its own. As it is a suffix no rewrite is required" (the user, 2026-11-18), "not quite true in the case of split-join".
+Where a frame halts within a branch of a term that splits frames and joins those its branches end with, the layer that
+split keeps the join, as the user chose ("yes 1"): the layer below's `exec` is given the rest of that branch alone and
+streams the branch's frames back; the layer that split collects every branch's frames, its completion marker telling it
+a branch has ended, joins them, and goes on with the terms after the join.
 
 As the user decided (2026-11-18):
 
