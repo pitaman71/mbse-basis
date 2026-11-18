@@ -822,8 +822,10 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   the transaction to the layer below and streams frames back, so that it goes down the stack and comes back up in one round
   trip, always processed as a stream, the lowest layer executing it within its database's transaction; a client receives
   a frame with the same symbol bindings more than once, each later arrival replacing the one before; the vocabulary of
-  mutations adjusted where the layers need it; in mbse-schemas, in Python and TypeScript, with mbse-rest and
-  mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md),
+  mutations adjusted where the layers need it; each layer interpreting it with an interpreter of its own, a base
+  class given hooks by each kind of store
+  ([the stacked stores proposal](../../proposals/STACKED-STORES.md#interpreters-and-their-hooks-proposed)); in
+  mbse-schemas, in Python and TypeScript, with mbse-rest and mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md),
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
 - <a id="CAP-309"></a>**[CAP-309: errors annotated on frames](CAP-309.md)** · adopted · An error that occurs while a mutation
@@ -837,9 +839,9 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   over what it holds, given the original expression, a handle to the subterm it evaluates, and, for each symbol that
   should be bound there, a stream of candidates; a frame it binds fully it streams to the client at once; where the
   layer below streams back a frame with the same symbol bindings that conflicts with one given, as in a property's
-  value, the cache takes the layer below's and gives the client that frame, which replaces the one given before; in
-  mbse-schemas, in Python and TypeScript. *Implements*
-  [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  value, the cache takes the layer below's and gives the client that frame, which replaces the one given before; the
+  cache layer's interpreter its own, CAP-308's base class with its hooks; in mbse-schemas, in Python and TypeScript.
+  *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · adopted · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
