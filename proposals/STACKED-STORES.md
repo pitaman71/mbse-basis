@@ -194,6 +194,9 @@ to the store implementation." The steps above, in its terms:
 - the loopback is that call made to C itself, with no layer below;
 - a partial frame come back is C's `exec(frame, remainder, allow_write=True)` again.
 
+Where a frame halts within a term, `remainder` is "the rest of that term plus the terms after it as an expression of
+its own. As it is a suffix no rewrite is required" (the user, 2026-11-18).
+
 As the user decided (2026-11-18):
 
 - **A frame's changes** "should rely on mbse-schemas/Changes": a frame carries the changes made in interpreting it as
@@ -206,8 +209,6 @@ As the user decided (2026-11-18):
 
 Open:
 
-- what `remainder` is when the frame halts within a term rather than between terms: the rest of that term, then the
-  terms after it, as an expression of its own;
 - the form of the completion marker;
 - how a frame carries its changes: a `Changes.Transaction` of the changes its interpretation made, or another form of
   the `Changes` schemas;
