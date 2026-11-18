@@ -183,6 +183,17 @@ with its layer and drives the transaction over what its layer holds.
 6. **Between transactions**: L's follow gives C each transaction L commits, a one-transaction journal, which C applies
    to what it holds ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md)).
 
+**The interpreter-store interface**, as the user suggested it (2026-11-18): "a single method
+`Store.exec(frame, remainder, allow_write) -> Stream[Frame]`. `frame` : current execution frame. `remainder` suffix of
+the mutation expression whose root is yet to be executed. This intentionally delegates execution of mutation suffixes
+to the store implementation." The steps above, in its terms:
+
+- C's read-only pass over an input frame is C's own `exec(frame, T, allow_write=False)`;
+- where it halts, C sends the partial frame and the suffix not yet executed below: the lower layer's
+  `exec(frame, remainder, allow_write=True)`, whose stream comes back up;
+- the loopback is that call made to C itself, with no layer below;
+- a partial frame come back is C's `exec(frame, remainder, allow_write=True)` again.
+
 As the user decided (2026-11-18):
 
 - **A frame's changes** "should rely on mbse-schemas/Changes": a frame carries the changes made in interpreting it as
@@ -195,6 +206,8 @@ As the user decided (2026-11-18):
 
 Open:
 
+- what `remainder` is when the frame halts within a term rather than between terms: the rest of that term, then the
+  terms after it, as an expression of its own;
 - the form of the completion marker;
 - how a frame carries its changes: a `Changes.Transaction` of the changes its interpretation made, or another form of
   the `Changes` schemas;
