@@ -837,9 +837,9 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   the transaction to the layer below and streams frames back, so that it goes down the stack and comes back up in one round
   trip, always processed as a stream, the lowest layer executing it within its database's transaction; a client receives
   a frame with the same symbol bindings more than once, each later arrival replacing the one before; the vocabulary of
-  mutations adjusted where the layers need it; each layer interpreting it with an interpreter of its own, a base
-  class given hooks by each kind of store
-  ([the stacked stores proposal](../../proposals/STACKED-STORES.md#interpreters-and-their-hooks-proposed)); in
+  mutations adjusted where the layers need it; each layer interpreting it with an interpreter of its own, coupled
+  with the layer, which drives the transaction over what the layer holds
+  ([the stacked stores proposal](../../proposals/STACKED-STORES.md#a-cache-layer-and-the-layer-below)); in
   mbse-schemas, in Python and TypeScript, with mbse-rest and mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md),
   [FEA-027: mutations as queries](../features/FEA-027.md).
   - **Current**: not met.
@@ -850,13 +850,13 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   - **Current**: met in mbse-schemas 0.26.26 (checked in its main at 40c408c: TXN-18 to TXN-20 and REF-10 pass in both
     languages, at 100% coverage); a layer of a stack streaming the annotated frames is CAP-308's.
 - <a id="CAP-310"></a>**[CAP-310: a cache layer's partial-aware interpretation](CAP-310.md)** · proposed · A cache
-  layer, a store over another, forwards a mutation transaction to the layer below and at once interprets it recursively
-  over what it holds, given the original expression, a handle to the subterm it evaluates, and, for each symbol that
-  should be bound there, a stream of candidates; a frame it binds fully it streams to the client at once; where the
-  layer below streams back a frame with the same symbol bindings that conflicts with one given, as in a property's
-  value, the cache takes the layer below's and gives the client that frame, which replaces the one given before; the
-  cache layer's interpreter its own, CAP-308's base class with its hooks; in mbse-schemas, in Python and TypeScript.
-  *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
+  layer, a store over another, interprets each input frame of a mutation transaction over its cache, reading only;
+  where it holds nothing to bind a symbol, it forwards the partial frame to the layer below, and writes go through to
+  the layer that persists them; each frame that comes back, carrying the changes made below as `Changes` data, it
+  applies to its cache and gives to the client, an error forwarded as it is, a partial frame interpreted again there,
+  and the stream ends with a completion marker
+  ([the stacked stores proposal](../../proposals/STACKED-STORES.md#a-cache-layer-and-the-layer-below)); in
+  mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: not met.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · adopted · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
