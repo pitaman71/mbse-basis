@@ -220,11 +220,29 @@ As the user decided (2026-11-18):
   cache layer may write speculatively" ([CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/CAP-310.md#decided)), is superseded, and with it
   a cache layer's frames given early, replaced and retracted.
 
-Open:
+**What it replaces, and the stages** (agreed by the user, 2026-11-18):
 
-- what of [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283) to
-  [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285), `Stores.Below`, mbse-rest and
-  mbse-dynamodb this replaces, and in what stages.
+- [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283) is kept: a layer has a layer below, or
+  none, the loopback; what passes between them is `Store.exec`, in place of `Stores.Below`'s `document`, `commit`,
+  `install` and `follow`.
+- [CAP-284: objects loaded on demand](../docs/capabilities/README.md#CAP-284) is replaced: a cache layer loads nothing
+  on a read; it reads what it holds, sends a partial frame below where it holds too little, and holds what the frames
+  that come back, and the follow, give it; `Proxies._Unresolved` goes.
+- [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285): writing through is replaced by
+  forwarding the frame and T, `allow_write` true, the layer below executing the writes; others' writes in stays, as the
+  follow's one-transaction journals, with its decisions of 2026-11-13.
+- [CAP-290: a service's store stacked, with no snapshot](../docs/capabilities/README.md#CAP-290) and
+  [CAP-289: journals kept in DynamoDB](../docs/capabilities/README.md#CAP-289), built on `Stores.Below`, move with it.
+
+The stages:
+
+1. **`Store.exec` in mbse-schemas**: a store in memory with no layer below, by the loopback, its behaviour unchanged,
+   its frames a stream ending with the completion marker.
+2. **The cache layer in mbse-schemas**: a `Builders.Store` over another reads its cache only, forwards partial
+   frames, applies the journals of the frames that come back; CAP-284 and CAP-285's writing through replaced,
+   `Stores.Below` retired; both the loopback and a layer below proven.
+3. **mbse-rest and mbse-dynamodb as layers**: each implements `exec`, mbse-rest streaming frames over HTTP, its last
+   item `{"end": null}`, mbse-dynamodb executing within its database's transaction.
 
 ## The stack
 
