@@ -153,78 +153,78 @@ What it replaces in what is built: `Stores.Below` and its members (`document`, `
 transaction before sending what it changed below. The sections that follow describe the stack as CAP-283 to CAP-285
 built it, until these capabilities replace it.
 
-## Interpreters and their hooks (proposed)
+## A cache layer and the layer below
 
-A design, for the user's review, of "each layer of the stack gets its own transaction interpreter", as
-[CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308) and
-[CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310) would build it. Nothing
-here is decided.
+As the user set it out (2026-11-18), how a transaction passes through a cache layer, the layer below it, and their
+interpreters ([CAP-308: stacking by mutation transactions, in one round trip](../docs/capabilities/README.md#CAP-308),
+[CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/README.md#CAP-310)). U is the upper layer,
+C the cache layer with its interpreter, L the layer below, where there is one, with its own; each interpreter is coupled
+with its layer and drives the transaction over what its layer holds.
 
-**As built (mbse-schemas 0.30.1).** One interpreter, the module `Transactions`, interprets every store's transactions.
-It reaches into the store it is given for what it reads and writes: a schema's objects, a singleton, what an object
-reference designates, the entries that link an object, the transaction's proposals, the owners it settles and the
-counted objects it made. A store above a store below interprets the transaction itself, then sends what it changed
-below (`Stores.Below.commit`), and loads each object it reads by a request of its own.
+1. **U to C**: U sends a mutation transaction T and a stream of input frames, each binding the symbols U already has,
+   and receives a stream of output frames. The input stream may still be arriving: each input frame is interpreted as
+   it arrives.
+2. **C's interpreter**, for each input frame, extends it through T, accessing C's cache "in a read-only mode". "Where C
+   holds nothing to bind a symbol, execution halts and the current partial frame is forwarded to the lower layer". For
+   now, writes go through ("for now assume write-through"): a frame C binds fully goes down too, for the layer that
+   persists it to write.
+3. **Down**:
+   - **There is a lower layer**: L's interpreter extends the frame through T within L's transaction, writing, and sends
+     it back up carrying the changes L made: "the changes L made *are* reported in the frame so there is no diff".
+   - **There is none**: "it is treated as a loopback path", the frame coming back to C as it went.
+4. **C, as each frame comes back**:
+   - **with an error**: "forward it directly back to U" ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309));
+   - **partial**, as the loopback gives it: "re-exec T and apply changes to the cache", and give U the frame;
+   - **complete**: "apply changes to the cache", and give U the frame.
 
-**The base class.** An interpreter is an instance of a class coupled with its layer, made for one transaction. The base
-class holds what every layer interprets alike: the expression's terms, bound in order (`map`, `upsert`, `update`,
-`reduce`, `then`); symbols and frames; the frames given back, by object reference ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md)); errors annotated on
-frames ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309)); and unique clauses held at commit. It gives
-its frames as a stream: a Python generator, a TypeScript observable.
+   A frame partial from a lower layer, not only from the loopback, is handled as one partial: "be defensive and prove
+   both cases work".
+5. **The end**: "there needs to be a completion marker of some sort in the stream", so that U knows no more frames come.
+6. **Between transactions**: L's follow gives C each transaction L commits, a one-transaction journal, which C applies
+   to what it holds ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md)).
 
-**The hooks.** What only a kind of store knows, each a method the layer's class gives:
+**The interpreter-store interface**, as the user suggested it (2026-11-18): "a single method
+`Store.exec(frame, remainder, allow_write) -> Stream[Frame]`. `frame` : current execution frame. `remainder` suffix of
+the mutation expression whose root is yet to be executed. This intentionally delegates execution of mutation suffixes
+to the store implementation." The steps above, in its terms:
 
-| Hook | What it gives |
-|---|---|
-| designated(reference) | the object an object reference designates among what the layer holds, or that it holds none |
-| extent(schema) | the objects of a schema the layer holds, as candidates for a symbol |
-| singleton(schema) | a singleton |
-| linking(relation, link, object) | the entries of a relation that link an object through a link |
-| create, set, clear, insert, remove | the writes of a spec, into the layer's transaction |
-| absent(...) | what the layer does where it holds no such object: a store in memory finds none; a cache layer leaves the symbol to the layer below |
-| commit, abort | the end of the layer's transaction: a store in memory commits its proposals; a store kept in a database commits within the database's transaction |
+- C's read-only pass over an input frame is C's own `exec(frame, T, allow_write=False)`;
+- where it halts, C sends the partial frame and the suffix not yet executed below: the lower layer's
+  `exec(frame, remainder, allow_write=True)`, whose stream comes back up;
+- the loopback is that call made to C itself, with no layer below;
+- a partial frame come back is C's `exec(frame, remainder, allow_write=True)` again.
 
-**The layers.**
+Where a frame halts within a term, `remainder` is "the rest of that term plus the terms after it as an expression of
+its own. As it is a suffix no rewrite is required" (the user, 2026-11-18), "not quite true in the case of split-join".
+Where a frame halts within a branch of a term that splits frames and joins those its branches end with, the layer that
+split keeps the join, as the user chose ("yes 1", "at least for now"): the layer below's `exec` is given the rest of that branch alone and
+streams the branch's frames back; the layer that split collects every branch's frames, its completion marker telling it
+a branch has ended, joins them, and goes on with the terms after the join.
 
-- **A store in memory**: the hooks read and write what it holds; the base class alone does the rest.
-- **A store kept in a database**, the lowest: it interprets the whole transaction within one database transaction,
-  reads and writes alike, as the user decided ("the entirety of a transaction - reads and writes - are all conducted
-  within a single transaction of the persistence layer"); the database decides what commits.
-- **A cache layer**, any store over another: it sends the transaction below and interprets it over what it holds at
-  once (CAP-310). A frame it binds fully it streams; a symbol it holds nothing for is the layer below's (`absent`).
-  What comes back from below replaces what it gave, frame by frame by symbol bindings, a frame it gave whose object is
-  gone retracted; what it wrote speculatively is undone where the layer below refuses.
-- **mbse-rest's client and service**: the client is a cache layer whose layer below is the service; the service passes
-  the transaction to its own store and streams the frames back.
+As the user decided (2026-11-18):
 
-**A follow** is the layer's too: it gives each transaction the layer commits as a one-transaction journal, and a cache
-layer applies what its layer below's follow gives to what it holds.
+- **A frame's changes** "should rely on mbse-schemas/Changes": a frame carries the changes made in interpreting it as
+  a `Changes.Journal` of one transaction, whose symbols are the frame's own, as
+  [CAP-318: support for decoupled code](../docs/capabilities/README.md#CAP-318) has a frame carry entries and
+  assignments relative to its symbol bindings; its id is the transaction's uid and the frame's position in the stream,
+  so that applying the frames' journals, each by `Changes.apply`, keeps the counted objects of each frame apart. A
+  cache layer applies it to its cache as it applies what a follow gives (offered, with a list of changes, by the user;
+  the journal agreed).
+- **The completion marker** is an item of the stream, `{"end": scope}`: `scope` the id of the input frame or branch
+  that has ended, each frame streamed carrying the id of the one it descends from, or `null` for the whole stream. In
+  a process, a generator's or an observable's end is the whole stream's; across mbse-rest, whose connection may close
+  short of it, the last item is `{"end": null}` (agreed).
+- **The frame transducer is deferred**: the mutation kind of its own that the transaction-object proposal in
+  mbse-schemas records, in most cases not delegated across mbse-rest.
+- **A cache layer reads its cache only**, and writes what comes back: what the user decided on 2026-11-16, that "a
+  cache layer may write speculatively" ([CAP-310: a cache layer's partial-aware interpretation](../docs/capabilities/CAP-310.md#decided)), is superseded, and with it
+  a cache layer's frames given early, replaced and retracted.
 
-**What it replaces**: `Stores.Below` and its members (`document`, `commit`, `install`, `follow`, `records`); a store
-above loading each object it reads by a request; and a store above interpreting a transaction before sending what it
-changed below.
+Open:
 
-**Stages**, each a release of mbse-schemas, then of mbse-rest and mbse-dynamodb:
-
-1. The base class and the store in memory's hooks: the interpreter as built, moved behind the hooks, its behaviour
-   unchanged.
-2. Frames as a stream from `store.transaction`.
-3. Forwarding (CAP-308): a store over another sends the transaction below, and the lowest interprets it whole;
-   mbse-rest and mbse-dynamodb as layers; `Stores.Below` retired.
-4. A cache layer's partial-aware interpretation (CAP-310), with the undo log, reconciliation and retraction kept on
-   mbse-schemas' branch `CAP-310` (#44, closed for this rework).
-
-**Questions for the user**:
-
-1. **The hooks**: is the table the right division between the base class and a layer?
-2. **The stream**: `store.transaction(callback)` gives back a stream of frames instead of a list (breaking); or a
-   second method gives the stream, the first collecting it?
-3. **A frame given again**: how a client tells a frame that replaces one given before from a new one, and knows that
-   none will come again: by its symbol bindings, and the stream's end?
-4. **The frame transducer**, a mutation kind of its own, "in most cases non-delegatable across `mbse-rest`" (the
-   transaction-object proposal in mbse-schemas): is a term a layer does not send below interpreted by the highest
-   layer that holds what it reads, or refused where none does?
-5. **The order of the stages**, and whether stage 1 may land before the others are designed.
+- what of [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283) to
+  [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285), `Stores.Below`, mbse-rest and
+  mbse-dynamodb this replaces, and in what stages.
 
 ## The stack
 
