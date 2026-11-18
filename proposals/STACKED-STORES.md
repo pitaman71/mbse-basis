@@ -204,7 +204,16 @@ a branch has ended, joins them, and goes on with the terms after the join.
 As the user decided (2026-11-18):
 
 - **A frame's changes** "should rely on mbse-schemas/Changes": a frame carries the changes made in interpreting it as
-  `Changes` data.
+  a `Changes.Journal` of one transaction, whose symbols are the frame's own, as
+  [CAP-318: support for decoupled code](../docs/capabilities/README.md#CAP-318) has a frame carry entries and
+  assignments relative to its symbol bindings; its id is the transaction's uid and the frame's position in the stream,
+  so that applying the frames' journals, each by `Changes.apply`, keeps the counted objects of each frame apart. A
+  cache layer applies it to its cache as it applies what a follow gives (offered, with a list of changes, by the user;
+  the journal agreed).
+- **The completion marker** is an item of the stream, `{"end": scope}`: `scope` the id of the input frame or branch
+  that has ended, each frame streamed carrying the id of the one it descends from, or `null` for the whole stream. In
+  a process, a generator's or an observable's end is the whole stream's; across mbse-rest, whose connection may close
+  short of it, the last item is `{"end": null}` (agreed).
 - **The frame transducer is deferred**: the mutation kind of its own that the transaction-object proposal in
   mbse-schemas records, in most cases not delegated across mbse-rest.
 - **A cache layer reads its cache only**, and writes what comes back: what the user decided on 2026-11-16, that "a
@@ -213,9 +222,6 @@ As the user decided (2026-11-18):
 
 Open:
 
-- the form of the completion marker;
-- how a frame carries its changes: a `Changes.Transaction` of the changes its interpretation made, or another form of
-  the `Changes` schemas;
 - what of [CAP-283: a store given a store below](../docs/capabilities/README.md#CAP-283) to
   [CAP-285: writes through, others' writes in](../docs/capabilities/README.md#CAP-285), `Stores.Below`, mbse-rest and
   mbse-dynamodb this replaces, and in what stages.
