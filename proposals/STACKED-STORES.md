@@ -183,14 +183,17 @@ with its layer and drives the transaction over what its layer holds.
 6. **Between transactions**: L's follow gives C each transaction L commits, a one-transaction journal, which C applies
    to what it holds ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md)).
 
-**The interpreter-store interface**, as the user suggested it (2026-11-18): "a single method
-`Store.exec(frame, remainder, allow_write) -> Stream[Frame]`. `frame` : current execution frame. `remainder` suffix of
+**The interpreter-store interface**, as the user suggested it (2026-11-18), then placed on the transaction ("Actually
+`exec` probably belongs on `Transaction` not `Store`"): within one transaction a caller holds open, each call to its
+`exec` streams frames, a halted frame is resumed in the same transaction, and a cache layer's transaction forwards to
+one transaction of the layer below that lasts as long as its own, the layer below committing first. As first
+suggested: "a single method `Store.exec(frame, remainder, allow_write) -> Stream[Frame]`. `frame` : current execution frame. `remainder` suffix of
 the mutation expression whose root is yet to be executed. This intentionally delegates execution of mutation suffixes
 to the store implementation." The steps above, in its terms:
 
-- C's read-only pass over an input frame is C's own `exec(frame, T, allow_write=False)`;
+- C's read-only pass over an input frame is its transaction's `exec(frame, T, allow_write=False)`;
 - where it halts, C sends the partial frame and the suffix not yet executed below: the lower layer's
-  `exec(frame, remainder, allow_write=True)`, whose stream comes back up;
+  transaction's `exec(frame, remainder, allow_write=True)`, whose stream comes back up;
 - the loopback is that call made to C itself, with no layer below;
 - a partial frame come back is C's `exec(frame, remainder, allow_write=True)` again.
 
@@ -236,7 +239,7 @@ As the user decided (2026-11-18):
 
 The stages:
 
-1. **`Store.exec` in mbse-schemas**: a store in memory with no layer below, by the loopback, its behaviour unchanged,
+1. **`exec` on the transaction, in mbse-schemas**: a store in memory with no layer below, by the loopback, its behaviour unchanged,
    its frames a stream ending with the completion marker.
 2. **The cache layer in mbse-schemas**: a `Builders.Store` over another reads its cache only, forwards partial
    frames, applies the journals of the frames that come back; CAP-284 and CAP-285's writing through replaced,
