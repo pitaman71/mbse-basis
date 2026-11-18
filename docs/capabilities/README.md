@@ -767,6 +767,21 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   running it again writes nothing. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md). *Relates to*
   [CAP-140: entries removed through a spec](CAP-140.md).
   - **Current**: not met (the store overhaul's 4j finding, open; mbse-schemas 0.26.4).
+- <a id="CAP-318"></a>**CAP-318: support for decoupled code** · proposed · Code outside a store's mutation
+  expressions works with the frames the store gives back, which survive their transaction, with no guarantee that
+  their data is fresh. As the user decided: "Coupled code "Transducers" - occurs inside of mutation expressions and can
+  be re-executed whenever frame changes arrive." "Decoupled code - occurs outside of mutation expressions using data
+  provided by a store in a frame that survives beyond the transaction, with no particular guarantee about the
+  "freshness" of that data." "Frames will need to be able to carry symbol bindings, property assignments (relative to
+  a symbol binding), and relation entries (relative to at least one symbol binding and object references not
+  otherwise bound to a symbol)." This revises
+  [CAP-131: frames witness values and entries](CAP-131.md), whose witnessed values and entries name every object by
+  its object reference, not by symbol. Coupled code, a mutation kind of its own
+  ([the transaction-object proposal](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/transaction-object/README.md#decided),
+  Decided), is not part of it. *Implements* [FEA-027: mutations as queries](../features/FEA-027.md). *Relates to*
+  [CAP-138: mutation expressions over frame streams](CAP-138.md),
+  [CAP-315: every read within a transaction or through a follow](CAP-315.md).
+  - **Current**: not met.
 
 ### One Store interface, lazy by default
 
