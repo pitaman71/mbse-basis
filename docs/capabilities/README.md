@@ -1179,24 +1179,27 @@ before they moved here; each is to assess against mbse-rest, mbse-react, mbse-dy
   - **Current**: not met.
 - <a id="CAP-288"></a>**CAP-288: the journal storage interface** · proposed · A backend is reached through the store
   interface ([FEA-028: one Store interface, lazy by default](../features/FEA-028.md)): a backend is a store over its database, which interprets each
-  transaction within a database transaction, which orders them, and reports its changes to each follower; a
-  conformance suite, in mbse-journals, run against the store kept in memory, which every backend passes, in Python and
-  TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).
-  - **Current**: met in mbse-journals 0.2.0 (checked in its main at 58c34b9: suite JRN passes in both languages, at
-    100% coverage, against the store kept in memory).
+  transaction within a database transaction, which orders them, and gives each follower each transaction it commits
+  as a one-transaction journal; mbse-schemas' suites BLW and CHG, run over each backend, are its conformance, in Python
+  and TypeScript, as [the journal storage proposal](../../proposals/JOURNAL-STORAGE.md) states. *Implements* [FEA-006: persistence](../features/FEA-006.md).
+  - **Current**: met by mbse-dynamodb 0.3.0 (checked in its main at 0b910bf: suite BLW over it, against moto, at 100%
+    coverage; its DynamoDB Local cases not run) and in part by mbse-rest 0.3.0 (checked in its main at 83c5130: BLW
+    through its client, but BLW-15 and BLW-18, expected failures from counted objects aliased across transactions in
+    mbse-schemas 0.29.0).
 - <a id="CAP-289"></a>**CAP-289: journals kept in DynamoDB** · proposed · A journal is kept in DynamoDB, meeting the
   journal storage interface (CAP-288), with an index of each object's values and entries kept current from it, from
   which a store reads one object, and no snapshot, in mbse-dynamodb. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md). *Refines* [CAP-013: an in-memory store journaled to DynamoDB](CAP-013.md).
-  - **Current**: met in mbse-dynamodb 0.1.0 (checked in its main at 7981bc8: mbse-journals' JRN-01..08 pass with each
-    journal kept in DynamoDB, as mbse-schemas' BLW-01..13 do over it, at 100% coverage, against moto; its DynamoDB Local
-    cases not yet run).
+  - **Current**: met in mbse-dynamodb 0.3.0 (checked in its main at 0b910bf: the store's record kept as plain
+    `Changes.Transaction`s keyed by id, mbse-schemas' BLW over it, at 100% coverage, against moto; its DynamoDB Local
+    cases not run).
 - <a id="CAP-290"></a>**[CAP-290: a service's store stacked, with no snapshot](CAP-290.md)** · adopted · mbse-rest's service serves a
   store given a store below, a database's, and persists by its journal alone: no snapshot is taken or read, and a
   client is sent a store's schemas as the install transactions that made them; its client implements every method of
   the store interface, in mbse-rest. *Implements* [FEA-006: persistence](../features/FEA-006.md), [FEA-045: a Python, FastAPI and DynamoDB service stack](../features/FEA-045.md).
-  - **Current**: met in mbse-rest 0.2.0 (checked in its main at 6e5816c: mbse-schemas' BLW-01..16 and mbse-journals'
-    JRN-01..08 pass through its client in Python and TypeScript; the service over a store kept in DynamoDB, under moto,
-    in mbse-dynamodb's main at dab7f35).
+  - **Current**: met in mbse-rest 0.3.0 but for BLW-15 and BLW-18 (checked in its main at 83c5130: mbse-schemas' BLW
+    passes through its client in Python and TypeScript, BLW-15 and BLW-18 expected failures from counted objects
+    aliased across transactions in mbse-schemas 0.29.0; the service over a store kept in DynamoDB, under moto, in
+    mbse-dynamodb's main at 0b910bf).
 - <a id="CAP-291"></a>**CAP-291: journals kept in MongoDB** · proposed · A journal is kept in MongoDB, self-hosted or
   managed, meeting the journal storage interface (CAP-288), with an index of each object's values and entries, in a new
   repository mbse-mongodb. *Implements* [FEA-006: persistence](../features/FEA-006.md). *Relates to* [CAP-220: persistence in other NoSQL stores](CAP-220.md).
