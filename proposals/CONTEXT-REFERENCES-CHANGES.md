@@ -48,7 +48,7 @@ VAL References.OfEntry.links : Container[name, object]
 VAL References.OfEntry.properties : Container[name, value]
 VAL References.OfValue
 VAL References.OfParameter
-PROP References.OfParameter.value
+PROP References.OfParameter.name
 ```
 
 ## Frames as an MBSE data structure
@@ -65,6 +65,27 @@ between mbse-schemas and mbse-expressions  and mbse-programs?
 
 O-02 Why was Frame formerly implementing Visitors.OfPattern?
 Is there still a need and what is a proper representation?
+
+## Targets
+
+The bespoke data structures in the three modules, Contexts, References and Changes, that MBSE schemas are to replace.
+`Transactions` is not among them, as the user decided: "I am trying to hunt down and eliminate bespoke data structures
+in favor of MBSE schemas in three specific modules. `Transactions` does not need to be included."
+
+- **Contexts.** The module does not exist yet. Validation takes its context as a plain mapping (`Mapping[str, Any]` in
+  Python, `ReadonlyMap<string, unknown>` in TypeScript) ([CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/CAP-313.md)).
+  `Contexts.OfVariable`, `OfSymbol` and `OfParameter` replace it. mbse-expressions' simplifier scope,
+  `Symbolics.Variables`, is another such mapping, outside mbse-schemas.
+- **References.** None. Every reference is schema data already: `References.OfObject`, `OfFrame`, `OfProperties`,
+  `OfEntry`, `OfError` and `OfParameter`. `References.OfSchema` and `OfValue` are new schemas, not replacements.
+- **Changes.** `_Gathered`, a Python dataclass and a TypeScript interface, holds what a transaction changed before it
+  commits: its symbols, each a reference or a schema; its entries removed or inserted, as tuples of the holder symbol,
+  the adjacency, the verb, the other links' symbols and the properties; and its properties changed, as tuples. It
+  becomes a `Changes.Transaction` once the transaction commits, whose `Changes.Symbol`, `Changes.OfEntry` and
+  `Changes.OfProperty` hold the same, so that the changes can be gathered as a `Changes.Transaction` directly. The
+  module's `_At` classes (`_Symbols`, `_Links`, `_Object`, `_Adjacency`, `_EntryProperties`, `_Value`, `_Members`)
+  hold no model data: they tell `Plain` the schema each part of a change is read by, so that they are code, not data
+  structures.
 
 ## Decided
 
@@ -122,11 +143,9 @@ frames become schema data.
   "will create proper MBSE schemas that hold the context used during procedures". Is it meant to say what references
   hold?
 - **The bespoke class.** The References section says "References.Frame is currently implemented as a bespoke class".
-  The bespoke class is `Transactions.Frame`; `References.OfFrame` is schema data already, a frame's reference
-  ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)). Which is meant?
-- **A parameter reference's value.** The draft gives `References.OfParameter` a `value`. A parameter reference holds its
-  parameter's name and nothing else, as the user decided ([the parametrics proposal](PARAMETRICS.md#decided)), and a
-  context's `Contexts.OfParameter` gives the parameter its value. Is `OfParameter.value` meant, and what does it hold?
+  `References` holds no bespoke class, and `References.OfFrame` is schema data already, a frame's reference
+  ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)); the bespoke frame is `Transactions.Frame`, outside the three modules. Is the
+  sentence to be dropped, or does it mean something else?
 - **A frame's form and its journal.** A frame in CAP-318's form, and a frame's `journal`, are each written as a
   `Changes.Transaction`. Is the frame's form its journal, as the decoupled code proposal's `state` would make it, or
   are the two kept apart: what the frame binds and witnesses, and what interpreting it changed? The Changes section is
