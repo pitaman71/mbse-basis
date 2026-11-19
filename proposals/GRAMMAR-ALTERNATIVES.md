@@ -44,10 +44,10 @@ name, for review)*): a kind, one of its properties, and what that property may h
 `HasStandard`'s kinds. A dialect's `define` writes each version's kinds and alternatives by listing them, not by a
 minimum version: `SINCE` tables go, in mbse-expressions' dialects and in mbse-programs' languages alike.
 
-**Reading**: `Framework.Standards` gains `alternatives(standard)` beside `kinds(standard)`. A language's `Check` asks,
-for each syntax node and term, which alternatives it takes (by its kind, its properties' values and its subterms' kinds),
-and whether the target version has each: `body[2].decorator_list[0]: a decorator holding any term needs Python 3.9`.
-The code tables (`FEATURES`, `STATEMENT_FEATURES`) go.
+**Reading**: `Framework.Standards` gains `alternatives(standard)` beside `kinds(standard)`. A language's `Check`
+asks, for each syntax node and term, which alternatives it takes (by its kind, its properties' values and its subterms'
+kinds), and whether the target version has each: `body[2].decorator_list[0]: a decorator holding any term needs Python
+3.9`. The code tables (`FEATURES`, `STATEMENT_FEATURES`) go.
 
 **Where**: the model and the reading in mbse-expressions' framework (both implementations); each of its dialects
 records its terms' alternatives (Python3, Python Types and Patterns, TypeScript5 and its family, C, C++, C Types,
