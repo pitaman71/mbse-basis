@@ -44,8 +44,8 @@ name, for review)*): a kind, one of its properties, and what that property may h
 `HasStandard`'s kinds. A dialect's `define` writes each version's kinds and alternatives by listing them, not by a
 minimum version: `SINCE` tables go, in mbse-expressions' dialects and in mbse-programs' languages alike.
 
-**Reading**: `Framework.Standards` gains `alternatives(standard)` beside `kinds(standard)`. A language's `Check` asks, for
-each syntax node and term, which alternatives it takes (by its kind, its properties' values and its subterms' kinds),
+**Reading**: `Framework.Standards` gains `alternatives(standard)` beside `kinds(standard)`. A language's `Check` asks,
+for each syntax node and term, which alternatives it takes (by its kind, its properties' values and its subterms' kinds),
 and whether the target version has each: `body[2].decorator_list[0]: a decorator holding any term needs Python 3.9`.
 The code tables (`FEATURES`, `STATEMENT_FEATURES`) go.
 
@@ -56,7 +56,9 @@ Cpp).
 
 ## Open questions
 
-1. **The name**: `Alternative`, as a grammar names one, beside a kind. Not "clause", which [VOC-032: clause](../docs/VOCABULARY.md#VOC-032) takes for a part of a statement that holds statements, nor "feature", the design spec's; a vocabulary entry for it either way.
+1. **The name**: `Alternative`, as a grammar names one, beside a kind. Not "clause", which
+   [VOC-032: clause](../docs/VOCABULARY.md#VOC-032) takes for a part of a statement that holds statements, nor
+   "feature", the design spec's; a vocabulary entry for it either way.
 2. **What an alternative an edition does not list means**: absent from every edition (a kind's property no version
    lists at all, the default) is taken as in every edition, so that only what changes between versions is recorded;
    or every alternative is listed, as every kind is. *Proposed: only what changes between versions*, as the tables do.
