@@ -41,6 +41,23 @@ PROP Contexts.Frame.variables : Variables.Frame
 
 And: "A Frame does not have to implement Visitors.OfPattern."
 
+## Decided
+
+- **A sub-context is copied** ("copied", the second of the options offered). Where a procedure meets a statement that
+  assigns or binds names, it makes a new frame that copies the outer frame's bindings and adds or replaces the
+  statement's own. Nothing links the new frame to the outer one, so that every frame is complete in itself, and is sent
+  as a value with nothing to follow.
+- **`References.OfSchema` is new**: "Reference.OfSchema is new and it is perfectly acceptable to implement it using
+  OfObject as a base class or coding pattern with the '.' prefix convention formalized". A schema reference's path
+  starts at the singleton `"."`, as a schema object's path does today; `OfSchema` makes that convention a schema of its
+  own, which may refine `References.OfObject` or follow its pattern.
+- **`References.OfValue` is data that holds a value of any schema** (agreed to the reading offered, "your reading is
+  correct"). It is a data object, and `Schemas.OfAny` is the schema that admits a value of any schema: "References.OfValue
+  is the data object whereas Schemas.OfAny is the schema".
+- **A schema argument is a constraint, for now** ("the first is okay for now"). In `References.OfSchema[Schemas.OfObject]`,
+  the bracket constrains the kind of schema that the reference may designate, here an object schema, and validation
+  checks it. mbse-schemas has no schemas that take arguments, and the bracket adds none.
+
 ## Design
 
 - **Three kinds of frame, and a context of them.** A variables frame gives each variable a value of a schema. A symbols
@@ -58,12 +75,6 @@ And: "A Frame does not have to implement Visitors.OfPattern."
 
 ## Open questions
 
-- **Nesting.** A sub-context hides a name of the context around it. Does a frame, or a context, link the one it
-  extends, or does a procedure make a new frame that copies the outer bindings with its own added?
-- **`References.OfValue` and `References.OfSchema`.** Neither exists. Is `OfSchema` a schema object's reference, which
-  an `OfObject` whose path starts at the singleton `"."` writes today? Is `OfValue` a value of any schema held as a
-  reference, and what does it hold? What does `OfSchema[Schemas.OfObject]`, a reference type with a schema argument,
-  mean in mbse-schemas, which has no parametric schemas?
 - **Binding and assignment.** The vocabulary says a parameter is assigned a value and bound to an object
   ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040)). In the draft, a variable's and a parameter's `Binding` hold a value. Is "binding" the general word within a
   frame, or does a value need an assignment of its own?
