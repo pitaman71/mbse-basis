@@ -10,11 +10,19 @@ Each initiative represents an investment of effort towards a particular
 external demo or product goal in terms of a set of CAP that must be 
 (or have been) completed.
 
-## INI-001 : agentic engineering strategy
+## INI-0XX : infrastructure
 
-## INI-002 : repository + dependency organization
+## INI-001 : define and apply agentic engineering strategy for MBSE frameworks
 
-## INI-003 : asset organization
+**PRIORITY**: 4
+
+## INI-002 : establish repository + dependency organization for MBSE repos
+
+**PRIORITY**: 4
+
+## INI-003 : plans + docs + source organized and optimized for selective consumption
+
+**PRIORITY**: 3
 
 Why?
 
@@ -43,7 +51,9 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
   [CAP-247: mbse-codegen-python's skill linking its notebook cases](../docs/capabilities/README.md#CAP-247): after mbse-codegen-python's port
 - [CAP-250: decision tags made readable](../docs/capabilities/README.md#CAP-250): not yet scheduled
 
-## INI-010 : schemas framework
+## INI-010 : build-out and stabilize schemas framework
+
+**PRIORITY**: 3
 
 Design: [parametrics](PARAMETRICS.md), in its order of work. Related: [INI-014: frames + references
 cleanup](#ini-014--frames--references-cleanup), the contexts that validation and simplification take.
@@ -57,7 +67,9 @@ cleanup](#ini-014--frames--references-cleanup), the contexts that validation and
 - [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298): not met
 - [CAP-163: parameters assigned, bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md): not met
 
-## INI-011 : object + relation + pattern framework
+## INI-011 : build-out object + relation + pattern framework
+
+**PRIORITY**: 3
 
 Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/main/docs/proposals/rescope/README.md). Patterns over data ([FEA-023: patterns over data](../docs/features/FEA-023.md)), in mbse-patterns 0.10.0:
 
@@ -68,7 +80,11 @@ Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/
 
 ## INI-012 : domain + expression dialect framework
 
-## INI-013 : journals framework
+**PRIORITY**: 3
+
+## INI-013 : define and build journaled persistence framework
+
+**PRIORITY**: 3
 
 Proposals: [Journals](JOURNALS.md), [Journal storage](JOURNAL-STORAGE.md) for where a journal is kept, and
 [Stacked stores](STACKED-STORES.md) for the stores stacked over it, each lazy by default. Journals, their language in mbse-schemas and the journal in a new repository
@@ -103,7 +119,9 @@ Design: [Frames + References cleanup](FRAMES-AND-REFERENCES.md): frames made fir
 symbols and a parameters frame, each holding bindings by reference, and a context holding one of each. Related:
 [INI-010: schemas framework](#ini-010--schemas-framework), whose validation and simplification take these contexts.
 
-## INI-020 : code mutation framework
+## INI-020 : build-out code mutation framework
+
+**PRIORITY**: 3
 
 Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/main/docs/proposals/charter/README.md). Transforms ([FEA-059: transforms of models, applied step by step and certified](../docs/features/README.md#FEA-059), serving [FEA-021: every generation ambiguity a parameter](../docs/features/FEA-021.md)), in mbse-transforms:
 
@@ -122,7 +140,11 @@ Charter: [mbse-transforms](https://github.com/pitaman71/mbse-transforms/blob/mai
 
 ## INI-030 : no/low-code and apps framework
 
+**PRIORITY**: 3
+
 ## INI-040 : diagrams framework
+
+**PRIORITY**: 3
 
 Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a diagram is edited. Diagrams ([FEA-056: fungible diagramming keeps agents and humans in the loop](../docs/features/FEA-056.md)), in build order:
 
@@ -141,11 +163,140 @@ Proposals: [Diagrams](DIAGRAMS.md), and [Interaction](INTERACTION.md) for how a 
 - [CAP-263: touch-first gestures, each one mutation](../docs/capabilities/README.md#CAP-263)
 - [CAP-266: shapes deleted](../docs/capabilities/README.md#CAP-266)
 
+## INI-041 : Agentic AI integration
+
+**PRIORITY**: 3
+
+## INI-042 : Content Management Systems integration
+
+**PRIORITY**: 5
+
+Build the ability to quickly an MBSE system to shadow a (legacy) content 
+management system where MBSE can serve as secondary, primary, or hybrid
+source of truth / system of record. 
+
+- survey content management systems
+- devise a vocbulary of universal domains
+- provide streaming data conduits for common file formats
+- provide streaming data conduits for common service APIs
+- prove that (via MCP) agents can conduct selective syncs with legacy
+  systems on a recurring basis
+- prove that (via MCP) agents can conduct surgical edits that durably
+  round-trip with a legacy system
+
+## INI-043 : Finance Management Systems integration
+
+**PRIORITY**: 5
+
+Build the ability to quickly an MBSE system to shadow a (legacy) finance 
+management system where MBSE can serve as secondary, primary, or hybrid
+source of truth / system of record. 
+
+- survey finance management systems
+- devise a vocbulary of universal domains
+- provide streaming data conduits for common file formats
+- provide streaming data conduits for common service APIs
+- prove that (via MCP) agents can conduct selective syncs with legacy
+  systems on a recurring basis
+- prove that (via MCP) agents can conduct surgical edits that durably
+  round-trip with a legacy system
+
+## INI-044 : Engineering Systems Integration
+
+**PRIORITY**: 5
+
+Build the ability to quickly an MBSE system to shadow a (legacy) 
+engineering system where MBSE can serve as secondary, primary, or hybrid
+source of truth / system of record. 
+
+- survey engineering systems
+- devise a vocbulary of universal domains
+- provide streaming data conduits for common file formats
+- provide streaming data conduits for common service APIs
+- prove that (via MCP) agents can conduct selective syncs with legacy
+  systems on a recurring basis
+- prove that (via MCP) agents can conduct surgical edits that durably
+  round-trip with a legacy system
+
+## INI-045 : Scientific Systems Integration
+
+**PRIORITY**: 5
+
+Build the ability to quickly an MBSE system to shadow a (legacy)
+scientific system where MBSE can serve as secondary, primary, or hybrid
+source of truth / system of record. 
+
+- survey scientific systems
+- devise a vocbulary of universal domains
+- provide streaming data conduits for common file formats
+- provide streaming data conduits for common service APIs
+- prove that (via MCP) agents can conduct selective syncs with legacy
+  systems on a recurring basis
+- prove that (via MCP) agents can conduct surgical edits that durably
+  round-trip with a legacy system
+
+## INI-046 : Embedded Systems Integration
+
+**PRIORITY**: 4
+
+Build the ability to quickly an MBSE system to shadow a (legacy) 
+embedded system where MBSE can serve as secondary, primary, or hybrid
+source of truth / system of record. 
+
+- survey embedded systems
+- devise a vocbulary of universal domains
+- provide streaming data conduits for common file formats
+- provide streaming data conduits for common service APIs
+- prove that (via MCP) agents can conduct selective syncs with legacy
+  systems on a recurring basis
+- prove that (via MCP) agents can conduct surgical edits that durably
+  round-trip with a legacy system
+
+## INI-047 : Robotic Systems Integration
+
+**PRIORITY**: 5
+
+Build the ability to quickly an MBSE system to shadow a (legacy)
+robotic system where MBSE can serve as secondary, primary, or hybrid
+source of truth / system of record. 
+
+- survey robotic systems
+- devise a vocbulary of universal domains
+- provide streaming data conduits for common file formats
+- provide streaming data conduits for common service APIs
+- prove that (via MCP) agents can conduct selective syncs with legacy
+  systems on a recurring basis
+- prove that (via MCP) agents can conduct surgical edits that durably
+  round-trip with a legacy system
+
+## INI-048 : Autonomic Systems Integration
+
+**PRIORITY**: 5
+
+Build the ability to quickly an MBSE system to shadow a (legacy)
+autonomic system where MBSE can serve as secondary, primary, or hybrid
+source of truth / system of record. 
+
+- survey autonomic management systems
+- devise a vocbulary of universal domains
+- provide streaming data conduits for common file formats
+- provide streaming data conduits for common service APIs
+- prove that (via MCP) agents can conduct selective syncs with legacy
+  systems on a recurring basis
+- prove that (via MCP) agents can conduct surgical edits that durably
+  round-trip with a legacy system
+
 ## INI-080 : stabilize mbse-schemas and mbse-expressions
+
+**PRIORITY**: 2
 
 ## INI-081 : stabilize Python codegen
 
+**PRIORITY**: 2
+
 ## INI-082 : eliminate counted objects
+
+**PRIORITY**: 3
 
 Counted objects are deprecated, as the user decided (2026-11-10), "counted objects are now deprecated": a reference object is to be a singleton or owned,
 never counted ([CAP-118: singletons, owned and counted objects](../docs/capabilities/CAP-118.md)). Its capabilities are not yet designed. What
@@ -158,33 +309,91 @@ counted objects reach today:
   [FEA-003: no-code logical views](../docs/features/FEA-003.md): counted objects, having no reference, are left out of what they
   show and transmit
 
+## INI-2XX : automated audits
 
-## INI-100 : formalize, parameterize, and visualize HW and LLM architectures
+## INI-201 : tutorials that double as tests
 
-Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
+**PRIORITY**: 4
 
-## INI-101 : explore, optimize LLM accelerator architectures (demo version)
+## INI-202 : equivalence requirements
 
-## INI-102 : Attention Chip
+**PRIORITY**: 4
 
-## INI-103 : Tensor Parallelism with distributed K-V cache
+## INI-208 : gaps plan category
 
-## INI-104 : gaps plan category
+**PRIORITY**: 4
 
 - log bugs + tech debt in a "gaps" plan category
 - consolidate and enuerate tech debt (from Later, below)
 
 ## INI-105 : nope plan category
 
+**PRIORITY**: 4
+
 - log boundaries around things we will not build in a "nope" plan category
 - first entries: snapshots ([CAP-127: snapshots made of transactions](../docs/capabilities/CAP-127.md)), and
   [CAP-282: no model needs bespoke schema-aware code to read or write](../docs/capabilities/README.md#CAP-282), absorbed as a capability until then
+
+## INI-3XX : demos
+
+## INI-301 : formalize, parameterize, and visualize HW and LLM architectures
+
+**PRIORITY**: 2
+
+Builds on [INI-040: diagrams framework](#ini-040--diagrams-framework).
+
+## INI-302 : explore, optimize LLM accelerator architectures (demo version)
+
+**PRIORITY**: 1
+
+## INI-303 : demo "the Attention Chip"
+
+**PRIORITY**: 1
+
+## INI-304 : demo "Tensor Parallelism with distributed K-V cache"
+
+**PRIORITY**: 1
+
+## INI-4XX : proofs
+
+## INI-401 : fully agent and human visible and fungible
+
+Prove that a combined system that integrates legacy system(s) with 
+MBSE is fully agent and human visible and fungible
+
+## INI-402 : fully secure, accountably authorized
+
+Prove that a combined system that integrates legacy system(s) with 
+MBSE is fully secure
+
+## INI-403 : surgically and accountably correctable
+
+Prove that surgical corrections can be retroactively applied to any 
+data stored in MBSE. Prove that history prior to the correction remains
+preserved. Prove that provenance and authorization of the correction
+is just as auditable as the original history.
+
+## INI-404 : continuously available
+
+Prove that a combined system that integrates legacy system(s) with 
+MBSE is continuously available
+
+## INI-405 : absolutely trustworthy
+
+Prove that a combined system that integrates legacy system(s) with 
+MBSE is fully trustworthy with even the most sensitive information
+
+## INI-406 : performant
+
+Prove that the performance gap between pure MBSE code, hybrid code
+using codegen with bespoke code, and pure bespoke code - can be
+easily quantified and is well justified
 
 ## Later
 
 - establishing reviews for leakage across document boundaries
 - conceptual terminology drift is still a problem
+- move integration workarounds into open source contribs
 - drain historical notes from the documents written before the rule "State what is true now" ([the basis](../docs/README.md#rules-for-writing-items)) into git history
 - consolidate and enumerate "decided" clauses 
-- object properties as financial/scientific/engineering ([FEA-007: property kinds](../docs/features/FEA-007.md))
 - re-partition mutations and queries
