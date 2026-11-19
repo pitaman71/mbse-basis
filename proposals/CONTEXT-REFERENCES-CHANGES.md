@@ -79,6 +79,14 @@ in favor of MBSE schemas in three specific modules. `Transactions` does not need
   module's `_At` classes (`_Symbols`, `_Links`, `_Object`, `_Adjacency`, `_EntryProperties`, `_Value`, `_Members`)
   hold no model data: they tell `Plain` the schema each part of a change is read by, so that they are code, not data
   structures.
+- **Changes' hand-written serialization.** Between `_Gathered` and a `Changes.Transaction`, Changes builds an effect
+  expression (`_effect`), writes it as plain data and passes it through JSON (`_plain_effect`), and translates that
+  plain data, mapping by mapping, into a `Changes.Transaction`'s plain form (`_transaction`, `_symbol`). Applying a
+  journal translates back the same way (`_effect_of`, `_renamed`, `_effects`), and a cache layer rewrites a layer
+  below's effect as plain mappings (`_present_only`). Gathered as a `Changes.Transaction` value, through its builders,
+  the changes need none of `_Gathered`, `_effect`, `_plain_effect`, `_transaction` and `_symbol`, about 150 lines in
+  each language; `_effect_of` and `_present_only` read a `Changes.Transaction` through the visitors, with no mapping
+  written by hand. No module of the three holds a comparison of its own.
 
 ## Decided
 
