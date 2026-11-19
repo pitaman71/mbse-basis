@@ -45,7 +45,7 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 
 ## INI-010 : schemas framework
 
-Design: [parametrics](PARAMETRICS.md), in its order of work.
+Design: [parametrics](PARAMETRICS.md), in its order of work, and [frames](FRAMES.md), the contexts that validation and simplification take.
 
 - [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311): not met
 - [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312): met
