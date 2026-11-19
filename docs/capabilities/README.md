@@ -598,11 +598,12 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   [FEA-033: model parameters](../features/FEA-033.md) and [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018). *Relates to* [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313),
   [CAP-320: schema and value references](#CAP-320), [the Context + References + Changes cleanup proposal](../../proposals/CONTEXT-REFERENCES-CHANGES.md).
   - **Current**: The capability is not met.
-- <a id="CAP-321"></a>**CAP-321: changes gathered as schema data** · proposed · mbse-schemas' `Changes` gathers what a
+- <a id="CAP-321"></a>**[CAP-321: changes gathered as schema data](CAP-321.md)** · adopted · mbse-schemas' `Changes` gathers what a
   transaction changed as a `Changes.Transaction` value, through its builders, with no bespoke structure between: no
   `_Gathered`, and no effect expression written and translated mapping by mapping into a `Changes.Transaction`'s
   plain form. Applying a journal, and a cache layer's rewriting of a layer below's changes, read a
-  `Changes.Transaction` through the visitors. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md) and
+  `Changes.Transaction` through the visitors. Its schemas are value objects that name what they change by `References`;
+  an entry change is inserted or removed, and each kind of change a union of its actions. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md) and
   [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018). *Relates to* [CAP-270: a transaction's changes observed at its commit](#CAP-270),
   [the Context + References + Changes cleanup proposal](../../proposals/CONTEXT-REFERENCES-CHANGES.md).
   - **Current**: The capability is not met.
