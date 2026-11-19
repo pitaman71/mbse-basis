@@ -49,8 +49,8 @@ of its properties, and what that property may hold there:
   `static_assert` without a message, its `message` absent; TypeScript 5.3's import `attributes`);
 - **one of these values**: scalars (Python 3.5's `AugAssign.op` `@`; C23's keyword spellings, `thread_local`,
   `alignas`, its integer suffix `wb`; TypeScript's `declarationKind` `using`, `phase` `defer`);
-- **a term of one of these kinds**, each optionally with grammar clauses of its own, nested, for what the held term's own
-  subterms may be: Python 3.11's subscript whose index is a starred term; Python 3.15's comprehension of starred
+- **a term of one of these kinds**, each optionally with grammar clauses of its own, nested, for what the held term's
+  own subterms may be: Python 3.11's subscript whose index is a starred term; Python 3.15's comprehension of starred
   elements; and PEP 614: Python 3.0 to 3.8 have "a decorator holds a dotted name, optionally called" (a `name`, an
   `attribute` whose value is one, or a `call` whose function is one), Python 3.9 on "a decorator holds any term".
 
