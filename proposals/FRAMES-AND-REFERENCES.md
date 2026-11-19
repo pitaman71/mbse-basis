@@ -51,6 +51,8 @@ And: "A Frame does not have to implement Visitors.OfPattern."
   OfObject as a base class or coding pattern with the '.' prefix convention formalized". A schema reference's path
   starts at the singleton `"."`, as a schema object's path does today; `OfSchema` makes that convention a schema of its
   own, which may refine `References.OfObject` or follow its pattern.
+- **`References.OfValue` holds a value of any schema** (agreed to the reading offered, "your reading is correct"), as
+  `Schemas.OfAny` holds one.
 
 ## Design
 
@@ -69,7 +71,6 @@ And: "A Frame does not have to implement Visitors.OfPattern."
 
 ## Open questions
 
-- **`References.OfValue`.** It does not exist. Is it a value of any schema held as a reference, and what does it hold?
 - **`OfSchema[Schemas.OfObject]`.** What does a reference type with a schema argument mean in mbse-schemas, which has no
   parametric schemas: a constraint on the kind of schema referenced, which validation checks, or schemas that take
   arguments?
