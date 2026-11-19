@@ -4,8 +4,8 @@ Initiative: [INI-014: context + references + changes cleanup](PRIORITIES.md#ini-
 Related: [INI-010: schemas framework](PRIORITIES.md#ini-010--schemas-framework), whose [parametrics](PARAMETRICS.md) the
 contexts here serve.
 
-The user wrote the sections below, from "Context as an MBSE data structure" to "Opens"; the sections after them record
-the decisions taken on this proposal, what stacked stores need a frame to carry, and the questions still open.
+The user wrote the sections below, from "Context as an MBSE data structure" to "Opens"; the sections after them list
+the bespoke data structures this proposal replaces and record the decisions taken on it.
 
 ## Context as an MBSE data structure
 
@@ -82,9 +82,6 @@ in favor of MBSE schemas in three specific modules. `Transactions` does not need
 
 ## Decided
 
-- **Frames take CAP-318's form**: "I prefer the CAP-318 form for frames." A frame carries symbol bindings, property
-  assignments relative to a symbol binding, and relation entries relative to at least one symbol binding and to object
-  references not otherwise bound to a symbol ([CAP-318: support for decoupled code](../docs/capabilities/README.md#CAP-318)).
 - **A frame is not a context**: "Contrary to what I said in the proposal today, a frame is not a context. But we do need
   contexts as a standardized argument for procedures (whether coupled or decoupled) and I'm not sure References covers
   it." A context is the argument that a procedure, coupled or decoupled, takes; a frame is what a transaction gives back.
@@ -102,30 +99,3 @@ in favor of MBSE schemas in three specific modules. `Transactions` does not need
 - **A schema argument is a constraint, for now** ("the first is okay for now"). In `References.OfSchema[Schemas.OfObject]`,
   the bracket constrains the kind of schema that the reference may designate, here an object schema, and validation
   checks it. mbse-schemas has no schemas that take arguments, and the bracket adds none.
-
-## What a frame must carry
-
-A frame given back by a transaction, or streamed by a layer of a stack, carries more than its bindings. As stacked
-stores build it ([the stacked stores proposal](STACKED-STORES.md#a-cache-layer-and-the-layer-below)), a frame carries:
-
-- its symbol bindings, each object by its reference;
-- `assigns`, the values the transaction left in the properties its terms' specs name for a symbol;
-- its errors, each a subterm, a kind and a message ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309));
-- `scope`, the id of the input frame or branch it descends from;
-- `remainder`, where in the expression it halted, or none where it is complete;
-- `journal`, the changes made in interpreting its input frame, a one-transaction `Changes.Journal` over the frame's own
-  symbols.
-
-A layer's stream also carries completion markers, `{"end": scope}`, which may carry a journal. Frames made schema data
-must express every one of these, and the markers too, because a layer below that is another process, as mbse-rest's
-and mbse-dynamodb's layers are, receives frames as they are written. The stacked stores' work holds those layers until
-frames are schema data.
-
-[CAP-318: support for decoupled code](../docs/capabilities/README.md#CAP-318), the user's capability, asks the same of frames that survive their
-transaction: "Frames will need to be able to carry symbol bindings, property assignments (relative to a symbol binding),
-and relation entries (relative to at least one symbol binding and object references not otherwise bound to a symbol)."
-Its proposal, [mbse-schemas' decoupled code proposal](https://github.com/pitaman71/mbse-schemas/pull/59) (open), proposes that a frame carry its state as
-a one-transaction `Changes.Journal`, replacing `References.OfFrame`'s `assigns` and `entries`.
-
-The corpora of mbse-programs are frames written as `References.OfFrame` values, so that they are regenerated when
-frames become schema data.
