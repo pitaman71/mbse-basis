@@ -584,6 +584,29 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   [the parametrics proposal](../../proposals/PARAMETRICS.md).
   - **Current**: met in mbse-schemas 0.28.0 (checked in its main at cf9dc15: PAR-05 to PAR-08 pass in both
     languages, at 100% coverage).
+- <a id="CAP-320"></a>**CAP-320: schema and value references** · proposed · mbse-schemas' `References` defines
+  `References.OfSchema`, a schema object's reference, whose path starts at the singleton `"."`, refining
+  `References.OfObject` or following its pattern; and `References.OfValue`, data that holds a value of any schema. A
+  schema argument, as in `References.OfSchema[Schemas.OfObject]`, constrains the kind of schema referenced, and
+  validation checks it. *Implements* [FEA-033: model parameters](../features/FEA-033.md). *Relates to* [CAP-311: references stabilized](#CAP-311),
+  [the Context + References + Changes cleanup proposal](../../proposals/CONTEXT-REFERENCES-CHANGES.md).
+  - **Current**: The capability is not met.
+- <a id="CAP-319"></a>**CAP-319: contexts as schema data** · proposed · mbse-schemas' `Contexts` defines a context as
+  value schemas, `Contexts.OfVariable`, `Contexts.OfSymbol` and `Contexts.OfParameter`, each a name and what it is
+  assigned or bound to, by reference. A context is the standardized argument of a procedure, coupled or decoupled,
+  and validation takes one in place of a plain mapping; a sub-context is a copied context. *Implements*
+  [FEA-033: model parameters](../features/FEA-033.md) and [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018). *Relates to* [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313),
+  [CAP-320: schema and value references](#CAP-320), [the Context + References + Changes cleanup proposal](../../proposals/CONTEXT-REFERENCES-CHANGES.md).
+  - **Current**: The capability is not met.
+- <a id="CAP-321"></a>**[CAP-321: changes gathered as schema data](CAP-321.md)** · adopted · mbse-schemas' `Changes` gathers what a
+  transaction changed as a `Changes.Transaction` value, through its builders, with no bespoke structure between: no
+  `_Gathered`, and no effect expression written and translated mapping by mapping into a `Changes.Transaction`'s
+  plain form. Applying a journal, and a cache layer's rewriting of a layer below's changes, read a
+  `Changes.Transaction` through the visitors. Its schemas are value objects that name what they change by `References`;
+  an entry change is inserted or removed, and each kind of change a union of its actions. *Implements* [FEA-030: clean mutation-based transactional API](../features/FEA-030.md) and
+  [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018). *Relates to* [CAP-270: a transaction's changes observed at its commit](#CAP-270),
+  [the Context + References + Changes cleanup proposal](../../proposals/CONTEXT-REFERENCES-CHANGES.md).
+  - **Current**: The capability is not met.
 ### Deterministic object identity
 
 - <a id="CAP-118"></a>**[CAP-118: singletons, owned and counted objects](CAP-118.md)** · adopted · A reference object

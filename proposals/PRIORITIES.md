@@ -119,6 +119,10 @@ Design: [Context + References + Changes cleanup](CONTEXT-REFERENCES-CHANGES.md):
 proper MBSE data structures, contexts the standardized argument of procedures. Related:
 [INI-010: schemas framework](#ini-010--schemas-framework), whose validation and simplification take contexts.
 
+- [CAP-320: schema and value references](../docs/capabilities/README.md#CAP-320): not met
+- [CAP-319: contexts as schema data](../docs/capabilities/README.md#CAP-319): not met
+- [CAP-321: changes gathered as schema data](../docs/capabilities/README.md#CAP-321): not met
+
 ## INI-020 : build-out code mutation framework
 
 **PRIORITY**: 3
