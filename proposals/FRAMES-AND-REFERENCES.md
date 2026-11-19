@@ -51,8 +51,9 @@ And: "A Frame does not have to implement Visitors.OfPattern."
   OfObject as a base class or coding pattern with the '.' prefix convention formalized". A schema reference's path
   starts at the singleton `"."`, as a schema object's path does today; `OfSchema` makes that convention a schema of its
   own, which may refine `References.OfObject` or follow its pattern.
-- **`References.OfValue` holds a value of any schema** (agreed to the reading offered, "your reading is correct"), as
-  `Schemas.OfAny` holds one.
+- **`References.OfValue` is data that holds a value of any schema** (agreed to the reading offered, "your reading is
+  correct"). It is a data object, and `Schemas.OfAny` is the schema that admits a value of any schema: "References.OfValue
+  is the data object whereas Schemas.OfAny is the schema".
 
 ## Design
 
