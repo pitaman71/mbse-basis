@@ -6,7 +6,7 @@ here serve.
 
 A frame holds what a scope binds: its symbols' objects, its variables' values, and its parameters' values, objects and
 schemas. mbse-schemas implements a frame as a bespoke class today (`Transactions.Frame`, a mapping with its errors),
-against [CAP-282: no model needs bespoke schema-aware code to read or write](../docs/capabilities/README.md#CAP-282). This proposal makes frames first-class schema data, with a clean
+contrary to [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018). This proposal makes frames first-class schema data, with a clean
 and stable seam with `References`, as references were made first-class ([CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311)). The
 contexts that validation and simplification take are frames of this kind
 ([CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/CAP-313.md),
