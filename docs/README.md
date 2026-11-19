@@ -154,7 +154,7 @@ or refines, and into the shelves, and what remains cites them.
 | Relation | From | To | Meaning |
 |---|---|---|---|
 | *confers* | feature | quality | Meeting the feature advances the quality |
-| *implements* | capability | feature | The capability is part of how the feature is met |
+| *implements* | capability | feature or principle | The capability is part of how the feature is met, or of how the principle is applied |
 | *serves* | principle | quality | Applying the principle delivers the quality |
 | *applies* | a source comment, or a repository's document | principle | This is the principle in one situation, plus a stated local delta |
 | *replaces* | any item | an item of its kind | The item refines the other, which is superseded by it |

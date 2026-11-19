@@ -429,10 +429,10 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   - **Current**: not met; tech debt (checked in mbse-schemas' main at 21db1ee).
 - <a id="CAP-282"></a>**CAP-282: no model needs bespoke schema-aware code to read or write** · adopted · "No model should need bespoke schema-aware code to read or write. Use mbse-schemas built-in serialization support." All model data is governed by a schema, and every builder, visitor, reader and writer of it comes
   from mbse-schemas' proxies or from generated dataclasses, never a bespoke class: a judgement on how serialization
-  abides, as the user put it (2026-11-12). *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md). *Replaces*
-  [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018), absorbed here until no-builds are a plan category of their own. *Relates to*
+  abides, as the user put it (2026-11-12). *Implements* [FEA-025: serialization behavior conventions in schema](../features/FEA-025.md) and
+  [PRI-018: no model needs code to read or write](../PRINCIPLES.md#PRI-018). *Relates to*
   [PRI-044: schema-governed data, else private bespoke structures](../PRINCIPLES.md#PRI-044).
-  - **Current**: to assess; not applied in mbse-expressions when PRI-018 was superseded
+  - **Current**: to assess; not applied in mbse-expressions
     ([CAP-098: dialects over one framework](CAP-098.md#open-questions), Open questions).
 
 ### Clean modeling separation between value objects and reference objects
