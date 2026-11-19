@@ -34,11 +34,9 @@ PROP Contexts.OfParameter.value : References.OfValue
 ## References as an MBSE data structure
 
 `mbse-schemas.References` will create proper MBSE schemas that
-hold the context used during procedures like validation,
-traversal, transformation, interpretation, etc.
-
-References.Frame is currently implemented as a bespoke class, contrary
-to [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018).
+designate what data refers to: objects, schemas, relation entries,
+values and parameters, each a value that outlives the transaction
+that made it.
 
 ```
 VAL References.OfSchema
@@ -50,11 +48,6 @@ VAL References.OfValue
 VAL References.OfParameter
 PROP References.OfParameter.name
 ```
-
-## Frames as an MBSE data structure
-
-Make Frames a first-class construct in value schemas with a clean 
-stable seam with References.
 
 ## Changes as an MBSE data structure
 
@@ -136,17 +129,3 @@ a one-transaction `Changes.Journal`, replacing `References.OfFrame`'s `assigns` 
 
 The corpora of mbse-programs are frames written as `References.OfFrame` values, so that they are regenerated when
 frames become schema data.
-
-## Open questions
-
-- **References' introduction.** The References section's first sentence repeats the Contexts section's: References
-  "will create proper MBSE schemas that hold the context used during procedures". Is it meant to say what references
-  hold?
-- **The bespoke class.** The References section says "References.Frame is currently implemented as a bespoke class".
-  `References` holds no bespoke class, and `References.OfFrame` is schema data already, a frame's reference
-  ([CAP-130: references to objects, entries and frames](../docs/capabilities/CAP-130.md)); the bespoke frame is `Transactions.Frame`, outside the three modules. Is the
-  sentence to be dropped, or does it mean something else?
-- **A frame's form and its journal.** A frame in CAP-318's form, and a frame's `journal`, are each written as a
-  `Changes.Transaction`. Is the frame's form its journal, as the decoupled code proposal's `state` would make it, or
-  are the two kept apart: what the frame binds and witnesses, and what interpreting it changed? The Changes section is
-  empty so far.

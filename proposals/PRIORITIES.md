@@ -115,8 +115,8 @@ mbse-journals, in build order:
 
 ## INI-014 : context + references + changes cleanup
 
-Design: [Context + References + Changes cleanup](CONTEXT-REFERENCES-CHANGES.md): contexts, references, frames and changes
-made proper MBSE data structures, contexts the standardized argument of procedures. Related:
+Design: [Context + References + Changes cleanup](CONTEXT-REFERENCES-CHANGES.md): contexts, references and changes made
+proper MBSE data structures, contexts the standardized argument of procedures. Related:
 [INI-010: schemas framework](#ini-010--schemas-framework), whose validation and simplification take contexts.
 
 ## INI-020 : build-out code mutation framework
