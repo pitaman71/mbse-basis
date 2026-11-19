@@ -55,8 +55,8 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 
 **PRIORITY**: 3
 
-Design: [parametrics](PARAMETRICS.md), in its order of work. Related: [INI-014: frames + references
-cleanup](#ini-014--frames--references-cleanup), the contexts that validation and simplification take.
+Design: [parametrics](PARAMETRICS.md), in its order of work. Related: [INI-014: context + references +
+changes cleanup](#ini-014--context--references--changes-cleanup), the contexts that validation and simplification take.
 
 - [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311): met
 - [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312): met
@@ -113,11 +113,11 @@ mbse-journals, in build order:
 - [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)
 - [CAP-275: two stores' difference as a journal transaction](../docs/capabilities/README.md#CAP-275)
 
-## INI-014 : frames + references cleanup
+## INI-014 : context + references + changes cleanup
 
-Design: [Frames + References cleanup](FRAMES-AND-REFERENCES.md): frames made first-class schema data, a variables, a
-symbols and a parameters frame, each holding bindings by reference, and a context holding one of each. Related:
-[INI-010: schemas framework](#ini-010--schemas-framework), whose validation and simplification take these contexts.
+Design: [Context + References + Changes cleanup](CONTEXT-REFERENCES-CHANGES.md): contexts, references, frames and changes
+made proper MBSE data structures, contexts the standardized argument of procedures. Related:
+[INI-010: schemas framework](#ini-010--schemas-framework), whose validation and simplification take contexts.
 
 ## INI-020 : build-out code mutation framework
 
