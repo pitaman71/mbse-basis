@@ -54,6 +54,9 @@ And: "A Frame does not have to implement Visitors.OfPattern."
 - **`References.OfValue` is data that holds a value of any schema** (agreed to the reading offered, "your reading is
   correct"). It is a data object, and `Schemas.OfAny` is the schema that admits a value of any schema: "References.OfValue
   is the data object whereas Schemas.OfAny is the schema".
+- **A schema argument is a constraint, for now** ("the first is okay for now"). In `References.OfSchema[Schemas.OfObject]`,
+  the bracket constrains the kind of schema that the reference may designate, here an object schema, and validation
+  checks it. mbse-schemas has no schemas that take arguments, and the bracket adds none.
 
 ## Design
 
@@ -72,9 +75,6 @@ And: "A Frame does not have to implement Visitors.OfPattern."
 
 ## Open questions
 
-- **`OfSchema[Schemas.OfObject]`.** What does a reference type with a schema argument mean in mbse-schemas, which has no
-  parametric schemas: a constraint on the kind of schema referenced, which validation checks, or schemas that take
-  arguments?
 - **Binding and assignment.** The vocabulary says a parameter is assigned a value and bound to an object
   ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040)). In the draft, a variable's and a parameter's `Binding` hold a value. Is "binding" the general word within a
   frame, or does a value need an assignment of its own?
