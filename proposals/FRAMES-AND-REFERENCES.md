@@ -4,17 +4,18 @@ Initiative: [INI-014: frames + references cleanup](PRIORITIES.md#ini-014--frames
 [INI-010: schemas framework](PRIORITIES.md#ini-010--schemas-framework), whose [parametrics](PARAMETRICS.md) the contexts
 here serve.
 
-A frame holds what a scope binds: its symbols' objects, its variables' values, and its parameters' values, objects and
-schemas. mbse-schemas implements a frame as a bespoke class today (`Transactions.Frame`, a mapping with its errors),
-contrary to [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018). This proposal makes frames first-class schema data, with a clean
-and stable seam with `References`, as references were made first-class ([CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311)). The
-contexts that validation and simplification take are frames of this kind
+A frame is what a transaction gives back: its symbols' objects, the property values and relation entries it
+witnesses, and what stacked stores carry with it. mbse-schemas implements a frame as a bespoke class today
+(`Transactions.Frame`, a mapping with its errors), contrary to [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018). This proposal makes
+frames first-class schema data, with a clean and stable seam with `References`, as references were made first-class
+([CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311)). It also makes contexts, a different thing, a standardized argument for procedures: the
+names in effect where a procedure runs, as validation and simplification take them
 ([CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/CAP-313.md),
 [the parametrics proposal](PARAMETRICS.md)).
 
-## The user's draft
+## The user's first draft
 
-The user wrote these schemas, in the user's notation (`OBJ` an object schema, `PROP` a property):
+The user first wrote these schemas, in the user's notation (`OBJ` an object schema, `PROP` a property):
 
 ```text
 OBJ Variables.Frame
@@ -95,10 +96,16 @@ frames become schema data.
 
 ## Decided
 
+- **Frames take CAP-318's form**: "I prefer the CAP-318 form for frames." A frame carries symbol bindings, property
+  assignments relative to a symbol binding, and relation entries relative to at least one symbol binding and to object
+  references not otherwise bound to a symbol ([CAP-318: support for decoupled code](../docs/capabilities/README.md#CAP-318)).
+- **A frame is not a context**: "Contrary to what I said in the proposal today, a frame is not a context. But we do need
+  contexts as a standardized argument for procedures (whether coupled or decoupled) and I'm not sure References covers
+  it." A context is the argument that a procedure, coupled or decoupled, takes; a frame is what a transaction gives back.
 - **A sub-context is copied** ("copied", the second of the options offered). Where a procedure meets a statement that
-  assigns or binds names, it makes a new frame that copies the outer frame's bindings and adds or replaces the
-  statement's own. Nothing links the new frame to the outer one, so that every frame is complete in itself, and is sent
-  as a value with nothing to follow.
+  assigns or binds names, it makes a new context that copies the outer context's assignments and bindings and adds or
+  replaces the statement's own. Nothing links the new context to the outer one, so that every context is complete in
+  itself, and is sent as a value with nothing to follow.
 - **`References.OfSchema` is new**: "Reference.OfSchema is new and it is perfectly acceptable to implement it using
   OfObject as a base class or coding pattern with the '.' prefix convention formalized". A schema reference's path
   starts at the singleton `"."`, as a schema object's path does today; `OfSchema` makes that convention a schema of its
@@ -112,33 +119,34 @@ frames become schema data.
 
 ## Design
 
-- **Three kinds of frame, and a context of them.** A variables frame gives each variable a value of a schema. A symbols
-  frame gives each symbol an object of an object schema. A parameters frame gives each parameter a value, an object or
-  a schema; a parameter given a schema is a type parameter
-  ([CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298)). A context holds one frame of each kind.
-- **Frames are value objects.** `OBJ`, not a reference object: a frame has no identity of its own in a store. It is
-  written, read and compared as any value is, and a transaction gives frames back as values, holding references and
-  values, not proxies ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md#decided)).
-- **The seam with `References`.** Each binding holds references only: a schema by `References.OfSchema`, an object by
-  `References.OfObject`, and a value by `References.OfValue`.
-- **Who uses a context.** Validation takes a context as its argument
-  ([CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/CAP-313.md#decided)). A dialect's simplifier takes one as its scope, and makes a sub-context where it
-  meets one of the dialect's own statements that assign or bind a name. A transaction gives back symbols frames.
+- **Frames.** A frame is what a transaction gives back, or what a layer of a stack streams: a value object, with no
+  identity of its own in a store, holding references and values, not visitors
+  ([CAP-315: every read within a transaction or through a follow](../docs/capabilities/CAP-315.md#decided)). It takes CAP-318's form, which `Changes.Transaction` already writes: its
+  symbols, each bound to an object by its reference (`Changes.Symbol`); its property assignments, each relative to a
+  symbol (`Changes.OfProperty`); and its relation entries, each holder a symbol and each link a symbol or an object
+  reference (`Changes.OfEntry`). It also carries what stacked stores need, below: its errors, `scope`, `remainder` and
+  `journal`.
+- **Contexts.** A context is the standardized argument of a procedure, coupled or decoupled: validation, a dialect's
+  simplifier, comparison, and code that runs over frames. It holds the names in effect where the procedure runs: each
+  variable's assignment, each symbol's binding and each parameter's binding, the updated schema's
+  `Variables.Assignment`, `Symbols.Binding` and `Parameters.Binding`. A parameter given a schema is a type parameter
+  ([CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298)). Validation takes one
+  ([CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/CAP-313.md#decided)), and a dialect's simplifier takes one as its scope.
+- **The seam with `References`.** An assignment or a binding holds references only: a schema by `References.OfSchema`,
+  an object by `References.OfObject`, and a value by `References.OfValue`.
 
 ## Open questions
 
 - **A symbol binding's path.** The updated schema writes a symbol binding's properties as `Symbols.Binding.binding.name`,
   with a `binding` step that a variable assignment's and a parameter binding's properties lack. Is the step meant?
-- **Frames and contexts.** The updated schema gives the assignments and bindings, not the frames. Do
-  `Variables.Frame`, `Symbols.Frame`, `Parameters.Frame` and `Contexts.Frame` remain, each holding its kind's
-  assignments or bindings?
+- **Where contexts live.** A context is not a reference, and `References` may not cover it. Is it a module of its own,
+  such as `Contexts`, holding the context schema and its assignments and bindings, or does it belong elsewhere?
 - **A parameter assigned a value.** The vocabulary says a parameter is assigned a value and bound to an object
   ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040)). `Parameters.Binding` holds a `value`. Is a parameter given a value through a binding, or through an
   assignment of its own, as a variable is?
-- **The journal and the bindings.** A frame's `journal`, and the decoupled code proposal's `state`, are each a
-  one-transaction `Changes.Journal` over the frame's symbols, which holds symbol bindings, property assignments and
-  relation entries as changes. Are a frame's bindings and assignments this proposal's value objects, its journal's
-  changes, or both, and where does a relation entry relative to a symbol go?
+- **A frame's form and its journal.** A frame in CAP-318's form, and a frame's `journal`, are each written as a
+  `Changes.Transaction`. Is the frame's form its journal, as the decoupled code proposal's `state` would make it, or
+  are the two kept apart: what the frame binds and witnesses, and what interpreting it changed?
 - **Errors.** `Transactions.Frame` carries the errors annotated on it
   ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309)). Does a symbols frame, or a context, hold them?
 - **What else a frame need not or must implement.** The draft says that a frame does not have to implement
