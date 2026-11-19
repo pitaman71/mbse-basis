@@ -41,6 +41,58 @@ PROP Contexts.Frame.variables : Variables.Frame
 
 And: "A Frame does not have to implement Visitors.OfPattern."
 
+## The user's updated schema
+
+The user then recommended these value objects (`VAL` a value object schema), in place of the draft's bindings:
+
+```text
+VAL Variables.Assignment
+PROP Variables.Assignment.name
+PROP Variables.Assignment.schema: References.OfSchema[Schemas.OfAny]
+PROP Variables.Assignment.value : References.OfValue
+
+VAL Symbols.Binding
+PROP Symbols.Binding.binding.name
+PROP Symbols.Binding.binding.schema: References.OfSchema[Schemas.OfObject]
+PROP Symbols.Binding.binding.object : References.OfObject
+
+VAL Parameters.Binding
+PROP Parameters.Binding.name
+PROP Parameters.Binding.schema : References.OfSchema
+PROP Parameters.Binding.object : References.OfObject
+PROP Parameters.Binding.value : References.OfValue
+```
+
+A variable is assigned a value, and a symbol is bound to an object. A parameter binding holds a value, an object or a
+schema, so that one kind of entry serves a parameter of each kind.
+
+## What a frame must carry
+
+A frame given back by a transaction, or streamed by a layer of a stack, carries more than its bindings. As stacked
+stores build it ([the stacked stores proposal](STACKED-STORES.md#a-cache-layer-and-the-layer-below)), a frame carries:
+
+- its symbol bindings, each object by its reference;
+- `assigns`, the values the transaction left in the properties its terms' specs name for a symbol;
+- its errors, each a subterm, a kind and a message ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309));
+- `scope`, the id of the input frame or branch it descends from;
+- `remainder`, where in the expression it halted, or none where it is complete;
+- `journal`, the changes made in interpreting its input frame, a one-transaction `Changes.Journal` over the frame's own
+  symbols.
+
+A layer's stream also carries completion markers, `{"end": scope}`, which may carry a journal. Frames made schema data
+must express every one of these, and the markers too, because a layer below that is another process, as mbse-rest's
+and mbse-dynamodb's layers are, receives frames as they are written. The stacked stores' work holds those layers until
+frames are schema data.
+
+[CAP-318: support for decoupled code](../docs/capabilities/README.md#CAP-318), the user's capability, asks the same of frames that survive their
+transaction: "Frames will need to be able to carry symbol bindings, property assignments (relative to a symbol binding),
+and relation entries (relative to at least one symbol binding and object references not otherwise bound to a symbol)."
+Its proposal, [mbse-schemas' decoupled code proposal](https://github.com/pitaman71/mbse-schemas/pull/59) (open), proposes that a frame carry its state as
+a one-transaction `Changes.Journal`, replacing `References.OfFrame`'s `assigns` and `entries`.
+
+The corpora of mbse-programs are frames written as `References.OfFrame` values, so that they are regenerated when
+frames become schema data.
+
 ## Decided
 
 - **A sub-context is copied** ("copied", the second of the options offered). Where a procedure meets a statement that
@@ -75,11 +127,18 @@ And: "A Frame does not have to implement Visitors.OfPattern."
 
 ## Open questions
 
-- **Binding and assignment.** The vocabulary says a parameter is assigned a value and bound to an object
-  ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040)). In the draft, a variable's and a parameter's `Binding` hold a value. Is "binding" the general word within a
-  frame, or does a value need an assignment of its own?
-- **A binding's name.** The draft gives a frame a property `Binding`. Is it a container of bindings keyed by name, as a
-  frame maps names today?
+- **A symbol binding's path.** The updated schema writes a symbol binding's properties as `Symbols.Binding.binding.name`,
+  with a `binding` step that a variable assignment's and a parameter binding's properties lack. Is the step meant?
+- **Frames and contexts.** The updated schema gives the assignments and bindings, not the frames. Do
+  `Variables.Frame`, `Symbols.Frame`, `Parameters.Frame` and `Contexts.Frame` remain, each holding its kind's
+  assignments or bindings?
+- **A parameter assigned a value.** The vocabulary says a parameter is assigned a value and bound to an object
+  ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040)). `Parameters.Binding` holds a `value`. Is a parameter given a value through a binding, or through an
+  assignment of its own, as a variable is?
+- **The journal and the bindings.** A frame's `journal`, and the decoupled code proposal's `state`, are each a
+  one-transaction `Changes.Journal` over the frame's symbols, which holds symbol bindings, property assignments and
+  relation entries as changes. Are a frame's bindings and assignments this proposal's value objects, its journal's
+  changes, or both, and where does a relation entry relative to a symbol go?
 - **Errors.** `Transactions.Frame` carries the errors annotated on it
   ([CAP-309: errors annotated on frames](../docs/capabilities/README.md#CAP-309)). Does a symbols frame, or a context, hold them?
 - **What else a frame need not or must implement.** The draft says that a frame does not have to implement
