@@ -133,7 +133,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
     package by `skills/sync.sh`.
 - <a id="PRI-017"></a>**PRI-017: transforms, models, dialects, schemas** · adopted · Transforms use Steps to mutate Models which are built on Dialects which are built on Schemas.
   *Relates to* [PRI-014: every ambiguity a decision](#PRI-014), [PRI-018: no model needs code to read or write](#PRI-018).
-- <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "No model should need bespoke schema-aware code to read or write. Use mbse-schemas built-in serialization support." All model data is governed by a schema,
+- <a id="PRI-018"></a>**PRI-018: no model needs code to read or write** · adopted · "Serialization and wire format are built-in to mbse-schemas." "No model should need bespoke schema-aware code to read or write. Use mbse-schemas built-in serialization support." All model data is governed by a schema,
   and all builder/visitor/reader/write functionality comes from either proxies in mbse-schemas or generated
   dataclasses. No bespoke class implementations are allowed for models. [CAP-282: no model needs bespoke schema-aware code to read or write](capabilities/README.md#CAP-282) implements it. *Relates to* [PRI-003: everything is schema data](#PRI-003), [PRI-004: one visitor protocol per kind](#PRI-004), [PRI-010: proxies and generated code read alike](#PRI-010), [PRI-017: transforms, models, dialects, schemas](#PRI-017).
   *Not yet applied* in mbse-expressions ([CAP-098: dialects over one framework](capabilities/CAP-098.md#open-questions), Open questions).
