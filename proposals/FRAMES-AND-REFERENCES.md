@@ -1,6 +1,8 @@
-# Frames
+# Frames + References cleanup
 
-Initiative: [INI-010: schemas framework](PRIORITIES.md#ini-010--schemas-framework).
+Initiative: [INI-014: frames + references cleanup](PRIORITIES.md#ini-014--frames--references-cleanup). Related:
+[INI-010: schemas framework](PRIORITIES.md#ini-010--schemas-framework), whose [parametrics](PARAMETRICS.md) the contexts
+here serve.
 
 A frame holds what a scope binds: its symbols' objects, its variables' values, and its parameters' values, objects and
 schemas. mbse-schemas implements a frame as a bespoke class today (`Transactions.Frame`, a mapping with its errors),

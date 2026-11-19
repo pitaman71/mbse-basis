@@ -45,9 +45,10 @@ Documentation ([FEA-057: documentation organized by semantic role](../docs/featu
 
 ## INI-010 : schemas framework
 
-Design: [parametrics](PARAMETRICS.md), in its order of work, and [frames](FRAMES.md), the contexts that validation and simplification take.
+Design: [parametrics](PARAMETRICS.md), in its order of work. Related: [INI-014: frames + references
+cleanup](#ini-014--frames--references-cleanup), the contexts that validation and simplification take.
 
-- [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311): not met
+- [CAP-311: references stabilized](../docs/capabilities/README.md#CAP-311): met
 - [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312): met
 - [CAP-314: parameters assigned or bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314): superseded by CAP-313
 - [CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/README.md#CAP-313): met
@@ -95,6 +96,12 @@ mbse-journals, in build order:
 - [CAP-272: surgical mutations of a property's value](../docs/capabilities/README.md#CAP-272)
 - [CAP-274: journals sent and received](../docs/capabilities/README.md#CAP-274)
 - [CAP-275: two stores' difference as a journal transaction](../docs/capabilities/README.md#CAP-275)
+
+## INI-014 : frames + references cleanup
+
+Design: [Frames + References cleanup](FRAMES-AND-REFERENCES.md): frames made first-class schema data, a variables, a
+symbols and a parameters frame, each holding bindings by reference, and a context holding one of each. Related:
+[INI-010: schemas framework](#ini-010--schemas-framework), whose validation and simplification take these contexts.
 
 ## INI-020 : code mutation framework
 
