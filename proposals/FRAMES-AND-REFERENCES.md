@@ -47,6 +47,10 @@ And: "A Frame does not have to implement Visitors.OfPattern."
   assigns or binds names, it makes a new frame that copies the outer frame's bindings and adds or replaces the
   statement's own. Nothing links the new frame to the outer one, so that every frame is complete in itself, and is sent
   as a value with nothing to follow.
+- **`References.OfSchema` is new**: "Reference.OfSchema is new and it is perfectly acceptable to implement it using
+  OfObject as a base class or coding pattern with the '.' prefix convention formalized". A schema reference's path
+  starts at the singleton `"."`, as a schema object's path does today; `OfSchema` makes that convention a schema of its
+  own, which may refine `References.OfObject` or follow its pattern.
 
 ## Design
 
@@ -65,10 +69,10 @@ And: "A Frame does not have to implement Visitors.OfPattern."
 
 ## Open questions
 
-- **`References.OfValue` and `References.OfSchema`.** Neither exists. Is `OfSchema` a schema object's reference, which
-  an `OfObject` whose path starts at the singleton `"."` writes today? Is `OfValue` a value of any schema held as a
-  reference, and what does it hold? What does `OfSchema[Schemas.OfObject]`, a reference type with a schema argument,
-  mean in mbse-schemas, which has no parametric schemas?
+- **`References.OfValue`.** It does not exist. Is it a value of any schema held as a reference, and what does it hold?
+- **`OfSchema[Schemas.OfObject]`.** What does a reference type with a schema argument mean in mbse-schemas, which has no
+  parametric schemas: a constraint on the kind of schema referenced, which validation checks, or schemas that take
+  arguments?
 - **Binding and assignment.** The vocabulary says a parameter is assigned a value and bound to an object
   ([VOC-040: parameter assignment](../docs/VOCABULARY.md#VOC-040)). In the draft, a variable's and a parameter's `Binding` hold a value. Is "binding" the general word within a
   frame, or does a value need an assignment of its own?
