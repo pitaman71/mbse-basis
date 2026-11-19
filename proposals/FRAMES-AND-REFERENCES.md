@@ -41,6 +41,13 @@ PROP Contexts.Frame.variables : Variables.Frame
 
 And: "A Frame does not have to implement Visitors.OfPattern."
 
+## Decided
+
+- **A sub-context is copied** ("copied", the second of the options offered). Where a procedure meets a statement that
+  assigns or binds names, it makes a new frame that copies the outer frame's bindings and adds or replaces the
+  statement's own. Nothing links the new frame to the outer one, so that every frame is complete in itself, and is sent
+  as a value with nothing to follow.
+
 ## Design
 
 - **Three kinds of frame, and a context of them.** A variables frame gives each variable a value of a schema. A symbols
@@ -58,8 +65,6 @@ And: "A Frame does not have to implement Visitors.OfPattern."
 
 ## Open questions
 
-- **Nesting.** A sub-context hides a name of the context around it. Does a frame, or a context, link the one it
-  extends, or does a procedure make a new frame that copies the outer bindings with its own added?
 - **`References.OfValue` and `References.OfSchema`.** Neither exists. Is `OfSchema` a schema object's reference, which
   an `OfObject` whose path starts at the singleton `"."` writes today? Is `OfValue` a value of any schema held as a
   reference, and what does it hold? What does `OfSchema[Schemas.OfObject]`, a reference type with a schema argument,
