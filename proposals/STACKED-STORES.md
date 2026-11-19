@@ -247,6 +247,31 @@ The stages:
 3. **mbse-rest and mbse-dynamodb as layers**: each implements `exec`, mbse-rest streaming frames over HTTP, its last
    item `{"end": null}`, mbse-dynamodb executing within its database's transaction.
 
+Stages 1 and 2 are built, in mbse-schemas 0.31.0 and 0.32.0 (checked in its main at c6b38d1). The user accepted, by
+merging them, these choices the documents had left open:
+
+- **A cache layer's completeness rule.** Reading its cache only, a cache layer binds a symbol only where it can know
+  that what it holds is all there is: a singleton, or an object given by reference that it holds; every other symbol
+  halts the frame, a schema's extent and an owned object found through its owner's entries among them. It reads a
+  spec only over objects it holds all of, made in it by a journal, a follow or its own write and with no entry since
+  left out; an update or an upsert always halts. Every frame the caller is given comes from the layer below, so that a
+  cache layer never gives fewer frames than the layer below would.
+- **Journals of frames that come back** are applied by the follow's path, to the objects the cache holds alone, rather
+  than by `Changes.apply`, which does not confine itself to them.
+- **The completion marker carries a journal** where an input frame gives no frame: `{"end": scope, "journal": ...}`.
+  A frame's journal names its objects by symbols of its own, not the frame's.
+- **An install is found, not declared**: a transaction whose upsert or update binds a symbol of a meta-schema is an
+  install, executed below first, then in the cache layer; `Stores.Below`'s `install` is retired with it.
+- **A cache layer's own writes go through at once**, each savepoint's effect executed below; an object written
+  without its owner is refused, an owner settled at commit being unable to go through.
+- **A frame assigns every property the expression names**, not only those named by the terms it passed through.
+- **The order at commit is the same in both languages**: the cache layer settles its owners and checks its unique
+  clauses, then the layer below commits, then the cache layer; a refusal in the cache layer drops the layer below's
+  transaction uncommitted.
+
+Left to stage 3: a frame's journal across a wire (in memory, it is not in `References.OfFrame`), and a follow's
+changes reaching a cache layer in another process promptly enough for the completeness rule.
+
 ## The stack
 
 Each layer implements the store interface, and each but the lowest is given the store below it:

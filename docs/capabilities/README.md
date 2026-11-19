@@ -791,7 +791,7 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   [the stacked stores proposal](../../proposals/STACKED-STORES.md) states. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
   - **Current**: met in mbse-schemas 0.26.15 (checked in its main at 0f0fb57: BLW-01..08 pass in both languages, at
     100% coverage).
-- <a id="CAP-284"></a>**CAP-284: objects loaded on demand** · proposed · A store given a store below loads an object's
+- <a id="CAP-284"></a>**CAP-284: objects loaded on demand** · superseded by [CAP-310: a cache layer's partial-aware interpretation](#CAP-310) · A store given a store below loads an object's
   values and entries when they are first read, and keeps them; an object an entry links that is not yet loaded is held
   as `Proxies._Unresolved`, a placeholder that holds the object's reference until the link is read, when the store loads
   the object, in mbse-schemas, in Python and TypeScript.
@@ -842,7 +842,9 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   ([the stacked stores proposal](../../proposals/STACKED-STORES.md#a-cache-layer-and-the-layer-below)); in
   mbse-schemas, in Python and TypeScript, with mbse-rest and mbse-dynamodb as layers. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md),
   [FEA-027: mutations as queries](../features/FEA-027.md).
-  - **Current**: not met.
+  - **Current**: in part, in mbse-schemas 0.32.0 (checked in its main at c6b38d1: a transaction's suffix executed over
+    a stream of frames on the transaction, suites EXE and BLW pass in both languages, at 100% coverage); mbse-rest and
+    mbse-dynamodb as layers are stage 3.
 - <a id="CAP-309"></a>**[CAP-309: errors annotated on frames](CAP-309.md)** · adopted · An error that occurs while a mutation
   transaction is processed is annotated on the frames it concerns; an unresolvable error partway through interpreting
   the expression gives a partially bound frame, preferred to none; in mbse-schemas, in Python and TypeScript.
@@ -857,7 +859,8 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   and the stream ends with a completion marker
   ([the stacked stores proposal](../../proposals/STACKED-STORES.md#a-cache-layer-and-the-layer-below)); in
   mbse-schemas, in Python and TypeScript. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
-  - **Current**: not met.
+  - **Current**: met within one process in mbse-schemas 0.32.0 (checked in its main at c6b38d1: suite BLW-01..13
+    passes in both languages, at 100% coverage); across processes, stage 3.
 - <a id="CAP-149"></a>**[CAP-149: data accessed through the store protocol](CAP-149.md)** · adopted · An object's
   property values, a value object's, and the entries linking an object are read and written through `Visitors.OfStore`,
   which a transaction's `Proposals` implements. *Implements* [FEA-028: one Store interface, lazy by default](../features/FEA-028.md).
