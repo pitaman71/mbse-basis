@@ -78,8 +78,8 @@ Cpp).
 
 ## Open questions
 
-Stage 1 built the design above (mbse-expressions 0.15.0); stage 2 (mbse-programs #25 and #26) is in review. What they
-found it cannot yet do, each to be addressed, as the user decided ("All of the shortcomings you list - they do need to be addressed"):
+Stage 1 built the design above (mbse-expressions 0.15.0); stage 2 (mbse-programs #25 and #26) is in review. What
+they found it cannot yet do, each to be addressed, as the user decided ("All of the shortcomings you list - they do need to be addressed"):
 
 1. **An edition the data does not represent.** `before` and `after` guess a grammar clause's support for an edition
    the data does not represent, but only for one stored: `allows` takes a stored `Standard`, so a Python 3.16 or a C2y
