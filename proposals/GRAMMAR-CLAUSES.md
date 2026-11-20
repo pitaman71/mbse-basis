@@ -37,6 +37,10 @@ The user decided, on this proposal's question:
   they are flags extending an entry to the editions before or after its own that the data does not represent (an
   `Allows` of Python 3.9 with `after`: an unrepresented Python 3.16 guessed to allow it), or editions' designations:
   "correct", flags.
+- **"The "open universe" design philosophy is interpreted by unions as "any"."**, as the user decided
+  ([PRI-020: no constraint, any configuration](../docs/principles/PRI-020.md#decided)): a syntax node or a term is
+  accepted at a place if the target edition allows any grammar clause it takes there.
+  Read as "each", PEP 614's two overlapping grammar clauses would refuse a dotted decorator in every version.
 - **Beyond the nested form** (on open question 3): "right": patterns, once mbse-patterns' port is done, where a case
   needs more.
 
@@ -62,9 +66,10 @@ the `SINCE` tables go, in mbse-expressions' dialects and in mbse-programs' langu
 
 **Reading**: `Framework.Standards` gains `allows(standard, clause)` (an edition's `Allows` and `Forbids`, else its
 flagged neighbours', else allowed). A language's `Check` asks, for each syntax node and term, which grammar clauses it
-takes (by its kind, its properties' values and its subterms'
-kinds), and whether the target version has each: `body[2].decorator_list[0]: a decorator holding any term needs Python
-3.9`. The code tables (`FEATURES`, `STATEMENT_FEATURES`) go.
+takes at each place (by its kind, its properties' values and its subterms' kinds), and whether the target version
+allows any of them there, alternatives as a union's branches are (Decided, above):
+`body[2].decorator_list[0]: a decorator holding any term needs Python 3.9`. The code tables (`FEATURES`,
+`STATEMENT_FEATURES`) go.
 
 **Where**: the model and the reading in mbse-expressions' framework (both implementations); each of its dialects
 records its terms' grammar clauses (Python3, Python Types and Patterns, TypeScript5 and its family, C, C++, C Types,
