@@ -82,7 +82,7 @@ Charter: [mbse-patterns afresh](https://github.com/pitaman71/mbse-patterns/blob/
 
 **PRIORITY**: 3
 
-Design: [grammar alternatives by version](GRAMMAR-ALTERNATIVES.md): language features recorded as standards data.
+Design: [grammar clauses by version](GRAMMAR-CLAUSES.md): language features recorded as standards data.
 
 ## INI-013 : define and build journaled persistence framework
 
