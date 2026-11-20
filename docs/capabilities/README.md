@@ -529,7 +529,7 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   bindings. *Implements*
   [FEA-033: model parameters](../features/FEA-033.md).
   - **Current**: not met.
-- <a id="CAP-114"></a>**[CAP-114: parameter bindings are substituted and checked](CAP-114.md)** · proposed · A parameter
+- <a id="CAP-114"></a>**[CAP-114: parameter bindings are substituted and checked](CAP-114.md)** · superseded by [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313) · A parameter
   assignment or a parameter binding is substituted where its definition is used, and its value or object checked against
   the schema its parameter is for.
   *Implements* [FEA-033: model parameters](../features/FEA-033.md).
