@@ -78,7 +78,36 @@ Cpp).
 
 ## Open questions
 
-None: each was answered (Decided, above).
+Stage 1 built the design above (mbse-expressions 0.15.0); stage 2 (mbse-programs #25 and #26) is in review. What
+they found it cannot yet do, each to be addressed, as the user decided ("All of the shortcomings you list - they do
+need to be addressed"):
+
+1. **An edition the data does not represent.** `before` and `after` guess a grammar clause's support for an edition
+   the data does not represent, but only for one stored: `allows` takes a stored `Standard`, so a Python 3.16 or a C2y
+   cannot be checked unless it is written, and a kind's membership (`HasStandard`) has no guess at all. Proposed:
+   (a) `allows` and a kind's membership answer for an edition given by its designation and revision, stored or not,
+   from its neighbours' flagged entries; (b) `HasStandard` gains `before` and `after` too, written on each standard's
+   oldest and newest editions, as `Allows` and `Forbids` have them.
+2. **What one grammar clause cannot express.** Found by stage 2, each kept as code (`Check.UNRECORDED`) until decided:
+   - *every* or *none* of a list's elements (C's unnamed parameter of a definition: no element of its declarator's
+     specifiers is a lone `void`; C's inferred `auto`: none of the specifiers names a type);
+   - two properties together (C's `u8` character literal: `prefix` and `quote`; C++'s bit-field with a default member
+     initializer: `bitfield` and `initializer`; C++'s `static operator()`: a specifier and the declarator's name);
+   - a count (C++23's subscript of several indices: two or more elements);
+   - alternatives among the nested grammar clauses of one kind (each nested one must hold today).
+
+   Options: (a) the grammar clause grows these forms: a quantifier on a list property (`any`, the default, `every`,
+   `none`), a count (`at least`), and a conjunction of grammar clauses on one syntax node or term (`Requires(clause,
+   clause)`), alternatives among nested ones read as "any", as [PRI-020](../docs/principles/PRI-020.md#decided)
+   reads unions; (b) they wait for patterns ([FEA-023: patterns over data](../docs/features/FEA-023.md)), as decided
+   for what needs more than the nested form, staying code meanwhile. *Proposed: (a)*, each small and of the grammar's
+   own shape, and every case found so far fits them; patterns stay for what a grammar does not say.
+3. **Removals.** No grammar clause records what an edition removed: C23's K&R function definitions, C++17's
+   `register`. They are data only, a grammar clause `Forbids` from the edition that removed it, with no model change.
+   Proposed: recorded in stage 3.
+4. **Two small API gaps in mbse-expressions.** `takes` reads a list property as a whole, so a caller finds which element
+   took a grammar clause itself (per-element answers proposed); and the writer `grammar_clauses_spec` binds a fixed
+   frame symbol, `dialect` (the caller's symbol proposed).
 
 ## Stages (proposed)
 
@@ -86,4 +115,6 @@ None: each was answered (Decided, above).
    in its `define`; `SINCE` gone; both implementations; a release.
 2. mbse-programs: each language's statements' grammar clauses in its `Standards.define`; `Check` reading them; the code
    tables and `SINCE` gone; the suites asserting each former entry by data.
-3. Drained into CAP-268 (its As built) and a capability of its own for grammar clauses, if the user wants one.
+3. The open questions above, once decided: the guesses for unrepresented editions, the grammar clause's further forms,
+   removals, and the API gaps; mbse-expressions first, then mbse-programs, `Check.UNRECORDED` emptied.
+4. Drained into CAP-268 (its As built) and a capability of its own for grammar clauses, if the user wants one.
