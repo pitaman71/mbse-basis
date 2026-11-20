@@ -141,7 +141,7 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   or imagined shorthand." "Do not invent another DSL by wrapping builder syntax": helper functions that build a model
   through the builders are such a DSL; models are written in the builders' fluent syntax itself. *Relates to* [PRI-004: one visitor protocol per kind](#PRI-004),
   [PRI-018: no model needs code to read or write](#PRI-018).
-- <a id="PRI-020"></a>**PRI-020: no constraint, any configuration** · adopted · An absence of constraints is interpreted as acceptance of any
+- <a id="PRI-020"></a>**[PRI-020: no constraint, any configuration](principles/PRI-020.md)** · adopted · An absence of constraints is interpreted as acceptance of any
   configuration of the model. Model interpretation assumes entropy and/or nondeterminism for any aspect not
   constrained. *Serves* [QUA-002: open-world models](QUALITIES.md#QUA-002).
 - <a id="PRI-021"></a>**PRI-021: refinement by constraint** · adopted · Models can be refined incrementally and iteratively by adding a
