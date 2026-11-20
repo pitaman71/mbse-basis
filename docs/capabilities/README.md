@@ -184,17 +184,17 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
     mbse-expressions' main holds at commit eb8516d. Both coverage gates reached 100% in both languages, and TypeScript's
     gate passed on Node 22, 24 and 26. The conformance corpora were byte-identical, and every tutorial, re-executed,
     gave its committed outputs ([As built](CAP-295.md#as-built-mbse-expressions)).
-- <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](README.md#CAP-296)** ·
+- <a id="CAP-296"></a>**[CAP-296: simplification over literals, variables and parameters](CAP-296.md)** ·
   proposed · An expression of one dialect whose leaf terms mix literals, arguments or variables, and parameters is
   simplified by its dialect, each known leaf substituted and each closed subterm folded. *Implements*
   [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to* [CAP-099: partial evaluation](CAP-099.md),
-  [CAP-181: parameters wherever literals may appear](CAP-181.md), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
+  [CAP-313: parameter references valid where their parameters are assigned or bound](#CAP-313), [CAP-319: contexts as schema data](#CAP-319), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
   - **Current**: The capability is not met. The check ran on mbse-expressions' main branch at commit 1c4be74, after #54
     merged. Both coverage gates reached 100% in both languages, and TypeScript's gate passed on Node 22, 24 and 26. The
     conformance corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. Simplification
     substitutes and folds literals and variables, as [CAP-295: simplification of single-dialect expressions with literal
-    leaves](CAP-295.md) records. Parameters cannot be simplified yet, because they wait on [CAP-181: parameters wherever
-    literals may appear](CAP-181.md), which is not yet modeled.
+    leaves](CAP-295.md) records. No simplifier yet handles a parameter reference: a term place that holds one reads as
+    an empty subterm (read in mbse-expressions' main at 4946dce).
 - <a id="CAP-297"></a>**[CAP-297: simplification in every binding state](CAP-297.md)** · proposed · An expression
   of one dialect is simplified fully bound (to a literal), partially bound (to a residual of the same dialect) and fully
   unbound (to itself, or simpler), alike. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies*
@@ -204,11 +204,11 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
     conformance corpora were byte-identical, and every tutorial, re-executed, gave its committed outputs. The suites
     PAR, PYS, TSS, CCS and SVS test the three binding states. Since #54, a subterm that the language may never evaluate
     stays in the residual instead of raising an error ([As built](CAP-297.md#as-built-mbse-expressions)).
-- <a id="CAP-298"></a>**[CAP-298: simplification over type parameters](README.md#CAP-298)** · proposed · An expression
+- <a id="CAP-298"></a>**[CAP-298: simplification over type parameters](CAP-298.md)** · proposed · An expression
   that involves type parameters, but no type algebra, is simplified, a bound type parameter substituted as any parameter
   is. *Implements* [FEA-024: expressions as data](../features/FEA-024.md). *Applies* [PRI-046: simplification, not evaluation](../PRINCIPLES.md#PRI-046). *Relates to*
-  [CAP-114: parameter bindings are substituted and checked](CAP-114.md), [CAP-181: parameters wherever literals may appear](CAP-181.md).
-  - **Current**: not met; in plan, as the user decided (2026-11-13).
+  [CAP-296: simplification over literals, variables and parameters](CAP-296.md), [CAP-319: contexts as schema data](#CAP-319), [CAP-114: parameter bindings are substituted and checked](CAP-114.md).
+  - **Current**: not met; in plan, as the user decided.
 - <a id="CAP-299"></a>**[CAP-299: simplification across a sub-dialect](CAP-299.md)** · adopted · An expression
   that involves a sub-dialect (a host reading its sublanguage's terms: a cast's type, a `randomize() with` constraint, a
   preprocessor condition) is simplified, each part by its own dialect. *Implements* [FEA-024: expressions as data](../features/FEA-024.md).
