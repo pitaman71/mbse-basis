@@ -62,7 +62,7 @@ changes cleanup](#ini-014--context--references--changes-cleanup), the contexts t
 - [CAP-312: a parameter reference in place of anything with a schema](../docs/capabilities/README.md#CAP-312): met
 - [CAP-314: parameters assigned or bound by the data objects their schema governs](../docs/capabilities/README.md#CAP-314): superseded by CAP-313
 - [CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/README.md#CAP-313): met
-- [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): not met
+- [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): superseded by CAP-313
 - [CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296): met
 - [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298): met
 - [CAP-163: parameters assigned, bound, applied and generated beyond mbse-schemas](../docs/capabilities/CAP-163.md): not met

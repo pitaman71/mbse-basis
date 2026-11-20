@@ -115,9 +115,10 @@ scope leaves unassigned and unbound is neither valid nor invalid there: validati
 
 ### Substituted
 
-Applying a definition substitutes each of its parameter assignments and parameter bindings for the parameter
-references that designate the parameter that it assigns or binds ([CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md)). Substitution
-writes new data and changes none, as simplification does. An expression parameter, which CAP-114 leaves to be designed,
+Every procedure that traverses a dialect's expression or statement tree keeps a context by the dialect's scoping
+rules, making a sub-context where it passes through a statement, a term or term clause, that assigns or binds
+parameters ([CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/CAP-313.md)). Substituting is what such a traversal does where its context gives a
+parameter a value or an object; it writes new data and changes none, as simplification does. An expression parameter
 is a parameter reference in an expression's term, and substituting it is the same operation.
 
 ### Simplified
@@ -189,8 +190,8 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
    relations a dialect's own statements replace.
 5. The removal of `Parametrics.AssignsValue`, `Parametrics.BindsObject` and `Parametrics.extend` from mbse-schemas, a
    change to the Parametrics API, made once the mbse-programs port lands.
-6. [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md): applying a definition
-   substitutes its parameter assignments and parameter bindings, and checks each against its parameter's schema.
+6. [CAP-114: parameter bindings are substituted and checked](../docs/capabilities/CAP-114.md), superseded by CAP-313: substituting is what a traversal keeping a
+   context does, and checking is validation.
 7. [CAP-296: simplification over literals, variables and parameters](../docs/capabilities/README.md#CAP-296) and
    [CAP-298: simplification over type parameters](../docs/capabilities/README.md#CAP-298), in mbse-expressions: the
    simplifier's rule for a parameter reference, and the scope's parameter assignments. These two need only CAP-311 and
@@ -201,8 +202,7 @@ Each capability is one increment of [FEA-033: model parameters](../docs/features
 ## Open questions
 
 - **Shapes bound to parameters.** How is a parameter bound into a constraint on the shape of a relation's key, to give a
-  tensor's shape ([CAP-114: parameter bindings are substituted and
-  checked](../docs/capabilities/CAP-114.md#open-questions))?
+  tensor's shape ([CAP-313: parameter references valid where their parameters are assigned or bound](../docs/capabilities/CAP-313.md#open-questions))?
 - **Equal applications.** Are two applications that substitute alike, such as `Matrix(n, n)` and `Square(n)`, equal
   ([CAP-163: parameters assigned, bound, applied and generated beyond
   mbse-schemas](../docs/capabilities/CAP-163.md#open-questions))?
