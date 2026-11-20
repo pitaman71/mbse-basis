@@ -16,7 +16,7 @@ Development uses the siblings as they are, so that a change in one is seen at on
 record by path, without a hash. The commit makes a checkout reproducible: `clone` checks it out, and `check --strict`
 requires it. A repository has a Python package (`python3/pyproject.toml`), a TypeScript one (`typescript5/package.json`)
 or both, and both carry its version alike. The version is the contract: a sibling is compatible when it has the same
-major version (the same minor below 1.0) and is no older. Where this repository has a Python package and the sibling
+major version, below 1.0 too, and is no older (PRI-031). Where this repository has a Python package and the sibling
 has one too, `python3/pyproject.toml` requires exactly that range, so uv refuses an incompatible sibling too; a
 TypeScript `file:` dependency carries no range, so only `check` holds TypeScript to the contract. A release of a sibling
 is the tag `v<version>`. A sibling without packages, such as mbse-basis, has no version: it is pinned by commit alone,
@@ -79,9 +79,9 @@ def parse(version: str) -> tuple[int, int, int]:
 
 
 def bound(version: str) -> str:
-    """The first version that is no longer compatible with `version`."""
-    major, minor, _ = parse(version)
-    return f"{major + 1}.0" if major > 0 else f"0.{minor + 1}"
+    """The first version that is no longer compatible with `version`: the next major version, 1.0 below 1.0."""
+    major, _, _ = parse(version)
+    return f"{major + 1}.0"
 
 
 def requirement(version: str) -> str:
@@ -90,8 +90,7 @@ def requirement(version: str) -> str:
 
 def compatible(pinned: str, actual: str) -> bool:
     p, a = parse(pinned), parse(actual)
-    same = p[0] == a[0] and (p[0] > 0 or p[1] == a[1])
-    return same and a >= p
+    return p[0] == a[0] and a >= p
 
 
 def has_python(sibling: Path) -> bool:

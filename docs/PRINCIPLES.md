@@ -207,8 +207,11 @@ promoted from the conventions each repository's `AGENTS.md` copied, and from cap
   (`mbse.Schemas`, `mbse.Services.Rest`, `mbse.Persistence.DynamoDB`, `mbse.Demos.Apps`). *Governs* the product: a user
   sees it in every import. *Serves* [QUA-005: an opinionated paradigm](QUALITIES.md#QUA-005).
 - <a id="PRI-031"></a>**PRI-031: the version is the contract** · proposed · A repository's Python and TypeScript packages share one
-  version, and a release is the tag `v<version>`. A sibling is compatible when it has the same major version (the same
-  minor below 1.0) and is no older, so below 1.0 a change that dependents must adapt to bumps the minor version.
+  version, and a release is the tag `v<version>`. A sibling is compatible when it has the same major version and is no
+  older, below 1.0 too, so that a dependent requires `>=<pinned>,<<next major>>` (`<1.0` below 1.0) and a sibling's
+  minor release does not by itself make its dependents move. Below 1.0 a change that dependents must adapt to still
+  bumps the minor version; whether a dependent must adapt is what its gates, run against the sibling's checkout, say.
+  As the user decided, choosing "(c)" when following mbse-schemas' minor releases kept stalling its dependents.
   Dependents develop against the sibling's checkout as it is, and pin the version and commit they were tested with in
   `siblings.json`, with `polyrepo.py pin`; a sibling without packages, such as mbse-basis, is pinned by commit alone.
   `scripts/polyrepo.py` carries it out (`polyrepo.py help`). *Governs* the work. *Serves* [QUA-010: every repository works alike](QUALITIES.md#QUA-010).

@@ -60,7 +60,7 @@ class Workspaces(unittest.TestCase):
         where = where or self.repos / name
         if "python3" in languages:
             (where / "python3").mkdir(exist_ok=True)
-            requires = ", ".join(f'"{s}>=0.1.0,<0.2"' for s in pinned)
+            requires = ", ".join(f'"{s}>=0.1.0,<1.0"' for s in pinned)
             (where / "python3" / "pyproject.toml").write_text(f'[project]\nversion = "{version}"\n'
                                                               f"dependencies = [{requires}]\n")
         if "typescript5" in languages:
@@ -367,11 +367,16 @@ class Workspaces(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()) as out:
             self.assertEqual(polyrepo.main(web, ["check", "--strict"]), 0)
         pinned = json.loads((web / "siblings.json").read_text())
-        pinned["middle"]["version"] = "0.1.0"  # the version is still the contract, with no range to require it
+        pinned["middle"]["version"] = "0.1.0"  # a minor version above the pin is compatible below 1.0
+        (web / "siblings.json").write_text(json.dumps(pinned))
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            polyrepo.main(web, ["check"])
+        self.assertNotIn("is not compatible", out.getvalue())
+        pinned["middle"]["version"] = "0.3.0"  # the version is still the contract, with no range to require it
         (web / "siblings.json").write_text(json.dumps(pinned))
         with contextlib.redirect_stdout(io.StringIO()) as out:
             self.assertEqual(polyrepo.main(web, ["check"]), 1)
-        self.assertIn("middle: 0.2.0 is not compatible with the pinned 0.1.0", out.getvalue())
+        self.assertIn("middle: 0.2.0 is not compatible with the pinned 0.3.0", out.getvalue())
 
     def test_siblings_with_one_package_each(self) -> None:
         """A dependent with both packages requires, in pyproject.toml, only the siblings with Python packages."""
@@ -386,12 +391,12 @@ class Workspaces(unittest.TestCase):
         self.assertEqual((pinned["web"]["version"], pinned["api"]["version"]), ("0.1.0", "0.1.0"))
         with contextlib.redirect_stdout(io.StringIO()) as out:
             self.assertEqual(polyrepo.main(upper, ["check"]), 1)
-        self.assertIn("api: pyproject.toml must require api>=0.1.0,<0.2, not []; run pin", out.getvalue())
+        self.assertIn("api: pyproject.toml must require api>=0.1.0,<1.0, not []; run pin", out.getvalue())
         self.assertNotIn("web: pyproject.toml", out.getvalue())
         pyproject = upper / "python3" / "pyproject.toml"
         pyproject.write_text(pyproject.read_text().replace('"middle', '"api>=0.0.1", "middle'))
         self.pin(upper)
-        self.assertIn('"api>=0.1.0,<0.2"', pyproject.read_text())
+        self.assertIn('"api>=0.1.0,<1.0"', pyproject.read_text())
         self.assertNotIn("web", pyproject.read_text())
         with contextlib.redirect_stdout(io.StringIO()) as out:
             self.assertEqual(polyrepo.main(upper, ["check", "--strict"]), 0)
@@ -423,15 +428,15 @@ class Workspaces(unittest.TestCase):
         self.assertEqual(pyproject.read_text(),
                          '[project]\nversion = "0.1.0"\ndescription = "middle, for lower"\n'
                          'keywords = ["lower", "middle>=0.0.1"]\n'
-                         'dependencies = [\n    "lower>=0.1.0,<0.2",  # "middle" in a comment\n'
-                         '    "middle[extra]>=0.1.0,<0.2",\n    "lower-tools>=1.0",\n]\n\n'
-                         '[project.optional-dependencies]\nall = ["middle>=0.1.0,<0.2; python_version >= \'3.11\'"]\n\n'
-                         '[dependency-groups]\ndev = [{include-group = "test"}, "lower>=0.1.0,<0.2"]\n'
-                         'test = ["middle>=0.1.0,<0.2"]\n\n'
+                         'dependencies = [\n    "lower>=0.1.0,<1.0",  # "middle" in a comment\n'
+                         '    "middle[extra]>=0.1.0,<1.0",\n    "lower-tools>=1.0",\n]\n\n'
+                         '[project.optional-dependencies]\nall = ["middle>=0.1.0,<1.0; python_version >= \'3.11\'"]\n\n'
+                         '[dependency-groups]\ndev = [{include-group = "test"}, "lower>=0.1.0,<1.0"]\n'
+                         'test = ["middle>=0.1.0,<1.0"]\n\n'
                          '[tool.notes]\ndependencies = ["lower is not a requirement here"]\n')
         with self.at(upper):
-            self.assertEqual(polyrepo.required("lower"), [">=0.1.0,<0.2", ">=0.1.0,<0.2"])
-            self.assertEqual(polyrepo.required("middle"), [">=0.1.0,<0.2"] * 3)
+            self.assertEqual(polyrepo.required("lower"), [">=0.1.0,<1.0", ">=0.1.0,<1.0"])
+            self.assertEqual(polyrepo.required("middle"), [">=0.1.0,<1.0"] * 3)
         with contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(polyrepo.main(upper, ["check", "--strict"]), 0)
 
@@ -450,6 +455,21 @@ class Workspaces(unittest.TestCase):
         with self.assertRaises(SystemExit) as raised:
             polyrepo.dependency_order(trees)
         self.assertIn("its siblings pin it in a cycle", str(raised.exception))
+
+
+class Compatibility(unittest.TestCase):
+    """PRI-031: a sibling is compatible when it has the same major version and is no older, below 1.0 too."""
+
+    def test_the_range_ends_at_the_next_major_version(self) -> None:
+        self.assertEqual(polyrepo.requirement("0.34.0"), ">=0.34.0,<1.0")
+        self.assertEqual(polyrepo.requirement("1.2.3"), ">=1.2.3,<2.0")
+
+    def test_a_later_minor_version_is_compatible_below_1_0(self) -> None:
+        self.assertTrue(polyrepo.compatible("0.34.0", "0.35.0"))
+        self.assertTrue(polyrepo.compatible("0.34.0", "0.34.0"))
+        self.assertFalse(polyrepo.compatible("0.35.0", "0.34.0"))
+        self.assertFalse(polyrepo.compatible("0.9.0", "1.0.0"))
+        self.assertFalse(polyrepo.compatible("1.0.0", "2.0.0"))
 
 
 if __name__ == "__main__":
