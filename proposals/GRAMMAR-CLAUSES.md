@@ -37,9 +37,9 @@ The user decided, on this proposal's question:
   they are flags extending an entry to the editions before or after its own that the data does not represent (an
   `Allows` of Python 3.9 with `after`: an unrepresented Python 3.16 guessed to allow it), or editions' designations:
   "correct", flags.
-- **Grammar clauses at one place are alternatives**: a syntax node or a term is accepted at a place if the target
-  edition allows any grammar clause it takes there, as the user decided that "The "open universe" design philosophy is
-  interpreted by unions as "any"" ([PRI-020: no constraint, any configuration](../docs/principles/PRI-020.md#decided)).
+- **"The "open universe" design philosophy is interpreted by unions as "any"."**, as the user decided
+  ([PRI-020: no constraint, any configuration](../docs/principles/PRI-020.md#decided)): a syntax node or a term is
+  accepted at a place if the target edition allows any grammar clause it takes there.
   Read as "each", PEP 614's two overlapping grammar clauses would refuse a dotted decorator in every version.
 - **Beyond the nested form** (on open question 3): "right": patterns, once mbse-patterns' port is done, where a case
   needs more.
