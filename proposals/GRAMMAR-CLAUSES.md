@@ -76,15 +76,15 @@ records its terms' grammar clauses (Python3, Python Types and Patterns, TypeScri
 C Preprocessor, SystemVerilog's); each of mbse-programs' languages records its statements' (Python3, TypeScript5, C,
 Cpp).
 
-## Open questions
+## Decided in stage 3
 
-Stage 1 built the design above (mbse-expressions 0.15.0); stage 2 (mbse-programs #25 and #26) is in review. What
+Stage 1 built the design above (mbse-expressions 0.15.0), and stage 2 the languages' (mbse-programs #25 and #26). What
 they found it cannot yet do, each to be addressed, as the user decided ("All of the shortcomings you list - they do
 need to be addressed"):
 
 1. **An edition the data does not represent.** `before` and `after` guess a grammar clause's support for an edition
    the data does not represent, but only for one stored: `allows` takes a stored `Standard`, so a Python 3.16 or a C2y
-   cannot be checked unless it is written, and a kind's membership (`HasStandard`) has no guess at all. Proposed:
+   cannot be checked unless it is written, and a kind's membership (`HasStandard`) has no guess at all. Decided:
    (a) `allows` and a kind's membership answer for an edition given by its designation and revision, stored or not,
    from its neighbours' flagged entries; (b) `HasStandard` gains `before` and `after` too, written on each standard's
    oldest and newest editions, as `Allows` and `Forbids` have them.
@@ -100,14 +100,22 @@ need to be addressed"):
    `none`), a count (`at least`), and a conjunction of grammar clauses on one syntax node or term (`Requires(clause,
    clause)`), alternatives among nested ones read as "any", as [PRI-020](../docs/principles/PRI-020.md#decided)
    reads unions; (b) they wait for patterns ([FEA-023: patterns over data](../docs/features/FEA-023.md)), as decided
-   for what needs more than the nested form, staying code meanwhile. *Proposed: (a)*, each small and of the grammar's
+   for what needs more than the nested form, staying code meanwhile. *Decided: (a)*, each small and of the grammar's
    own shape, and every case found so far fits them; patterns stay for what a grammar does not say.
 3. **Removals.** No grammar clause records what an edition removed: C23's K&R function definitions, C++17's
    `register`. They are data only, a grammar clause `Forbids` from the edition that removed it, with no model change.
-   Proposed: recorded in stage 3.
+   Decided: recorded in stage 3.
 4. **Two small API gaps in mbse-expressions.** `takes` reads a list property as a whole, so a caller finds which element
-   took a grammar clause itself (per-element answers proposed); and the writer `grammar_clauses_spec` binds a fixed
-   frame symbol, `dialect` (the caller's symbol proposed).
+   took a grammar clause itself (decided: per-element answers); and the writer `grammar_clauses_spec` binds a fixed
+   frame symbol, `dialect` (decided: the caller's symbol).
+
+As the user decided, on the four as proposed: "1. I already confirmed that" (the guess for an edition the data does
+not represent, as the `before`/`after` flags were decided); "2. that's fine" (option (a), the grammar clause's further
+forms); "3. yes" (removals as `Forbids`); "4. yes" (the two API fixes).
+
+## Open questions
+
+None.
 
 ## Stages (proposed)
 
