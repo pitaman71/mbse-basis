@@ -269,8 +269,15 @@ merging them, these choices the documents had left open:
   clauses, then the layer below commits, then the cache layer; a refusal in the cache layer drops the layer below's
   transaction uncommitted.
 
-Left to stage 3: a frame's journal across a wire (in memory, it is not in `References.OfFrame`), and a follow's
-changes reaching a cache layer in another process promptly enough for the completeness rule.
+A frame's journal crosses a wire as the rest of a frame does: `References.OfFrame`'s `journal`, its `scope` and
+`remainder`, and the stream's items, `References.OfItem` and `References.OfEnd`, are schema data written by mbse-schemas'
+own serialization (mbse-schemas 0.34.0), as [PRI-018: no model needs code to read or write](../docs/PRINCIPLES.md#PRI-018) has it.
+
+A follow's changes reach a cache layer in another process by a mode, as the user decided ("make it a mode", 2026-11-19):
+either the cache layer catches up with what its layer below's follow has delivered, to its head, before it reads what
+it holds in a transaction; or it takes them as they arrive, polled, and may read what it holds a poll behind. The
+mode is chosen where the store is made, as [QUA-017: distributed or local, decided at runtime](../docs/QUALITIES.md#QUA-017) has it; catching up
+is the default, as the completeness rule asks (an agent's choice, for review).
 
 ## The stack
 
