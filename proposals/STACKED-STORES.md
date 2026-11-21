@@ -247,6 +247,15 @@ The stages:
 3. **mbse-rest and mbse-dynamodb as layers**: each implements `exec`, mbse-rest streaming frames over HTTP, its last
    item `{"end": null}`, mbse-dynamodb executing within its database's transaction.
 
+   The lowest layer, a store kept in a database, interprets with an interpreter of its own, as the user decided
+   (2026-11-19, "yes"): mbse-schemas' base class holds what every layer interprets alike, the walk of the terms,
+   symbols, frames, errors, unique clauses at commit and the stream; the database layer's class, coupled with it,
+   drives its own reads within its database's transaction, a symbol's candidates by schema, an object by its object
+   reference and the entries that link an object, each from its index, and its writes. The index stays, from which a
+   read of one object is answered. Rather than its whole journal replayed into a store in memory, which was offered.
+   So stage 3 has a part in mbse-schemas first: the walk of the terms separated from where its reads come from, today
+   the store in memory alone.
+
 Stages 1 and 2 are built, in mbse-schemas 0.31.0 and 0.32.0 (checked in its main at c6b38d1). The user accepted, by
 merging them, these choices the documents had left open:
 
