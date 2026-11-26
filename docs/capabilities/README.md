@@ -797,7 +797,13 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   provided by a store in a frame that survives beyond the transaction, with no particular guarantee about the
   "freshness" of that data." "Frames will need to be able to carry symbol bindings, property assignments (relative to
   a symbol binding), and relation entries (relative to at least one symbol binding and object references not
-  otherwise bound to a symbol)." Frames take this form: "I prefer the CAP-318 form for frames." This revises
+  otherwise bound to a symbol)." Frames take this form: "I prefer the CAP-318 form for frames." What a frame holds,
+  as the user put it (2026-11-26): "The core concept of a `Frame` is an image of state that is consumed or produced by
+  intepretation of mutation+query terms. In the course of interpreting a path through a mutation+query expression, the
+  Frame should capture precisely the information explicitly refefernced by the current term and ancestors of it. That
+  is: symbol bindings, properties, and relation entries to which some clause directly refers. The schema is not
+  consulted in order build some kind of "closure" of properties and relation entries/adjacencies to be included in the
+  Frame. Only those touched by reference." This revises
   [CAP-131: frames witness values and entries](CAP-131.md), whose witnessed values and entries name every object by
   its object reference, not by symbol. Coupled code, a mutation kind of its own
   ([the transaction-object proposal](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/transaction-object/README.md#decided),

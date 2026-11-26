@@ -274,6 +274,9 @@ merging them, these choices the documents had left open:
 - **A cache layer's own writes go through at once**, each savepoint's effect executed below; an object written
   without its owner is refused, an owner settled at commit being unable to go through.
 - **A frame assigns every property the expression names**, not only those named by the terms it passed through.
+  (Superseded, 2026-11-26: a frame captures "precisely the information explicitly refefernced by the current term and
+  ancestors of it", the relation entries a clause refers to among it
+  ([CAP-318: support for decoupled code](../docs/capabilities/README.md#CAP-318)).)
 - **The order at commit is the same in both languages**: the cache layer settles its owners and checks its unique
   clauses, then the layer below commits, then the cache layer; a refusal in the cache layer drops the layer below's
   transaction uncommitted.
