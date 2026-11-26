@@ -803,7 +803,14 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   Frame should capture precisely the information explicitly refefernced by the current term and ancestors of it. That
   is: symbol bindings, properties, and relation entries to which some clause directly refers. The schema is not
   consulted in order build some kind of "closure" of properties and relation entries/adjacencies to be included in the
-  Frame. Only those touched by reference." This revises
+  Frame. Only those touched by reference." A frame's state is written in the journal language, as the user decided
+  (2026-11-26): frames contain journals, which contain changes ("at some point it seems like we diverged from the
+  original design where frames contained journals which contained changes. `assigns` is unnecessary"), and "the symbol
+  bindings belong in the journal language too". A frame is its journal, a `Changes.Transaction` whose symbols are the
+  frame's bindings and whose changes are the state its path's clauses reference, each property set and each relation
+  entry inserted, read or written; with its place in the stream, its scope and remainder, and its errors. No `binds`,
+  `assigns` or `entries` of its own; a symbol bound to a counted object, which has no reference, is left out of the
+  journal and annotated (an agent's choice, for review). This revises
   [CAP-131: frames witness values and entries](CAP-131.md), whose witnessed values and entries name every object by
   its object reference, not by symbol. Coupled code, a mutation kind of its own
   ([the transaction-object proposal](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/transaction-object/README.md#decided),
