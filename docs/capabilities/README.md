@@ -810,7 +810,15 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   frame's bindings and whose changes are the state its path's clauses reference, each property set and each relation
   entry inserted, read or written; with its place in the stream, its scope and remainder, and its errors. No `binds`,
   `assigns` or `entries` of its own; a symbol bound to a counted object, which has no reference, is left out of the
-  journal and annotated (an agent's choice, for review). This revises
+  journal and annotated (an agent's choice, for review). Frames are not the record of what commits ("if we aren't
+  going down the Frames-only path already, let's not start. Maybe later"): a transaction's writes accumulate in its
+  layer's own transaction and commit from there, and a cache layer's copy follows what is committed. A frame a term
+  drops whose path changed anything is marked `terminal`: "Frame drops are somewhat inevitable as they are built in to
+  the mutation expression language. It is the job of the interpreter to make sure these frames follow a 'terminal
+  path' that leads to commit. You may add a property to the Frame that marks it as 'terminal' - so downstream
+  interpreters pass it down without interpreting it. Second-order interpreters (such as for remote delegation) can
+  handle terminal bypass more efficiently." A terminal frame guarantees only that its path reaches the layer that
+  commits, whose transaction holds its writes; its journal is not what commits ("The latter for now"). This revises
   [CAP-131: frames witness values and entries](CAP-131.md), whose witnessed values and entries name every object by
   its object reference, not by symbol. Coupled code, a mutation kind of its own
   ([the transaction-object proposal](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/transaction-object/README.md#decided),
