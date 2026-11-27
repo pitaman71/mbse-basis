@@ -797,7 +797,28 @@ mbse-transforms' too, as the user agreed ("placements - agreed").
   provided by a store in a frame that survives beyond the transaction, with no particular guarantee about the
   "freshness" of that data." "Frames will need to be able to carry symbol bindings, property assignments (relative to
   a symbol binding), and relation entries (relative to at least one symbol binding and object references not
-  otherwise bound to a symbol)." Frames take this form: "I prefer the CAP-318 form for frames." This revises
+  otherwise bound to a symbol)." Frames take this form: "I prefer the CAP-318 form for frames." What a frame holds,
+  as the user put it (2026-11-26): "The core concept of a `Frame` is an image of state that is consumed or produced by
+  intepretation of mutation+query terms. In the course of interpreting a path through a mutation+query expression, the
+  Frame should capture precisely the information explicitly refefernced by the current term and ancestors of it. That
+  is: symbol bindings, properties, and relation entries to which some clause directly refers. The schema is not
+  consulted in order build some kind of "closure" of properties and relation entries/adjacencies to be included in the
+  Frame. Only those touched by reference." A frame's state is written in the journal language, as the user decided
+  (2026-11-26): frames contain journals, which contain changes ("at some point it seems like we diverged from the
+  original design where frames contained journals which contained changes. `assigns` is unnecessary"), and "the symbol
+  bindings belong in the journal language too". A frame is its journal, a `Changes.Transaction` whose symbols are the
+  frame's bindings and whose changes are the state its path's clauses reference, each property set and each relation
+  entry inserted, read or written; with its place in the stream, its scope and remainder, and its errors. No `binds`,
+  `assigns` or `entries` of its own; a symbol bound to a counted object, which has no reference, is left out of the
+  journal and annotated (an agent's choice, for review). Frames are not the record of what commits ("if we aren't
+  going down the Frames-only path already, let's not start. Maybe later"): a transaction's writes accumulate in its
+  layer's own transaction and commit from there, and a cache layer's copy follows what is committed. A frame a term
+  drops whose path changed anything is marked `terminal`: "Frame drops are somewhat inevitable as they are built in to
+  the mutation expression language. It is the job of the interpreter to make sure these frames follow a 'terminal
+  path' that leads to commit. You may add a property to the Frame that marks it as 'terminal' - so downstream
+  interpreters pass it down without interpreting it. Second-order interpreters (such as for remote delegation) can
+  handle terminal bypass more efficiently." A terminal frame guarantees only that its path reaches the layer that
+  commits, whose transaction holds its writes; its journal is not what commits ("The latter for now"). This revises
   [CAP-131: frames witness values and entries](CAP-131.md), whose witnessed values and entries name every object by
   its object reference, not by symbol. Coupled code, a mutation kind of its own
   ([the transaction-object proposal](https://github.com/pitaman71/mbse-schemas/blob/main/docs/proposals/transaction-object/README.md#decided),
