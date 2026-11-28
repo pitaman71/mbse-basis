@@ -271,7 +271,7 @@ merging them, these choices the documents had left open:
   A frame's journal names its objects by symbols of its own, not the frame's.
 - **An install is found, not declared**: a transaction whose upsert or update binds a symbol of a meta-schema is an
   install, executed below first, then in the cache layer; `Stores.Below`'s `install` is retired with it.
-- **A cache layer's own writes go through at once**, each savepoint's effect executed below; an object written
+- **A cache layer's own writes go through at once**, each write's effect executed below; an object written
   without its owner is refused, an owner settled at commit being unable to go through.
 - **A frame assigns every property the expression names**, not only those named by the terms it passed through.
   (Superseded, 2026-11-26: a frame captures "precisely the information explicitly refefernced by the current term and
